@@ -1,15 +1,10 @@
 ### FISSION Landing Page
 
-#### Dependencies
-
-- https://elm-lang.org/
-- https://github.com/casey/just
-
-
 #### How to use
 
 ```shell
 # 🍱
+# Install https://github.com/casey/just
 yarn install
 
 # Build, watch & start server
