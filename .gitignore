@@ -1,4 +1,5 @@
 .cache
+.fission.yaml
 build
 dist
 elm-stuff

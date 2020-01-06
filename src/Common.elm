@@ -29,8 +29,13 @@ relativePath : { from : String, to : String } -> String
 relativePath { from, to } =
     from
         |> String.dropLeft 1
-        |> String.split "/"
-        |> List.drop 1
+        |> (\str ->
+                if String.isEmpty str then
+                    []
+
+                else
+                    String.split "/" str
+           )
         |> List.map (\_ -> "..")
         |> String.join "/"
         |> (\prefix ->
