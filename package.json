@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "devDependencies": {
+    "elm-pages": "^1.1.6"
+  }
+}
