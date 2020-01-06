@@ -12,4 +12,6 @@ bin := "./node_modules/.bin"
 	{{bin}}/elm-pages develop
 
 @build:
+	rm -rf .cache
+	rm -rf dist
 	{{bin}}/elm-pages build
