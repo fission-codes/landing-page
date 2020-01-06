@@ -1,13 +1,12 @@
-__FISSION Landing Page.__
+### FISSION Landing Page
 
-
-### Dependencies
+#### Dependencies
 
 - https://elm-lang.org/
 - https://github.com/casey/just
 
 
-### How to use
+#### How to use
 
 ```shell
 # 🍱
