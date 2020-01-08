@@ -1,17 +1,9 @@
 
-# Variables
-# ---------
-
-bin := "./node_modules/.bin"
-
-
 # Tasks
 # -----
 
 @default:
-	{{bin}}/elm-pages develop
+	yarn run dev
 
 @build:
-	rm -rf .cache
-	rm -rf dist
-	{{bin}}/elm-pages build
+	yarn run build

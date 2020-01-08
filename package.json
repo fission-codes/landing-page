@@ -1,6 +1,12 @@
 {
   "private": true,
+  "scripts": {
+    "dev": "elm-pages develop",
+    "build": "elm-pages build"
+  },
   "devDependencies": {
+    "elm": "latest-0.19.1",
+    "elm-format": "^0.8.2",
     "elm-pages": "^1.1.6"
   }
 }
