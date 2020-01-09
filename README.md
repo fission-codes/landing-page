@@ -5,7 +5,7 @@
 ```shell
 # 🍱
 # Install https://github.com/casey/just
-yarn install
+just install-deps
 
 # Build, watch & start server
 just

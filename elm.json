@@ -1,6 +1,7 @@
 {
     "type": "application",
     "source-directories": [
+        "elm-stuff/gitdeps/github.com/fission-suite/elm-kit.git/src",
         "gen",
         "src"
     ],
