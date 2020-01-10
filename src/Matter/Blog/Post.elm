@@ -1,4 +1,4 @@
-module View.Blog.Post exposing (view)
+module Matter.Blog.Post exposing (render)
 
 import Content.Metadata exposing (MetadataForBlogPosts)
 import Element exposing (Element)
@@ -7,11 +7,11 @@ import Types exposing (..)
 
 
 
--- 🌈
+-- 🖼
 
 
-view : PagePath -> MetadataForBlogPosts -> Element Msg -> Element Msg
-view pagePath meta renderedMarkdown =
+render : PagePath -> MetadataForBlogPosts -> Element Msg -> Element Msg
+render pagePath meta renderedMarkdown =
     Element.el
         [ Element.width (Element.maximum 700 Element.fill)
         , Element.padding (Kit.scales.spacing 10)

@@ -1,4 +1,4 @@
-module View.Blog.Index exposing (view)
+module Matter.Blog.Index exposing (render)
 
 import Common exposing (..)
 import Content.Metadata as Metadata exposing (MetadataForPages)
@@ -11,11 +11,11 @@ import Types exposing (..)
 
 
 
--- 🌈
+-- 🖼
 
 
-view : ContentList -> PagePath -> MetadataForPages -> EncodedData -> Element Msg
-view contentList currentPagePath meta _ =
+render : ContentList -> PagePath -> MetadataForPages -> EncodedData -> Element Msg
+render contentList currentPagePath meta _ =
     contentList
         |> List.filterMap
             (\( pagePath, metadata ) ->

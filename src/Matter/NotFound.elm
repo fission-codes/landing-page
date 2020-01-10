@@ -1,10 +1,10 @@
-module View.NotFound exposing (view)
+module Matter.NotFound exposing (render)
 
 import Element
 import Element.Font
 
 
-view _ _ _ _ =
+render _ _ _ _ =
     Element.el
         [ Element.centerX
         , Element.centerY

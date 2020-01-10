@@ -9,55 +9,58 @@ import Element.Font
 import Html exposing (Html)
 import Html.Attributes
 import Kit
+import Matter.Blog.Index
+import Matter.Blog.Post
+import Matter.Index
+import Matter.NotFound
 import Pages exposing (pages)
 import Pages.PagePath as Pages
 import Pages.StaticHttp as StaticHttp
 import Types exposing (..)
-import View.Blog.Index
-import View.Blog.Post
-import View.Index
-import View.NotFound
-import Yaml.Decode as Yaml
 
 
 
--- 🍱
+-- 🏔
 
 
-viewsCatalog =
-    [ ( pages.index, View.Index.view )
-    , ( pages.blog.index, View.Blog.Index.view )
+pagesCatalog =
+    [ ( pages.index, Matter.Index.render )
+    , ( pages.blog.index, Matter.Blog.Index.render )
     ]
 
 
 
--- 🌈
+-- ⛩
 
 
 root contentList page =
+    let
+        withFontStyles model interpretation =
+            Element.row
+                [ Element.height Element.fill
+                , Element.width Element.fill
+                ]
+                [ Element.html fontStylesheetLink
+                , renderMatter contentList page model interpretation
+                ]
+    in
     StaticHttp.succeed
-        { head = Metadata.head page.frontmatter
-        , view = rootView contentList page
+        { head =
+            Metadata.head page.frontmatter
+        , view =
+            \m i ->
+                { title = Metadata.title page.frontmatter
+                , body = Element.layout layoutAttributes (withFontStyles m i)
+                }
         }
 
 
-rootView : ContentList -> Page -> Model -> Interpretation Msg -> { title : String, body : Html Msg }
-rootView contentList page model interpretation =
-    let
-        withFontStyles =
-            Element.row
-                [ Element.height Element.fill ]
-                [ Element.html fontStylesheetLink
-                , renderPage contentList page model interpretation
-                ]
-    in
-    { title = Metadata.title page.frontmatter
-    , body = Element.layout layoutAttributes withFontStyles
-    }
+
+-- 🖼
 
 
-renderPage : ContentList -> Page -> Model -> Interpretation Msg -> Element Msg
-renderPage contentList page _ interpretation =
+renderMatter : ContentList -> Page -> Model -> Interpretation Msg -> Element Msg
+renderMatter contentList page _ interpretation =
     case page.frontmatter of
         -----------------------------------------
         -- Blog Posts
@@ -72,7 +75,7 @@ renderPage contentList page _ interpretation =
                         Interpretation.VirtualDom r ->
                             r
             in
-            View.Blog.Post.view page.path meta renderedMarkdown
+            Matter.Blog.Post.render page.path meta renderedMarkdown
 
         -----------------------------------------
         -- Pages
@@ -89,17 +92,19 @@ renderPage contentList page _ interpretation =
             in
             case maybeData of
                 Just data ->
-                    viewsCatalogDictionary
+                    -- Look up the associated Matter module in the catalog and render it.
+                    -- If it's not found, render a 404 page.
+                    pagesCatalogDictionary
                         |> Dict.Any.get page.path
-                        |> Maybe.withDefault View.NotFound.view
-                        |> (\view -> view contentList page.path meta data)
+                        |> Maybe.withDefault Matter.NotFound.render
+                        |> (\renderer -> renderer contentList page.path meta data)
 
                 Nothing ->
                     Element.none
 
 
-viewsCatalogDictionary =
-    Dict.Any.fromList Pages.toString viewsCatalog
+pagesCatalogDictionary =
+    Dict.Any.fromList Pages.toString pagesCatalog
 
 
 
