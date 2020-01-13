@@ -39,6 +39,7 @@ root contentList page =
             Element.row
                 [ Element.height Element.fill
                 , Element.width Element.fill
+                , Element.Font.color Kit.colors.gray_100
                 ]
                 [ Element.html fontStylesheetLink
                 , renderMatter contentList page model interpretation
@@ -126,7 +127,7 @@ fontStylesheetLink : Html msg
 fontStylesheetLink =
     Html.node
         "link"
-        [ Html.Attributes.href "https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:600,700&display=swap"
+        [ Html.Attributes.href "https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700&display=swap"
         , Html.Attributes.rel "stylesheet"
         ]
         []
