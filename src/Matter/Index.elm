@@ -285,9 +285,9 @@ fissionLive pagePath data =
             , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
             ]
             (Element.newTabLink
-                Kit.buttonAttributes
+                Kit.buttonAltAttributes
                 { url = "https://guide.fission.codes/"
-                , label = Element.text "Read the guide"
+                , label = Element.text "Read the Guide"
                 }
             )
         ]
@@ -298,63 +298,62 @@ fissionLive pagePath data =
 
 
 heroku pagePath data =
-    Element.column
+    [ -- Title
+      --------
+      Kit.heading
+        { level = 1 }
+        [ Element.text data.heroku.title ]
+
+    -- About
+    --------
+    , Element.el
         [ Element.centerX
-        , Element.id "heroku"
-        , Element.paddingXY 0 (Kit.scales.spacing 24)
-        , Background.color Kit.colors.gray_600
-        ]
-        [ -- Title
-          --------
-          Kit.heading
-            { level = 1 }
-            [ Element.text data.heroku.title ]
-
-        -- About
-        --------
-        , Element.el
-            [ Element.centerX
-            , Element.paddingEach
-                { edges
-                    | bottom = Kit.scales.spacing 12
-                    , top = Kit.scales.spacing 8
-                }
-            , Element.width (Element.maximum 500 Element.fill)
-            , Font.center
-            ]
-            (data.heroku.about
-                |> Element.text
-                |> List.singleton
-                |> Kit.subtleParagraph
-            )
-
-        -- Image
-        ---------------
-        , Element.image
-            [ Element.centerY
-            , Element.clip
-            , Element.width (Element.px 638)
-            , Border.rounded Kit.defaultBorderRounding
-            ]
-            { src = "https://s3.fission.codes/2019/11/IMG_7574.jpg"
-            , description = ""
+        , Element.paddingEach
+            { edges
+                | bottom = Kit.scales.spacing 12
+                , top = Kit.scales.spacing 8
             }
-
-        -- Add-on Link
-        -------------
-        , Element.el
-            [ Element.centerX
-            , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
-            ]
-            (Element.newTabLink
-                Kit.buttonAttributes
-                { url = "https://elements.heroku.com/addons/interplanetary-fission"
-                , label = Element.text "Try the Add-on"
-                }
-            )
+        , Element.width (Element.maximum 500 Element.fill)
+        , Font.center
         ]
+        (data.heroku.about
+            |> Element.text
+            |> List.singleton
+            |> Kit.subtleParagraph
+        )
+
+    -- Image
+    --------
+    , Element.image
+        [ Element.centerY
+        , Element.clip
+        , Element.width (Element.maximum 638 Element.fill)
+        , Border.rounded Kit.defaultBorderRounding
+        ]
+        { src = "https://s3.fission.codes/2019/11/IMG_7574.jpg"
+        , description = ""
+        }
+
+    -- Add-on Link
+    --------------
+    , Element.el
+        [ Element.centerX
+        , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
+        ]
+        (Element.newTabLink
+            Kit.buttonAttributes
+            { url = "https://elements.heroku.com/addons/interplanetary-fission"
+            , label = Element.text "Try the Add-on"
+            }
+        )
+    ]
+        |> Element.column
+            [ Element.centerX
+            , Element.id "heroku"
+            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
+            , Background.color Kit.colors.gray_600
+            ]
         |> Element.el
             [ Element.width Element.fill
             , Background.color Kit.colors.gray_600
             ]
-
