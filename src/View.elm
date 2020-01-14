@@ -1,5 +1,6 @@
 module View exposing (..)
 
+import Common
 import Content.Metadata as Metadata exposing (Metadata)
 import Content.Parsers as Interpretation exposing (Interpretation)
 import Dict.Any exposing (AnyDict)
@@ -35,13 +36,14 @@ pagesCatalog =
 
 root contentList page =
     let
-        withFontStyles model interpretation =
+        withStyles model interpretation =
             Element.row
                 [ Element.height Element.fill
                 , Element.width Element.fill
                 , Element.Font.color Kit.colors.gray_100
                 ]
                 [ Element.html fontStylesheetLink
+                , Element.html mediaQueries
                 , renderMatter contentList page model interpretation
                 ]
     in
@@ -51,7 +53,7 @@ root contentList page =
         , view =
             \m i ->
                 { title = Metadata.title page.frontmatter
-                , body = Element.layout layoutAttributes (withFontStyles m i)
+                , body = Element.layout layoutAttributes (withStyles m i)
                 }
         }
 
@@ -131,3 +133,28 @@ fontStylesheetLink =
         , Html.Attributes.rel "stylesheet"
         ]
         []
+
+
+mediaQueries : Html msg
+mediaQueries =
+    Html.node
+        "style"
+        [ Html.Attributes.type_ "text/css" ]
+        [ Html.text """
+            /* Small */
+            @media (min-width: 640px) { [hide-gte-sm] { display: none !important }}
+            @media (max-width: 639px) { [hide-lt-sm] { display: none !important }}
+
+            /* Large */
+            @media (min-width: 768px) { [hide-gte-md] { display: none !important }}
+            @media (max-width: 767px) { [hide-lt-md] { display: none !important }}
+
+            /* Large */
+            @media (min-width: 1024px) { [hide-gte-lg] { display: none !important }}
+            @media (max-width: 1023px) { [hide-lt-lg] { display: none !important }}
+
+            /* Large */
+            @media (min-width: 1280px) { [hide-gte-xl] { display: none !important }}
+            @media (max-width: 1279px) { [hide-lt-xl] { display: none !important }}
+          """
+        ]

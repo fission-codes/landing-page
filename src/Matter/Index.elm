@@ -11,6 +11,7 @@ import Element.Extra as Element
 import Element.Font as Font
 import Kit exposing (edges, none)
 import Pages exposing (images, pages)
+import Responsive
 import Result.Extra as Result
 import Types exposing (..)
 import Yaml.Decode as Yaml
@@ -119,36 +120,40 @@ view pagePath data =
 
 
 menu pagePath =
-    Element.row
-        [ Element.alignTop
-        , Element.centerX
-        , Element.paddingXY 0 (Kit.scales.spacing 8)
-        , Element.width (Element.maximum 1000 Element.fill)
-        , Border.color Kit.colors.gray_500
-        , Border.widthEach { edges | bottom = 1 }
+    [ -- Logo Icon
+      ------------
+      Element.image
+        [ Element.centerY
+        , Element.width (Element.px 30)
         ]
-        [ -- Logo Icon
-          ------------
-          Element.image
-            [ Element.centerY
-            , Element.width (Element.px 30)
-            ]
-            { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
-            , description = "FISSION"
-            }
+        { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
+        , description = "FISSION"
+        }
 
-        -- Links
-        --------
-        , Element.row
-            [ Element.alignRight
-            , Element.centerY
-            , Element.spacing (Kit.scales.spacing 8)
-            ]
-            [ menuItem "#fission-live" "Fission Live"
-            , menuItem "#heroku" "Heroku"
-            , menuItem "#news" "News"
-            ]
+    -- Links
+    --------
+    , Element.row
+        [ Element.alignRight
+        , Element.centerY
+        , Element.spacing (Kit.scales.spacing 8)
         ]
+        [ menuItem "#fission-live" "Fission Live"
+        , menuItem "#heroku" "Heroku"
+        , menuItem "#news" "News"
+        ]
+    ]
+        |> Element.row
+            [ Element.alignTop
+            , Element.centerX
+            , Element.paddingXY 0 (Kit.scales.spacing 8)
+            , Element.width (Element.maximum 1000 Element.fill)
+            , Border.color Kit.colors.gray_500
+            , Border.widthEach { edges | bottom = 1 }
+            ]
+        |> Element.el
+            [ Element.paddingXY (Kit.scales.spacing 6) 0
+            , Element.width Element.fill
+            ]
 
 
 menuItem url text =
@@ -173,8 +178,10 @@ intro pagePath data =
             , Element.centerY
             ]
         |> Element.el
-            [ Element.customStyle "height" "100vh"
+            [ Element.clip
+            , Element.customStyle "min-height" "100vh"
             , Element.inFront (menu pagePath)
+            , Element.paddingXY (Kit.scales.spacing 6) 0
             , Element.width Element.fill
             , Background.color Kit.colors.gray_600
             ]
@@ -187,7 +194,7 @@ logo pagePath =
         [ Element.centerX
         , Element.centerY
         , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
-        , Element.width (Element.px 550)
+        , Element.width (Element.maximum 550 Element.fill)
         ]
         { src = relativeImagePath { from = pagePath, to = images.logoDarkColored }
         , description = "FISSION"
@@ -230,7 +237,7 @@ fissionLive pagePath data =
     Element.column
         [ Element.centerX
         , Element.id "fission-live"
-        , Element.paddingXY 0 (Kit.scales.spacing 24)
+        , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
         ]
         [ -- Title
           --------
@@ -261,7 +268,7 @@ fissionLive pagePath data =
         , Element.image
             [ Element.centerY
             , Element.clip
-            , Element.width (Element.px 638)
+            , Element.width (Element.maximum 638 Element.fill)
             , Border.rounded Kit.defaultBorderRounding
             ]
             { src = "https://s3.fission.codes/2019/11/going-live-code-diffusion.gif"
