@@ -17,3 +17,13 @@ fission_live:
 
   terminal_caption:
     Download our CLI, register, and start streaming files online.
+
+
+
+heroku:
+
+  title:
+    Decentralized Files for Heroku
+
+  about:
+    Add a file system to Heroku that lets you and your users easily sync and re-use files everywhere.
