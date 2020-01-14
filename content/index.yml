@@ -1,6 +1,19 @@
 tagline:
   App & website hosting with user-controlled data
 
-shortDescription:
+short_description:
   Fission provides app hosting with user controlled data.
   We’re building a web native file system that combines files, encryption, and identity, like an open source iCloud.
+
+
+
+fission_live:
+
+  title:
+    Fission Live
+
+  about:
+    Get started with Fission to bring your apps live directly from your laptop. Publish static files, websites, and JavaScript front ends and keep them updated in real time. We use the InterPlanetary File System (IPFS) to power peer-to-peer files.
+
+  terminal_caption:
+    Download our CLI, register, and start streaming files online.

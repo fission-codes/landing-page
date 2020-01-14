@@ -1,4 +1,4 @@
-module Common exposing (decodeYaml, edges, errorView, relativeImagePath, relativePagePath)
+module Common exposing (decodeYaml, errorView, relativeImagePath, relativePagePath)
 
 import Element exposing (Element)
 import Pages.ImagePath
@@ -48,17 +48,6 @@ decodeYaml decoder yaml =
 
 
 -- 🖼
-
-
-{-| See <https://package.elm-lang.org/packages/mdgriffith/elm-ui/1.1.5/Element#paddingEach>
--}
-edges : { top : Int, right : Int, bottom : Int, left : Int }
-edges =
-    { top = 0
-    , right = 0
-    , bottom = 0
-    , left = 0
-    }
 
 
 errorView : String -> Element msg

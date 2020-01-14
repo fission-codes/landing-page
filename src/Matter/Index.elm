@@ -5,11 +5,11 @@ import Content.Metadata exposing (MetadataForPages)
 import Content.Parsers exposing (EncodedData)
 import Dict.Any
 import Element exposing (Element)
-import Element.Background
-import Element.Border
-import Element.Extension as Element
-import Element.Font
-import Kit
+import Element.Background as Background
+import Element.Border as Border
+import Element.Extra as Element
+import Element.Font as Font
+import Kit exposing (edges, none)
 import Pages exposing (images, pages)
 import Result.Extra as Result
 import Types exposing (..)
@@ -21,8 +21,16 @@ import Yaml.Decode as Yaml
 
 
 type alias DecodedData =
-    { shortDescription : String
+    { fissionLive : FissionLiveData
+    , shortDescription : String
     , tagline : String
+    }
+
+
+type alias FissionLiveData =
+    { about : String
+    , terminalCaption : String
+    , title : String
     }
 
 
@@ -43,14 +51,30 @@ render _ pagePath meta encodedData =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map2
-        (\s t ->
-            { shortDescription = s
+    Yaml.map3
+        (\f s t ->
+            { fissionLive = f
+            , shortDescription = s
             , tagline = t
             }
         )
-        (Yaml.field "shortDescription" Yaml.string)
+        (Yaml.field "fission_live" fissionLiveDataDecoder)
+        (Yaml.field "short_description" Yaml.string)
         (Yaml.field "tagline" Yaml.string)
+
+
+fissionLiveDataDecoder : Yaml.Decoder FissionLiveData
+fissionLiveDataDecoder =
+    Yaml.map3
+        (\a c t ->
+            { about = a
+            , terminalCaption = c
+            , title = t
+            }
+        )
+        (Yaml.field "about" Yaml.string)
+        (Yaml.field "terminal_caption" Yaml.string)
+        (Yaml.field "title" Yaml.string)
 
 
 
@@ -63,18 +87,8 @@ view pagePath data =
         [ Element.height Element.fill
         , Element.width Element.fill
         ]
-        [ -- Intro
-          --------
-          data
-            |> intro pagePath
-            |> Element.el
-                [ Element.customStyle "height" "100vh"
-                , Element.inFront (menu pagePath)
-                , Element.width Element.fill
-                , Element.Background.color Kit.colors.gray_600
-                ]
-            |> Element.el
-                [ Element.width Element.fill ]
+        [ intro pagePath data
+        , fissionLive pagePath data
         ]
 
 
@@ -88,8 +102,8 @@ menu pagePath =
         , Element.centerX
         , Element.paddingXY 0 (Kit.scales.spacing 8)
         , Element.width (Element.maximum 1000 Element.fill)
-        , Element.Border.color Kit.colors.gray_500
-        , Element.Border.widthEach { edges | bottom = 1 }
+        , Border.color Kit.colors.gray_500
+        , Border.widthEach { edges | bottom = 1 }
         ]
         [ -- Logo Icon
           ------------
@@ -108,17 +122,19 @@ menu pagePath =
             , Element.centerY
             , Element.spacing (Kit.scales.spacing 8)
             ]
-            [ menuItem "Fission Live"
-            , menuItem "Heroku"
-            , menuItem "News"
+            [ menuItem "#fission-live" "Fission Live"
+            , menuItem "#heroku" "Heroku"
+            , menuItem "#news" "News"
             ]
         ]
 
 
-menuItem text =
-    Element.el
-        [ Element.Font.color Kit.colors.gray_200 ]
-        (Element.text text)
+menuItem url text =
+    Element.link
+        [ Font.color Kit.colors.gray_200 ]
+        { url = url
+        , label = Element.text text
+        }
 
 
 
@@ -126,20 +142,29 @@ menuItem text =
 
 
 intro pagePath data =
-    Element.column
-        [ Element.centerX
-        , Element.centerY
-        ]
-        [ logo pagePath
-        , tagline data
-        , shortDescription data
-        ]
+    [ logo pagePath
+    , tagline data
+    , shortDescription data
+    ]
+        |> Element.column
+            [ Element.centerX
+            , Element.centerY
+            ]
+        |> Element.el
+            [ Element.customStyle "height" "100vh"
+            , Element.inFront (menu pagePath)
+            , Element.width Element.fill
+            , Background.color Kit.colors.gray_600
+            ]
+        |> Element.el
+            [ Element.width Element.fill ]
 
 
 logo pagePath =
     Element.image
         [ Element.centerX
         , Element.centerY
+        , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
         , Element.width (Element.px 550)
         ]
         { src = relativeImagePath { from = pagePath, to = images.logoDarkColored }
@@ -151,26 +176,89 @@ tagline data =
     Element.paragraph
         [ Element.paddingEach { edges | top = Kit.scales.spacing 12 }
         , Element.spacing (Kit.scales.spacing 2)
-        , Element.Font.center
-        , Element.Font.color Kit.colors.gray_100
-        , Element.Font.family Kit.fonts.display
-        , Element.Font.letterSpacing -0.625
-        , Element.Font.medium
-        , Element.Font.size (Kit.scales.typography 6)
+        , Font.center
+        , Font.family Kit.fonts.display
+        , Font.letterSpacing -0.625
+        , Font.medium
+        , Font.size (Kit.scales.typography 6)
         ]
         [ Element.text data.tagline
         ]
 
 
 shortDescription data =
-    Element.paragraph
+    Element.el
         [ Element.centerX
         , Element.paddingEach { edges | top = Kit.scales.spacing 8 }
-        , Element.spacing (Kit.scales.spacing 2)
         , Element.width (Element.maximum 500 Element.fill)
-        , Element.Font.color Kit.colors.gray_300
-        , Element.Font.center
-        , Element.Font.size (Kit.scales.typography 2)
+        , Font.center
         ]
-        [ Element.textWithLineBreaks data.shortDescription
+        (data.shortDescription
+            |> Element.text
+            |> List.singleton
+            |> Kit.subtleParagraph
+        )
+
+
+
+-- FISSION LIVE
+
+
+fissionLive pagePath data =
+    Element.column
+        [ Element.centerX
+        , Element.id "fission-live"
+        , Element.paddingXY 0 (Kit.scales.spacing 24)
+        ]
+        [ -- Title
+          --------
+          Kit.heading
+            { level = 1 }
+            [ Element.text data.fissionLive.title ]
+
+        -- About
+        --------
+        , Element.el
+            [ Element.centerX
+            , Element.paddingEach
+                { edges
+                    | bottom = Kit.scales.spacing 12
+                    , top = Kit.scales.spacing 8
+                }
+            , Element.width (Element.maximum 500 Element.fill)
+            , Font.center
+            ]
+            (data.fissionLive.about
+                |> Element.text
+                |> List.singleton
+                |> Kit.subtleParagraph
+            )
+
+        -- Terminal GIF
+        ---------------
+        , Element.image
+            [ Element.centerY
+            , Element.clip
+            , Element.width (Element.px 638)
+            , Border.rounded Kit.defaultBorderRounding
+            ]
+            { src = "https://s3.fission.codes/2019/11/going-live-code-diffusion.gif"
+            , description = ""
+            }
+
+        -- Caption
+        , Kit.caption data.fissionLive.terminalCaption
+
+        -- Guide Link
+        -------------
+        , Element.el
+            [ Element.centerX
+            , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
+            ]
+            (Element.newTabLink
+                Kit.buttonAttributes
+                { url = "https://guide.fission.codes/"
+                , label = Element.text "Read the guide"
+                }
+            )
         ]
