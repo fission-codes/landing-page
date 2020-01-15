@@ -1,7 +1,7 @@
 {
     "git-dependencies": {
         "direct": {
-            "git@github.com:fission-suite/elm-kit.git": "bed5dedd8a4e7f5471961c8a07633e5c0120ced2"
+            "git@github.com:fission-suite/elm-kit.git": "4438407bf80f82afad45103a64fbb5266a7b08d7"
         },
         "indirect": {}
     }

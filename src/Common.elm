@@ -1,4 +1,4 @@
-module Common exposing (decodeYaml, errorView, relativeImagePath, relativePagePath)
+module Common exposing (decodeYaml, errorView, maxContainerWidth, relativeImagePath, relativePagePath)
 
 import Element exposing (Element)
 import Pages.ImagePath
@@ -58,6 +58,11 @@ errorView err =
         , Element.centerY
         ]
         (Element.text err)
+
+
+maxContainerWidth : Int
+maxContainerWidth =
+    1000
 
 
 

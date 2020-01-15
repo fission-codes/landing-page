@@ -10,6 +10,7 @@ import Element.Border as Border
 import Element.Events as Events
 import Element.Extra as Element
 import Element.Font as Font
+import Html
 import Html.Events
 import Json.Decode
 import Kit exposing (edges, none)
@@ -115,6 +116,7 @@ view pagePath data =
         [ intro pagePath data
         , fissionLive pagePath data
         , heroku pagePath data
+        , news pagePath data
         ]
 
 
@@ -149,7 +151,7 @@ menu pagePath =
             [ Element.alignTop
             , Element.centerX
             , Element.paddingXY 0 (Kit.scales.spacing 8)
-            , Element.width (Element.maximum 1000 Element.fill)
+            , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
             , Border.color Kit.colors.gray_500
             , Border.widthEach { edges | bottom = 1 }
             ]
@@ -251,6 +253,7 @@ fissionLive pagePath data =
         [ Element.centerX
         , Element.id "fission-live"
         , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
+        , Font.center
         ]
         [ -- Title
           --------
@@ -268,7 +271,6 @@ fissionLive pagePath data =
                     , top = Kit.scales.spacing 8
                 }
             , Element.width (Element.maximum 500 Element.fill)
-            , Font.center
             ]
             (data.fissionLive.about
                 |> Element.text
@@ -327,7 +329,6 @@ heroku pagePath data =
                 , top = Kit.scales.spacing 8
             }
         , Element.width (Element.maximum 500 Element.fill)
-        , Font.center
         ]
         (data.heroku.about
             |> Element.text
@@ -365,8 +366,89 @@ heroku pagePath data =
             , Element.id "heroku"
             , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
             , Background.color Kit.colors.gray_600
+            , Font.center
             ]
         |> Element.el
             [ Element.width Element.fill
             , Background.color Kit.colors.gray_600
             ]
+
+
+
+-- NEWS
+
+
+news pagePath data =
+    Element.row
+        [ Element.centerX
+        , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
+        , Element.spacing (Kit.scales.spacing 16)
+        , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
+        ]
+        [ -- Left
+          -------
+          Element.column
+            [ Element.width (Element.fillPortion 4) ]
+            [ Kit.heading
+                { level = 1 }
+                [ Element.text "News" ]
+
+            --
+            , [ "IPFS on Hackage"
+              , "IPFS Storage Adapter for Ghost Blog with Heroku Deploy"
+              , "Drinks with Canadians in SF, January 2020"
+              , "Let Business Write Business Logic, Ben Church at The Big Elixir"
+              , "Fission one-click IPFS publishing for VSCode Extension 🎉"
+              ]
+                |> List.indexedMap
+                    (\idx ->
+                        newsItem (idx == 0)
+                    )
+                |> Element.column
+                    [ Element.paddingXY 0 (Kit.scales.spacing 12)
+                    , Element.spacing (Kit.scales.spacing 6)
+                    , Font.size (Kit.scales.typography 2)
+                    ]
+
+            --
+            , Element.link
+                Kit.buttonAltAttributes
+                { url = "https://blog.fission.codes"
+                , label = Element.text "Visit Fission Blog"
+                }
+            ]
+
+        -- Right
+        --------
+        , Element.el
+            [ Element.height Element.fill
+            , Element.width (Element.fillPortion 5)
+            , Background.color Kit.colors.gray_600
+            , Background.image "https://fission.codes/assets/images/marvin-meyer-571072-unsplash-600.jpg"
+            , Border.rounded Kit.defaultBorderRounding
+            , Responsive.hide_lt_md
+            ]
+            Element.none
+        ]
+
+
+newsItem isFirst text =
+    Element.column
+        []
+        [ if isFirst then
+            Element.none
+
+          else
+            Element.el
+                [ Element.height (Element.px 0)
+                , Element.paddingEach { edges | bottom = Kit.scales.spacing 6 }
+                , Element.width (Element.px 110)
+                , Border.color Kit.colors.gray_600
+                , Border.widthEach { none | top = 2 }
+                ]
+                Element.none
+
+        --
+        , Kit.paragraph
+            [ Element.text text ]
+        ]
