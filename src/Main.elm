@@ -29,5 +29,5 @@ main =
 
         --
         , internals = Pages.internals
-        , onPageChange = \_ -> ()
+        , onPageChange = \_ -> Bypass
         }

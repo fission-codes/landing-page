@@ -1,5 +1,8 @@
 module State exposing (..)
 
+import Ease
+import SmoothScroll
+import Task
 import Types exposing (..)
 
 
@@ -18,9 +21,29 @@ init _ =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update _ _ =
-    -- Not needed at the moment
-    ( (), Cmd.none )
+update msg model =
+    case msg of
+        -- Don't do anything.
+        Bypass ->
+            ( model
+            , Cmd.none
+            )
+
+        -- Smooth scroll to a certain node on the page.
+        SmoothScroll { nodeId } ->
+            ( model
+            , Task.attempt
+                (\_ -> Bypass)
+                (SmoothScroll.scrollToWithOptions smoothScrollConfig nodeId)
+            )
+
+
+smoothScrollConfig : SmoothScroll.Config
+smoothScrollConfig =
+    { offset = 0
+    , speed = 35
+    , easing = Ease.inOutCubic
+    }
 
 
 

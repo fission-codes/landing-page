@@ -26,8 +26,9 @@ type alias Model =
 
 {-| Messages, or actions, that influence our `Model`.
 -}
-type alias Msg =
-    ()
+type Msg
+    = Bypass
+    | SmoothScroll { nodeId : String }
 
 
 

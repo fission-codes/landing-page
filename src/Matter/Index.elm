@@ -7,8 +7,11 @@ import Dict.Any
 import Element exposing (Element)
 import Element.Background as Background
 import Element.Border as Border
+import Element.Events as Events
 import Element.Extra as Element
 import Element.Font as Font
+import Html.Events
+import Json.Decode
 import Kit exposing (edges, none)
 import Pages exposing (images, pages)
 import Responsive
@@ -137,9 +140,9 @@ menu pagePath =
         , Element.centerY
         , Element.spacing (Kit.scales.spacing 8)
         ]
-        [ menuItem "#fission-live" "Fission Live"
-        , menuItem "#heroku" "Heroku"
-        , menuItem "#news" "News"
+        [ menuItem "fission-live" "Fission Live"
+        , menuItem "heroku" "Heroku"
+        , menuItem "news" "News"
         ]
     ]
         |> Element.row
@@ -156,10 +159,20 @@ menu pagePath =
             ]
 
 
-menuItem url text =
+menuItem id text =
     Element.link
-        [ Font.color Kit.colors.gray_200 ]
-        { url = url
+        [ Font.color Kit.colors.gray_200
+
+        --
+        , { message = SmoothScroll { nodeId = id }
+          , preventDefault = True
+          , stopPropagation = True
+          }
+            |> Json.Decode.succeed
+            |> Html.Events.custom "click"
+            |> Element.htmlAttribute
+        ]
+        { url = ""
         , label = Element.text text
         }
 
