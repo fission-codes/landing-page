@@ -411,6 +411,7 @@ heroku pagePath data =
 news pagePath data =
     Element.row
         [ Element.centerX
+        , Element.id "news"
         , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
         , Element.spacing (Kit.scales.spacing 16)
         , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
@@ -516,7 +517,7 @@ footer pagePath data =
     ]
     |> Element.row
         [ Element.centerX
-        , Element.id "heroku"
+        , Element.id "footer"
         , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 6)
         , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
         ]
