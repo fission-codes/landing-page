@@ -28,6 +28,7 @@ import Yaml.Decode as Yaml
 type alias DecodedData =
     { fissionLive : FissionLiveData
     , heroku : HerokuData
+    , footer : FooterData
     , shortDescription : String
     , tagline : String
     }
@@ -43,6 +44,13 @@ type alias FissionLiveData =
 type alias HerokuData =
     { about : String
     , title : String
+    }
+
+
+type alias FooterData =
+    { discordLink : String
+    , twitterLink : String
+    , linkedinLink : String
     }
 
 
@@ -63,16 +71,18 @@ render _ pagePath meta encodedData =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map4
-        (\f h s t ->
+    Yaml.map5
+        (\f h ft s t ->
             { fissionLive = f
             , heroku = h
+            , footer = ft
             , shortDescription = s
             , tagline = t
             }
         )
         (Yaml.field "fission_live" fissionLiveDataDecoder)
         (Yaml.field "heroku" herokuDataDecoder)
+        (Yaml.field "footer" footerDataDecoder)
         (Yaml.field "short_description" Yaml.string)
         (Yaml.field "tagline" Yaml.string)
 
@@ -103,6 +113,20 @@ herokuDataDecoder =
         (Yaml.field "title" Yaml.string)
 
 
+footerDataDecoder : Yaml.Decoder FooterData
+footerDataDecoder =
+    Yaml.map3
+        (\d t l ->
+            { discordLink = d
+            , twitterLink = t
+            , linkedinLink = l
+            }
+        )
+        (Yaml.field "discord_link" Yaml.string)
+        (Yaml.field "twitter_link" Yaml.string)
+        (Yaml.field "linkedin_link" Yaml.string)
+
+
 
 -- 🖼
 
@@ -117,6 +141,7 @@ view pagePath data =
         , fissionLive pagePath data
         , heroku pagePath data
         , news pagePath data
+        , footer pagePath data
         ]
 
 
@@ -452,3 +477,66 @@ newsItem isFirst text =
         , Kit.paragraph
             [ Element.text text ]
         ]
+
+
+
+-- FOOTER
+
+
+footer pagePath data =
+    [ -- Logo
+      ---------------
+      footerItem
+        <| Element.image
+            [ Element.centerY
+            , Element.width (Element.px 30)
+            ]
+            { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
+            , description = "FISSION"
+            }
+
+    -- Company Name
+    ---------------
+    , footerItem
+        <| Element.el
+            [ Element.centerX ]
+            <| Kit.subtleText "© Fission Internet Software"
+
+    -- Social Links
+    ---------------
+    , footerItem
+        <| Element.row [ Element.alignRight ]
+        [ Kit.link 
+                { label = Kit.subtleText "Discord"
+                , title = "Discord Link"
+                , url = data.footer.discordLink
+                }
+                |> Element.el [ Element.padding (Kit.scales.spacing 2) ]
+            , Kit.link 
+                { label = Kit.subtleText "Twitter"
+                , title = "Twitter Link"
+                , url = data.footer.twitterLink
+                }
+                |> Element.el [ Element.padding (Kit.scales.spacing 2) ]
+            , Kit.link 
+                { label = Kit.subtleText "LinkedIn"
+                , title = "LinkedIn Link"
+                , url = data.footer.linkedinLink
+                }
+                |> Element.el [ Element.padding (Kit.scales.spacing 2) ]
+        ]
+    ]
+    |> Element.row
+        [ Element.centerX
+        , Element.id "heroku"
+        , Element.paddingXY (Kit.scales.spacing 0) (Kit.scales.spacing 6)
+        , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
+        ]
+    |> Element.el 
+        [ Background.color Kit.colors.gray_600
+        , Element.width Element.fill
+        ]
+
+
+footerItem content = 
+    Element.el [Element.width (Element.fillPortion 1) ] content
