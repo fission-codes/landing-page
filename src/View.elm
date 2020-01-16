@@ -47,6 +47,7 @@ root contentList page =
                 ]
                 [ Element.html fontStylesheetLink
                 , Element.html mediaQueries
+                , Element.html temporaryElmUiSafariCssFix
                 , renderMatter contentList page model interpretation
                 ]
     in
@@ -171,3 +172,11 @@ mediaQueries =
             @media (max-width: 1279px) { [hide-lt-xl] { display: none !important }}
           """
         ]
+
+
+{-| Fixes Safari CSS issue with elm-ui.
+See <https://github.com/mdgriffith/elm-ui/issues/152> for more info.
+-}
+temporaryElmUiSafariCssFix : Html Msg
+temporaryElmUiSafariCssFix =
+    Html.node "style" [] [ Html.text ".s.c > .s { flex-basis: auto; flex-shrink: 0; }" ]
