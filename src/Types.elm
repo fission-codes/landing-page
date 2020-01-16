@@ -3,6 +3,8 @@ module Types exposing (..)
 import Content.Metadata exposing (Metadata)
 import Content.Parsers exposing (Interpretation)
 import Element exposing (Element)
+import External.Blog
+import Http
 import Pages
 import Pages.ImagePath as Images
 import Pages.PagePath as Pages
@@ -17,7 +19,8 @@ import Yaml.Decode as Yaml
 {-| Model of our UI state.
 -}
 type alias Model =
-    ()
+    { latestBlogPosts : List External.Blog.Post
+    }
 
 
 
@@ -28,6 +31,7 @@ type alias Model =
 -}
 type Msg
     = Bypass
+    | GotBlogRssFeed (Result Http.Error String)
     | SmoothScroll { nodeId : String }
 
 

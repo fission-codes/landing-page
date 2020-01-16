@@ -44,6 +44,8 @@ markdownMetadataDecoder =
 
 
 yamlMetadataDecoder =
+    -- We actually don't need to use a YAML parser here,
+    -- because elm-pages translates YAML metadata into JSON.
     Json.succeed
         (Page {})
 

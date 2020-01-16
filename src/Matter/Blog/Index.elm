@@ -14,8 +14,8 @@ import Types exposing (..)
 -- 🖼
 
 
-render : ContentList -> PagePath -> MetadataForPages -> EncodedData -> Element Msg
-render contentList currentPagePath meta _ =
+render : ContentList -> PagePath -> MetadataForPages -> EncodedData -> Model -> Element Msg
+render contentList currentPagePath meta _ _ =
     contentList
         |> List.filterMap
             (\( pagePath, metadata ) ->

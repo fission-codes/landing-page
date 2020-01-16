@@ -10,6 +10,7 @@ import Element.Border as Border
 import Element.Events as Events
 import Element.Extra as Element
 import Element.Font as Font
+import External.Blog
 import Html
 import Html.Events
 import Json.Decode
@@ -58,11 +59,11 @@ type alias FooterData =
 -- ⛩
 
 
-render : ContentList -> PagePath -> MetadataForPages -> EncodedData -> Element Msg
-render _ pagePath meta encodedData =
+render : ContentList -> PagePath -> MetadataForPages -> EncodedData -> Model -> Element Msg
+render _ pagePath meta encodedData model =
     encodedData
         |> Common.decodeYaml dataDecoder
-        |> Result.unpack Common.errorView (view pagePath)
+        |> Result.unpack Common.errorView (view pagePath model)
 
 
 
@@ -131,17 +132,17 @@ footerDataDecoder =
 -- 🖼
 
 
-view : PagePath -> DecodedData -> Element Msg
-view pagePath data =
+view : PagePath -> Model -> DecodedData -> Element Msg
+view pagePath model data =
     Element.column
         [ Element.height Element.fill
         , Element.width Element.fill
         ]
-        [ intro pagePath data
-        , fissionLive pagePath data
-        , heroku pagePath data
-        , news pagePath data
-        , footer pagePath data
+        [ intro pagePath model data
+        , fissionLive pagePath model data
+        , heroku pagePath model data
+        , news pagePath model data
+        , footer pagePath model data
         ]
 
 
@@ -180,17 +181,7 @@ menu pagePath =
             ]
 
 
-badge : PagePath -> Element msg
-badge pagePath =
-    Element.image
-        [ Element.centerY
-        , Element.width (Element.px 30)
-        ]
-        { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
-        , description = "FISSION"
-        }
-
-
+menuItem : String -> String -> Element Msg
 menuItem id text =
     Element.link
         [ Font.color Kit.colors.gray_200
@@ -209,11 +200,23 @@ menuItem id text =
         }
 
 
+badge : PagePath -> Element msg
+badge pagePath =
+    Element.image
+        [ Element.centerY
+        , Element.width (Element.px 30)
+        ]
+        { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
+        , description = "FISSION"
+        }
+
+
 
 -- INTRO
 
 
-intro pagePath data =
+intro : PagePath -> Model -> DecodedData -> Element Msg
+intro pagePath _ data =
     [ logo pagePath
     , tagline data
     , shortDescription data
@@ -278,7 +281,8 @@ shortDescription data =
 -- FISSION LIVE
 
 
-fissionLive pagePath data =
+fissionLive : PagePath -> Model -> DecodedData -> Element Msg
+fissionLive pagePath _ data =
     Element.column
         [ Element.centerX
         , Element.id "fission-live"
@@ -342,7 +346,8 @@ fissionLive pagePath data =
 -- HEROKU
 
 
-heroku pagePath data =
+heroku : PagePath -> Model -> DecodedData -> Element Msg
+heroku pagePath _ data =
     [ -- Title
       --------
       Kit.heading
@@ -408,7 +413,8 @@ heroku pagePath data =
 -- NEWS
 
 
-news pagePath data =
+news : PagePath -> Model -> DecodedData -> Element Msg
+news pagePath model data =
     Element.row
         [ Element.centerX
         , Element.id "news"
@@ -425,12 +431,7 @@ news pagePath data =
                 [ Element.text "News" ]
 
             --
-            , [ "IPFS on Hackage"
-              , "IPFS Storage Adapter for Ghost Blog with Heroku Deploy"
-              , "Drinks with Canadians in SF, January 2020"
-              , "Let Business Write Business Logic, Ben Church at The Big Elixir"
-              , "Fission one-click IPFS publishing for VSCode Extension 🎉"
-              ]
+            , model.latestBlogPosts
                 |> List.indexedMap
                     (\idx ->
                         newsItem (idx == 0)
@@ -463,7 +464,8 @@ news pagePath data =
         ]
 
 
-newsItem isFirst text =
+newsItem : Bool -> External.Blog.Post -> Element Msg
+newsItem isFirst post =
     Element.column
         []
         [ if isFirst then
@@ -480,8 +482,12 @@ newsItem isFirst text =
                 Element.none
 
         --
-        , Kit.paragraph
-            [ Element.text text ]
+        , { label = Element.text post.title
+          , url = post.url
+          }
+            |> Element.link []
+            |> List.singleton
+            |> Element.paragraph []
         ]
 
 
@@ -489,38 +495,38 @@ newsItem isFirst text =
 -- FOOTER
 
 
-footer : PagePath -> DecodedData -> Element Msg
-footer pagePath data =
+footer : PagePath -> Model -> DecodedData -> Element Msg
+footer pagePath _ data =
     [ -- Logo
-      ---------------
-      footerItem <|
-        badge pagePath
+      -------
+      footerItem (badge pagePath)
 
     -- Company Name
     ---------------
-    , footerItem <|
-        Element.el
+    , "© Fission Internet Software"
+        |> Kit.subtleText
+        |> Element.el
             [ Element.centerX
             , Responsive.hide_lt_md
             ]
-            (Kit.subtleText "© Fission Internet Software")
+        |> footerItem
 
     -- Social Links
     ---------------
-    , footerItem <|
-        Element.row
+    , [ socialLink "Discord" data.footer.discordLink
+      , socialLink "Twitter" data.footer.twitterLink
+      , socialLink "LinkedIn" data.footer.linkedinLink
+      ]
+        |> Element.row
             [ Element.alignRight
             , Element.spacing (Kit.scales.spacing 4)
             ]
-            [ socialLink "Discord" data.footer.discordLink
-            , socialLink "Twitter" data.footer.twitterLink
-            , socialLink "LinkedIn" data.footer.linkedinLink
-            ]
+        |> footerItem
     ]
         |> Element.row
             [ Element.centerX
             , Element.id "footer"
-            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 6)
+            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 8)
             , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
             ]
         |> Element.el
@@ -532,7 +538,11 @@ footer pagePath data =
 
 footerItem : Element msg -> Element msg
 footerItem content =
-    Element.el [ Element.width (Element.fillPortion 1) ] content
+    Element.el
+        [ Element.centerY
+        , Element.width (Element.fillPortion 1)
+        ]
+        content
 
 
 socialLink : String -> String -> Element msg

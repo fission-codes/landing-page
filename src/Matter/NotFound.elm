@@ -4,7 +4,7 @@ import Element
 import Element.Font
 
 
-render _ _ _ _ =
+render _ _ _ _ _ =
     Element.el
         [ Element.centerX
         , Element.centerY

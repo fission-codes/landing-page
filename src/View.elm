@@ -7,8 +7,10 @@ import Dict.Any exposing (AnyDict)
 import Element exposing (Element)
 import Element.Background
 import Element.Font
+import External.Blog
 import Html exposing (Html)
 import Html.Attributes
+import Json.Decode.Exploration as StrictJson
 import Kit
 import Matter.Blog.Index
 import Matter.Blog.Post
@@ -16,6 +18,7 @@ import Matter.Index
 import Matter.NotFound
 import Pages exposing (pages)
 import Pages.PagePath as Pages
+import Pages.Secrets as Secrets
 import Pages.StaticHttp as StaticHttp
 import Types exposing (..)
 
@@ -36,7 +39,7 @@ pagesCatalog =
 
 root contentList page =
     let
-        withStyles model interpretation =
+        withStyles interpretation model =
             Element.row
                 [ Element.height Element.fill
                 , Element.width Element.fill
@@ -47,15 +50,25 @@ root contentList page =
                 , renderMatter contentList page model interpretation
                 ]
     in
-    StaticHttp.succeed
-        { head =
-            Metadata.head page.frontmatter
-        , view =
-            \m i ->
-                { title = Metadata.title page.frontmatter
-                , body = Element.layout layoutAttributes (withStyles m i)
+    External.Blog.latestPostsDecoder
+        |> StaticHttp.get
+            (Secrets.succeed External.Blog.feedUrl)
+        |> StaticHttp.map
+            (\latestBlogPosts ->
+                { head =
+                    Metadata.head page.frontmatter
+                , view =
+                    \m i ->
+                        { m | latestBlogPosts = latestBlogPosts }
+                            |> withStyles i
+                            |> Element.layout layoutAttributes
+                            |> (\body ->
+                                    { title = Metadata.title page.frontmatter
+                                    , body = body
+                                    }
+                               )
                 }
-        }
+            )
 
 
 
@@ -63,7 +76,7 @@ root contentList page =
 
 
 renderMatter : ContentList -> Page -> Model -> Interpretation Msg -> Element Msg
-renderMatter contentList page _ interpretation =
+renderMatter contentList page model interpretation =
     case page.frontmatter of
         -----------------------------------------
         -- Blog Posts
@@ -100,7 +113,7 @@ renderMatter contentList page _ interpretation =
                     pagesCatalogDictionary
                         |> Dict.Any.get page.path
                         |> Maybe.withDefault Matter.NotFound.render
-                        |> (\renderer -> renderer contentList page.path meta data)
+                        |> (\renderer -> renderer contentList page.path meta data model)
 
                 Nothing ->
                     Element.none
