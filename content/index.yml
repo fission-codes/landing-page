@@ -29,14 +29,32 @@ heroku:
     Add a file system to Heroku that lets you and your users easily sync and re-use files everywhere.
 
 
+
+news:
+
+  title: News
+  button_text: Subscribe to our product updates newsletter
+
+
+
+subscribe:
+
+  title: Subscribe to our product updates newsletter
+  sub_text: GREAT DEVELOPER EXPERIENCES, LIVE FROM YOUR LAPTOP
+  input_placeholder: newsletter@fission.codes
+
+  note:
+    "Visit the subscribe page to choose mailing lists and tell us your name :)"
+
+
+
 footer:
 
   discord_link:
     "https://discord.gg/daDMAjE"
-  
+
   twitter_link:
     "https://twitter.com/FISSIONcodes"
 
   linkedin_link:
     "https://linkedin.com/company/fissioncodes"
-  

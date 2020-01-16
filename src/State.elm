@@ -15,7 +15,9 @@ import Types exposing (..)
 
 init : Maybe PagePath -> ( Model, Cmd Msg )
 init _ =
-    ( { latestBlogPosts = [] }
+    ( { latestBlogPosts = []
+      , subscribeToEmail = Nothing
+      }
       -- Get the posts from the blog
     , Http.get
         { url = External.Blog.feedUrl
@@ -57,6 +59,11 @@ update msg model =
         GotBlogRssFeed (Err err) ->
             -- Ignore error
             ( model
+            , Cmd.none
+            )
+
+        GotSubscriptionInput input ->
+            ( { model | subscribeToEmail = Just input }
             , Cmd.none
             )
 

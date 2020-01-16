@@ -20,6 +20,7 @@ import Yaml.Decode as Yaml
 -}
 type alias Model =
     { latestBlogPosts : List External.Blog.Post
+    , subscribeToEmail : Maybe String
     }
 
 
@@ -32,6 +33,7 @@ type alias Model =
 type Msg
     = Bypass
     | GotBlogRssFeed (Result Http.Error String)
+    | GotSubscriptionInput String
     | SmoothScroll { nodeId : String }
 
 

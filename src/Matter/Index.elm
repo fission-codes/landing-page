@@ -10,6 +10,7 @@ import Element.Border as Border
 import Element.Events as Events
 import Element.Extra as Element
 import Element.Font as Font
+import Element.Input as Input
 import External.Blog
 import Html
 import Html.Events
@@ -28,8 +29,12 @@ import Yaml.Decode as Yaml
 
 type alias DecodedData =
     { fissionLive : FissionLiveData
-    , heroku : HerokuData
     , footer : FooterData
+    , heroku : HerokuData
+    , news : NewsData
+    , subscribe : SubscribeData
+
+    --
     , shortDescription : String
     , tagline : String
     }
@@ -44,6 +49,20 @@ type alias FissionLiveData =
 
 type alias HerokuData =
     { about : String
+    , title : String
+    }
+
+
+type alias NewsData =
+    { buttonText : String
+    , title : String
+    }
+
+
+type alias SubscribeData =
+    { inputPlaceholder : String
+    , note : String
+    , subText : String
     , title : String
     }
 
@@ -72,18 +91,14 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map5
-        (\f h ft s t ->
-            { fissionLive = f
-            , heroku = h
-            , footer = ft
-            , shortDescription = s
-            , tagline = t
-            }
-        )
+    Yaml.map7
+        DecodedData
         (Yaml.field "fission_live" fissionLiveDataDecoder)
-        (Yaml.field "heroku" herokuDataDecoder)
         (Yaml.field "footer" footerDataDecoder)
+        (Yaml.field "heroku" herokuDataDecoder)
+        (Yaml.field "news" newsDataDecoder)
+        (Yaml.field "subscribe" subscribeDataDecoder)
+        --
         (Yaml.field "short_description" Yaml.string)
         (Yaml.field "tagline" Yaml.string)
 
@@ -91,41 +106,45 @@ dataDecoder =
 fissionLiveDataDecoder : Yaml.Decoder FissionLiveData
 fissionLiveDataDecoder =
     Yaml.map3
-        (\a c t ->
-            { about = a
-            , terminalCaption = c
-            , title = t
-            }
-        )
+        FissionLiveData
         (Yaml.field "about" Yaml.string)
         (Yaml.field "terminal_caption" Yaml.string)
-        (Yaml.field "title" Yaml.string)
-
-
-herokuDataDecoder : Yaml.Decoder HerokuData
-herokuDataDecoder =
-    Yaml.map2
-        (\a t ->
-            { about = a
-            , title = t
-            }
-        )
-        (Yaml.field "about" Yaml.string)
         (Yaml.field "title" Yaml.string)
 
 
 footerDataDecoder : Yaml.Decoder FooterData
 footerDataDecoder =
     Yaml.map3
-        (\d t l ->
-            { discordLink = d
-            , twitterLink = t
-            , linkedinLink = l
-            }
-        )
+        FooterData
         (Yaml.field "discord_link" Yaml.string)
         (Yaml.field "twitter_link" Yaml.string)
         (Yaml.field "linkedin_link" Yaml.string)
+
+
+herokuDataDecoder : Yaml.Decoder HerokuData
+herokuDataDecoder =
+    Yaml.map2
+        HerokuData
+        (Yaml.field "about" Yaml.string)
+        (Yaml.field "title" Yaml.string)
+
+
+newsDataDecoder : Yaml.Decoder NewsData
+newsDataDecoder =
+    Yaml.map2
+        NewsData
+        (Yaml.field "button_text" Yaml.string)
+        (Yaml.field "title" Yaml.string)
+
+
+subscribeDataDecoder : Yaml.Decoder SubscribeData
+subscribeDataDecoder =
+    Yaml.map4
+        SubscribeData
+        (Yaml.field "input_placeholder" Yaml.string)
+        (Yaml.field "note" Yaml.string)
+        (Yaml.field "sub_text" Yaml.string)
+        (Yaml.field "title" Yaml.string)
 
 
 
@@ -142,6 +161,7 @@ view pagePath model data =
         , fissionLive pagePath model data
         , heroku pagePath model data
         , news pagePath model data
+        , subscribe pagePath model data
         , footer pagePath model data
         ]
 
@@ -165,13 +185,32 @@ menu pagePath =
         [ menuItem "fission-live" "Fission Live"
         , menuItem "heroku" "Heroku"
         , menuItem "news" "News"
+
+        --
+        , Element.link
+            (menuItemAttributes "subscribe")
+            { url = ""
+            , label =
+                Element.el
+                    [ Element.paddingEach
+                        { top = Kit.scales.spacing 2.25
+                        , right = Kit.scales.spacing 2.25
+                        , bottom = Kit.scales.spacing 2
+                        , left = Kit.scales.spacing 2.25
+                        }
+                    , Background.color Kit.colors.gray_200
+                    , Border.rounded Kit.defaultBorderRounding
+                    , Font.color Kit.colors.gray_600
+                    ]
+                    (Element.text "Subscribe")
+            }
         ]
     ]
         |> Element.row
             [ Element.alignTop
             , Element.centerX
             , Element.paddingXY 0 (Kit.scales.spacing 8)
-            , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
+            , Element.width Common.containerLength
             , Border.color Kit.colors.gray_500
             , Border.widthEach { edges | bottom = 1 }
             ]
@@ -184,20 +223,20 @@ menu pagePath =
 menuItem : String -> String -> Element Msg
 menuItem id text =
     Element.link
-        [ Font.color Kit.colors.gray_200
-
-        --
-        , { message = SmoothScroll { nodeId = id }
-          , preventDefault = True
-          , stopPropagation = True
-          }
-            |> Json.Decode.succeed
-            |> Html.Events.custom "click"
-            |> Element.htmlAttribute
-        ]
+        (menuItemAttributes id)
+        -- TODO: Ideally this should be "#id",
+        --       but then the browser jumps to that location
+        --       (instead of actually doing the smooth scroll)
         { url = ""
         , label = Element.text text
         }
+
+
+menuItemAttributes : String -> List (Element.Attribute Msg)
+menuItemAttributes id =
+    [ Events.onClick (SmoothScroll { nodeId = id })
+    , Font.color Kit.colors.gray_200
+    ]
 
 
 badge : PagePath -> Element msg
@@ -420,7 +459,7 @@ news pagePath model data =
         , Element.id "news"
         , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
         , Element.spacing (Kit.scales.spacing 16)
-        , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
+        , Element.width Common.containerLength
         ]
         [ -- Left
           -------
@@ -492,6 +531,99 @@ newsItem isFirst post =
 
 
 
+-- SUBSCRIBE
+
+
+subscribe : PagePath -> Model -> DecodedData -> Element Msg
+subscribe pagePath model data =
+    [ -- Sub text
+      -----------
+      Element.paragraph
+        [ Element.paddingEach { edges | bottom = Kit.scales.spacing 5 }
+        , Font.color Kit.colors.gray_400
+        , Font.letterSpacing 0.5
+        ]
+        [ Element.text data.subscribe.subText
+        ]
+
+    -- Title
+    --------
+    , Kit.heading
+        { level = 1 }
+        [ Element.text data.subscribe.title ]
+
+    -- Input
+    --------
+    , { onChange = GotSubscriptionInput
+      , text = Maybe.withDefault "" model.subscribeToEmail
+      , label = Input.labelHidden "email"
+
+      --
+      , placeholder =
+            data.subscribe.inputPlaceholder
+                |> Element.text
+                |> Input.placeholder
+                    [ Font.alignLeft
+                    , Font.color Kit.colors.gray_500
+                    ]
+                |> Just
+      }
+        |> Input.text
+            [ Background.color Kit.colors.white
+            , Border.rounded Kit.defaultBorderRounding
+            , Border.width 0
+            , Font.size (Kit.scales.typography 2)
+            , Element.paddingXY (Kit.scales.spacing 5) (Kit.scales.spacing 5)
+            ]
+        |> Element.el
+            [ Element.centerX
+            , Element.paddingEach { edges | top = Kit.scales.spacing 7 }
+            , Element.width (Element.maximum 406 Element.fill)
+            ]
+
+    -- Button
+    ---------
+    , "Subscribe"
+        |> Element.text
+        |> Element.el
+            (List.append
+                Kit.buttonAttributes
+                [ Element.width Element.fill
+                , Element.paddingXY (Kit.scales.spacing 4) (Kit.scales.spacing 4)
+                ]
+            )
+        |> Element.el
+            [ Element.centerX
+            , Element.paddingEach { edges | top = Kit.scales.spacing 5 }
+            , Element.width (Element.maximum 406 Element.fill)
+            ]
+
+    -- Note
+    -------
+    , Element.paragraph
+        [ Element.paddingEach { edges | top = Kit.scales.spacing 5 }
+        , Font.color Kit.colors.gray_300
+        , Font.italic
+        , Font.size (Kit.scales.typography -1)
+        ]
+        [ Element.text data.subscribe.note
+        ]
+    ]
+        |> Element.column
+            [ Element.centerX
+            , Element.id "subscribe"
+            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
+            , Element.width Common.containerLength
+            , Background.color Kit.colors.gray_600
+            , Font.center
+            ]
+        |> Element.el
+            [ Element.width Element.fill
+            , Background.color Kit.colors.gray_600
+            ]
+
+
+
 -- FOOTER
 
 
@@ -524,14 +656,15 @@ footer pagePath _ data =
         |> footerItem
     ]
         |> Element.row
-            [ Element.centerX
+            [ Border.color Kit.colors.gray_500
+            , Border.widthEach { edges | top = 1 }
+            , Element.centerX
             , Element.id "footer"
             , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 8)
-            , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
+            , Element.width Common.containerLength
             ]
         |> Element.el
             [ Background.color Kit.colors.gray_600
-            , Element.paddingEach { edges | top = Kit.scales.spacing 1 }
             , Element.width Element.fill
             ]
 

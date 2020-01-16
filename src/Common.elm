@@ -1,6 +1,7 @@
-module Common exposing (decodeYaml, errorView, maxContainerWidth, relativeImagePath, relativePagePath)
+module Common exposing (containerLength, decodeYaml, errorView, relativeImagePath, relativePagePath)
 
 import Element exposing (Element)
+import Kit
 import Pages.ImagePath
 import Pages.PagePath
 import Types exposing (..)
@@ -50,6 +51,11 @@ decodeYaml decoder yaml =
 -- 🖼
 
 
+containerLength : Element.Length
+containerLength =
+    Element.maximum 1000 Element.fill
+
+
 errorView : String -> Element msg
 errorView err =
     -- TODO
@@ -58,11 +64,6 @@ errorView err =
         , Element.centerY
         ]
         (Element.text err)
-
-
-maxContainerWidth : Int
-maxContainerWidth =
-    1000
 
 
 
