@@ -181,7 +181,7 @@ menu pagePath =
 
 
 badge : PagePath -> Element msg
-badge pagePath = 
+badge pagePath =
     Element.image
         [ Element.centerY
         , Element.width (Element.px 30)
@@ -493,49 +493,52 @@ footer : PagePath -> DecodedData -> Element Msg
 footer pagePath data =
     [ -- Logo
       ---------------
-      footerItem
-        <| badge pagePath
+      footerItem <|
+        badge pagePath
 
     -- Company Name
     ---------------
-    , footerItem
-        <| Element.el
-            [ Element.centerX ]
-            <| Kit.subtleText "© Fission Internet Software"
+    , footerItem <|
+        Element.el
+            [ Element.centerX
+            , Responsive.hide_lt_md
+            ]
+            (Kit.subtleText "© Fission Internet Software")
 
     -- Social Links
     ---------------
-    , footerItem
-        <| Element.row
-        [ Element.alignRight
-        , Element.spacing (Kit.scales.spacing 2)
-        ]
-        [ socialLink "Discord" data.footer.discordLink
-        , socialLink "Twitter" data.footer.twitterLink
-        , socialLink "LinkedIn" data.footer.linkedinLink
-        ]
+    , footerItem <|
+        Element.row
+            [ Element.alignRight
+            , Element.spacing (Kit.scales.spacing 4)
+            ]
+            [ socialLink "Discord" data.footer.discordLink
+            , socialLink "Twitter" data.footer.twitterLink
+            , socialLink "LinkedIn" data.footer.linkedinLink
+            ]
     ]
-    |> Element.row
-        [ Element.centerX
-        , Element.id "footer"
-        , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 6)
-        , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
-        ]
-    |> Element.el 
-        [ Background.color Kit.colors.gray_600
-        , Element.width Element.fill
-        ]
+        |> Element.row
+            [ Element.centerX
+            , Element.id "footer"
+            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 6)
+            , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
+            ]
+        |> Element.el
+            [ Background.color Kit.colors.gray_600
+            , Element.paddingEach { edges | top = Kit.scales.spacing 1 }
+            , Element.width Element.fill
+            ]
 
 
 footerItem : Element msg -> Element msg
-footerItem content = 
-    Element.el [Element.width (Element.fillPortion 1) ] content
+footerItem content =
+    Element.el [ Element.width (Element.fillPortion 1) ] content
 
 
 socialLink : String -> String -> Element msg
-socialLink name url = 
-    Kit.link 
-    { label = Kit.subtleText name
-    , title = name ++ " Link"
-    , url = url
-    }
+socialLink name url =
+    Kit.link
+        { label = Kit.subtleText name
+        , title = name ++ " Link"
+        , url = url
+        }
