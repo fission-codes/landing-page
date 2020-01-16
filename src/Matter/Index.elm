@@ -152,13 +152,7 @@ view pagePath data =
 menu pagePath =
     [ -- Logo Icon
       ------------
-      Element.image
-        [ Element.centerY
-        , Element.width (Element.px 30)
-        ]
-        { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
-        , description = "FISSION"
-        }
+      badge pagePath
 
     -- Links
     --------
@@ -184,6 +178,17 @@ menu pagePath =
             [ Element.paddingXY (Kit.scales.spacing 6) 0
             , Element.width Element.fill
             ]
+
+
+badge : PagePath -> Element msg
+badge pagePath = 
+    Element.image
+        [ Element.centerY
+        , Element.width (Element.px 30)
+        ]
+        { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
+        , description = "FISSION"
+        }
 
 
 menuItem id text =
@@ -483,17 +488,12 @@ newsItem isFirst text =
 -- FOOTER
 
 
+footer : PagePath -> DecodedData -> Element Msg
 footer pagePath data =
     [ -- Logo
       ---------------
       footerItem
-        <| Element.image
-            [ Element.centerY
-            , Element.width (Element.px 30)
-            ]
-            { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
-            , description = "FISSION"
-            }
+        <| badge pagePath
 
     -- Company Name
     ---------------
@@ -505,31 +505,19 @@ footer pagePath data =
     -- Social Links
     ---------------
     , footerItem
-        <| Element.row [ Element.alignRight ]
-        [ Kit.link 
-                { label = Kit.subtleText "Discord"
-                , title = "Discord Link"
-                , url = data.footer.discordLink
-                }
-                |> Element.el [ Element.padding (Kit.scales.spacing 2) ]
-            , Kit.link 
-                { label = Kit.subtleText "Twitter"
-                , title = "Twitter Link"
-                , url = data.footer.twitterLink
-                }
-                |> Element.el [ Element.padding (Kit.scales.spacing 2) ]
-            , Kit.link 
-                { label = Kit.subtleText "LinkedIn"
-                , title = "LinkedIn Link"
-                , url = data.footer.linkedinLink
-                }
-                |> Element.el [ Element.padding (Kit.scales.spacing 2) ]
+        <| Element.row
+        [ Element.alignRight
+        , Element.spacing (Kit.scales.spacing 2)
+        ]
+        [ socialLink "Discord" data.footer.discordLink
+        , socialLink "Twitter" data.footer.twitterLink
+        , socialLink "LinkedIn" data.footer.linkedinLink
         ]
     ]
     |> Element.row
         [ Element.centerX
         , Element.id "heroku"
-        , Element.paddingXY (Kit.scales.spacing 0) (Kit.scales.spacing 6)
+        , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 6)
         , Element.width (Element.maximum Common.maxContainerWidth Element.fill)
         ]
     |> Element.el 
@@ -538,5 +526,15 @@ footer pagePath data =
         ]
 
 
+footerItem : Element msg -> Element msg
 footerItem content = 
     Element.el [Element.width (Element.fillPortion 1) ] content
+
+
+socialLink : String -> String -> Element msg
+socialLink name url = 
+    Kit.link 
+    { label = Kit.subtleText name
+    , title = name ++ " Link"
+    , url = url
+    }
