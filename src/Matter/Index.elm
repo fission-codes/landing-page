@@ -660,11 +660,12 @@ footer pagePath _ data =
             , Border.widthEach { edges | top = 1 }
             , Element.centerX
             , Element.id "footer"
-            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 8)
+            , Element.paddingXY 0 (Kit.scales.spacing 8)
             , Element.width Common.containerLength
             ]
         |> Element.el
             [ Background.color Kit.colors.gray_600
+            , Element.paddingXY (Kit.scales.spacing 6) 0
             , Element.width Element.fill
             ]
 
