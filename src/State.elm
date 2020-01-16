@@ -44,7 +44,7 @@ update msg model =
                     |> StrictJson.strict
             of
                 Ok latestBlogPosts ->
-                    ( { model | latestBlogPosts = Debug.log "" latestBlogPosts }
+                    ( { model | latestBlogPosts = latestBlogPosts }
                     , Cmd.none
                     )
 
