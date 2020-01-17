@@ -1,10 +1,12 @@
 module Content.Metadata exposing (..)
 
 import Color
+import Color.Transform as Color
 import Date
 import Head
 import Head.Seo as Seo
 import Json.Decode as Json
+import Kit
 import Pages exposing (images, pages)
 import Pages.Manifest as Manifest
 import Pages.Manifest.Category as Manifest
@@ -58,7 +60,7 @@ yamlMetadataDecoder =
 -}
 canonicalSiteUrl : String
 canonicalSiteUrl =
-    "TODO"
+    "https://fission.codes"
 
 
 {-| HTML `head` contents based on page metadata.
@@ -70,9 +72,9 @@ head metadata =
         BlogPost meta ->
             Seo.summaryLarge
                 { canonicalUrlOverride = Nothing
-                , siteName = "FISSION"
+                , siteName = "Fission"
                 , image =
-                    { url = images.favicon
+                    { url = images.icon
                     , alt = meta.title
                     , dimensions = Nothing
                     , mimeType = Nothing
@@ -97,18 +99,17 @@ head metadata =
 -}
 manifest : Manifest.Config Pages.PathKey
 manifest =
-    -- TODO
     { backgroundColor = Just Color.white
-    , categories = [ Manifest.education ]
+    , categories = [ Manifest.utilities ]
     , displayMode = Manifest.Standalone
-    , orientation = Manifest.Portrait
-    , description = "elm-pages-starter - A statically typed site generator."
+    , orientation = Manifest.Any
+    , description = "App & website hosting with user-controlled data" -- TODO
     , iarcRatingId = Nothing
-    , name = "FISSION"
-    , themeColor = Just Color.white
+    , name = "Fission"
+    , themeColor = Just (Color.transform Kit.colors.gray_600)
     , startUrl = pages.index
-    , shortName = Just "elm-pages-starter"
-    , sourceIcon = images.favicon
+    , shortName = Just "Fission"
+    , sourceIcon = images.logoIconColoredBordered
     }
 
 
