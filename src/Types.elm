@@ -21,6 +21,7 @@ import Yaml.Decode as Yaml
 type alias Model =
     { latestBlogPosts : List External.Blog.Post
     , subscribeToEmail : Maybe String
+    , subscribing : RemoteAction
     }
 
 
@@ -32,9 +33,11 @@ type alias Model =
 -}
 type Msg
     = Bypass
-    | GotBlogRssFeed (Result Http.Error String)
+    | GotBlogPosts (Result Http.Error String)
+    | GotSubscribeResponse (Result Http.Error ())
     | GotSubscriptionInput String
     | SmoothScroll { nodeId : String }
+    | Subscribe
 
 
 
@@ -57,3 +60,10 @@ type alias Page =
 
 type alias PagePath =
     Pages.PagePath Pages.PathKey
+
+
+type RemoteAction
+    = Failed String
+    | InProgress
+    | Stopped
+    | Succeeded

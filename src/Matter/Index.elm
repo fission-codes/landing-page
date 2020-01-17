@@ -583,20 +583,7 @@ subscribe pagePath model data =
 
     -- Button
     ---------
-    , "Subscribe"
-        |> Element.text
-        |> Element.el
-            (List.append
-                Kit.buttonAttributes
-                [ Element.width Element.fill
-                , Element.paddingXY (Kit.scales.spacing 4) (Kit.scales.spacing 4)
-                ]
-            )
-        |> Element.el
-            [ Element.centerX
-            , Element.paddingEach { edges | top = Kit.scales.spacing 5 }
-            , Element.width (Element.maximum 406 Element.fill)
-            ]
+    , subscriptionButton model
 
     -- Note
     -------
@@ -620,6 +607,70 @@ subscribe pagePath model data =
         |> Element.el
             [ Element.width Element.fill
             , Background.color Kit.colors.gray_600
+            ]
+
+
+subscriptionButton : Model -> Element Msg
+subscriptionButton model =
+    let
+        buttonColor =
+            case model.subscribing of
+                Failed _ ->
+                    Kit.colors.darkPink
+
+                InProgress ->
+                    Kit.colors.gray_400
+
+                Stopped ->
+                    Kit.colors.purple
+
+                Succeeded ->
+                    Kit.colors.gray_300
+
+        onPress =
+            case model.subscribing of
+                Failed _ ->
+                    Just Subscribe
+
+                InProgress ->
+                    Nothing
+
+                Stopped ->
+                    Just Subscribe
+
+                Succeeded ->
+                    Nothing
+
+        label =
+            case model.subscribing of
+                Failed _ ->
+                    "Failed to subscribe, please try again"
+
+                InProgress ->
+                    "Subscribing …"
+
+                Stopped ->
+                    "Subscribe"
+
+                Succeeded ->
+                    "Thank you!"
+
+        buttonAttributes =
+            List.append
+                (Kit.buttonAttributesWithColor buttonColor)
+                [ Element.customStyle "transition" "background-color 250ms ease"
+                , Element.paddingXY (Kit.scales.spacing 4) (Kit.scales.spacing 4)
+                , Element.width Element.fill
+                ]
+    in
+    { onPress = onPress
+    , label = Element.text label
+    }
+        |> Input.button buttonAttributes
+        |> Element.el
+            [ Element.centerX
+            , Element.paddingEach { edges | top = Kit.scales.spacing 5 }
+            , Element.width (Element.maximum 406 Element.fill)
             ]
 
 
