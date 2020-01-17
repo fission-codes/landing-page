@@ -1,13 +1,12 @@
 module Matter.Index exposing (render)
 
 import Common exposing (..)
+import Common.Views as Common
 import Content.Metadata exposing (MetadataForPages)
 import Content.Parsers exposing (EncodedData)
-import Dict.Any
 import Element exposing (Element)
 import Element.Background as Background
 import Element.Border as Border
-import Element.Events as Events
 import Element.Extra as Element
 import Element.Font as Font
 import Element.Input as Input
@@ -29,7 +28,7 @@ import Yaml.Decode as Yaml
 
 type alias DecodedData =
     { fissionLive : FissionLiveData
-    , footer : FooterData
+    , footer : Common.FooterData
     , heroku : HerokuData
     , news : NewsData
     , subscribe : SubscribeData
@@ -67,13 +66,6 @@ type alias SubscribeData =
     }
 
 
-type alias FooterData =
-    { discordLink : String
-    , twitterLink : String
-    , linkedinLink : String
-    }
-
-
 
 -- ⛩
 
@@ -94,7 +86,7 @@ dataDecoder =
     Yaml.map7
         DecodedData
         (Yaml.field "fission_live" fissionLiveDataDecoder)
-        (Yaml.field "footer" footerDataDecoder)
+        (Yaml.field "footer" Common.footerDataDecoder)
         (Yaml.field "heroku" herokuDataDecoder)
         (Yaml.field "news" newsDataDecoder)
         (Yaml.field "subscribe" subscribeDataDecoder)
@@ -110,15 +102,6 @@ fissionLiveDataDecoder =
         (Yaml.field "about" Yaml.string)
         (Yaml.field "terminal_caption" Yaml.string)
         (Yaml.field "title" Yaml.string)
-
-
-footerDataDecoder : Yaml.Decoder FooterData
-footerDataDecoder =
-    Yaml.map3
-        FooterData
-        (Yaml.field "discord_link" Yaml.string)
-        (Yaml.field "twitter_link" Yaml.string)
-        (Yaml.field "linkedin_link" Yaml.string)
 
 
 herokuDataDecoder : Yaml.Decoder HerokuData
@@ -162,92 +145,8 @@ view pagePath model data =
         , heroku pagePath model data
         , news pagePath model data
         , subscribe pagePath model data
-        , footer pagePath model data
+        , Common.footer pagePath data.footer
         ]
-
-
-
--- MENU
-
-
-menu pagePath =
-    [ -- Logo Icon
-      ------------
-      badge pagePath
-
-    -- Links
-    --------
-    , Element.row
-        [ Element.alignRight
-        , Element.centerY
-        , Element.spacing (Kit.scales.spacing 8)
-        ]
-        [ menuItem "fission-live" "Fission Live"
-        , menuItem "heroku" "Heroku"
-        , menuItem "news" "News"
-
-        --
-        , Element.link
-            (menuItemAttributes "subscribe")
-            { url = ""
-            , label =
-                Element.el
-                    [ Element.paddingEach
-                        { top = Kit.scales.spacing 2.25
-                        , right = Kit.scales.spacing 2.25
-                        , bottom = Kit.scales.spacing 2
-                        , left = Kit.scales.spacing 2.25
-                        }
-                    , Background.color Kit.colors.gray_200
-                    , Border.rounded Kit.defaultBorderRounding
-                    , Font.color Kit.colors.gray_600
-                    ]
-                    (Element.text "Subscribe")
-            }
-        ]
-    ]
-        |> Element.row
-            [ Element.alignTop
-            , Element.centerX
-            , Element.paddingXY 0 (Kit.scales.spacing 8)
-            , Element.width Common.containerLength
-            , Border.color Kit.colors.gray_500
-            , Border.widthEach { edges | bottom = 1 }
-            ]
-        |> Element.el
-            [ Element.paddingXY (Kit.scales.spacing 6) 0
-            , Element.width Element.fill
-            ]
-
-
-menuItem : String -> String -> Element Msg
-menuItem id text =
-    Element.link
-        (menuItemAttributes id)
-        -- TODO: Ideally this should be "#id",
-        --       but then the browser jumps to that location
-        --       (instead of actually doing the smooth scroll)
-        { url = ""
-        , label = Element.text text
-        }
-
-
-menuItemAttributes : String -> List (Element.Attribute Msg)
-menuItemAttributes id =
-    [ Events.onClick (SmoothScroll { nodeId = id })
-    , Font.color Kit.colors.gray_200
-    ]
-
-
-badge : PagePath -> Element msg
-badge pagePath =
-    Element.image
-        [ Element.centerY
-        , Element.width (Element.px 30)
-        ]
-        { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
-        , description = "FISSION"
-        }
 
 
 
@@ -267,7 +166,7 @@ intro pagePath _ data =
         |> Element.el
             [ Element.clip
             , Element.customStyle "min-height" "100vh"
-            , Element.inFront (menu pagePath)
+            , Element.inFront (Common.menu pagePath)
             , Element.paddingXY (Kit.scales.spacing 6) 0
             , Element.width Element.fill
             , Background.color Kit.colors.gray_600
@@ -672,68 +571,3 @@ subscriptionButton model =
             , Element.paddingEach { edges | top = Kit.scales.spacing 5 }
             , Element.width (Element.maximum 406 Element.fill)
             ]
-
-
-
--- FOOTER
-
-
-footer : PagePath -> Model -> DecodedData -> Element Msg
-footer pagePath _ data =
-    [ -- Logo
-      -------
-      footerItem (badge pagePath)
-
-    -- Company Name
-    ---------------
-    , "© Fission Internet Software"
-        |> Kit.subtleText
-        |> Element.el
-            [ Element.centerX
-            , Responsive.hide_lt_md
-            ]
-        |> footerItem
-
-    -- Social Links
-    ---------------
-    , [ socialLink "Discord" data.footer.discordLink
-      , socialLink "Twitter" data.footer.twitterLink
-      , socialLink "LinkedIn" data.footer.linkedinLink
-      ]
-        |> Element.row
-            [ Element.alignRight
-            , Element.spacing (Kit.scales.spacing 4)
-            ]
-        |> footerItem
-    ]
-        |> Element.row
-            [ Border.color Kit.colors.gray_500
-            , Border.widthEach { edges | top = 1 }
-            , Element.centerX
-            , Element.id "footer"
-            , Element.paddingXY 0 (Kit.scales.spacing 8)
-            , Element.width Common.containerLength
-            ]
-        |> Element.el
-            [ Background.color Kit.colors.gray_600
-            , Element.paddingXY (Kit.scales.spacing 6) 0
-            , Element.width Element.fill
-            ]
-
-
-footerItem : Element msg -> Element msg
-footerItem content =
-    Element.el
-        [ Element.centerY
-        , Element.width (Element.fillPortion 1)
-        ]
-        content
-
-
-socialLink : String -> String -> Element msg
-socialLink name url =
-    Kit.link
-        { label = Kit.subtleText name
-        , title = name ++ " Link"
-        , url = url
-        }
