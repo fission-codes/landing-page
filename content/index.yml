@@ -16,7 +16,7 @@ fission_live:
     Get started with Fission to bring your apps live directly from your laptop. Publish static files, websites, and JavaScript front ends and keep them updated in real time. We use the InterPlanetary File System (IPFS) to power peer-to-peer files.
 
   terminal_caption:
-    Download our CLI, register, and start streaming files online.
+    Download our <abbr title="Command Line Interface">CLI</abbr>, register, and start streaming files online.
 
 
 

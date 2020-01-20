@@ -11,15 +11,13 @@ import Element.Extra as Element
 import Element.Font as Font
 import Element.Input as Input
 import External.Blog
-import Html
-import Html.Events
-import Json.Decode
 import Kit exposing (edges, none)
 import Pages exposing (images, pages)
 import Responsive
 import Result.Extra as Result
 import Types exposing (..)
 import Yaml.Decode as Yaml
+import Yaml.Decode.Extra as Yaml
 
 
 
@@ -263,7 +261,11 @@ fissionLive pagePath _ data =
             }
 
         -- Caption
-        , Kit.caption data.fissionLive.terminalCaption
+        , data.fissionLive.terminalCaption
+            |> Common.rawHtml
+            |> List.map Element.html
+            |> Kit.caption
+            |> Element.el [ Element.width (Element.maximum 638 Element.fill) ]
 
         -- Guide Link
         -------------
