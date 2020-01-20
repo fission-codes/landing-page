@@ -102,16 +102,12 @@ menu pagePath =
             , Border.color Kit.colors.gray_500
             , Border.widthEach { edges | bottom = 1 }
             ]
-        |> Element.el
-            [ Element.paddingXY (Kit.scales.spacing 6) 0
-            , Element.width Element.fill
-            ]
 
 
 menuItem : String -> String -> Element Msg
 menuItem id text =
     Element.link
-        (menuItemAttributes id)
+        (Responsive.hide_lt_md :: menuItemAttributes id)
         -- TODO: Ideally this should be "#id",
         --       but then the browser jumps to that location
         --       (instead of actually doing the smooth scroll)

@@ -147,37 +147,76 @@ view pagePath model data =
         ]
 
 
+desktopVerticalPadding : Int
+desktopVerticalPadding =
+    Kit.scales.spacing 24
+
+
+mobileVerticalPadding : Int
+mobileVerticalPadding =
+    Kit.scales.spacing 16
+
+
+horizontalPadding : Int
+horizontalPadding =
+    Kit.scales.spacing 6
+
+
 
 -- INTRO
 
 
 intro : PagePath -> Model -> DecodedData -> Element Msg
-intro pagePath _ data =
-    [ logo pagePath
-    , tagline data
-    , shortDescription data
-    ]
-        |> Element.column
-            [ Element.centerX
-            , Element.centerY
-            ]
-        |> Element.el
+intro pagePath model data =
+    Element.column
+        [ Element.width Element.fill ]
+        [ -- Desktop
+          ----------
+          Element.column
             [ Element.clip
             , Element.customStyle "min-height" "100vh"
-            , Element.inFront (Common.menu pagePath)
-            , Element.paddingXY (Kit.scales.spacing 6) 0
+            , Element.paddingXY horizontalPadding 0
             , Element.width Element.fill
             , Background.color Kit.colors.gray_600
+            , Responsive.hide_lt_md
             ]
-        |> Element.el
-            [ Element.width Element.fill ]
+            (introParts pagePath model data)
+
+        -- Mobile
+        ---------
+        , Element.column
+            [ Element.paddingXY horizontalPadding 0
+            , Element.width Element.fill
+            , Background.color Kit.colors.gray_600
+            , Responsive.hide_gte_md
+            ]
+            (introParts pagePath model data)
+        ]
+
+
+introParts : PagePath -> Model -> DecodedData -> List (Element Msg)
+introParts pagePath _ data =
+    [ Common.menu pagePath
+
+    --
+    , Element.column
+        [ Element.centerX
+        , Element.centerY
+        , Element.paddingXY 0 (Kit.scales.spacing 16)
+        ]
+        [ logo pagePath
+        , taglineDesktop data
+        , taglineMobile data
+        , shortDescription data
+        ]
+    ]
 
 
 logo pagePath =
     Element.image
         [ Element.centerX
         , Element.centerY
-        , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
+        , Element.paddingXY (Kit.scales.spacing 10) 0
         , Element.width (Element.maximum 550 Element.fill)
         ]
         { src = relativeImagePath { from = pagePath, to = images.logoDarkColored }
@@ -185,7 +224,7 @@ logo pagePath =
         }
 
 
-tagline data =
+taglineDesktop data =
     Element.paragraph
         [ Element.paddingEach { edges | top = Kit.scales.spacing 12 }
         , Element.spacing (Kit.scales.spacing 2)
@@ -194,6 +233,22 @@ tagline data =
         , Font.letterSpacing -0.625
         , Font.medium
         , Font.size (Kit.scales.typography 6)
+        , Responsive.hide_lt_md
+        ]
+        [ Element.text data.tagline
+        ]
+
+
+taglineMobile data =
+    Element.paragraph
+        [ Element.paddingEach { edges | top = Kit.scales.spacing 12 }
+        , Element.spacing (Kit.scales.spacing 2)
+        , Font.center
+        , Font.family Kit.fonts.display
+        , Font.letterSpacing -1
+        , Font.medium
+        , Font.size (Kit.scales.typography 5)
+        , Responsive.hide_gte_md
         ]
         [ Element.text data.tagline
         ]
@@ -218,68 +273,90 @@ shortDescription data =
 
 
 fissionLive : PagePath -> Model -> DecodedData -> Element Msg
-fissionLive pagePath _ data =
+fissionLive pagePath model data =
     Element.column
+        [ Element.width Element.fill ]
+        [ -- Desktop
+          ----------
+          Element.column
+            [ Element.centerX
+            , Element.id "fission-live"
+            , Element.paddingXY horizontalPadding desktopVerticalPadding
+            , Font.center
+            , Responsive.hide_lt_md
+            ]
+            (fissionLiveParts pagePath model data)
+
+        -- Mobile
+        ---------
+        , Element.column
+            [ Element.centerX
+            , Element.id "fission-live"
+            , Element.paddingXY horizontalPadding mobileVerticalPadding
+            , Font.center
+            , Responsive.hide_gte_md
+            ]
+            (fissionLiveParts pagePath model data)
+        ]
+
+
+fissionLiveParts : PagePath -> Model -> DecodedData -> List (Element Msg)
+fissionLiveParts pagePath _ data =
+    [ -- Title
+      --------
+      Kit.heading
+        { level = 1 }
+        [ Element.text data.fissionLive.title ]
+
+    -- About
+    --------
+    , Element.el
         [ Element.centerX
-        , Element.id "fission-live"
-        , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
-        , Font.center
-        ]
-        [ -- Title
-          --------
-          Kit.heading
-            { level = 1 }
-            [ Element.text data.fissionLive.title ]
-
-        -- About
-        --------
-        , Element.el
-            [ Element.centerX
-            , Element.paddingEach
-                { edges
-                    | bottom = Kit.scales.spacing 12
-                    , top = Kit.scales.spacing 8
-                }
-            , Element.width (Element.maximum 500 Element.fill)
-            ]
-            (data.fissionLive.about
-                |> Element.text
-                |> List.singleton
-                |> Kit.subtleParagraph
-            )
-
-        -- Terminal GIF
-        ---------------
-        , Element.image
-            [ Element.centerY
-            , Element.clip
-            , Element.width (Element.maximum 638 Element.fill)
-            , Border.rounded Kit.defaultBorderRounding
-            ]
-            { src = "https://s3.fission.codes/2019/11/going-live-code-diffusion.gif"
-            , description = ""
+        , Element.paddingEach
+            { edges
+                | bottom = Kit.scales.spacing 12
+                , top = Kit.scales.spacing 8
             }
-
-        -- Caption
-        , data.fissionLive.terminalCaption
-            |> Common.rawHtml
-            |> List.map Element.html
-            |> Kit.caption
-            |> Element.el [ Element.width (Element.maximum 638 Element.fill) ]
-
-        -- Guide Link
-        -------------
-        , Element.el
-            [ Element.centerX
-            , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
-            ]
-            (Element.newTabLink
-                Kit.buttonAltAttributes
-                { url = "https://guide.fission.codes/"
-                , label = Element.text "Read the Guide"
-                }
-            )
+        , Element.width (Element.maximum 500 Element.fill)
         ]
+        (data.fissionLive.about
+            |> Element.text
+            |> List.singleton
+            |> Kit.subtleParagraph
+        )
+
+    -- Terminal GIF
+    ---------------
+    , Element.image
+        [ Element.centerY
+        , Element.clip
+        , Element.width (Element.maximum 638 Element.fill)
+        , Border.rounded Kit.defaultBorderRounding
+        ]
+        { src = "https://s3.fission.codes/2019/11/going-live-code-diffusion.gif"
+        , description = ""
+        }
+
+    -- Caption
+    , data.fissionLive.terminalCaption
+        |> Common.rawHtml
+        |> List.map Element.html
+        |> Kit.caption
+        |> Element.el [ Element.width (Element.maximum 638 Element.fill) ]
+
+    -- Guide Link
+    -------------
+    , Element.el
+        [ Element.centerX
+        , Element.paddingEach { edges | top = Kit.scales.spacing 12 }
+        ]
+        (Element.newTabLink
+            Kit.buttonAltAttributes
+            { url = "https://guide.fission.codes/"
+            , label = Element.text "Read the Guide"
+            }
+        )
+    ]
 
 
 
@@ -287,7 +364,39 @@ fissionLive pagePath _ data =
 
 
 heroku : PagePath -> Model -> DecodedData -> Element Msg
-heroku pagePath _ data =
+heroku pagePath model data =
+    Element.column
+        [ Background.color Kit.colors.gray_600
+        , Element.width Element.fill
+        ]
+        [ -- Desktop
+          ----------
+          Element.column
+            [ Element.centerX
+            , Element.id "heroku"
+            , Element.paddingXY horizontalPadding desktopVerticalPadding
+            , Background.color Kit.colors.gray_600
+            , Font.center
+            , Responsive.hide_lt_md
+            ]
+            (herokuParts pagePath model data)
+
+        -- Mobile
+        ---------
+        , Element.column
+            [ Element.centerX
+            , Element.id "heroku"
+            , Element.paddingXY horizontalPadding mobileVerticalPadding
+            , Background.color Kit.colors.gray_600
+            , Font.center
+            , Responsive.hide_gte_md
+            ]
+            (herokuParts pagePath model data)
+        ]
+
+
+herokuParts : PagePath -> Model -> DecodedData -> List (Element Msg)
+herokuParts pagePath model data =
     [ -- Title
       --------
       Kit.heading
@@ -336,17 +445,6 @@ heroku pagePath _ data =
             }
         )
     ]
-        |> Element.column
-            [ Element.centerX
-            , Element.id "heroku"
-            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
-            , Background.color Kit.colors.gray_600
-            , Font.center
-            ]
-        |> Element.el
-            [ Element.width Element.fill
-            , Background.color Kit.colors.gray_600
-            ]
 
 
 
@@ -355,53 +453,76 @@ heroku pagePath _ data =
 
 news : PagePath -> Model -> DecodedData -> Element Msg
 news pagePath model data =
-    Element.row
-        [ Element.centerX
-        , Element.id "news"
-        , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
-        , Element.spacing (Kit.scales.spacing 16)
-        , Element.width Common.containerLength
-        ]
-        [ -- Left
-          -------
-          Element.column
-            [ Element.width (Element.fillPortion 4) ]
-            [ Kit.heading
-                { level = 1 }
-                [ Element.text "News" ]
-
-            --
-            , model.latestBlogPosts
-                |> List.indexedMap
-                    (\idx ->
-                        newsItem (idx == 0)
-                    )
-                |> Element.column
-                    [ Element.paddingXY 0 (Kit.scales.spacing 12)
-                    , Element.spacing (Kit.scales.spacing 6)
-                    , Font.size (Kit.scales.typography 2)
-                    ]
-
-            --
-            , Element.link
-                Kit.buttonAltAttributes
-                { url = "https://blog.fission.codes"
-                , label = Element.text "Visit Fission Blog"
-                }
-            ]
-
-        -- Right
-        --------
-        , Element.el
-            [ Element.height Element.fill
-            , Element.width (Element.fillPortion 5)
-            , Background.color Kit.colors.gray_600
-            , Background.image "https://fission.codes/assets/images/marvin-meyer-571072-unsplash-600.jpg"
-            , Border.rounded Kit.defaultBorderRounding
+    Element.column
+        [ Element.width Element.fill ]
+        [ -- Desktop
+          ----------
+          Element.row
+            [ Element.centerX
+            , Element.id "news"
+            , Element.paddingXY horizontalPadding desktopVerticalPadding
+            , Element.spacing (Kit.scales.spacing 16)
+            , Element.width Common.containerLength
             , Responsive.hide_lt_md
             ]
-            Element.none
+            (newsParts pagePath model data)
+
+        -- Mobile
+        ---------
+        , Element.row
+            [ Element.centerX
+            , Element.id "news"
+            , Element.paddingXY horizontalPadding mobileVerticalPadding
+            , Element.spacing (Kit.scales.spacing 16)
+            , Element.width Common.containerLength
+            , Responsive.hide_gte_md
+            ]
+            (newsParts pagePath model data)
         ]
+
+
+newsParts : PagePath -> Model -> DecodedData -> List (Element Msg)
+newsParts pagePath model data =
+    [ -- Left
+      -------
+      Element.column
+        [ Element.width (Element.fillPortion 4) ]
+        [ Kit.heading
+            { level = 1 }
+            [ Element.text "News" ]
+
+        --
+        , model.latestBlogPosts
+            |> List.indexedMap
+                (\idx ->
+                    newsItem (idx == 0)
+                )
+            |> Element.column
+                [ Element.paddingXY 0 (Kit.scales.spacing 12)
+                , Element.spacing (Kit.scales.spacing 6)
+                , Font.size (Kit.scales.typography 2)
+                ]
+
+        --
+        , Element.link
+            Kit.buttonAltAttributes
+            { url = "https://blog.fission.codes"
+            , label = Element.text "Visit Fission Blog"
+            }
+        ]
+
+    -- Right
+    --------
+    , Element.el
+        [ Element.height Element.fill
+        , Element.width (Element.fillPortion 5)
+        , Background.color Kit.colors.gray_600
+        , Background.image "https://fission.codes/assets/images/marvin-meyer-571072-unsplash-600.jpg"
+        , Border.rounded Kit.defaultBorderRounding
+        , Responsive.hide_lt_md
+        ]
+        Element.none
+    ]
 
 
 newsItem : Bool -> External.Blog.Post -> Element Msg
@@ -437,6 +558,40 @@ newsItem isFirst post =
 
 subscribe : PagePath -> Model -> DecodedData -> Element Msg
 subscribe pagePath model data =
+    Element.column
+        [ Element.width Element.fill
+        , Background.color Kit.colors.gray_600
+        ]
+        [ -- Desktop
+          ----------
+          Element.column
+            [ Element.centerX
+            , Element.id "subscribe"
+            , Element.paddingXY horizontalPadding desktopVerticalPadding
+            , Element.width Common.containerLength
+            , Background.color Kit.colors.gray_600
+            , Font.center
+            , Responsive.hide_lt_md
+            ]
+            (subscribeParts pagePath model data)
+
+        -- Mobile
+        ---------
+        , Element.column
+            [ Element.centerX
+            , Element.id "subscribe"
+            , Element.paddingXY horizontalPadding mobileVerticalPadding
+            , Element.width Common.containerLength
+            , Background.color Kit.colors.gray_600
+            , Font.center
+            , Responsive.hide_gte_md
+            ]
+            (subscribeParts pagePath model data)
+        ]
+
+
+subscribeParts : PagePath -> Model -> DecodedData -> List (Element Msg)
+subscribeParts pagePath model data =
     [ -- Sub text
       -----------
       Element.paragraph
@@ -497,18 +652,6 @@ subscribe pagePath model data =
         [ Element.text data.subscribe.note
         ]
     ]
-        |> Element.column
-            [ Element.centerX
-            , Element.id "subscribe"
-            , Element.paddingXY (Kit.scales.spacing 6) (Kit.scales.spacing 24)
-            , Element.width Common.containerLength
-            , Background.color Kit.colors.gray_600
-            , Font.center
-            ]
-        |> Element.el
-            [ Element.width Element.fill
-            , Background.color Kit.colors.gray_600
-            ]
 
 
 subscriptionButton : Model -> Element Msg
