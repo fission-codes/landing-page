@@ -17,7 +17,8 @@ feedUrl =
 
 
 type alias Post =
-    { url : String
+    { featured : Bool
+    , url : String
     , title : String
     }
 
@@ -28,7 +29,8 @@ type alias Post =
 
 postDecoder : StrictJson.Decoder Post
 postDecoder =
-    StrictJson.map2 Post
+    StrictJson.map3 Post
+        (StrictJson.field "featured" StrictJson.bool)
         (StrictJson.field "url" StrictJson.string)
         (StrictJson.field "title" StrictJson.string)
 
@@ -38,4 +40,13 @@ latestPostsDecoder =
     postDecoder
         |> StrictJson.list
         |> StrictJson.field "posts"
+        |> StrictJson.map
+            (\posts ->
+                case List.filter .featured posts of
+                    [] ->
+                        posts
+
+                    featured ->
+                        featured
+            )
         |> StrictJson.map (List.take 5)
