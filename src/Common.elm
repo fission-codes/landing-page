@@ -1,9 +1,6 @@
-module Common exposing (containerLength, decodeYaml, errorView, rawHtml, relativeImagePath, relativePagePath)
+module Common exposing (containerLength, decodeYaml, errorView, relativeImagePath, relativePagePath)
 
 import Element exposing (Element)
-import Html exposing (Html)
-import Html.Parser
-import Html.Parser.Util
 import Kit
 import Pages.ImagePath
 import Pages.PagePath
@@ -67,16 +64,6 @@ errorView err =
         , Element.centerY
         ]
         (Element.text err)
-
-
-rawHtml : String -> List (Html msg)
-rawHtml t =
-    case Html.Parser.run t of
-        Ok nodes ->
-            Html.Parser.Util.toVirtualDom nodes
-
-        Err _ ->
-            []
 
 
 

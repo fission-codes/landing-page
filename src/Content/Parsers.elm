@@ -5,7 +5,6 @@ import Content.Metadata as Metadata exposing (Metadata)
 import Element exposing (Element)
 import Element.Font
 import Kit
-import Markdown.Parser as Markdown
 import Pages.Document as Pages
 import Yaml.Decode as Yaml
 import Yaml.Decode.Extra as Yaml
@@ -39,11 +38,7 @@ markdown =
     Pages.parser
         { extension = "md"
         , metadata = Metadata.markdownMetadataDecoder
-        , body =
-            Markdown.parse
-                >> Result.mapError Yaml.deadEndsToString
-                >> Result.andThen (Markdown.render Content.Markdown.renderer)
-                >> Result.map (Element.column [] >> VirtualDom)
+        , body = Content.Markdown.process >> Element.column [] >> VirtualDom >> Ok
         }
 
 

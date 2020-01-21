@@ -39,7 +39,7 @@ type alias DecodedData =
 
 type alias FissionLiveData =
     { about : String
-    , terminalCaption : String
+    , terminalCaption : Element Msg
     , title : String
     }
 
@@ -98,7 +98,7 @@ fissionLiveDataDecoder =
     Yaml.map3
         FissionLiveData
         (Yaml.field "about" Yaml.string)
-        (Yaml.field "terminal_caption" Yaml.string)
+        (Yaml.field "terminal_caption" Yaml.markdownString)
         (Yaml.field "title" Yaml.string)
 
 
@@ -338,9 +338,7 @@ fissionLiveParts pagePath _ data =
         }
 
     -- Caption
-    , data.fissionLive.terminalCaption
-        |> Common.rawHtml
-        |> List.map Element.html
+    , [ data.fissionLive.terminalCaption ]
         |> Kit.caption
         |> Element.el [ Element.width (Element.maximum 638 Element.fill) ]
 
