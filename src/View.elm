@@ -12,9 +12,8 @@ import Html exposing (Html)
 import Html.Attributes
 import Json.Decode.Exploration as StrictJson
 import Kit
-import Matter.Blog.Index
-import Matter.Blog.Post
 import Matter.Index
+import Matter.Support
 import Matter.NotFound
 import Pages exposing (pages)
 import Pages.PagePath as Pages
@@ -29,7 +28,7 @@ import Types exposing (..)
 
 pagesCatalog =
     [ ( pages.index, Matter.Index.render )
-    , ( pages.blog.index, Matter.Blog.Index.render )
+    , ( pages.support, Matter.Support.render )
     ]
 
 
@@ -79,20 +78,6 @@ root contentList page =
 renderMatter : ContentList -> Page -> Model -> Interpretation Msg -> Element Msg
 renderMatter contentList page model interpretation =
     case page.frontmatter of
-        -----------------------------------------
-        -- Blog Posts
-        -----------------------------------------
-        Metadata.BlogPost meta ->
-            let
-                renderedMarkdown =
-                    case interpretation of
-                        Interpretation.Data _ ->
-                            Element.none
-
-                        Interpretation.VirtualDom r ->
-                            r
-            in
-            Matter.Blog.Post.render page.path meta renderedMarkdown
 
         -----------------------------------------
         -- Pages

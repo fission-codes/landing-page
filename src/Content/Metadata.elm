@@ -17,15 +17,7 @@ import Pages.Manifest.Category as Manifest
 
 
 type Metadata
-    = BlogPost MetadataForBlogPosts
-    | Page MetadataForPages
-
-
-type alias MetadataForBlogPosts =
-    { date : String
-    , published : Bool
-    , title : String
-    }
+    = Page MetadataForPages
 
 
 type alias MetadataForPages =
@@ -37,12 +29,8 @@ type alias MetadataForPages =
 
 
 markdownMetadataDecoder =
-    Json.map BlogPost <|
-        Json.map3
-            MetadataForBlogPosts
-            (Json.field "date" Json.string)
-            (Json.field "published" Json.bool)
-            (Json.field "title" Json.string)
+    Json.succeed
+        (Page {})
 
 
 yamlMetadataDecoder =
@@ -69,27 +57,6 @@ head : Metadata -> List (Head.Tag Pages.PathKey)
 head metadata =
     -- TODO
     case metadata of
-        BlogPost meta ->
-            Seo.summaryLarge
-                { canonicalUrlOverride = Nothing
-                , siteName = "Fission"
-                , image =
-                    { url = images.icon
-                    , alt = meta.title
-                    , dimensions = Nothing
-                    , mimeType = Nothing
-                    }
-                , description = meta.title
-                , locale = Nothing
-                , title = meta.title
-                }
-                |> Seo.article
-                    { tags = []
-                    , section = Nothing
-                    , publishedTime = Just meta.date
-                    , modifiedTime = Nothing
-                    , expirationTime = Nothing
-                    }
 
         Page _ ->
             []
@@ -118,8 +85,6 @@ manifest =
 title : Metadata -> String
 title metadata =
     case metadata of
-        BlogPost m ->
-            m.title ++ " — FISSION"
 
         Page _ ->
-            "FISSION"
+            "Fission"
