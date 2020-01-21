@@ -2,9 +2,11 @@ module State exposing (..)
 
 import Ease
 import External.Blog
+import Fathom
 import Http
 import Json.Decode.Exploration as StrictJson
-import Return2 as Return exposing (return)
+import Ports
+import Return2 as Return exposing (return, returnWithModel)
 import SmoothScroll
 import Task
 import Types exposing (..)
@@ -84,18 +86,22 @@ update msg model =
 
                 Just email ->
                     ( { model | subscribing = InProgress }
-                    , Http.post
-                        { url = "https://5d04d668.sibforms.com/serve/MUIEAH9z71F3-xucvdxYTZ9rKE0dHzCDikuQqcnxjAyY3T2NBmxUOklz4XijWG0ML4E_sHeoyq1PBQM_-PpLAkraiFa51bhHUp64vZfo6XT38fr4H2eFpxjCSgcIpFDo1KFyRr3hWfQ4KZ8TCPG0YVqWEYDQVVGW_ZGwBgJcgjaLibCPjvshJzIeUYDSQPg2jHyvYshB1YuqPopz"
-                        , body =
-                            Http.multipartBody
-                                [ Http.stringPart "EMAIL" email
-                                , Http.stringPart "html_type" "simple"
-                                , Http.stringPart "locale" "en"
-                                ]
-                        , expect =
-                            Http.expectWhatever
-                                GotSubscribeResponse
-                        }
+                    , Cmd.batch
+                        [ Http.post
+                            { url = "https://5d04d668.sibforms.com/serve/MUIEAH9z71F3-xucvdxYTZ9rKE0dHzCDikuQqcnxjAyY3T2NBmxUOklz4XijWG0ML4E_sHeoyq1PBQM_-PpLAkraiFa51bhHUp64vZfo6XT38fr4H2eFpxjCSgcIpFDo1KFyRr3hWfQ4KZ8TCPG0YVqWEYDQVVGW_ZGwBgJcgjaLibCPjvshJzIeUYDSQPg2jHyvYshB1YuqPopz"
+                            , body =
+                                Http.multipartBody
+                                    [ Http.stringPart "EMAIL" email
+                                    , Http.stringPart "html_type" "simple"
+                                    , Http.stringPart "locale" "en"
+                                    ]
+                            , expect =
+                                Http.expectWhatever GotSubscribeResponse
+                            }
+
+                        --
+                        , Ports.setFathomGoal Fathom.goals.emailSubscription
+                        ]
                     )
 
                 Nothing ->
