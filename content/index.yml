@@ -44,7 +44,7 @@ subscribe:
   input_placeholder: newsletter@fission.codes
 
   note:
-    "Visit the subscribe page to choose mailing lists and tell us your name :)"
+    "<a href='./subscribe'>Visit the subscribe page</a> to pick from event, product, and blog link newsletters »"
 
 
 
