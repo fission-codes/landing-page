@@ -5,11 +5,8 @@ import Element exposing (Element)
 import Yaml.Decode as Yaml
 
 
-markdownString : Yaml.Decoder (Element msg)
+markdownString : Yaml.Decoder (List (Element msg))
 markdownString =
     Yaml.andThen
-        (Content.Markdown.process
-            >> Element.column []
-            >> Yaml.succeed
-        )
+        (Content.Markdown.process >> Yaml.succeed)
         Yaml.string

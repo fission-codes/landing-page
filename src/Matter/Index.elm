@@ -32,20 +32,20 @@ type alias DecodedData =
     , subscribe : SubscribeData
 
     --
-    , shortDescription : String
+    , shortDescription : List (Element Msg)
     , tagline : String
     }
 
 
 type alias FissionLiveData =
-    { about : String
-    , terminalCaption : Element Msg
+    { about : List (Element Msg)
+    , terminalCaption : List (Element Msg)
     , title : String
     }
 
 
 type alias HerokuData =
-    { about : String
+    { about : List (Element Msg)
     , title : String
     }
 
@@ -58,7 +58,7 @@ type alias NewsData =
 
 type alias SubscribeData =
     { inputPlaceholder : String
-    , note : String
+    , note : List (Element Msg)
     , subText : String
     , title : String
     }
@@ -89,7 +89,7 @@ dataDecoder =
         (Yaml.field "news" newsDataDecoder)
         (Yaml.field "subscribe" subscribeDataDecoder)
         --
-        (Yaml.field "short_description" Yaml.string)
+        (Yaml.field "short_description" Yaml.markdownString)
         (Yaml.field "tagline" Yaml.string)
 
 
@@ -97,7 +97,7 @@ fissionLiveDataDecoder : Yaml.Decoder FissionLiveData
 fissionLiveDataDecoder =
     Yaml.map3
         FissionLiveData
-        (Yaml.field "about" Yaml.string)
+        (Yaml.field "about" Yaml.markdownString)
         (Yaml.field "terminal_caption" Yaml.markdownString)
         (Yaml.field "title" Yaml.string)
 
@@ -106,7 +106,7 @@ herokuDataDecoder : Yaml.Decoder HerokuData
 herokuDataDecoder =
     Yaml.map2
         HerokuData
-        (Yaml.field "about" Yaml.string)
+        (Yaml.field "about" Yaml.markdownString)
         (Yaml.field "title" Yaml.string)
 
 
@@ -123,7 +123,7 @@ subscribeDataDecoder =
     Yaml.map4
         SubscribeData
         (Yaml.field "input_placeholder" Yaml.string)
-        (Yaml.field "note" Yaml.string)
+        (Yaml.field "note" Yaml.markdownString)
         (Yaml.field "sub_text" Yaml.string)
         (Yaml.field "title" Yaml.string)
 
@@ -262,8 +262,6 @@ shortDescription data =
         , Font.center
         ]
         (data.shortDescription
-            |> Element.text
-            |> List.singleton
             |> Kit.subtleParagraph
         )
 
@@ -319,11 +317,7 @@ fissionLiveParts pagePath _ data =
             }
         , Element.width (Element.maximum 500 Element.fill)
         ]
-        (data.fissionLive.about
-            |> Element.text
-            |> List.singleton
-            |> Kit.subtleParagraph
-        )
+        (Kit.subtleParagraph data.fissionLive.about)
 
     -- Terminal GIF
     ---------------
@@ -338,7 +332,7 @@ fissionLiveParts pagePath _ data =
         }
 
     -- Caption
-    , [ data.fissionLive.terminalCaption ]
+    , data.fissionLive.terminalCaption
         |> Kit.caption
         |> Element.el [ Element.width (Element.maximum 638 Element.fill) ]
 
@@ -412,11 +406,7 @@ herokuParts pagePath model data =
             }
         , Element.width (Element.maximum 500 Element.fill)
         ]
-        (data.heroku.about
-            |> Element.text
-            |> List.singleton
-            |> Kit.subtleParagraph
-        )
+        (Kit.subtleParagraph data.heroku.about)
 
     -- Image
     --------
@@ -647,8 +637,7 @@ subscribeParts pagePath model data =
         , Font.italic
         , Font.size (Kit.scales.typography -1)
         ]
-        [ Element.text data.subscribe.note
-        ]
+        data.subscribe.note
     ]
 
 

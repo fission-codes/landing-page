@@ -13,7 +13,6 @@ import Html.Attributes
 import Json.Decode.Exploration as StrictJson
 import Kit
 import Matter.Index
-import Matter.Support
 import Matter.NotFound
 import Pages exposing (pages)
 import Pages.PagePath as Pages
@@ -28,7 +27,7 @@ import Types exposing (..)
 
 pagesCatalog =
     [ ( pages.index, Matter.Index.render )
-    , ( pages.support, Matter.Support.render )
+    , ( pages.support, \_ _ _ _ _ -> Element.none ) -- TODO
     ]
 
 
@@ -78,7 +77,6 @@ root contentList page =
 renderMatter : ContentList -> Page -> Model -> Interpretation Msg -> Element Msg
 renderMatter contentList page model interpretation =
     case page.frontmatter of
-
         -----------------------------------------
         -- Pages
         -----------------------------------------
