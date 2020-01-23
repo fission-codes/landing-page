@@ -36,7 +36,7 @@ init _ =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case Debug.log "" msg of
+    case msg of
         Bypass ->
             -- Don't do anything.
             return model
