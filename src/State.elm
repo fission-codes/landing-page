@@ -36,21 +36,20 @@ init _ =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case msg of
+    case Debug.log "" msg of
         Bypass ->
             -- Don't do anything.
             return model
 
         GotBlogPosts (Ok json) ->
-            case
-                json
-                    |> StrictJson.decodeString External.Blog.latestPostsDecoder
-                    |> StrictJson.strict
-            of
-                Ok latestBlogPosts ->
+            case StrictJson.decodeString External.Blog.latestPostsDecoder json of
+                StrictJson.Success latestBlogPosts ->
                     return { model | latestBlogPosts = latestBlogPosts }
 
-                Err _ ->
+                StrictJson.WithWarnings _ latestBlogPosts ->
+                    return { model | latestBlogPosts = latestBlogPosts }
+
+                _ ->
                     -- Can't decode the server response,
                     -- this should ideally never happen.
                     return model
