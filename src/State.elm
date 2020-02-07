@@ -16,7 +16,13 @@ import Types exposing (..)
 -- 🌱
 
 
-init : Maybe PagePath -> ( Model, Cmd Msg )
+init :
+    Maybe
+        { path : PagePath
+        , query : Maybe String
+        , fragment : Maybe String
+        }
+    -> ( Model, Cmd Msg )
 init _ =
     ( { latestBlogPosts = []
       , subscribeToEmail = Nothing

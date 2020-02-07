@@ -9,7 +9,7 @@
     "dependencies": {
         "direct": {
             "avh4/elm-color": "1.0.0",
-            "dillonkearns/elm-pages": "1.1.2",
+            "dillonkearns/elm-pages": "3.0.2",
             "elm/browser": "1.0.2",
             "elm/core": "1.0.4",
             "elm/html": "1.0.0",
@@ -39,7 +39,7 @@
             "elm-community/dict-extra": "2.4.0",
             "fredcy/elm-parseint": "2.0.1",
             "lukewestby/elm-string-interpolate": "1.0.4",
-            "mgold/elm-nonempty-list": "4.0.2",
+            "mgold/elm-nonempty-list": "4.1.0",
             "miniBill/elm-codec": "1.2.0",
             "noahzgordon/elm-color-extra": "1.0.2",
             "tripokey/elm-fuzzy": "5.2.1"

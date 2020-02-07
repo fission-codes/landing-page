@@ -8,6 +8,6 @@
     "elm": "latest-0.19.1",
     "elm-format": "^0.8.2",
     "elm-git-install": "^0.1.2",
-    "elm-pages": "icidasset/elm-pages#c0f8755558cc0efcf207917e687bc00a4ac097b4"
+    "elm-pages": "^1.2.7"
   }
 }
