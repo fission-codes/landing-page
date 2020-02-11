@@ -3087,7 +3087,7 @@ elm-hot@^1.1.4:
   resolved "https://registry.yarnpkg.com/elm-hot/-/elm-hot-1.1.4.tgz#4984592b3554670255ea4e08f4e98aa9103ab51f"
   integrity sha512-qPDP/o/Fkifriaxaf3E7hHFB5L6Ijihyg8is4A6xna6/h/zebUiNssbQrxywI2oxNUkr6W/leEu/WlIC1tmVnw==
 
-elm-pages@^1.2.7:
+elm-pages@1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/elm-pages/-/elm-pages-1.2.7.tgz#f88177cc084b82bff899663c8779ef297376b5fd"
   integrity sha512-UElq8KOij0MjltQvIZWC72lzdfbLsCxKwryhWfFaTWxtu1idZM+LuXO/H/CYuYct2JzZnwSzXC/xyQ2BJK9DYA==

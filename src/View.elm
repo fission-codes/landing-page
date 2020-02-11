@@ -14,6 +14,7 @@ import Json.Decode.Exploration as StrictJson
 import Kit
 import Matter.Index
 import Matter.NotFound
+import Matter.Support
 import Pages exposing (pages)
 import Pages.PagePath as Pages
 import Pages.Secrets as Secrets
@@ -27,7 +28,7 @@ import Types exposing (..)
 
 pagesCatalog =
     [ ( pages.index, Matter.Index.render )
-    , ( pages.support, \_ _ _ _ _ -> Element.none ) -- TODO
+    , ( pages.support, Matter.Support.render )
     ]
 
 
