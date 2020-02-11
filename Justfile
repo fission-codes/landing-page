@@ -16,11 +16,11 @@ build:
 	@rm -rf dist
 	@yarn run build
 
-	# Replace 'href="/' and 'src="/' with the correct prefix
-	# based on where you are in the directory structure.
+	@# Replace 'href="/' and 'src="/' with the correct prefix
+	@# based on where you are in the directory structure.
 	just fix-absolute-paths
 
-	# Gzip everything
+	@# Gzip everything
 	gzip --best --recursive --keep dist/
 
 

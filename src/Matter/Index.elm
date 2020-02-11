@@ -547,14 +547,14 @@ newsItem isFirst post =
 subscribe : PagePath -> Model -> DecodedData -> Element Msg
 subscribe pagePath model data =
     Element.column
-        [ Element.width Element.fill
+        [ Element.id "subscribe"
+        , Element.width Element.fill
         , Background.color Kit.colors.gray_600
         ]
         [ -- Desktop
           ----------
           Element.column
             [ Element.centerX
-            , Element.id "subscribe"
             , Element.paddingXY horizontalPadding desktopVerticalPadding
             , Element.width Common.containerLength
             , Background.color Kit.colors.gray_600
@@ -567,7 +567,6 @@ subscribe pagePath model data =
         ---------
         , Element.column
             [ Element.centerX
-            , Element.id "subscribe"
             , Element.paddingXY horizontalPadding mobileVerticalPadding
             , Element.width Common.containerLength
             , Background.color Kit.colors.gray_600
