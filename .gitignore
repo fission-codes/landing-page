@@ -1,4 +1,5 @@
 .cache
+.deploy
 .fission.yaml
 build
 dist
