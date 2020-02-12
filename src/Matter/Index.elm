@@ -505,7 +505,7 @@ newsParts pagePath model data =
         [ Element.height Element.fill
         , Element.width (Element.fillPortion 5)
         , Background.color Kit.colors.gray_600
-        , Background.image "https://fission.codes/assets/images/marvin-meyer-571072-unsplash-600.jpg"
+        , Background.image (relativeImagePath { from = pagePath, to = images.content.marvinMeyer571072Unsplash600 })
         , Border.rounded Kit.defaultBorderRounding
         , Responsive.hide_lt_md
         ]
