@@ -18,7 +18,7 @@ build:
 
 	@# Replace 'href="/' and 'src="/' with the correct prefix
 	@# based on where you are in the directory structure.
-	just fix-absolute-paths
+	@# just fix-absolute-paths
 
 	@# Gzip everything
 	gzip --best --recursive --keep dist/
@@ -39,6 +39,7 @@ fix-absolute-paths:
 			const fixedHtml = html
 				.replace(/href=\"\/(\w)/g, `href="${prefix}${sep}$1`)
 				.replace(/src=\"\/(\w)/g, `src="${prefix}${sep}$1`)
+				.replace(/\.register\(\"\/(\w)/g, `.register("${prefix}${sep}$1`)
 
 			fs.writeFileSync(`dist/${path}`, fixedHtml)
 		})
