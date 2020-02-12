@@ -18,7 +18,7 @@ build:
 
 	@# Replace 'href="/' and 'src="/' with the correct prefix
 	@# based on where you are in the directory structure.
-	@# just fix-absolute-paths
+	just fix-absolute-paths
 
 	@# Gzip everything
 	gzip --best --recursive --keep dist/
