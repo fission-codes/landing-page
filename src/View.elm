@@ -51,8 +51,7 @@ root contentList page =
                 ]
     in
     -- External.Blog.latestPostsDecoder
-    --     |> StaticHttp.get
-    --         (Secrets.succeed External.Blog.feedUrl)
+    --     |> StaticHttp.get (Secrets.succeed External.Blog.feedUrl)
     []
         |> StaticHttp.succeed
         |> StaticHttp.map
@@ -61,7 +60,8 @@ root contentList page =
                     Metadata.head page.frontmatter
                 , view =
                     \m i ->
-                        { m | latestBlogPosts = latestBlogPosts }
+                        -- { m | latestBlogPosts = latestBlogPosts }
+                        m
                             |> withStyles i
                             |> Element.layout layoutAttributes
                             |> (\body ->
