@@ -21,7 +21,7 @@ const isIpns = location.pathname.startsWith("/ipns/")
       m = document.head;
       o.async = 1; o.src = t; o.id = "fathom-script";
       m.appendChild(o)
-    })(document, window, "//cdn.usefathom.com/tracker.js", "fathom")
+    })(document, window, "https://cdn.usefathom.com/tracker.js", "fathom")
     fathom("set", "siteId", "asdvqpoi")
     fathom("set", "spa", "pushstate")
     fathom("trackPageview")

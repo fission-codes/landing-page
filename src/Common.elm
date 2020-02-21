@@ -14,18 +14,20 @@ import Yaml.Decode as Yaml
 
 relativeImagePath : { from : PagePath, to : ImagePath } -> String
 relativeImagePath { from, to } =
-    relativePath
-        { from = Pages.PagePath.toString from
-        , to = Pages.ImagePath.toString to
-        }
+    -- relativePath
+    --     { from = Pages.PagePath.toString from
+    --     , to = Pages.ImagePath.toString to
+    --     }
+    Pages.ImagePath.toString to
 
 
 relativePagePath : { from : PagePath, to : PagePath } -> String
 relativePagePath { from, to } =
-    relativePath
-        { from = Pages.PagePath.toString from
-        , to = Pages.PagePath.toString to
-        }
+    -- relativePath
+    --     { from = Pages.PagePath.toString from
+    --     , to = Pages.PagePath.toString to
+    --     }
+    Pages.PagePath.toString to
 
 
 
