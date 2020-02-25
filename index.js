@@ -1,9 +1,8 @@
 const { Elm } = require("./src/Main.elm")
 const initializePages = require("elm-pages")
-const isIpns = location.pathname.startsWith("/ipns/")
 
 
-!isIpns && initializePages({
+initializePages({
   mainElmModule: Elm.Main
 
 }).then(app => {
@@ -33,7 +32,7 @@ const isIpns = location.pathname.startsWith("/ipns/")
   // -----
 
   app.ports.setFathomGoal.subscribe(({ id, value }) => {
-    if (window.fathom) fathom("trackGoal", id, value)
+    // if (window.fathom) fathom("trackGoal", id, value)
   })
 
 })
