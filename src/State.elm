@@ -24,16 +24,22 @@ init :
         }
     -> ( Model, Cmd Msg )
 init _ =
-    ( { latestBlogPosts = []
-      , subscribeToEmail = Nothing
-      , subscribing = Stopped
-      }
-      -- Get the posts from the blog
-    , Http.get
-        { url = External.Blog.feedUrl
-        , expect = Http.expectString GotBlogPosts
+    Tuple.pair
+        -----------------------------------------
+        -- Model
+        -----------------------------------------
+        { latestBlogPosts = []
+        , subscribeToEmail = Nothing
+        , subscribing = Stopped
         }
-    )
+        -----------------------------------------
+        -- Command
+        -----------------------------------------
+        (Http.get
+            { url = External.Blog.feedUrl
+            , expect = Http.expectString GotBlogPosts
+            }
+        )
 
 
 
@@ -47,6 +53,9 @@ update msg model =
             -- Don't do anything.
             return model
 
+        -----------------------------------------
+        -- News
+        -----------------------------------------
         GotBlogPosts (Ok json) ->
             case StrictJson.decodeString External.Blog.latestPostsDecoder json of
                 StrictJson.Success latestBlogPosts ->
@@ -65,6 +74,9 @@ update msg model =
             -- Besides, we have a cached backup for this.
             return model
 
+        -----------------------------------------
+        -- Subscribe
+        -----------------------------------------
         GotSubscribeResponse (Ok ()) ->
             return { model | subscribing = Succeeded }
 
@@ -75,14 +87,6 @@ update msg model =
 
         GotSubscriptionInput input ->
             return { model | subscribeToEmail = Just input }
-
-        SmoothScroll { nodeId } ->
-            -- Smooth scroll to a certain node on the page.
-            ( model
-            , Task.attempt
-                (\_ -> Bypass)
-                (SmoothScroll.scrollToWithOptions smoothScrollConfig nodeId)
-            )
 
         Subscribe ->
             case Maybe.map String.trim model.subscribeToEmail of
@@ -111,6 +115,17 @@ update msg model =
 
                 Nothing ->
                     return model
+
+        -----------------------------------------
+        -- 📭 Other
+        -----------------------------------------
+        SmoothScroll { nodeId } ->
+            -- Smooth scroll to a certain node on the page.
+            ( model
+            , Task.attempt
+                (\_ -> Bypass)
+                (SmoothScroll.scrollToWithOptions smoothScrollConfig nodeId)
+            )
 
 
 smoothScrollConfig : SmoothScroll.Config

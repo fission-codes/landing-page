@@ -33,11 +33,20 @@ type alias Model =
 -}
 type Msg
     = Bypass
+      -----------------------------------------
+      -- News
+      -----------------------------------------
     | GotBlogPosts (Result Http.Error String)
+      -----------------------------------------
+      -- Subscribe
+      -----------------------------------------
     | GotSubscribeResponse (Result Http.Error ())
     | GotSubscriptionInput String
-    | SmoothScroll { nodeId : String }
     | Subscribe
+      -----------------------------------------
+      -- 📭 Other
+      -----------------------------------------
+    | SmoothScroll { nodeId : String }
 
 
 

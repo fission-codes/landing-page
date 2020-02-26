@@ -9,6 +9,8 @@ import Element.Extra as Element
 import Element.Font as Font
 import Kit exposing (edges, none)
 import Pages exposing (images, pages)
+import Pages.ImagePath as ImagePath
+import Pages.PagePath as PagePath
 import Responsive
 import Types exposing (..)
 import Yaml.Decode as Yaml
@@ -42,13 +44,13 @@ footerDataDecoder =
 -- BADGE
 
 
-badge : PagePath -> Element msg
-badge pagePath =
+badge : Element msg
+badge =
     Element.image
         [ Element.centerY
         , Element.width (Element.px 30)
         ]
-        { src = relativeImagePath { from = pagePath, to = images.badgeSolidFaded }
+        { src = ImagePath.toString images.badgeSolidFaded
         , description = "FISSION"
         }
 
@@ -57,43 +59,19 @@ badge pagePath =
 -- MENU
 
 
-menu : PagePath -> Element Msg
-menu pagePath =
-    [ -- Logo Icon
-      ------------
-      badge pagePath
+menu : PagePath -> List (Element Msg) -> Element Msg
+menu currentPage contents =
+    [ if currentPage == pages.index then
+        badge
 
-    -- Links
-    --------
-    , Element.row
-        [ Element.alignRight
-        , Element.centerY
-        , Element.spacing (Kit.scales.spacing 8)
-        ]
-        [ menuItem "fission-live" "Fission Live"
-        , menuItem "heroku" "Heroku"
-        , menuItem "news" "News"
-
-        --
-        , Element.link
-            (menuItemAttributes "subscribe")
-            { url = ""
-            , label =
-                Element.el
-                    [ Element.paddingEach
-                        { top = Kit.scales.spacing 2.25
-                        , right = Kit.scales.spacing 2.25
-                        , bottom = Kit.scales.spacing 2
-                        , left = Kit.scales.spacing 2.25
-                        }
-                    , Background.color Kit.colors.gray_200
-                    , Border.rounded Kit.defaultBorderRounding
-                    , Font.color Kit.colors.gray_600
-                    ]
-                    (Element.text "Subscribe")
+      else
+        Element.link
+            []
+            { url = PagePath.toString pages.index
+            , label = badge
             }
-        ]
     ]
+        |> (\l -> l ++ contents)
         |> Element.row
             [ Element.alignTop
             , Element.centerX
@@ -128,24 +106,27 @@ menuItemAttributes id =
 
 
 footer : PagePath -> FooterData -> Element Msg
-footer pagePath data =
+footer currentPage data =
     [ -- Logo
       -------
-      footerItem (badge pagePath)
-
-    -- Company Name
-    ---------------
-    , "© Fission Internet Software"
-        |> Kit.subtleText
-        |> Element.el
-            [ Element.centerX
-            , Responsive.hide_lt_md
+      [ badge
+      , Kit.subtleText "Fission Internet Software"
+      ]
+        |> Element.row
+            [ Element.spacing (Kit.scales.spacing 4)
             ]
         |> footerItem
 
     -- Social Links
     ---------------
-    , [ socialLink "Discord" data.discordLink
+    , [ if currentPage == pages.support then
+            Element.none
+
+        else
+            socialLink "Support" (PagePath.toString pages.support)
+
+      --
+      , socialLink "Discord" data.discordLink
       , socialLink "Twitter" data.twitterLink
       , socialLink "LinkedIn" data.linkedinLink
       ]

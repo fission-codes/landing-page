@@ -13,6 +13,7 @@ import Element.Input as Input
 import External.Blog
 import Kit exposing (edges, none)
 import Pages exposing (images, pages)
+import Pages.ImagePath as ImagePath
 import Responsive
 import Result.Extra as Result
 import Types exposing (..)
@@ -147,21 +148,6 @@ view pagePath model data =
         ]
 
 
-desktopVerticalPadding : Int
-desktopVerticalPadding =
-    Kit.scales.spacing 24
-
-
-mobileVerticalPadding : Int
-mobileVerticalPadding =
-    Kit.scales.spacing 16
-
-
-horizontalPadding : Int
-horizontalPadding =
-    Kit.scales.spacing 6
-
-
 
 -- INTRO
 
@@ -196,7 +182,7 @@ intro pagePath model data =
 
 introParts : PagePath -> Model -> DecodedData -> List (Element Msg)
 introParts pagePath _ data =
-    [ Common.menu pagePath
+    [ Common.menu pagePath [ menuItems ]
 
     --
     , Element.column
@@ -204,7 +190,7 @@ introParts pagePath _ data =
         , Element.centerY
         , Element.paddingXY 0 (Kit.scales.spacing 16)
         ]
-        [ logo pagePath
+        [ logo
         , taglineDesktop data
         , taglineMobile data
         , shortDescription data
@@ -212,14 +198,45 @@ introParts pagePath _ data =
     ]
 
 
-logo pagePath =
+menuItems =
+    Element.row
+        [ Element.alignRight
+        , Element.centerY
+        , Element.spacing (Kit.scales.spacing 8)
+        ]
+        [ Common.menuItem "fission-live" "Fission Live"
+        , Common.menuItem "heroku" "Heroku"
+        , Common.menuItem "news" "News"
+
+        --
+        , Element.link
+            (Common.menuItemAttributes "subscribe")
+            { url = ""
+            , label =
+                Element.el
+                    [ Element.paddingEach
+                        { top = Kit.scales.spacing 2.25
+                        , right = Kit.scales.spacing 2.25
+                        , bottom = Kit.scales.spacing 2
+                        , left = Kit.scales.spacing 2.25
+                        }
+                    , Background.color Kit.colors.gray_200
+                    , Border.rounded Kit.defaultBorderRounding
+                    , Font.color Kit.colors.gray_600
+                    ]
+                    (Element.text "Subscribe")
+            }
+        ]
+
+
+logo =
     Element.image
         [ Element.centerX
         , Element.centerY
         , Element.paddingXY (Kit.scales.spacing 10) 0
         , Element.width (Element.maximum 550 Element.fill)
         ]
-        { src = relativeImagePath { from = pagePath, to = images.logoDarkColored }
+        { src = ImagePath.toString images.logoDarkColored
         , description = "FISSION"
         }
 
@@ -505,7 +522,7 @@ newsParts pagePath model data =
         [ Element.height Element.fill
         , Element.width (Element.fillPortion 5)
         , Background.color Kit.colors.gray_600
-        , Background.image (relativeImagePath { from = pagePath, to = images.content.marvinMeyer571072Unsplash600 })
+        , Background.image (ImagePath.toString images.content.marvinMeyer571072Unsplash600)
         , Border.rounded Kit.defaultBorderRounding
         , Responsive.hide_lt_md
         ]

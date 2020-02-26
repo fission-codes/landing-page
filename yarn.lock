@@ -3087,9 +3087,9 @@ elm-hot@^1.1.4:
   resolved "https://registry.yarnpkg.com/elm-hot/-/elm-hot-1.1.4.tgz#4984592b3554670255ea4e08f4e98aa9103ab51f"
   integrity sha512-qPDP/o/Fkifriaxaf3E7hHFB5L6Ijihyg8is4A6xna6/h/zebUiNssbQrxywI2oxNUkr6W/leEu/WlIC1tmVnw==
 
-elm-pages@icidasset/elm-pages#874a6e6484df31da57fe1c554c3128f75dcdc608:
+elm-pages@icidasset/elm-pages#fdf09810a6e9e321763058d4b7c14996707fd2a5:
   version "1.2.10"
-  resolved "https://codeload.github.com/icidasset/elm-pages/tar.gz/874a6e6484df31da57fe1c554c3128f75dcdc608"
+  resolved "https://codeload.github.com/icidasset/elm-pages/tar.gz/fdf09810a6e9e321763058d4b7c14996707fd2a5"
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/preset-env" "^7.5.5"

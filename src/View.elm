@@ -50,10 +50,8 @@ root contentList page =
                 , renderMatter contentList page model interpretation
                 ]
     in
-    -- External.Blog.latestPostsDecoder
-    --     |> StaticHttp.get (Secrets.succeed External.Blog.feedUrl)
-    []
-        |> StaticHttp.succeed
+    External.Blog.latestPostsDecoder
+        |> StaticHttp.get (Secrets.succeed External.Blog.feedUrl)
         |> StaticHttp.map
             (\latestBlogPosts ->
                 { head =

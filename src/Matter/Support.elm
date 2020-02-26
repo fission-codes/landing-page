@@ -54,4 +54,39 @@ dataDecoder =
 
 view : PagePath -> Model -> DecodedData -> Element Msg
 view pagePath model data =
-    Element.none
+    Element.column
+        [ Element.clip
+        , Element.customStyle "min-height" "100vh"
+        , Element.paddingXY horizontalPadding 0
+        , Element.width Element.fill
+        , Background.color Kit.colors.gray_600
+        , Responsive.hide_lt_md
+        ]
+        (introParts pagePath model data)
+
+
+
+-- INTRO
+
+
+introParts : PagePath -> Model -> DecodedData -> List (Element Msg)
+introParts pagePath _ data =
+    [ Common.menu pagePath [ menuItems ]
+
+    --
+    , Element.column
+        [ Element.centerX
+        , Element.centerY
+        , Element.paddingXY 0 (Kit.scales.spacing 16)
+        ]
+        []
+    ]
+
+
+menuItems =
+    Element.row
+        [ Element.alignRight
+        , Element.centerY
+        , Element.spacing (Kit.scales.spacing 8)
+        ]
+        []
