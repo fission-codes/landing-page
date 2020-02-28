@@ -9,6 +9,7 @@
     "elm-version": "0.19.1",
     "dependencies": {
         "direct": {
+            "Fresheyeball/elm-return": "7.1.0",
             "avh4/elm-color": "1.0.0",
             "elm/browser": "1.0.2",
             "elm/core": "1.0.4",
@@ -25,7 +26,6 @@
             "justinmimbs/date": "3.2.0",
             "linuss/smooth-scroll": "1.1.0",
             "mdgriffith/elm-markup": "3.0.1",
-            "mdgriffith/elm-ui": "1.1.5",
             "miniBill/elm-codec": "1.2.0",
             "noahzgordon/elm-color-extra": "1.0.2",
             "pablohirafuji/elm-markdown": "2.0.5",
@@ -47,8 +47,6 @@
     },
     "test-dependencies": {
         "direct": {},
-        "indirect": {
-            "lukewestby/elm-string-interpolate": "1.0.4"
-        }
+        "indirect": {}
     }
 }

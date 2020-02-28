@@ -2,7 +2,6 @@ module Types exposing (..)
 
 import Content.Metadata exposing (Metadata)
 import Content.Parsers exposing (Interpretation)
-import Element exposing (Element)
 import External.Blog
 import Http
 import Pages

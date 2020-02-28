@@ -6,7 +6,7 @@ import Fathom
 import Http
 import Json.Decode.Exploration as StrictJson
 import Ports
-import Return2 as Return exposing (return, returnWithModel)
+import Return exposing (return)
 import SmoothScroll
 import Task
 import Types exposing (..)
@@ -51,7 +51,7 @@ update msg model =
     case msg of
         Bypass ->
             -- Don't do anything.
-            return model
+            Return.singleton model
 
         -----------------------------------------
         -- News
@@ -59,39 +59,39 @@ update msg model =
         GotBlogPosts (Ok json) ->
             case StrictJson.decodeString External.Blog.latestPostsDecoder json of
                 StrictJson.Success latestBlogPosts ->
-                    return { model | latestBlogPosts = latestBlogPosts }
+                    Return.singleton { model | latestBlogPosts = latestBlogPosts }
 
                 StrictJson.WithWarnings _ latestBlogPosts ->
-                    return { model | latestBlogPosts = latestBlogPosts }
+                    Return.singleton { model | latestBlogPosts = latestBlogPosts }
 
                 _ ->
                     -- Can't decode the server response,
                     -- this should ideally never happen.
-                    return model
+                    Return.singleton model
 
         GotBlogPosts (Err err) ->
             -- Ignore error, the user shouldn't care if this fails.
             -- Besides, we have a cached backup for this.
-            return model
+            Return.singleton model
 
         -----------------------------------------
         -- Subscribe
         -----------------------------------------
         GotSubscribeResponse (Ok ()) ->
-            return { model | subscribing = Succeeded }
+            Return.singleton { model | subscribing = Succeeded }
 
         GotSubscribeResponse (Err err) ->
-            -- return { model | subscribing = Failed "HTTP Request Failed" }
+            -- Return.singleton { model | subscribing = Failed "HTTP Request Failed" }
             -- NOTE: We always get an error because of CORS issues with sendinblue.
-            return { model | subscribing = Succeeded }
+            Return.singleton { model | subscribing = Succeeded }
 
         GotSubscriptionInput input ->
-            return { model | subscribeToEmail = Just input }
+            Return.singleton { model | subscribeToEmail = Just input }
 
         Subscribe ->
             case Maybe.map String.trim model.subscribeToEmail of
                 Just "" ->
-                    return model
+                    Return.singleton model
 
                 Just email ->
                     ( { model | subscribing = InProgress }
@@ -114,7 +114,7 @@ update msg model =
                     )
 
                 Nothing ->
-                    return model
+                    Return.singleton model
 
         -----------------------------------------
         -- 📭 Other

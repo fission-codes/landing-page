@@ -14,7 +14,6 @@ import Kit
 import Kit.Local as Kit
 import Pages exposing (images, pages)
 import Pages.ImagePath as ImagePath
-import Responsive
 import Result.Extra as Result
 import Tailwind as T
 import Types exposing (..)
