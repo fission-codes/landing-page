@@ -116,7 +116,7 @@ fontStylesheetLink : Html msg
 fontStylesheetLink =
     Html.node
         "link"
-        [ Html.Attributes.href "https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700&display=swap"
+        [ Html.Attributes.href "https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700|Dokdo&display=swap"
         , Html.Attributes.rel "stylesheet"
         ]
         []

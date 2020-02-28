@@ -163,7 +163,10 @@ intro pagePath model data =
         -------------
         , T.md__min_h_screen
         ]
-        [ Common.menu pagePath [ menuItems ]
+        [ Common.menu
+            pagePath
+            [ T.border_gray_500 ]
+            [ menuItems ]
 
         -----------------------------------------
         -- Hidden <h1>
@@ -201,17 +204,12 @@ menuItems =
         , Common.menuItem "news" "News"
 
         --
-        , Html.span
-            (Common.menuItemAttributes "subscribe")
-            [ Html.div
-                [ T.bg_gray_200
-                , T.leading_relaxed
-                , T.px_2
-                , T.py_1
-                , T.rounded
-                , T.text_gray_600
-                ]
-                [ Html.text "Subscribe" ]
+        , Html.button
+            (List.append
+                (Common.menuItemAttributes "subscribe")
+                Kit.menuButtonAttributes
+            )
+            [ Html.text "Subscribe"
             ]
         ]
 
@@ -230,18 +228,7 @@ logo =
 
 
 tagline data =
-    Html.h2
-        [ T.font_display
-        , T.font_medium
-        , T.leading_tight
-        , T.mt_10
-        , T.text_2xl
-        , T.tracking_tight
-
-        --
-        , T.md__text_3xl
-        ]
-        [ Html.text data.tagline ]
+    Kit.tagline data.tagline
 
 
 shortDescription data =

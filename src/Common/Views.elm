@@ -20,10 +20,11 @@ import Yaml.Decode as Yaml
 
 
 type alias FooterData =
-    { discordLink : String
-    , twitterLink : String
-    , linkedinLink : String
-    }
+    { links : List FooterLink }
+
+
+type alias FooterLink =
+    { url : String, label : String }
 
 
 
@@ -32,11 +33,18 @@ type alias FooterData =
 
 footerDataDecoder : Yaml.Decoder FooterData
 footerDataDecoder =
-    Yaml.map3
-        FooterData
-        (Yaml.field "discord_link" Yaml.string)
-        (Yaml.field "twitter_link" Yaml.string)
-        (Yaml.field "linkedin_link" Yaml.string)
+    footerLinkDecoder
+        |> Yaml.list
+        |> Yaml.field "links"
+        |> Yaml.map FooterData
+
+
+footerLinkDecoder : Yaml.Decoder FooterLink
+footerLinkDecoder =
+    Yaml.map2
+        FooterLink
+        (Yaml.field "url" Yaml.string)
+        (Yaml.field "label" Yaml.string)
 
 
 
@@ -74,17 +82,19 @@ error err =
 -- MENU
 
 
-menu : PagePath -> List (Html Msg) -> Html Msg
-menu currentPage contents =
+menu : PagePath -> List (Html.Attribute Msg) -> List (Html Msg) -> Html Msg
+menu currentPage attributes contents =
     Html.div
-        [ T.border_b
-        , T.border_gray_500
-        , T.container
-        , T.flex
-        , T.items_center
-        , T.mx_auto
-        , T.py_8
-        ]
+        (List.append
+            [ T.border_b
+            , T.container
+            , T.flex
+            , T.items_center
+            , T.mx_auto
+            , T.py_8
+            ]
+            attributes
+        )
         [ if currentPage == pages.index then
             badge
 
@@ -106,16 +116,21 @@ menuItem id text =
     --       but then the browser jumps to that location
     --       instead of actually doing the smooth scroll.
     --       (yes, even with "preventDefault")
-    Html.span
+    Html.button
         (T.hidden :: T.md__block :: menuItemAttributes id)
         [ Html.text text ]
 
 
 menuItemAttributes : String -> List (Html.Attribute Msg)
 menuItemAttributes id =
-    [ E.onClickPreventDefault (SmoothScroll { nodeId = id })
+    (::)
+        (E.onClickPreventDefault <| SmoothScroll { nodeId = id })
+        menuItemStyleAttributes
 
-    --
+
+menuItemStyleAttributes : List (Html.Attribute msg)
+menuItemStyleAttributes =
+    [ T.appearance_none
     , T.cursor_pointer
     , T.ml_8
     , T.text_gray_200
@@ -149,19 +164,16 @@ footer currentPage data =
     -----------------------------------------
     -- Social Links
     -----------------------------------------
-    , Html.div
-        [ T.ml_auto ]
-        [ if currentPage == pages.support then
-            Html.nothing
+    , data.links
+        |> List.map (\l -> footerLink l.label l.url)
+        |> (::)
+            (if currentPage == pages.support then
+                Html.nothing
 
-          else
-            socialLink "Support" (PagePath.toString pages.support)
-
-        --
-        , socialLink "Discord" data.discordLink
-        , socialLink "Twitter" data.twitterLink
-        , socialLink "LinkedIn" data.linkedinLink
-        ]
+             else
+                footerLink "Support" (PagePath.toString pages.support)
+            )
+        |> Html.div [ T.ml_auto ]
     ]
         |> Html.div
             [ A.id "footer"
@@ -180,15 +192,15 @@ footer currentPage data =
             ]
 
 
-socialLink : String -> String -> Html msg
-socialLink name url =
+footerLink : String -> String -> Html msg
+footerLink label url =
     Html.a
         [ A.href url
-        , A.title (name ++ " Link")
+        , A.title (label ++ " Link")
 
         --
         , T.ml_4
         , T.text_gray_300
         , T.underline
         ]
-        [ Html.text name ]
+        [ Html.text label ]

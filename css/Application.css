@@ -16,6 +16,15 @@ p a[href] {
 }
 
 
+.fancy-title {
+  color: hsl(338.7, 71.4%, 75.3%);
+  font-family: "Dokdo";
+  font-size: 4.5rem;
+  line-height: 0.9;
+  text-shadow: 2px 2px 0px hsla(338.7, 71.4%, 75.3%, 0.35);
+}
+
+
 
 /* Forms
    ----- */

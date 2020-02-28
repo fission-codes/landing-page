@@ -49,12 +49,13 @@ subscribe:
 
 
 footer:
+  
+  links:
+    - url: "https://discord.gg/daDMAjE"
+      label: Discord
 
-  discord_link:
-    "https://discord.gg/daDMAjE"
+    - url: "https://twitter.com/FISSIONcodes"
+      label: Twitter
 
-  twitter_link:
-    "https://twitter.com/FISSIONcodes"
-
-  linkedin_link:
-    "https://linkedin.com/company/fissioncodes"
+    - url: "https://linkedin.com/company/fissioncodes"
+      label: LinkedIn

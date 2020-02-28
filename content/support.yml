@@ -1,3 +1,11 @@
-support_links:
-  - https://discord.gg/daDMAjE
-  - https://talk.fission.codes/
+footer:
+  
+  links:
+    - url: "https://discord.gg/daDMAjE"
+      label: Discord
+
+    - url: "https://twitter.com/FISSIONcodes"
+      label: Twitter
+
+    - url: "https://linkedin.com/company/fissioncodes"
+      label: LinkedIn

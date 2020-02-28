@@ -36,6 +36,17 @@ buttonAttributesWithColor colorAttribute =
     ]
 
 
+menuButtonAttributes : List (Html.Attribute msg)
+menuButtonAttributes =
+    [ T.bg_gray_200
+    , T.leading_relaxed
+    , T.px_2
+    , T.py_1
+    , T.rounded
+    , T.text_gray_600
+    ]
+
+
 
 -- 🧱  ░░  TEXT
 
@@ -90,3 +101,19 @@ introParagraph =
         , T.md__pt_6
         , T.md__text_lg
         ]
+
+
+tagline : String -> Html msg
+tagline text =
+    Html.h2
+        [ T.font_display
+        , T.font_medium
+        , T.leading_tight
+        , T.mt_10
+        , T.text_2xl
+        , T.tracking_tight
+
+        --
+        , T.md__text_3xl
+        ]
+        [ Html.text text ]
