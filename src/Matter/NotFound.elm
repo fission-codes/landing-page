@@ -1,13 +1,16 @@
 module Matter.NotFound exposing (render)
 
-import Element
-import Element.Font
+import Html exposing (Html)
+import Tailwind as T
 
 
 render _ _ _ _ _ =
-    Element.el
-        [ Element.centerX
-        , Element.centerY
-        , Element.Font.italic
+    Html.div
+        [ T.absolute
+        , T.italic
+        , T.left_1over2
+        , T.top_1over2
+        , T.neg_translate_x_1over2
+        , T.neg_translate_y_1over2
         ]
-        (Element.text "Page not found")
+        [ Html.text "Page not found" ]

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  @apply bg-white font-body min-h-screen text-gray-100;
+  text-rendering: optimizeLegibility;
+}
+
+
+p a[href] {
+  @apply underline;
+}
+
+
+
+/* Forms
+   ----- */
+
+input::placeholder,
+textarea::placeholder {
+  @apply opacity-100 text-gray-500;
+}

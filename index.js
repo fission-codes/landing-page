@@ -32,7 +32,7 @@ initializePages({
   // -----
 
   app.ports.setFathomGoal.subscribe(({ id, value }) => {
-    // if (window.fathom) fathom("trackGoal", id, value)
+    if (window.fathom) fathom("trackGoal", id, value)
   })
 
 })

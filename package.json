@@ -1,14 +1,24 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "elm-pages develop",
     "build": "elm-pages build"
   },
+  "dependencies": {
+    "fission-kit": "fission-suite/kit#d77054d1ef4a74ddd018a8efa64c9764e9453eb6"
+  },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.0.6",
+    "autoprefixer": "^9.7.4",
     "elm": "latest-0.19.1",
     "elm-format": "^0.8.2",
     "elm-git-install": "^0.1.2",
     "elm-pages": "icidasset/elm-pages#fdf09810a6e9e321763058d4b7c14996707fd2a5",
-    "sharp": "^0.24.1"
+    "postcss": "^7.0.26",
+    "postcss-csso": "^4.0.0",
+    "postcss-elm-tailwind": "icidasset/postcss-elm-tailwind#c2997991aa9b74e2fd886654ef6cb75a3efdbfe6",
+    "sharp": "^0.24.1",
+    "tailwindcss": "^1.2.0"
   }
 }

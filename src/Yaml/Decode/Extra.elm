@@ -1,11 +1,11 @@
 module Yaml.Decode.Extra exposing (..)
 
 import Content.Markdown
-import Element exposing (Element)
+import Html exposing (Html)
 import Yaml.Decode as Yaml
 
 
-markdownString : Yaml.Decoder (List (Element msg))
+markdownString : Yaml.Decoder (List (Html msg))
 markdownString =
     Yaml.andThen
         (Content.Markdown.process >> Yaml.succeed)

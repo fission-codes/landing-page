@@ -1,7 +1,6 @@
 module Content.Metadata exposing (..)
 
 import Color
-import Color.Transform as Color
 import Date
 import Head
 import Head.Seo as Seo
@@ -57,7 +56,6 @@ head : Metadata -> List (Head.Tag Pages.PathKey)
 head metadata =
     -- TODO
     case metadata of
-
         Page _ ->
             []
 
@@ -73,7 +71,7 @@ manifest =
     , description = "App & website hosting with user-controlled data" -- TODO
     , iarcRatingId = Nothing
     , name = "Fission"
-    , themeColor = Just (Color.transform Kit.colors.gray_600)
+    , themeColor = Just Kit.colors.gray_600
     , startUrl = pages.index
     , shortName = Just "Fission"
     , sourceIcon = images.logoIconColoredBordered
@@ -85,6 +83,5 @@ manifest =
 title : Metadata -> String
 title metadata =
     case metadata of
-
         Page _ ->
             "Fission"

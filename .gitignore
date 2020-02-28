@@ -7,3 +7,5 @@ elm-stuff
 gen
 node_modules
 *.log
+src/Tailwind.elm
+static/application.css

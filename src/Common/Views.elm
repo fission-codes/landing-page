@@ -1,17 +1,16 @@
 module Common.Views exposing (..)
 
 import Common exposing (..)
-import Element exposing (Element)
-import Element.Background as Background
-import Element.Border as Border
-import Element.Events as Events
-import Element.Extra as Element
-import Element.Font as Font
-import Kit exposing (edges, none)
+import Html exposing (Html)
+import Html.Attributes as A
+import Html.Events as E
+import Html.Events.Extra as E
+import Html.Extra as Html
+import Kit
 import Pages exposing (images, pages)
 import Pages.ImagePath as ImagePath
 import Pages.PagePath as PagePath
-import Responsive
+import Tailwind as T
 import Types exposing (..)
 import Yaml.Decode as Yaml
 
@@ -44,60 +43,86 @@ footerDataDecoder =
 -- BADGE
 
 
-badge : Element msg
+badge : Html msg
 badge =
-    Element.image
-        [ Element.centerY
-        , Element.width (Element.px 30)
+    Html.img
+        [ A.src (ImagePath.toString images.badgeSolidFaded)
+        , A.title "FISSION"
+        , A.width 30
         ]
-        { src = ImagePath.toString images.badgeSolidFaded
-        , description = "FISSION"
-        }
+        []
+
+
+
+-- ERROR
+
+
+error : String -> Html msg
+error err =
+    -- TODO
+    Html.div
+        [ T.absolute
+        , T.left_1over2
+        , T.top_1over2
+        , T.neg_translate_x_1over2
+        , T.neg_translate_y_1over2
+        ]
+        [ Html.text err ]
 
 
 
 -- MENU
 
 
-menu : PagePath -> List (Element Msg) -> Element Msg
+menu : PagePath -> List (Html Msg) -> Html Msg
 menu currentPage contents =
-    [ if currentPage == pages.index then
-        badge
+    Html.div
+        [ T.border_b
+        , T.border_gray_500
+        , T.container
+        , T.flex
+        , T.items_center
+        , T.mx_auto
+        , T.py_8
+        ]
+        [ if currentPage == pages.index then
+            badge
 
-      else
-        Element.link
-            []
-            { url = PagePath.toString pages.index
-            , label = badge
-            }
-    ]
-        |> (\l -> l ++ contents)
-        |> Element.row
-            [ Element.alignTop
-            , Element.centerX
-            , Element.paddingXY 0 (Kit.scales.spacing 8)
-            , Element.width Common.containerLength
-            , Border.color Kit.colors.gray_500
-            , Border.widthEach { edges | bottom = 1 }
-            ]
+          else
+            Html.a
+                [ A.href (PagePath.toString pages.index) ]
+                [ badge ]
+
+        --
+        , Html.div
+            [ T.ml_auto ]
+            contents
+        ]
 
 
-menuItem : String -> String -> Element Msg
+menuItem : String -> String -> Html Msg
 menuItem id text =
-    Element.link
-        (Responsive.hide_lt_md :: menuItemAttributes id)
-        -- TODO: Ideally this should be "#id",
-        --       but then the browser jumps to that location
-        --       (instead of actually doing the smooth scroll)
-        { url = ""
-        , label = Element.text text
-        }
+    -- TODO: Ideally this should have the "#id" href,
+    --       but then the browser jumps to that location
+    --       instead of actually doing the smooth scroll.
+    --       (yes, even with "preventDefault")
+    Html.span
+        (T.hidden :: T.md__block :: menuItemAttributes id)
+        [ Html.text text ]
 
 
-menuItemAttributes : String -> List (Element.Attribute Msg)
+menuItemAttributes : String -> List (Html.Attribute Msg)
 menuItemAttributes id =
-    [ Events.onClick (SmoothScroll { nodeId = id })
-    , Font.color Kit.colors.gray_200
+    [ E.onClickPreventDefault (SmoothScroll { nodeId = id })
+
+    --
+    , T.cursor_pointer
+    , T.ml_8
+    , T.text_gray_200
+
+    -- Responsive
+    -------------
+    , T.first__ml_0
     ]
 
 
@@ -105,65 +130,65 @@ menuItemAttributes id =
 -- FOOTER
 
 
-footer : PagePath -> FooterData -> Element Msg
+footer : PagePath -> FooterData -> Html Msg
 footer currentPage data =
-    [ -- Logo
-      -------
-      [ badge
-      , Kit.subtleText "Fission Internet Software"
-      ]
-        |> Element.row
-            [ Element.spacing (Kit.scales.spacing 4)
-            ]
-        |> footerItem
+    [ -----------------------------------------
+      -- Logo
+      -----------------------------------------
+      badge
+    , Html.div
+        [ T.hidden
+        , T.ml_4
+        , T.text_gray_300
 
+        --
+        , T.md__block
+        ]
+        [ Html.text "Fission Internet Software" ]
+
+    -----------------------------------------
     -- Social Links
-    ---------------
-    , [ if currentPage == pages.support then
-            Element.none
+    -----------------------------------------
+    , Html.div
+        [ T.ml_auto ]
+        [ if currentPage == pages.support then
+            Html.nothing
 
-        else
+          else
             socialLink "Support" (PagePath.toString pages.support)
 
-      --
-      , socialLink "Discord" data.discordLink
-      , socialLink "Twitter" data.twitterLink
-      , socialLink "LinkedIn" data.linkedinLink
-      ]
-        |> Element.row
-            [ Element.alignRight
-            , Element.spacing (Kit.scales.spacing 4)
-            ]
-        |> footerItem
-    ]
-        |> Element.row
-            [ Border.color Kit.colors.gray_500
-            , Border.widthEach { edges | top = 1 }
-            , Element.centerX
-            , Element.id "footer"
-            , Element.paddingXY 0 (Kit.scales.spacing 8)
-            , Element.width Common.containerLength
-            ]
-        |> Element.el
-            [ Background.color Kit.colors.gray_600
-            , Element.paddingXY (Kit.scales.spacing 6) 0
-            , Element.width Element.fill
-            ]
-
-
-footerItem : Element msg -> Element msg
-footerItem content =
-    Element.el
-        [ Element.centerY
-        , Element.width (Element.fillPortion 1)
+        --
+        , socialLink "Discord" data.discordLink
+        , socialLink "Twitter" data.twitterLink
+        , socialLink "LinkedIn" data.linkedinLink
         ]
-        content
+    ]
+        |> Html.div
+            [ A.id "footer"
+            , T.border_t
+            , T.border_gray_500
+            , T.container
+            , T.flex
+            , T.items_center
+            , T.mx_auto
+            , T.py_8
+            ]
+        |> List.singleton
+        |> Html.div
+            [ T.bg_gray_600
+            , T.px_6
+            ]
 
 
-socialLink : String -> String -> Element msg
+socialLink : String -> String -> Html msg
 socialLink name url =
-    Kit.link
-        { label = Kit.subtleText name
-        , title = name ++ " Link"
-        , url = url
-        }
+    Html.a
+        [ A.href url
+        , A.title (name ++ " Link")
+
+        --
+        , T.ml_4
+        , T.text_gray_300
+        , T.underline
+        ]
+        [ Html.text name ]
