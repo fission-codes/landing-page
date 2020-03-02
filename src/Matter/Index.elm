@@ -462,26 +462,13 @@ subscribe pagePath model data =
             -----------------------------------------
             -- Input
             -----------------------------------------
-            , Html.input
-                [ A.name "email"
-                , E.onChange GotSubscriptionInput
-                , A.placeholder data.subscribe.inputPlaceholder
-                , A.value (Maybe.withDefault "" model.subscribeToEmail)
-
-                --
-                , T.appearance_none
-                , T.bg_white
-                , T.border_0
-                , T.block
-                , T.max_w_md
-                , T.mx_auto
-                , T.mt_6
-                , T.p_5
-                , T.rounded
-                , T.text_lg
-                , T.w_full
-                ]
-                []
+            , { name = "email"
+              , onChange = GotSubscriptionInput
+              , placeholder = data.subscribe.inputPlaceholder
+              , value = model.subscribeToEmail
+              }
+                |> Kit.inputAttributes
+                |> (\a -> Html.input a [])
 
             -----------------------------------------
             -- Button
@@ -554,12 +541,9 @@ subscriptionButton model =
 
                 --
                 , T.block
-                , T.ease_in_out
                 , T.max_w_md
                 , T.mt_5
                 , T.p_4
-                , T.transition
-                , T.transition_colors
                 , T.w_full
                 ]
     in

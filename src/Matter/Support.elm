@@ -62,6 +62,7 @@ view pagePath model data =
     Html.div
         []
         [ intro pagePath model data
+        , form
         , Common.footer pagePath data.footer
         ]
 
@@ -152,6 +153,7 @@ overview =
 
         -- Responsive
         -------------
+        , T.sm__text_lg
         , T.md__ml_8
         , T.md__w_7over12
         , T.lg__ml_16
@@ -185,7 +187,6 @@ overviewItem icon nodes =
     Html.div
         [ T.flex
         , T.items_center
-        , T.max_w_sm
         , T.mt_10
         ]
         [ icon
@@ -197,8 +198,86 @@ overviewItem icon nodes =
 
         --
         , Html.p
-            [ T.max_w_md
-            , T.text_lg
-            ]
+            [ T.max_w_xs ]
             nodes
+        ]
+
+
+
+-- FORM
+
+
+form : Html Msg
+form =
+    Html.div
+        [ T.bg_gray_600 ]
+        [ Html.div
+            Kit.containerAttributes
+            [ -----------------------------------------
+              -- Title
+              -----------------------------------------
+              Kit.h2 "Contact us"
+
+            -----------------------------------------
+            -- Text
+            -----------------------------------------
+            , Kit.introParagraph <| Markdown.trimAndProcess """
+                Sorry to hear you're having trouble with Fission!
+                You can send us a quick note below, or join us in our chat.
+              """
+
+            -----------------------------------------
+            -- Input
+            -----------------------------------------
+            -- Email
+            --------
+            , Html.label
+                Kit.labelAttributes
+                [ Html.text "Email" ]
+
+            --
+            , { name = "email"
+              , onChange = \_ -> Bypass
+              , placeholder = "your@email.dev"
+              , value = Just ""
+              }
+                |> Kit.inputAttributes
+                |> (\a -> Html.input a [])
+
+            -- Message
+            ----------
+            , Html.label
+                Kit.labelAttributes
+                [ Html.text "Message" ]
+
+            --
+            , { name = "message"
+              , onChange = \_ -> Bypass
+              , placeholder = "Describe the problem we can help you with"
+              , value = Just ""
+              }
+                |> Kit.inputAttributes
+                |> List.append [ T.h_40, T.resize_none ]
+                |> (\a -> Html.textarea a [])
+
+            -- Button
+            ---------
+            , let
+                buttonAttributes =
+                    List.append
+                        Kit.buttonAttributes
+                        [ E.onClick Bypass
+
+                        --
+                        , T.block
+                        , T.max_w_md
+                        , T.mt_5
+                        , T.p_4
+                        , T.w_full
+                        ]
+              in
+              Html.button
+                buttonAttributes
+                [ Html.text "Send message" ]
+            ]
         ]

@@ -4,6 +4,7 @@ import Color exposing (Color)
 import Html exposing (Html)
 import Html.Attributes as A
 import Html.Events as E
+import Html.Events.Extra as E
 import Html.Extra as Html
 import Kit exposing (..)
 import Tailwind as T
@@ -25,11 +26,14 @@ buttonAltAttributes =
 
 buttonAttributesWithColor : Html.Attribute msg -> List (Html.Attribute msg)
 buttonAttributesWithColor colorAttribute =
-    [ T.inline_block
+    [ T.ease_in_out
+    , T.inline_block
     , T.leading_none
     , T.p_3
     , T.rounded
     , T.text_white
+    , T.transition
+    , T.transition_colors
 
     --
     , colorAttribute
@@ -44,6 +48,57 @@ menuButtonAttributes =
     , T.py_1
     , T.rounded
     , T.text_gray_600
+    ]
+
+
+
+-- 🧱  ░░  FORMS
+
+
+type alias InputOptions msg =
+    { name : String
+    , onChange : String -> msg
+    , placeholder : String
+    , value : Maybe String
+    }
+
+
+inputAttributes : InputOptions msg -> List (Html.Attribute msg)
+inputAttributes { name, onChange, placeholder, value } =
+    [ A.name name
+    , E.onChange onChange
+    , A.placeholder placeholder
+    , A.value (Maybe.withDefault "" value)
+
+    --
+    , T.appearance_none
+    , T.bg_white
+    , T.border_0
+    , T.block
+    , T.max_w_md
+    , T.mx_auto
+    , T.mt_6
+    , T.p_5
+    , T.rounded
+    , T.text_lg
+    , T.w_full
+    ]
+
+
+labelAttributes : List (Html.Attribute msg)
+labelAttributes =
+    [ T.block
+    , T.font_semibold
+    , T.font_display
+    , T.max_w_md
+    , T.neg_mb_4
+    , T.mt_8
+    , T.mx_auto
+    , T.text_gray_200
+    , T.text_left
+    , T.text_xs
+    , T.tracking_widest
+    , T.uppercase
     ]
 
 
