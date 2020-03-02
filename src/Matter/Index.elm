@@ -228,7 +228,9 @@ logo =
 
 
 tagline data =
-    Kit.tagline data.tagline
+    Html.div
+        [ T.mt_10 ]
+        [ Kit.tagline data.tagline ]
 
 
 shortDescription data =

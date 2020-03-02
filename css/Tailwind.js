@@ -28,9 +28,9 @@ export default {
     fontFamily: {
       ...defaultTheme.fontFamily,
 
-      body: [ kit.fonts.body, ...defaultTheme.fontFamily.sans ],
-      display: [ kit.fonts.display, ...defaultTheme.fontFamily.serif ],
-      mono: [ kit.fonts.mono, ...defaultTheme.fontFamily.mono ],
+      body: [ `"${kit.fonts.body}"`, ...defaultTheme.fontFamily.sans ],
+      display: [ `"${kit.fonts.display}"`, ...defaultTheme.fontFamily.serif ],
+      mono: [ `"${kit.fonts.mono}"`, ...defaultTheme.fontFamily.mono ],
     },
 
     // Inset
@@ -66,6 +66,11 @@ export default {
     // ==========
 
     extend: {
+
+      fontSize: {
+        "2_5xl": "1.6875rem",
+        "3_5xl": "2.0625rem",
+      },
 
       screens: {
         dark: { raw: '(prefers-color-scheme: dark)' }

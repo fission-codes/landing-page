@@ -1,4 +1,4 @@
-module Content.Markdown exposing (process)
+module Content.Markdown exposing (..)
 
 import Html exposing (Html)
 import Markdown
@@ -23,3 +23,8 @@ process =
     }
         |> Just
         |> Markdown.toHtml
+
+
+trimAndProcess : String -> List (Html msg)
+trimAndProcess =
+    String.trim >> process

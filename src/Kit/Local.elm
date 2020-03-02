@@ -54,16 +54,15 @@ menuButtonAttributes =
 h2 : String -> Html msg
 h2 text =
     Html.h2
-        [ T.text_3xl
-        , T.font_display
+        [ T.font_display
         , T.font_semibold
         , T.leading_tight
+        , T.text_3xl
         , T.tracking_tight
 
         -- Responsive
         -------------
-        , T.sm__text_3xl
-        , T.lg__text_4xl
+        , T.lg__text_3_5xl
         ]
         [ Html.text text ]
 
@@ -93,7 +92,6 @@ introParagraph =
         --
         , T.mx_auto
         , T.pt_5
-        , T.text_center
         , T.text_gray_300
 
         -- Responsive
@@ -109,11 +107,10 @@ tagline text =
         [ T.font_display
         , T.font_medium
         , T.leading_tight
-        , T.mt_10
         , T.text_2xl
         , T.tracking_tight
 
         --
-        , T.md__text_3xl
+        , T.md__text_2_5xl
         ]
         [ Html.text text ]

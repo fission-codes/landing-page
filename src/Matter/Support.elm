@@ -2,9 +2,11 @@ module Matter.Support exposing (render)
 
 import Common exposing (..)
 import Common.Views as Common
+import Content.Markdown as Markdown
 import Content.Metadata exposing (MetadataForPages)
 import Content.Parsers exposing (EncodedData)
 import External.Blog
+import FeatherIcons
 import Html exposing (Html)
 import Html.Attributes as A
 import Html.Events as E
@@ -87,25 +89,21 @@ intro pagePath model data =
             [ menuItems ]
 
         -----------------------------------------
-        -- Hidden <h1>
-        -----------------------------------------
-        , Html.h1
-            [ T.hidden ]
-            [ Html.text "FISSION" ]
-
-        -----------------------------------------
-        -- Centered content
+        -- Content
         -----------------------------------------
         , Html.div
             [ T.flex
-            , T.flex_col
             , T.flex_grow
             , T.items_center
             , T.justify_center
             , T.py_16
-            , T.text_center
+
+            -- Responsive
+            -------------
+            , T.lg__pb_20
             ]
             [ priestess
+            , overview
             ]
         ]
 
@@ -115,39 +113,92 @@ menuItems =
         [ T.flex
         , T.items_center
         ]
-        []
+        [ Html.a
+            (List.append
+                (A.href (PagePath.toString pages.index) :: Common.menuItemStyleAttributes)
+                Kit.menuButtonAttributes
+            )
+            [ Html.text "Learn more"
+            ]
+        ]
 
 
 priestess =
     Html.div
-        [ T.relative ]
+        [ T.hidden
+        , T.relative
+        , T.text_right
+        , T.w_5over12
+
+        -- Responsive
+        -------------
+        , T.md__block
+        ]
         [ Html.img
             [ A.src (ImagePath.toString images.content.haskellHighPriestess768)
 
             --
+            , T.inline_block
             , T.max_w_sm
             , T.w_full
             ]
             []
+        ]
+
+
+overview =
+    Html.div
+        [ T.text_gray_200
+
+        -- Responsive
+        -------------
+        , T.md__ml_8
+        , T.md__w_7over12
+        , T.lg__ml_16
+        ]
+        [ Kit.tagline "Need some guidance?"
 
         --
-        , Html.h1
-            [ A.class "fancy-title"
-            , A.style "font-family" "\"Dokdo\""
+        , overviewItem
+            FeatherIcons.bookOpen
+            (Markdown.trimAndProcess """
+                Our [Guide](https://guide.fission.codes ) has instructions on getting started and basic troubleshooting
+             """)
 
-            --
-            , T.absolute
-            , T.left_1over2
-            , T.top_1over2
-            , T.neg_translate_x_1over2
-            , T.translate_y_8
-            , T.transform
+        --
+        , overviewItem
+            FeatherIcons.server
+            (Markdown.trimAndProcess """
+                The [API docs](https://runfission.com/docs) are interactive and document the Web API
+             """)
 
-            --
-            , T.font_display
+        --
+        , overviewItem
+            FeatherIcons.github
+            (Markdown.trimAndProcess """
+                If you're comfortable filing Github issues - for problems or for feature requests - head on over to [our repos](https://github.com/fission-suite)
+             """)
+        ]
+
+
+overviewItem icon nodes =
+    Html.div
+        [ T.flex
+        , T.items_center
+        , T.max_w_sm
+        , T.mt_10
+        ]
+        [ icon
+            |> FeatherIcons.withClass "mr-8"
+            |> FeatherIcons.withSize 24
+            |> FeatherIcons.toHtml []
+            |> List.singleton
+            |> Html.div [ T.flex_shrink_0, T.text_gray_300 ]
+
+        --
+        , Html.p
+            [ T.max_w_md
+            , T.text_lg
             ]
-            [ Html.text "Fission"
-            , Html.br [] []
-            , Html.text "Support"
-            ]
+            nodes
         ]
