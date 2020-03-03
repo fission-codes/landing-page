@@ -8,6 +8,7 @@ import Html.Events.Extra as E
 import Html.Extra as Html
 import Kit exposing (..)
 import Tailwind as T
+import Validation exposing (Validated)
 
 
 
@@ -57,18 +58,18 @@ menuButtonAttributes =
 
 type alias InputOptions msg =
     { name : String
-    , onChange : String -> msg
+    , onInput : String -> msg
     , placeholder : String
-    , value : Maybe String
+    , value : Validated String
     }
 
 
 inputAttributes : InputOptions msg -> List (Html.Attribute msg)
-inputAttributes { name, onChange, placeholder, value } =
+inputAttributes { name, onInput, placeholder, value } =
     [ A.name name
-    , E.onChange onChange
+    , E.onInput onInput
     , A.placeholder placeholder
-    , A.value (Maybe.withDefault "" value)
+    , A.value (Validation.data "" value)
 
     --
     , T.appearance_none

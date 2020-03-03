@@ -30,6 +30,7 @@
             "miniBill/elm-codec": "1.2.0",
             "noahzgordon/elm-color-extra": "1.0.2",
             "pablohirafuji/elm-markdown": "2.0.5",
+            "panthershark/email-parser": "1.0.2",
             "terezka/yaml": "1.0.1",
             "tripokey/elm-fuzzy": "5.2.1",
             "turboMaCk/any-dict": "2.1.0",

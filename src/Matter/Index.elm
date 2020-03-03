@@ -433,10 +433,25 @@ newsItem isFirst post =
 
 subscribe : PagePath -> Model -> DecodedData -> Html Msg
 subscribe pagePath model data =
+    let
+        onSubmit =
+            case model.subscribing of
+                Failed _ ->
+                    Subscribe
+
+                InProgress ->
+                    Bypass
+
+                Stopped ->
+                    Subscribe
+
+                Succeeded ->
+                    Bypass
+    in
     Html.div
         [ T.bg_gray_600 ]
-        [ Html.div
-            (A.id "subscribe" :: Kit.containerAttributes)
+        [ Html.form
+            (A.id "subscribe" :: E.onSubmit onSubmit :: Kit.containerAttributes)
             [ -----------------------------------------
               -- Sub text
               -----------------------------------------
@@ -463,16 +478,14 @@ subscribe pagePath model data =
             -- Input
             -----------------------------------------
             , { name = "email"
-              , onChange = GotSubscriptionInput
+              , onInput = GotSubscriptionInput
               , placeholder = data.subscribe.inputPlaceholder
               , value = model.subscribeToEmail
               }
                 |> Kit.inputAttributes
                 |> (\a -> Html.input a [])
 
-            -----------------------------------------
-            -- Button
-            -----------------------------------------
+            --
             , subscriptionButton model
 
             -----------------------------------------
@@ -506,20 +519,6 @@ subscriptionButton model =
                 Succeeded ->
                     T.bg_gray_300
 
-        onPress =
-            case model.subscribing of
-                Failed _ ->
-                    Just Subscribe
-
-                InProgress ->
-                    Nothing
-
-                Stopped ->
-                    Just Subscribe
-
-                Succeeded ->
-                    Nothing
-
         label =
             case model.subscribing of
                 Failed _ ->
@@ -537,10 +536,7 @@ subscriptionButton model =
         buttonAttributes =
             List.append
                 (Kit.buttonAttributesWithColor buttonColorAttribute)
-                [ E.onClick (Maybe.withDefault Bypass onPress)
-
-                --
-                , T.block
+                [ T.block
                 , T.max_w_md
                 , T.mt_5
                 , T.p_4

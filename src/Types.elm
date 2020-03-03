@@ -8,6 +8,7 @@ import Pages
 import Pages.ImagePath as Images
 import Pages.PagePath as Pages
 import Pages.Platform as Pages
+import Validation exposing (Validated(..))
 import Yaml.Decode as Yaml
 
 
@@ -19,7 +20,7 @@ import Yaml.Decode as Yaml
 -}
 type alias Model =
     { latestBlogPosts : List External.Blog.Post
-    , subscribeToEmail : Maybe String
+    , subscribeToEmail : Validated String
     , subscribing : RemoteAction
     }
 

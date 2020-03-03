@@ -19,6 +19,7 @@ import Pages.PagePath as PagePath
 import Result.Extra as Result
 import Tailwind as T
 import Types exposing (..)
+import Validation exposing (Validated(..))
 import Yaml.Decode as Yaml
 import Yaml.Decode.Extra as Yaml
 
@@ -187,7 +188,11 @@ overviewItem icon nodes =
     Html.div
         [ T.flex
         , T.items_center
-        , T.mt_10
+        , T.mt_8
+
+        -- Responsive
+        -------------
+        , T.md__mt_10
         ]
         [ icon
             |> FeatherIcons.withClass "mr-8"
@@ -223,7 +228,7 @@ form =
             -----------------------------------------
             , Kit.introParagraph <| Markdown.trimAndProcess """
                 Sorry to hear you're having trouble with Fission!
-                You can send us a quick note below, or join us in our chat.
+                You can send us a quick note below, or join us in [our chat](https://discord.gg/daDMAjE).
               """
 
             -----------------------------------------
@@ -237,9 +242,9 @@ form =
 
             --
             , { name = "email"
-              , onChange = \_ -> Bypass
+              , onInput = \_ -> Bypass
               , placeholder = "your@email.dev"
-              , value = Just ""
+              , value = Blank
               }
                 |> Kit.inputAttributes
                 |> (\a -> Html.input a [])
@@ -252,9 +257,9 @@ form =
 
             --
             , { name = "message"
-              , onChange = \_ -> Bypass
+              , onInput = \_ -> Bypass
               , placeholder = "Describe the problem we can help you with"
-              , value = Just ""
+              , value = Blank
               }
                 |> Kit.inputAttributes
                 |> List.append [ T.h_40, T.resize_none ]

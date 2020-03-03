@@ -10,6 +10,7 @@ import Return exposing (return)
 import SmoothScroll
 import Task
 import Types exposing (..)
+import Validation exposing (Validated(..))
 
 
 
@@ -29,7 +30,7 @@ init _ =
         -- Model
         -----------------------------------------
         { latestBlogPosts = []
-        , subscribeToEmail = Nothing
+        , subscribeToEmail = Blank
         , subscribing = Stopped
         }
         -----------------------------------------
@@ -86,14 +87,15 @@ update msg model =
             Return.singleton { model | subscribing = Succeeded }
 
         GotSubscriptionInput input ->
-            Return.singleton { model | subscribeToEmail = Just input }
+            Return.singleton
+                { model
+                    | subscribing = Stopped
+                    , subscribeToEmail = Validation.email input
+                }
 
         Subscribe ->
-            case Maybe.map String.trim model.subscribeToEmail of
-                Just "" ->
-                    Return.singleton model
-
-                Just email ->
+            case model.subscribeToEmail of
+                Valid email ->
                     ( { model | subscribing = InProgress }
                     , Cmd.batch
                         [ Http.post
@@ -113,8 +115,8 @@ update msg model =
                         ]
                     )
 
-                Nothing ->
-                    Return.singleton model
+                _ ->
+                    Return.singleton { model | subscribing = Failed "Invalid input" }
 
         -----------------------------------------
         -- 📭 Other
