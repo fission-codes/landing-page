@@ -63,25 +63,43 @@ update msg model =
         -----------------------------------------
         Contact ->
             case
-                List.filter
-                    Validation.isInvalid
-                    [ model.contactEmail
-                    , model.contactMessage
-                    ]
+                [ model.contactEmail
+                , model.contactMessage
+                ]
             of
+                [ Valid email, Valid message ] ->
+                    ( { model | contacting = InProgress }
+                    , Http.post
+                        { url = "https://formsubmit.co/hello@fission.codes"
+                        , body =
+                            Http.multipartBody
+                                [ Http.stringPart "email" email
+                                , Http.stringPart "message" message
+
+                                -- Options
+                                ----------
+                                , Http.stringPart "_captcha" "false"
+                                , Http.stringPart "_replyto" email
+                                ]
+                        , expect =
+                            Http.expectWhatever GotContactResponse
+                        }
+                    )
+
                 [ Blank, _ ] ->
                     Return.singleton { model | contacting = Failed "I need an email address" }
 
                 [ _, Blank ] ->
                     Return.singleton { model | contacting = Failed "I need a message" }
 
-                (Invalid { note }) :: _ ->
+                [ Invalid { note }, _ ] ->
+                    Return.singleton { model | contacting = Failed note }
+
+                [ _, Invalid { note } ] ->
                     Return.singleton { model | contacting = Failed note }
 
                 _ ->
-                    ( { model | contacting = InProgress }
-                    , Cmd.none
-                    )
+                    Return.singleton model
 
         GotContactEmail input ->
             Return.singleton
@@ -96,6 +114,14 @@ update msg model =
                     | contacting = RemoteAction.recoverFromFailure model.contacting
                     , contactMessage = Validation.message input
                 }
+
+        GotContactResponse (Ok ()) ->
+            Return.singleton { model | contacting = Succeeded }
+
+        GotContactResponse (Err err) ->
+            -- Return.singleton { model | contacting = Failed "HTTP Request Failed" }
+            -- NOTE: We always get an error because of CORS issues with formsubmit.co
+            Return.singleton { model | contacting = Succeeded }
 
         -----------------------------------------
         -- News

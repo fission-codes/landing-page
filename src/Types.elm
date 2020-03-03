@@ -43,6 +43,7 @@ type Msg
     | Contact
     | GotContactEmail String
     | GotContactMessage String
+    | GotContactResponse (Result Http.Error ())
       -----------------------------------------
       -- News
       -----------------------------------------
