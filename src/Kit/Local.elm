@@ -95,7 +95,7 @@ labelAttributes =
     , T.neg_mb_4
     , T.mt_8
     , T.mx_auto
-    , T.text_gray_200
+    , T.text_gray_300
     , T.text_left
     , T.text_xs
     , T.tracking_widest
@@ -142,12 +142,11 @@ containerAttributes =
 
 introParagraph : List (Html msg) -> Html msg
 introParagraph =
-    Html.p
-        [ A.style "max-width" "500px"
-
-        --
+    Html.div
+        [ T.max_w_lg
         , T.mx_auto
         , T.pt_5
+        , T.px_3
         , T.text_gray_300
 
         -- Responsive

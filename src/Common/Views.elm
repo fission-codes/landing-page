@@ -71,9 +71,10 @@ error err =
     Html.div
         [ T.absolute
         , T.left_1over2
-        , T.top_1over2
         , T.neg_translate_x_1over2
         , T.neg_translate_y_1over2
+        , T.top_1over2
+        , T.transform
         ]
         [ Html.text err ]
 

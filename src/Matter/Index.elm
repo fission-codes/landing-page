@@ -14,6 +14,7 @@ import Kit
 import Kit.Local as Kit
 import Pages exposing (images, pages)
 import Pages.ImagePath as ImagePath
+import RemoteAction exposing (RemoteAction(..))
 import Result.Extra as Result
 import Tailwind as T
 import Types exposing (..)
@@ -221,7 +222,7 @@ logo =
         , A.title "FISSION"
 
         --
-        , T.px_10
+        , T.mx_10
         , T.w_full
         ]
         []
@@ -272,7 +273,7 @@ fissionLive pagePath model data =
 
             -- Caption
             ----------
-            , Html.p
+            , Html.div
                 [ T.mt_4
                 , T.text_gray_300
                 , T.text_sm
@@ -491,7 +492,7 @@ subscribe pagePath model data =
             -----------------------------------------
             -- Note
             -----------------------------------------
-            , Html.p
+            , Html.div
                 [ T.italic
                 , T.mt_5
                 , T.text_gray_300
@@ -506,18 +507,7 @@ subscriptionButton : Model -> Html Msg
 subscriptionButton model =
     let
         buttonColorAttribute =
-            case model.subscribing of
-                Failed _ ->
-                    T.bg_dark_pink
-
-                InProgress ->
-                    T.bg_gray_400
-
-                Stopped ->
-                    T.bg_purple
-
-                Succeeded ->
-                    T.bg_gray_300
+            RemoteAction.backgroundColor model.subscribing
 
         label =
             case model.subscribing of

@@ -39,16 +39,11 @@ root contentList page =
         view latestBlogPosts model interpretation =
             { title = Metadata.title page.frontmatter
             , body =
-                Html.div
-                    []
-                    [ applicationStylesheetLink
-                    , fontStylesheetLink
-                    , renderMatter
-                        contentList
-                        page
-                        { model | latestBlogPosts = latestBlogPosts }
-                        interpretation
-                    ]
+                renderMatter
+                    contentList
+                    page
+                    { model | latestBlogPosts = latestBlogPosts }
+                    interpretation
             }
     in
     External.Blog.latestPostsDecoder
@@ -96,27 +91,3 @@ renderMatter contentList page model interpretation =
 
 pagesCatalogDictionary =
     Dict.Any.fromList Pages.toString pagesCatalog
-
-
-
--- 🎨
-
-
-applicationStylesheetLink : Html msg
-applicationStylesheetLink =
-    Html.node
-        "link"
-        [ Html.Attributes.href "application.css"
-        , Html.Attributes.rel "stylesheet"
-        ]
-        []
-
-
-fontStylesheetLink : Html msg
-fontStylesheetLink =
-    Html.node
-        "link"
-        [ Html.Attributes.href "https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700&display=swap"
-        , Html.Attributes.rel "stylesheet"
-        ]
-        []

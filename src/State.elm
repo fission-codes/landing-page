@@ -6,6 +6,7 @@ import Fathom
 import Http
 import Json.Decode.Exploration as StrictJson
 import Ports
+import RemoteAction exposing (RemoteAction(..))
 import Return exposing (return)
 import SmoothScroll
 import Task
@@ -29,7 +30,10 @@ init _ =
         -----------------------------------------
         -- Model
         -----------------------------------------
-        { latestBlogPosts = []
+        { contacting = Stopped
+        , contactEmail = Blank
+        , contactMessage = Blank
+        , latestBlogPosts = []
         , subscribeToEmail = Blank
         , subscribing = Stopped
         }
@@ -53,6 +57,45 @@ update msg model =
         Bypass ->
             -- Don't do anything.
             Return.singleton model
+
+        -----------------------------------------
+        -- Contact
+        -----------------------------------------
+        Contact ->
+            case
+                List.filter
+                    Validation.isInvalid
+                    [ model.contactEmail
+                    , model.contactMessage
+                    ]
+            of
+                [ Blank, _ ] ->
+                    Return.singleton { model | contacting = Failed "I need an email address" }
+
+                [ _, Blank ] ->
+                    Return.singleton { model | contacting = Failed "I need a message" }
+
+                (Invalid { note }) :: _ ->
+                    Return.singleton { model | contacting = Failed note }
+
+                _ ->
+                    ( { model | contacting = InProgress }
+                    , Cmd.none
+                    )
+
+        GotContactEmail input ->
+            Return.singleton
+                { model
+                    | contacting = RemoteAction.recoverFromFailure model.contacting
+                    , contactEmail = Validation.email input
+                }
+
+        GotContactMessage input ->
+            Return.singleton
+                { model
+                    | contacting = RemoteAction.recoverFromFailure model.contacting
+                    , contactMessage = Validation.message input
+                }
 
         -----------------------------------------
         -- News
@@ -89,7 +132,7 @@ update msg model =
         GotSubscriptionInput input ->
             Return.singleton
                 { model
-                    | subscribing = Stopped
+                    | subscribing = RemoteAction.recoverFromFailure model.subscribing
                     , subscribeToEmail = Validation.email input
                 }
 

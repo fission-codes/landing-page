@@ -8,6 +8,7 @@ import Pages
 import Pages.ImagePath as Images
 import Pages.PagePath as Pages
 import Pages.Platform as Pages
+import RemoteAction exposing (RemoteAction)
 import Validation exposing (Validated(..))
 import Yaml.Decode as Yaml
 
@@ -19,7 +20,10 @@ import Yaml.Decode as Yaml
 {-| Model of our UI state.
 -}
 type alias Model =
-    { latestBlogPosts : List External.Blog.Post
+    { contacting : RemoteAction
+    , contactEmail : Validated String
+    , contactMessage : Validated String
+    , latestBlogPosts : List External.Blog.Post
     , subscribeToEmail : Validated String
     , subscribing : RemoteAction
     }
@@ -33,6 +37,12 @@ type alias Model =
 -}
 type Msg
     = Bypass
+      -----------------------------------------
+      -- Contact
+      -----------------------------------------
+    | Contact
+    | GotContactEmail String
+    | GotContactMessage String
       -----------------------------------------
       -- News
       -----------------------------------------
@@ -69,10 +79,3 @@ type alias Page =
 
 type alias PagePath =
     Pages.PagePath Pages.PathKey
-
-
-type RemoteAction
-    = Failed String
-    | InProgress
-    | Stopped
-    | Succeeded

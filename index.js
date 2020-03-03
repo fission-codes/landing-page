@@ -1,6 +1,26 @@
-const { Elm } = require("./src/Main.elm")
-const initializePages = require("elm-pages")
+import { Elm } from "./src/Main.elm"
+import initializePages from "elm-pages"
 
+
+// Stylesheets
+// ===========
+
+let n
+
+n = document.createElement("link")
+n.href = "application.css"
+n.rel = "stylesheet"
+document.head.appendChild(n)
+
+n = document.createElement("link")
+n.href = "https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700&display=swap"
+n.rel = "stylesheet"
+document.head.appendChild(n)
+
+
+
+// Elm
+// ===
 
 initializePages({
   mainElmModule: Elm.Main

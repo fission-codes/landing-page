@@ -25,6 +25,7 @@ build:
 	@# Css
 	@rm dist/application.css
 	@just css-small
+	@cp static/application.css dist/application.css
 
 
 install-deps:
