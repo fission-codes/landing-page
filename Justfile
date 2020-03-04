@@ -15,7 +15,7 @@ node_bin := "./node_modules/.bin"
 	just watch-css & yarn run dev
 
 
-build:
+build-production:
 	@rm -rf dist
 	@yarn run build
 
