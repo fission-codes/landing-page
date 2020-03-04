@@ -33,9 +33,9 @@ initializePages({
   try {
 
     (function(f, a, t, h, o, m) {
-        a[h] = a[h] || function() {
-          (a[h].q = a[h].q || []).push(arguments)
-        };
+      a[h] = a[h] || function() {
+        (a[h].q = a[h].q || []).push(arguments)
+      };
       o = f.createElement("script"),
       m = document.head;
       o.async = 1; o.src = t; o.id = "fathom-script";
