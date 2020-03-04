@@ -79,10 +79,15 @@ inputAttributes { name, onInput, placeholder, value } =
     , T.max_w_md
     , T.mx_auto
     , T.mt_6
-    , T.p_5
+    , T.p_4
     , T.rounded
-    , T.text_lg
+    , T.text_base
     , T.w_full
+
+    -- Responsive
+    -------------
+    , T.md__p_5
+    , T.md__text_lg
     ]
 
 
@@ -113,11 +118,12 @@ h2 text =
         [ T.font_display
         , T.font_semibold
         , T.leading_tight
-        , T.text_3xl
+        , T.text_2_5xl
         , T.tracking_tight
 
         -- Responsive
         -------------
+        , T.md__text_3xl
         , T.lg__text_3_5xl
         ]
         [ Html.text text ]

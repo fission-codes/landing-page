@@ -70,7 +70,7 @@ update msg model =
                 [ Valid email, Valid message ] ->
                     ( { model | contacting = InProgress }
                     , Http.post
-                        { url = "https://formsubmit.co/hello@fission.codes"
+                        { url = "https://formsubmit.co/support@fission.codes"
                         , body =
                             Http.multipartBody
                                 [ Http.stringPart "email" email

@@ -216,16 +216,18 @@ menuItems =
 
 
 logo =
-    Html.img
-        [ A.src (ImagePath.toString images.logoDarkColored)
-        , A.style "max-width" "550px"
-        , A.title "FISSION"
+    Html.div
+        [ T.px_10 ]
+        [ Html.img
+            [ A.src (ImagePath.toString images.logoDarkColored)
+            , A.style "max-width" "550px"
+            , A.title "FISSION"
 
-        --
-        , T.mx_10
-        , T.w_full
+            --
+            , T.w_full
+            ]
+            []
         ]
-        []
 
 
 tagline data =
@@ -460,13 +462,16 @@ subscribe pagePath model data =
                 [ T.mb_3
                 , T.max_w_xs
                 , T.mx_auto
-                , T.leading_tight
+                , T.leading_snug
+                , T.px_8
                 , T.text_gray_400
+                , T.text_sm
                 , T.tracking_wider
 
                 -- Responsive
                 -------------
                 , T.md__max_w_none
+                , T.md__tracking_widest
                 ]
                 [ Html.text data.subscribe.subText ]
 
