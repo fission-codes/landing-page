@@ -2,20 +2,27 @@ import { Elm } from "./src/Main.elm"
 import initializePages from "elm-pages"
 
 
-// Stylesheets
-// ===========
+// 🍱
 
-let n
+const isHeadless = navigator.userAgent.indexOf("Headless") >= 0
 
-n = document.createElement("link")
-n.href = "application.css"
-n.rel = "stylesheet"
-document.head.appendChild(n)
 
-n = document.createElement("link")
-n.href = "https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700&display=swap"
-n.rel = "stylesheet"
-document.head.appendChild(n)
+
+// Dynamic imports
+// ===============
+
+function loadLinkIfNeeded(href) {
+  if (!document.querySelector(`link[href="${href}"]`)) {
+    const n = document.createElement("link")
+    n.href = href
+    n.rel = "stylesheet"
+    document.head.appendChild(n)
+  }
+}
+
+
+loadLinkIfNeeded("application.css")
+loadLinkIfNeeded("https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700&display=swap")
 
 
 
@@ -30,7 +37,7 @@ initializePages({
   // Analytics
   // ---------
 
-  try {
+  if (!isHeadless) {
 
     (function(f, a, t, h, o, m) {
       a[h] = a[h] || function() {
@@ -41,11 +48,12 @@ initializePages({
       o.async = 1; o.src = t; o.id = "fathom-script";
       m.appendChild(o)
     })(document, window, "https://cdn.usefathom.com/tracker.js", "fathom")
+
     fathom("set", "siteId", "asdvqpoi")
     fathom("set", "spa", "pushstate")
     fathom("trackPageview")
 
-  } catch (_) {}
+  }
 
 
   // Ports
