@@ -23,7 +23,7 @@ backgroundColor : RemoteAction -> Html.Attribute msg
 backgroundColor r =
     case r of
         Failed _ ->
-            T.bg_dark_pink
+            T.bg_red
 
         InProgress ->
             T.bg_gray_400

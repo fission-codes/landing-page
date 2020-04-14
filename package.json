@@ -6,7 +6,7 @@
     "build": "elm-pages build"
   },
   "dependencies": {
-    "fission-kit": "fission-suite/kit#d77054d1ef4a74ddd018a8efa64c9764e9453eb6"
+    "fission-kit": "fission-suite/kit#52007072cf459d02de6b49f5ca13229a7a03f4c6"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.0.6",
@@ -14,10 +14,10 @@
     "elm": "latest-0.19.1",
     "elm-format": "^0.8.2",
     "elm-git-install": "^0.1.2",
-    "elm-pages": "icidasset/elm-pages#fdf09810a6e9e321763058d4b7c14996707fd2a5",
+    "elm-pages": "1.3.0",
     "postcss": "^7.0.26",
     "postcss-csso": "^4.0.0",
-    "postcss-elm-tailwind": "icidasset/postcss-elm-tailwind#c2997991aa9b74e2fd886654ef6cb75a3efdbfe6",
+    "postcss-elm-tailwind": "0.8.0",
     "sharp": "^0.24.1",
     "tailwindcss": "^1.2.0"
   }

@@ -2,7 +2,6 @@
     "type": "application",
     "source-directories": [
         "elm-stuff/gitdeps/github.com/fission-suite/elm-kit.git/src",
-        "elm-stuff/gitdeps/github.com/icidasset/elm-pages.git/src",
         "gen",
         "src"
     ],
@@ -11,6 +10,7 @@
         "direct": {
             "Fresheyeball/elm-return": "7.1.0",
             "avh4/elm-color": "1.0.0",
+            "dillonkearns/elm-pages": "4.0.1",
             "elm/browser": "1.0.2",
             "elm/core": "1.0.4",
             "elm/html": "1.0.0",
@@ -45,6 +45,7 @@
             "elm/svg": "1.0.1",
             "elm/virtual-dom": "1.0.2",
             "fredcy/elm-parseint": "2.0.1",
+            "lukewestby/elm-string-interpolate": "1.0.4",
             "mgold/elm-nonempty-list": "4.1.0"
         }
     },

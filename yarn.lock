@@ -3184,9 +3184,10 @@ elm-hot@^1.1.4:
   resolved "https://registry.yarnpkg.com/elm-hot/-/elm-hot-1.1.4.tgz#4984592b3554670255ea4e08f4e98aa9103ab51f"
   integrity sha512-qPDP/o/Fkifriaxaf3E7hHFB5L6Ijihyg8is4A6xna6/h/zebUiNssbQrxywI2oxNUkr6W/leEu/WlIC1tmVnw==
 
-elm-pages@icidasset/elm-pages#fdf09810a6e9e321763058d4b7c14996707fd2a5:
-  version "1.2.10"
-  resolved "https://codeload.github.com/icidasset/elm-pages/tar.gz/fdf09810a6e9e321763058d4b7c14996707fd2a5"
+elm-pages@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/elm-pages/-/elm-pages-1.3.0.tgz#a2f6b7384a6a9a6b22a1bb8730cb835399f8a2b6"
+  integrity sha512-6H1+LPIKsBaC3LEETVe82igC86rk8tLeFiotuIh+c+OM4anOKoYIOQ0fscLq0MMGEG6wcryXFhyvVrpsw7P2Dw==
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/preset-env" "^7.5.5"
@@ -3844,9 +3845,9 @@ firstline@1.2.0:
   resolved "https://registry.yarnpkg.com/firstline/-/firstline-1.2.0.tgz#c9f4886e7f7fbf0afc12d71941dce06b192aea05"
   integrity sha1-yfSIbn9/vwr8EtcZQdzgaxkq6gU=
 
-fission-kit@fission-suite/kit#d77054d1ef4a74ddd018a8efa64c9764e9453eb6:
+fission-kit@fission-suite/kit#52007072cf459d02de6b49f5ca13229a7a03f4c6:
   version "0.2.0"
-  resolved "https://codeload.github.com/fission-suite/kit/tar.gz/d77054d1ef4a74ddd018a8efa64c9764e9453eb6"
+  resolved "https://codeload.github.com/fission-suite/kit/tar.gz/52007072cf459d02de6b49f5ca13229a7a03f4c6"
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
@@ -6479,9 +6480,10 @@ postcss-csso@^4.0.0:
   dependencies:
     csso "^4.0.2"
 
-postcss-elm-tailwind@icidasset/postcss-elm-tailwind#c2997991aa9b74e2fd886654ef6cb75a3efdbfe6:
-  version "0.5.0"
-  resolved "https://codeload.github.com/icidasset/postcss-elm-tailwind/tar.gz/c2997991aa9b74e2fd886654ef6cb75a3efdbfe6"
+postcss-elm-tailwind@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/postcss-elm-tailwind/-/postcss-elm-tailwind-0.8.0.tgz#7cbeab2cd8a343e6417234af3baf648db6c7822c"
+  integrity sha512-3Q/Q9xLLi0NStqP6IBndUmfqoZxdBHodhsEBdFYhL6dI7lxy+XKBdkt0fq1PjD7Qc6NFrnm34pKsWDeGEKk33g==
 
 postcss-functions@^3.0.0:
   version "3.0.0"
