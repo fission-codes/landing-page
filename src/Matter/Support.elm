@@ -266,7 +266,9 @@ overviewItem icon nodes =
 contact : Model -> DecodedData -> Html Msg
 contact model data =
     Html.div
-        [ T.bg_gray_600 ]
+        [ A.id "contact"
+        , T.bg_gray_600
+        ]
         [ Html.div
             Kit.containerAttributes
             [ -----------------------------------------
