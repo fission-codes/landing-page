@@ -27,7 +27,8 @@ buttonAltAttributes =
 
 buttonAttributesWithColor : Html.Attribute msg -> List (Html.Attribute msg)
 buttonAttributesWithColor colorAttribute =
-    [ T.ease_in_out
+    [ T.duration_200
+    , T.ease_in_out
     , T.inline_block
     , T.leading_none
     , T.p_3
