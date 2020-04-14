@@ -2,14 +2,13 @@ module State exposing (..)
 
 import Ease
 import External.Blog
-import Fathom
 import Http
-import Json.Decode.Exploration as StrictJson
-import Ports
 import RemoteAction exposing (RemoteAction(..))
-import Return exposing (return)
+import Return
 import SmoothScroll
-import Task
+import State.News as News
+import State.Other as Other
+import State.Subscribe as Subscribe
 import Types exposing (..)
 import Validation exposing (Validated(..))
 
@@ -30,10 +29,7 @@ init _ =
         -----------------------------------------
         -- Model
         -----------------------------------------
-        { contacting = Stopped
-        , contactEmail = Blank
-        , contactMessage = Blank
-        , latestBlogPosts = []
+        { latestBlogPosts = []
         , subscribeToEmail = Blank
         , subscribing = Stopped
         }
@@ -52,159 +48,38 @@ init _ =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update msg =
     case msg of
         Bypass ->
             -- Don't do anything.
-            Return.singleton model
-
-        -----------------------------------------
-        -- Contact
-        -----------------------------------------
-        Contact ->
-            case
-                [ model.contactEmail
-                , model.contactMessage
-                ]
-            of
-                [ Valid email, Valid message ] ->
-                    ( { model | contacting = InProgress }
-                    , Http.post
-                        { url = "https://formsubmit.co/boris@fission.codes"
-                        , body =
-                            Http.multipartBody
-                                [ Http.stringPart "email" email
-                                , Http.stringPart "message" message
-
-                                -- Options
-                                ----------
-                                , Http.stringPart "_captcha" "false"
-                                , Http.stringPart "_replyto" email
-                                ]
-                        , expect =
-                            Http.expectWhatever GotContactResponse
-                        }
-                    )
-
-                [ Blank, _ ] ->
-                    Return.singleton { model | contacting = Failed "I need an email address" }
-
-                [ _, Blank ] ->
-                    Return.singleton { model | contacting = Failed "I need a message" }
-
-                [ Invalid { note }, _ ] ->
-                    Return.singleton { model | contacting = Failed note }
-
-                [ _, Invalid { note } ] ->
-                    Return.singleton { model | contacting = Failed note }
-
-                _ ->
-                    Return.singleton model
-
-        GotContactEmail input ->
             Return.singleton
-                { model
-                    | contacting = RemoteAction.recoverFromFailure model.contacting
-                    , contactEmail = Validation.email input
-                }
-
-        GotContactMessage input ->
-            Return.singleton
-                { model
-                    | contacting = RemoteAction.recoverFromFailure model.contacting
-                    , contactMessage = Validation.message input
-                }
-
-        GotContactResponse (Ok ()) ->
-            Return.singleton { model | contacting = Succeeded }
-
-        GotContactResponse (Err err) ->
-            -- Return.singleton { model | contacting = Failed "HTTP Request Failed" }
-            -- NOTE: We always get an error because of CORS issues with formsubmit.co
-            Return.singleton { model | contacting = Succeeded }
 
         -----------------------------------------
         -- News
         -----------------------------------------
-        GotBlogPosts (Ok json) ->
-            case StrictJson.decodeString External.Blog.latestPostsDecoder json of
-                StrictJson.Success latestBlogPosts ->
-                    Return.singleton { model | latestBlogPosts = latestBlogPosts }
-
-                StrictJson.WithWarnings _ latestBlogPosts ->
-                    Return.singleton { model | latestBlogPosts = latestBlogPosts }
-
-                _ ->
-                    -- Can't decode the server response,
-                    -- this should ideally never happen.
-                    Return.singleton model
-
-        GotBlogPosts (Err err) ->
-            -- Ignore error, the user shouldn't care if this fails.
-            -- Besides, we have a cached backup for this.
-            Return.singleton model
+        GotBlogPosts a ->
+            News.gotPosts a
 
         -----------------------------------------
         -- Subscribe
         -----------------------------------------
-        GotSubscribeResponse (Ok ()) ->
-            Return.singleton { model | subscribing = Succeeded }
+        GotSubscribeResponse a ->
+            Subscribe.gotResponse a
 
-        GotSubscribeResponse (Err err) ->
-            -- Return.singleton { model | subscribing = Failed "HTTP Request Failed" }
-            -- NOTE: We always get an error because of CORS issues with sendinblue.
-            Return.singleton { model | subscribing = Succeeded }
-
-        GotSubscriptionInput input ->
-            Return.singleton
-                { model
-                    | subscribing = RemoteAction.recoverFromFailure model.subscribing
-                    , subscribeToEmail = Validation.email input
-                }
+        GotSubscriptionInput a ->
+            Subscribe.gotInput a
 
         Subscribe ->
-            case model.subscribeToEmail of
-                Valid email ->
-                    ( { model | subscribing = InProgress }
-                    , Cmd.batch
-                        [ Http.post
-                            { url = "https://5d04d668.sibforms.com/serve/MUIEAH9z71F3-xucvdxYTZ9rKE0dHzCDikuQqcnxjAyY3T2NBmxUOklz4XijWG0ML4E_sHeoyq1PBQM_-PpLAkraiFa51bhHUp64vZfo6XT38fr4H2eFpxjCSgcIpFDo1KFyRr3hWfQ4KZ8TCPG0YVqWEYDQVVGW_ZGwBgJcgjaLibCPjvshJzIeUYDSQPg2jHyvYshB1YuqPopz"
-                            , body =
-                                Http.multipartBody
-                                    [ Http.stringPart "EMAIL" email
-                                    , Http.stringPart "html_type" "simple"
-                                    , Http.stringPart "locale" "en"
-                                    ]
-                            , expect =
-                                Http.expectWhatever GotSubscribeResponse
-                            }
-
-                        --
-                        , Ports.setFathomGoal Fathom.goals.emailSubscription
-                        ]
-                    )
-
-                _ ->
-                    Return.singleton { model | subscribing = Failed "Invalid input" }
+            Subscribe.subscribe
 
         -----------------------------------------
         -- 📭 Other
         -----------------------------------------
-        SmoothScroll { nodeId } ->
-            -- Smooth scroll to a certain node on the page.
-            ( model
-            , Task.attempt
-                (\_ -> Bypass)
-                (SmoothScroll.scrollToWithOptions smoothScrollConfig nodeId)
-            )
+        OpenChat ->
+            Other.openChat
 
-
-smoothScrollConfig : SmoothScroll.Config
-smoothScrollConfig =
-    { offset = 0
-    , speed = 35
-    , easing = Ease.inOutCubic
-    }
+        SmoothScroll a ->
+            Other.smoothScroll a
 
 
 

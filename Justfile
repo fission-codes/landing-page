@@ -4,7 +4,8 @@ export NODE_OPTIONS := "--no-warnings"
 # Variables
 # ---------
 
-node_bin := "./node_modules/.bin"
+node_bin 		:= "./node_modules/.bin"
+src_dir 		:= "./src"
 
 
 
@@ -12,12 +13,12 @@ node_bin := "./node_modules/.bin"
 # -----
 
 @default: css-large
-	just watch-css & yarn run dev
+	just watch-css & npm run dev
 
 
 build-production:
 	@rm -rf dist
-	@yarn run build
+	@npm run build
 
 	@# Gzip everything
 	gzip --best --recursive --keep dist/
@@ -28,8 +29,15 @@ build-production:
 	@cp static/application.css dist/application.css
 
 
+@elm-housekeeping:
+	echo "> Running elm-impfix"
+	{{node_bin}}/elm-impfix "{{src_dir}}/**/*.elm" --replace
+	echo "> Running elm-format"
+	elm-format {{src_dir}} --yes
+
+
 install-deps:
-	@yarn install
+	@npm install
 	{{node_bin}}/elm-git-install
 
 

@@ -2,7 +2,9 @@
 
 ## Setup
 
-On Mac: `brew install just`, or [see full just install](https://github.com/casey/just)
+Prerequisites:
+- [`brew install just`](https://github.com/casey/just)
+- [`brew install pnpm`](https://pnpm.js.org)
 
 Uses `elm-git` for install, so you'll need to have your [SSH key setup for Github](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
 

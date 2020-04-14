@@ -18,19 +18,13 @@ overview:
       
       
       
-form:
+contact:
   
     title:
       "Contact us"
     
     body:
-      "Sorry to hear you're having trouble with Fission! You can send us a quick note below, or join us in [our chat](https://discord.gg/daDMAjE)."
-      
-    email_placeholder:
-      "your@email.dev"
-      
-    message_placeholder:
-      "Describe the problem we can help you with"
+      "Sorry to hear you're having trouble with Fission! You can chat with us, or send an email, using the button below. Alternatively, if you'd like to chat more often, you can join [our Discord](https://discord.gg/daDMAjE)."
   
 
 

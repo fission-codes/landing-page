@@ -1,6 +1,6 @@
 module Matter.NotFound exposing (render)
 
-import Html exposing (Html)
+import Html
 import Tailwind as T
 
 

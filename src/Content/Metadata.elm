@@ -1,9 +1,7 @@
 module Content.Metadata exposing (..)
 
 import Color
-import Date
 import Head
-import Head.Seo as Seo
 import Json.Decode as Json
 import Kit
 import Pages exposing (images, pages)

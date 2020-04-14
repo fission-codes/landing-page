@@ -1,15 +1,11 @@
 module View exposing (..)
 
-import Common
-import Content.Metadata as Metadata exposing (Metadata)
+import Content.Metadata as Metadata
 import Content.Parsers as Interpretation exposing (Interpretation)
-import Dict.Any exposing (AnyDict)
+import Dict.Any
 import External.Blog
 import Html exposing (Html)
-import Html.Attributes
 import Html.Extra as Html
-import Json.Decode.Exploration as StrictJson
-import Kit
 import Matter.Index
 import Matter.NotFound
 import Matter.Support

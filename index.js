@@ -56,11 +56,48 @@ initializePages({
   }
 
 
+  // Missive
+  // -------
+
+  let isShowingChat = false
+
+
+  if (!isHeadless) {
+
+    (function(d, w) {
+      w.MissiveChatConfig = {
+        id: "91a74dc2-1b64-4f99-890f-e90f86e40362",
+
+        // Options
+        chat: { hidden: true },
+        visitor: { requireEmail: false },
+
+        // Callbacks
+        onReady() { isShowingChat && w.MissiveChat.open() },
+        onOpen() { isShowingChat = true },
+        onClose() { isShowingChat = false },
+      }
+
+      var s = d.createElement("script")
+      s.async = true
+      s.src = "https://webchat.missiveapp.com/" + w.MissiveChatConfig.id + "/missive.js"
+      if (d.head) d.head.appendChild(s)
+    })(document, window)
+
+  }
+
+
   // Ports
   // -----
 
   app.ports.setFathomGoal.subscribe(({ id, value }) => {
     if (window.fathom) fathom("trackGoal", id, value)
+  })
+
+
+  app.ports.showChat.subscribe(_ => {
+    isShowingChat = true
+    if (window.MissiveChat) window.MissiveChat.open()
   })
 
 })

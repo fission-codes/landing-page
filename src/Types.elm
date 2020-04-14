@@ -1,9 +1,9 @@
 module Types exposing (..)
 
 import Content.Metadata exposing (Metadata)
-import Content.Parsers exposing (Interpretation)
 import External.Blog
 import Http
+import Management
 import Pages
 import Pages.ImagePath as Images
 import Pages.PagePath as Pages
@@ -20,10 +20,7 @@ import Yaml.Decode as Yaml
 {-| Model of our UI state.
 -}
 type alias Model =
-    { contacting : RemoteAction
-    , contactEmail : Validated String
-    , contactMessage : Validated String
-    , latestBlogPosts : List External.Blog.Post
+    { latestBlogPosts : List External.Blog.Post
     , subscribeToEmail : Validated String
     , subscribing : RemoteAction
     }
@@ -38,13 +35,6 @@ type alias Model =
 type Msg
     = Bypass
       -----------------------------------------
-      -- Contact
-      -----------------------------------------
-    | Contact
-    | GotContactEmail String
-    | GotContactMessage String
-    | GotContactResponse (Result Http.Error ())
-      -----------------------------------------
       -- News
       -----------------------------------------
     | GotBlogPosts (Result Http.Error String)
@@ -57,6 +47,7 @@ type Msg
       -----------------------------------------
       -- 📭 Other
       -----------------------------------------
+    | OpenChat
     | SmoothScroll { nodeId : String }
 
 
@@ -70,6 +61,10 @@ type alias ContentList =
 
 type alias ImagePath =
     Images.ImagePath Pages.PathKey
+
+
+type alias Manager =
+    Management.Manager Msg Model
 
 
 type alias Page =

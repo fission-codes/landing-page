@@ -4,7 +4,6 @@ import Content.Markdown
 import Content.Metadata as Metadata exposing (Metadata)
 import Html exposing (Html)
 import Pages.Document as Pages
-import Yaml.Decode as Yaml
 import Yaml.Decode.Extra as Yaml
 
 

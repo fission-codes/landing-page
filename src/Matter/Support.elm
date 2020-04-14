@@ -2,11 +2,9 @@ module Matter.Support exposing (render)
 
 import Common exposing (..)
 import Common.Views as Common
-import Content.Markdown as Markdown
 import Content.Metadata exposing (MetadataForPages)
 import Content.Parsers exposing (EncodedData)
 import Dict
-import External.Blog
 import FeatherIcons
 import Html exposing (Html)
 import Html.Attributes as A
@@ -32,8 +30,8 @@ import Yaml.Decode.Extra as Yaml
 
 
 type alias DecodedData =
-    { footer : Common.FooterData
-    , form : FormData
+    { contact : ContactData
+    , footer : Common.FooterData
     , menu : MenuData
     , overview : OverviewData
     }
@@ -56,10 +54,8 @@ type alias OverviewItem =
     }
 
 
-type alias FormData =
+type alias ContactData =
     { body : List (Html Msg)
-    , emailPlaceholder : String
-    , messagePlaceholder : String
     , title : String
     }
 
@@ -83,8 +79,8 @@ dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
     Yaml.map4
         DecodedData
+        (Yaml.field "contact" contactDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
-        (Yaml.field "form" formDataDecoder)
         (Yaml.field "menu" menuDataDecoder)
         (Yaml.field "overview" overviewDataDecoder)
 
@@ -112,13 +108,11 @@ overviewItemDecoder =
         (Yaml.field "icon" Yaml.string)
 
 
-formDataDecoder : Yaml.Decoder FormData
-formDataDecoder =
-    Yaml.map4
-        FormData
+contactDataDecoder : Yaml.Decoder ContactData
+contactDataDecoder =
+    Yaml.map2
+        ContactData
         (Yaml.field "body" Yaml.markdownString)
-        (Yaml.field "email_placeholder" Yaml.string)
-        (Yaml.field "message_placeholder" Yaml.string)
         (Yaml.field "title" Yaml.string)
 
 
@@ -131,7 +125,7 @@ view pagePath model data =
     Html.div
         []
         [ intro pagePath model data
-        , form model data
+        , contact model data
         , Common.footer pagePath data.footer
         ]
 
@@ -266,99 +260,56 @@ overviewItem icon nodes =
 
 
 
--- FORM
+-- CONTACT
 
 
-form : Model -> DecodedData -> Html Msg
-form model data =
+contact : Model -> DecodedData -> Html Msg
+contact model data =
     Html.div
         [ T.bg_gray_600 ]
-        [ Html.form
-            (E.onSubmit Contact :: Kit.containerAttributes)
+        [ Html.div
+            Kit.containerAttributes
             [ -----------------------------------------
               -- Title
               -----------------------------------------
-              Kit.h2 "Contact us"
+              Kit.h2 data.contact.title
 
             -----------------------------------------
             -- Text
             -----------------------------------------
-            , Kit.introParagraph <| Markdown.trimAndProcess """
-                Sorry to hear you're having trouble with Fission!
-                You can send us a quick note below, or join us in [our chat](https://discord.gg/daDMAjE).
-              """
+            , Html.div
+                [ T.max_w_xl
+                , T.mx_auto
+                , T.pt_5
+                , T.px_3
+                , T.text_gray_300
+
+                -- Responsive
+                -------------
+                , T.md__pt_6
+                , T.md__text_lg
+                ]
+                data.contact.body
 
             -----------------------------------------
-            -- Input
+            -- Chat trigger
             -----------------------------------------
-            -- Email
-            --------
-            , Html.label
-                Kit.labelAttributes
-                [ Html.text "Email" ]
+            , Html.button
+                (List.append
+                    Kit.buttonAttributes
+                    [ E.onClick OpenChat
 
-            --
-            , { name = "email"
-              , onInput = GotContactEmail
-              , placeholder = "your@email.dev"
-              , value = model.contactEmail
-              }
-                |> Kit.inputAttributes
-                |> (\a -> Html.input a [])
-
-            -- Message
-            ----------
-            , Html.label
-                Kit.labelAttributes
-                [ Html.text "Message" ]
-
-            --
-            , { name = "message"
-              , onInput = GotContactMessage
-              , placeholder = "Describe the problem we can help you with"
-              , value = model.contactMessage
-              }
-                |> Kit.inputAttributes
-                |> List.append [ T.h_40, T.resize_none ]
-                |> (\a -> Html.textarea a [])
-
-            -- Button
-            ---------
-            , formButton model
+                    --
+                    , T.inline_flex
+                    , T.items_center
+                    , T.mt_10
+                    ]
+                )
+                [ FeatherIcons.messageCircle
+                    |> FeatherIcons.withClass "mr-2 opacity-30"
+                    |> FeatherIcons.withSize 20
+                    |> FeatherIcons.toHtml []
+                , Html.text "Chat with us"
+                ]
             ]
         ]
-
-
-formButton : Model -> Html Msg
-formButton model =
-    let
-        buttonColorAttribute =
-            RemoteAction.backgroundColor model.contacting
-
-        label =
-            case model.contacting of
-                Failed reason ->
-                    reason
-
-                InProgress ->
-                    "Sending message …"
-
-                Stopped ->
-                    "Send message"
-
-                Succeeded ->
-                    "Thank you!"
-
-        buttonAttributes =
-            List.append
-                (Kit.buttonAttributesWithColor buttonColorAttribute)
-                [ T.block
-                , T.max_w_md
-                , T.mt_5
-                , T.p_4
-                , T.w_full
-                ]
-    in
-    Html.button
-        buttonAttributes
-        [ Html.text label ]
