@@ -332,11 +332,11 @@ heroku pagePath model data =
             -- Add-on Link
             -----------------------------------------
             , Html.a
-                (A.href "https://elements.heroku.com/addons/interplanetary-fission"
+                (A.href "https://drive.fission.codes"
                     :: T.mt_12
                     :: Kit.buttonAttributes
                 )
-                [ Html.text "Try the Add-on" ]
+                [ Html.text "Sign up for Fission Drive" ]
             ]
         ]
 
@@ -356,7 +356,7 @@ news pagePath model data =
               -----------------------------------------
               Html.div
                 [ T.md__w_5over12, T.text_left ]
-                [ Kit.h2 "News"
+                [ Kit.h2 "From the blog"
 
                 --
                 , model.latestBlogPosts
@@ -375,7 +375,7 @@ news pagePath model data =
                         :: T.mt_12
                         :: Kit.buttonAltAttributes
                     )
-                    [ Html.text "Visit Fission Blog" ]
+                    [ Html.text "Visit the Fission Blog »" ]
                 ]
 
             -----------------------------------------
