@@ -13,17 +13,17 @@ fission_live:
     Fission for Developers
 
   about:
-    Get started with Fission to bring your apps live directly from your laptop. Publish static files, websites, and JavaScript front ends and keep them updated in real time. We use the InterPlanetary File System (IPFS) to power peer-to-peer files.
+    Build apps that include passwordless login, end-to-end encryption, and offline support, without having to learn complicated DevOps techniques. Let your app users own their data, with more scale and less cost to you.
 
   terminal_caption:
-    Download our <abbr title="Command Line Interface">CLI</abbr>, register, and start streaming files online.
+    Download our <abbr title="Command Line Interface">CLI</abbr> and deploy apps instantly.
 
 
 
 heroku:
 
   title:
-    Drive for Users
+    Fission Drive
 
   about:
     Every user creating a Fission Account gets access to Drive. Your files, available everywhere, even offline. Private files are encrypted end-to-end. Easily publish and share public files. Add an app, give permission to what files it can access, just like you're used to on mobile.

@@ -200,8 +200,8 @@ menuItems =
         [ T.flex
         , T.items_center
         ]
-        [ Common.menuItem "fission-live" "Fission Live"
-        , Common.menuItem "heroku" "Heroku"
+        [ Common.menuItem "fission-live" "For Developers"
+        , Common.menuItem "heroku" "Drive"
         , Common.menuItem "news" "News"
 
         --
@@ -290,7 +290,7 @@ fissionLive pagePath model data =
                     :: T.mt_12
                     :: Kit.buttonAltAttributes
                 )
-                [ Html.text "Read the Guide" ]
+                [ Html.text "Install the CLI" ]
             ]
         ]
 
