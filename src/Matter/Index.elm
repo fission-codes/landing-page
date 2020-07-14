@@ -221,7 +221,7 @@ logo =
         [ Html.img
             [ A.src (ImagePath.toString images.logoDarkColored)
             , A.style "max-width" "550px"
-            , A.title "FISSION"
+            , A.title "Fission"
 
             --
             , T.w_full
@@ -264,7 +264,7 @@ fissionLive pagePath model data =
             -- Terminal GIF
             -----------------------------------------
             , Html.img
-                [ A.src "https://s3.fission.codes/2019/11/going-live-code-diffusion.gif"
+                [ A.src (ImagePath.toString images.content.fissionCliAppInit)
 
                 --
                 , T.mt_12
@@ -319,7 +319,7 @@ heroku pagePath model data =
             -- Image
             -----------------------------------------
             , Html.img
-                [ A.src "https://s3.fission.codes/2019/11/IMG_7574.jpg"
+                [ A.src (ImagePath.toString images.content.driveDarkPublicRootVideoRedpanda)
 
                 --
                 , T.mt_12

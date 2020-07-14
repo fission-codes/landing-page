@@ -2,8 +2,8 @@ tagline:
   App & website hosting with user-controlled data
 
 short_description:
-  Fission provides app hosting with user controlled data.
-  We’re building a web native file system that combines files, encryption, and identity, like an open source iCloud.
+  We’ve built a web native file system that combines files, encryption, and identity, like an open source iCloud.<br /><br />
+  As a developer, use it to host your apps, your users' files, and build using only client-side browser tech.
 
 
 
@@ -13,7 +13,7 @@ fission_live:
     Fission for Developers
 
   about:
-    Build apps that include passwordless login, end-to-end encryption, and offline support, without having to learn complicated DevOps techniques. Let your app users own their data, with more scale and less cost to you.
+    Build apps that include passwordless login, end-to-end encryption, and offline support, without having to learn complicated DevOps techniques.<br /><br />Let your app users own their data, with more scale and less cost to you.
 
   terminal_caption:
     Download our <abbr title="Command Line Interface">CLI</abbr> and deploy apps instantly.
@@ -26,7 +26,7 @@ heroku:
     Fission Drive
 
   about:
-    Every user creating a Fission Account gets access to Drive. Your files, available everywhere, even offline. Private files are encrypted end-to-end. Easily publish and share public files. Add an app, give permission to what files it can access, just like you're used to on mobile.
+    Everyone creating a Fission Account gets access to Drive. Your files, available everywhere, even offline.<br /><br >Private files are encrypted end-to-end. Easily publish and share public files.<br /><br />Add an app, give permission to what files it can access, just like you're used to on mobile.
 
 
 
