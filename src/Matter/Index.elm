@@ -200,8 +200,8 @@ menuItems =
         [ T.flex
         , T.items_center
         ]
-        [ Common.menuItem "fission-live" "Fission Live"
-        , Common.menuItem "heroku" "Heroku"
+        [ Common.menuItem "fission-live" "For Developers"
+        , Common.menuItem "heroku" "Drive"
         , Common.menuItem "news" "News"
 
         --
@@ -221,7 +221,7 @@ logo =
         [ Html.img
             [ A.src (ImagePath.toString images.logoDarkColored)
             , A.style "max-width" "550px"
-            , A.title "FISSION"
+            , A.title "Fission"
 
             --
             , T.w_full
@@ -264,7 +264,7 @@ fissionLive pagePath model data =
             -- Terminal GIF
             -----------------------------------------
             , Html.img
-                [ A.src "https://s3.fission.codes/2019/11/going-live-code-diffusion.gif"
+                [ A.src (ImagePath.toString images.content.fissionCliAppInit)
 
                 --
                 , T.mt_12
@@ -290,7 +290,7 @@ fissionLive pagePath model data =
                     :: T.mt_12
                     :: Kit.buttonAltAttributes
                 )
-                [ Html.text "Read the Guide" ]
+                [ Html.text "Install the CLI" ]
             ]
         ]
 
@@ -319,7 +319,7 @@ heroku pagePath model data =
             -- Image
             -----------------------------------------
             , Html.img
-                [ A.src "https://s3.fission.codes/2019/11/IMG_7574.jpg"
+                [ A.src (ImagePath.toString images.content.driveDarkPublicRootVideoRedpanda)
 
                 --
                 , T.mt_12
@@ -332,11 +332,11 @@ heroku pagePath model data =
             -- Add-on Link
             -----------------------------------------
             , Html.a
-                (A.href "https://elements.heroku.com/addons/interplanetary-fission"
+                (A.href "https://drive.fission.codes"
                     :: T.mt_12
                     :: Kit.buttonAttributes
                 )
-                [ Html.text "Try the Add-on" ]
+                [ Html.text "Sign up for Fission Drive" ]
             ]
         ]
 
@@ -356,7 +356,7 @@ news pagePath model data =
               -----------------------------------------
               Html.div
                 [ T.md__w_5over12, T.text_left ]
-                [ Kit.h2 "News"
+                [ Kit.h2 "From the blog"
 
                 --
                 , model.latestBlogPosts
@@ -375,7 +375,7 @@ news pagePath model data =
                         :: T.mt_12
                         :: Kit.buttonAltAttributes
                     )
-                    [ Html.text "Visit Fission Blog" ]
+                    [ Html.text "Visit the Fission Blog »" ]
                 ]
 
             -----------------------------------------

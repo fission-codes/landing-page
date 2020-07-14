@@ -2,37 +2,37 @@ tagline:
   App & website hosting with user-controlled data
 
 short_description:
-  Fission provides app hosting with user controlled data.
-  We’re building a web native file system that combines files, encryption, and identity, like an open source iCloud.
+  We’ve built a web native file system that combines files, encryption, and identity, like an open source iCloud.<br /><br />
+  As a developer, use it to host your apps, your users' files, and build using only client-side browser tech.
 
 
 
 fission_live:
 
   title:
-    Fission Live
+    Fission for Developers
 
   about:
-    Get started with Fission to bring your apps live directly from your laptop. Publish static files, websites, and JavaScript front ends and keep them updated in real time. We use the InterPlanetary File System (IPFS) to power peer-to-peer files.
+    Build apps that include passwordless login, end-to-end encryption, and offline support, without having to learn complicated DevOps techniques.<br /><br />Let your app users own their data, with more scale and less cost to you.
 
   terminal_caption:
-    Download our <abbr title="Command Line Interface">CLI</abbr>, register, and start streaming files online.
+    Download our <abbr title="Command Line Interface">CLI</abbr> and deploy apps instantly.
 
 
 
 heroku:
 
   title:
-    Decentralized Files for Heroku
+    Fission Drive
 
   about:
-    Add a file system to Heroku that lets you and your users easily sync and re-use files everywhere.
+    Everyone creating a Fission Account gets access to Drive. Your files, available everywhere, even offline.<br /><br />Private files are encrypted end-to-end. Easily publish and share public files.<br /><br />Add an app, give permission to what files it can access, just like you're used to on mobile.
 
 
 
 news:
 
-  title: News
+  title: From the blog
   button_text: Subscribe to our product updates newsletter
 
 
@@ -44,7 +44,7 @@ subscribe:
   input_placeholder: newsletter@fission.codes
 
   note:
-    "[Visit the subscribe page](https://5d04d668.sibforms.com/serve/MUIEAD0fi3_BJE-4eieeuK6_0_XZaOPiu1_nfh56jvP1pV9uWy9OLxWLrHtjC148osZF2vcRb0XAymSdzFxhVD7XgvvODjbrp5ClBvQLmY70hyvU1JKu7ucoOP5KFJVRcfNgYN-3qvVppxg72KGyYZlWAJr2IkO7Ae9CIhnjpufaP7npZGPrBFzpmyEaKKLGYyqu0dnQIobGLAMM) to pick from event, product, and blog link newsletters"
+    "[Visit the subscribe page](https://5d04d668.sibforms.com/serve/MUIEAD0fi3_BJE-4eieeuK6_0_XZaOPiu1_nfh56jvP1pV9uWy9OLxWLrHtjC148osZF2vcRb0XAymSdzFxhVD7XgvvODjbrp5ClBvQLmY70hyvU1JKu7ucoOP5KFJVRcfNgYN-3qvVppxg72KGyYZlWAJr2IkO7Ae9CIhnjpufaP7npZGPrBFzpmyEaKKLGYyqu0dnQIobGLAMM) to pick from event, product, and weekly link newsletters"
 
 
 

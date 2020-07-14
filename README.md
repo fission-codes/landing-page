@@ -16,4 +16,8 @@ just install-deps
 
 # Build, watch & start server
 just
+
+
+# Build for production and put in `dist` folder
+just build-production
 ```
