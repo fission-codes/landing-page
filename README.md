@@ -5,6 +5,7 @@
 Prerequisites:
 - [`brew install just`](https://github.com/casey/just)
 - [`brew install pnpm`](https://pnpm.js.org)
+- [`brew install watchexec`](https://github.com/watchexec/watchexec)
 
 Uses `elm-git` for install, so you'll need to have your [SSH key setup for Github](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
 
