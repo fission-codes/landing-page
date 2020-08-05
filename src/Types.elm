@@ -10,7 +10,6 @@ import Pages.PagePath as Pages
 import Pages.Platform as Pages
 import RemoteAction exposing (RemoteAction)
 import Validation exposing (Validated(..))
-import Yaml.Decode as Yaml
 
 
 
