@@ -26,15 +26,13 @@
             "feathericons/elm-feather": "1.5.0",
             "justinmimbs/date": "3.2.1",
             "linuss/smooth-scroll": "1.1.0",
-            "mdgriffith/elm-markup": "3.0.1",
             "miniBill/elm-codec": "1.2.0",
             "noahzgordon/elm-color-extra": "1.0.2",
             "pablohirafuji/elm-markdown": "2.0.5",
             "panthershark/email-parser": "1.0.2",
             "terezka/yaml": "1.0.1",
             "tripokey/elm-fuzzy": "5.2.1",
-            "turboMaCk/any-dict": "2.3.0",
-            "zwilias/json-decode-exploration": "6.0.0"
+            "turboMaCk/any-dict": "2.3.0"
         },
         "indirect": {
             "elm/bytes": "1.0.8",
@@ -46,7 +44,8 @@
             "elm/virtual-dom": "1.0.2",
             "fredcy/elm-parseint": "2.0.1",
             "lukewestby/elm-string-interpolate": "1.0.4",
-            "mgold/elm-nonempty-list": "4.1.0"
+            "mgold/elm-nonempty-list": "4.1.0",
+            "zwilias/json-decode-exploration": "6.0.0"
         }
     },
     "test-dependencies": {
