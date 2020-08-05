@@ -126,65 +126,7 @@ view pagePath model data =
         []
         [ intro pagePath model data
         , carusel pagePath model data
-        , Html.div
-            [ T.bg_gray_600
-            , T.flex
-            , T.flex_col
-            , T.overflow_hidden
-            , T.px_6
-            , T.py_24
-            ]
-            [ Html.div
-                [ T.m_auto
-                , T.flex
-                , T.flex_row
-                ]
-                [ Html.img
-                    [ A.src (ImagePath.toString images.content.artworkPage.heroImage)
-                    , A.width 844
-                    , A.height 840
-                    , T.flex_shrink
-                    , T.mx_auto
-                    , T.max_w_sm
-                    ]
-                    []
-                , Html.div
-                    [ T.max_w_sm
-                    , T.my_auto
-                    , T.ml_20
-                    ]
-                    -- TODO move to data
-                    [ Html.h3
-                        [ T.text_3xl
-                        , T.text_gray_100
-                        , T.font_display
-                        ]
-                        [ Html.text "Get some swag!" ]
-                    , Html.p
-                        [ T.mt_4
-                        , T.font_body
-                        , T.text_gray_300
-                        , T.text_lg
-                        ]
-                        [ Html.text "What about having some Fission\nArtwork on a t-shirt, mug or some stickers, huh? We are already working on some very cool swag for you."
-                        ]
-                    , Html.button
-                        [ T.appearance_none
-                        , T.cursor_pointer
-                        , T.text_lg
-                        , T.mt_8
-                        , T.text_gray_200
-                        , T.bg_gray_200
-                        , T.leading_relaxed
-                        , T.px_4
-                        , T.py_1
-                        , T.rounded_lg
-                        , T.text_gray_600
-                        ]
-                        [ Html.text "Sign up for swag" ]
-                    ]
-                ]
-            ]
+        , callToAction pagePath model data
         , Common.footer pagePath data.footer
         ]
 
@@ -201,7 +143,8 @@ intro pagePath model data =
         , T.flex_col
         , T.overflow_hidden
         , T.px_6
-        , T.pb_24
+        , T.pb_16
+        , T.md__pb_24
         , T.md__min_h_screen
         ]
         [ Common.menu
@@ -219,14 +162,15 @@ intro pagePath model data =
                   -- but we have to make a thinner version available somehow.
                   -- Karla on the other hand is a little thinner by default
                   T.font_body
-                , T.text_3_5xl
+                , T.text_2_5xl
+                , T.sm__text_3_5xl
                 , T.text_center
                 , T.mt_24
                 ]
                 [ Html.text "Fission"
                 , Html.img
                     [ A.src (ImagePath.toString images.content.artworkPage.lettering)
-                    , A.style "margin-top" "-80px"
+                    , A.style "margin-top" "-15%"
                     , A.width 600
                     , T.mx_auto
                     ]
@@ -240,16 +184,18 @@ intro pagePath model data =
                 ]
                 -- TODO move to data
                 [ Html.h3
-                    [ T.text_3xl
-                    , T.text_gray_100
+                    [ T.text_gray_100
                     , T.font_display
+                    , T.leading_tight
+                    , T.text_2xl
+                    , T.md__text_3xl
                     ]
                     [ Html.text "Other than coding, we also love art!" ]
                 , Html.p
                     [ T.mt_4
                     , T.font_body
                     , T.text_gray_300
-                    , T.text_lg
+                    , T.md__text_lg
                     ]
                     [ Html.text "That’s why we always collaborate with great artists to create some funny, cute and awesome dev-related artwork."
                     , Html.br [] []
@@ -288,7 +234,8 @@ carusel pagePath model data =
         , T.flex_col
         , T.overflow_hidden
         , T.px_6
-        , T.py_24
+        , T.py_16
+        , T.md__py_24
         ]
         [ Html.div
             [ T.flex
@@ -409,77 +356,77 @@ carusel pagePath model data =
         ]
 
 
-priestess : Html msg
-priestess =
+
+-- CALL TO ACTION
+
+
+callToAction : PagePath -> Model -> DecodedData -> Html Msg
+callToAction pagePath model data =
     Html.div
-        [ T.hidden
-        , T.relative
-        , T.text_right
-        , T.w_5over12
-
-        -- Responsive
-        -------------
-        , T.md__block
+        [ T.bg_gray_600
+        , T.flex
+        , T.flex_col
+        , T.overflow_hidden
+        , T.px_6
+        , T.py_16
+        , T.md__py_24
         ]
-        [ Html.img
-            [ A.src (ImagePath.toString images.content.haskellHighPriestess768)
-
-            --
-            , T.inline_block
-            , T.max_w_sm
-            , T.w_full
+        [ Html.div
+            [ T.mx_auto
+            , T.flex
+            , T.flex_col
+            , T.lg__flex_row
             ]
-            []
-        ]
-
-
-overview : DecodedData -> Html Msg
-overview data =
-    Html.div
-        [ T.text_gray_200
-
-        -- Responsive
-        -------------
-        , T.sm__text_lg
-        , T.md__ml_8
-        , T.md__w_7over12
-        , T.lg__ml_16
-        ]
-        (data.overview.items
-            |> List.map
-                (\item ->
-                    overviewItem
-                        (FeatherIcons.icons
-                            |> Dict.get item.icon
-                            |> Maybe.withDefault FeatherIcons.chevronRight
-                        )
-                        item.body
-                )
-            |> (::) (Kit.tagline data.overview.tagline)
-        )
-
-
-overviewItem icon nodes =
-    Html.div
-        [ T.flex
-        , T.items_center
-        , T.mt_8
-
-        -- Responsive
-        -------------
-        , T.md__mt_10
-        ]
-        [ icon
-            |> FeatherIcons.withClass "mr-8"
-            |> FeatherIcons.withSize 24
-            |> FeatherIcons.toHtml []
-            |> List.singleton
-            |> Html.div [ T.flex_shrink_0, T.text_gray_300 ]
-
-        --
-        , Html.div
-            [ T.max_w_xs ]
-            nodes
+            [ Html.img
+                [ A.src (ImagePath.toString images.content.artworkPage.heroImage)
+                , A.width 844
+                , A.height 840
+                , T.flex_shrink
+                , T.max_w_sm
+                , T.px_6
+                , T.w_full
+                , T.mx_auto
+                ]
+                []
+            , Html.div
+                [ T.text_center
+                , T.lg__text_left
+                , T.lg__max_w_sm
+                , T.lg__my_auto
+                , T.lg__ml_20
+                ]
+                -- TODO move to data
+                [ Html.h3
+                    [ T.text_2xl
+                    , T.text_gray_100
+                    , T.font_display
+                    , T.md__text_3xl
+                    ]
+                    [ Html.text "Get some swag!" ]
+                , Html.p
+                    [ T.mt_4
+                    , T.font_body
+                    , T.text_gray_300
+                    , T.md__text_lg
+                    ]
+                    [ Html.text "What about having some Fission\nArtwork on a t-shirt, mug or some stickers, huh? We are already working on some very cool swag for you."
+                    ]
+                , Html.button
+                    [ T.appearance_none
+                    , T.cursor_pointer
+                    , T.mt_8
+                    , T.text_gray_200
+                    , T.bg_gray_200
+                    , T.leading_relaxed
+                    , T.px_4
+                    , T.py_1
+                    , T.rounded_lg
+                    , T.text_gray_600
+                    , T.md__text_lg
+                    ]
+                    [ Html.text "Sign up for swag" ]
+                ]
+            ]
         ]
 
 
