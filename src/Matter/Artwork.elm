@@ -126,6 +126,65 @@ view pagePath model data =
         []
         [ intro pagePath model data
         , carusel pagePath model data
+        , Html.div
+            [ T.bg_gray_600
+            , T.flex
+            , T.flex_col
+            , T.overflow_hidden
+            , T.px_6
+            , T.py_24
+            ]
+            [ Html.div
+                [ T.m_auto
+                , T.flex
+                , T.flex_row
+                ]
+                [ Html.img
+                    [ A.src (ImagePath.toString images.content.artworkPage.heroImage)
+                    , A.width 844
+                    , A.height 840
+                    , T.flex_shrink
+                    , T.mx_auto
+                    , T.max_w_sm
+                    ]
+                    []
+                , Html.div
+                    [ T.max_w_sm
+                    , T.my_auto
+                    , T.ml_20
+                    ]
+                    -- TODO move to data
+                    [ Html.h3
+                        [ T.text_3xl
+                        , T.text_gray_100
+                        , T.font_display
+                        ]
+                        [ Html.text "Get some swag!" ]
+                    , Html.p
+                        [ T.mt_4
+                        , T.font_body
+                        , T.text_gray_300
+                        , T.text_lg
+                        ]
+                        [ Html.text "What about having some Fission\nArtwork on a t-shirt, mug or some stickers, huh? We are already working on some very cool swag for you."
+                        ]
+                    , Html.button
+                        [ T.appearance_none
+                        , T.cursor_pointer
+                        , T.text_lg
+                        , T.mt_8
+                        , T.text_gray_200
+                        , T.bg_gray_200
+                        , T.leading_relaxed
+                        , T.px_4
+                        , T.py_1
+                        , T.rounded_lg
+                        , T.text_gray_600
+                        ]
+                        [ Html.text "Sign up for swag" ]
+                    ]
+                ]
+            ]
         , Common.footer pagePath data.footer
         ]
 
@@ -142,6 +201,7 @@ intro pagePath model data =
         , T.flex_col
         , T.overflow_hidden
         , T.px_6
+        , T.pb_24
         , T.md__min_h_screen
         ]
         [ Common.menu
@@ -176,7 +236,6 @@ intro pagePath model data =
                 [ T.max_w_xl
                 , T.mx_auto
                 , T.mt_8
-                , T.mb_24
                 , T.text_center
                 ]
                 -- TODO move to data
@@ -229,8 +288,7 @@ carusel pagePath model data =
         , T.flex_col
         , T.overflow_hidden
         , T.px_6
-        , T.py_6
-        , T.md__min_h_screen
+        , T.py_24
         ]
         [ Html.div
             [ T.flex
