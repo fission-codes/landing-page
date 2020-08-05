@@ -1,6 +1,6 @@
 module External.Blog exposing (..)
 
-import Json.Decode.Exploration as StrictJson
+import OptimizedDecoder as Decode
 
 
 
@@ -27,20 +27,20 @@ type alias Post =
 -- DECODERS
 
 
-postDecoder : StrictJson.Decoder Post
+postDecoder : Decode.Decoder Post
 postDecoder =
-    StrictJson.map3 Post
-        (StrictJson.field "featured" StrictJson.bool)
-        (StrictJson.field "url" StrictJson.string)
-        (StrictJson.field "title" StrictJson.string)
+    Decode.map3 Post
+        (Decode.field "featured" Decode.bool)
+        (Decode.field "url" Decode.string)
+        (Decode.field "title" Decode.string)
 
 
-latestPostsDecoder : StrictJson.Decoder (List Post)
+latestPostsDecoder : Decode.Decoder (List Post)
 latestPostsDecoder =
     postDecoder
-        |> StrictJson.list
-        |> StrictJson.field "posts"
-        |> StrictJson.map
+        |> Decode.list
+        |> Decode.field "posts"
+        |> Decode.map
             (\posts ->
                 case List.filter .featured posts of
                     [] ->
@@ -49,4 +49,4 @@ latestPostsDecoder =
                     featured ->
                         featured
             )
-        |> StrictJson.map (List.take 5)
+        |> Decode.map (List.take 5)

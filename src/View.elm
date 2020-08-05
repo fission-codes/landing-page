@@ -4,6 +4,7 @@ import Content.Metadata as Metadata
 import Content.Parsers as Interpretation exposing (Interpretation)
 import Dict.Any
 import External.Blog
+import Head
 import Html exposing (Html)
 import Html.Extra as Html
 import Matter.Artwork
@@ -32,6 +33,20 @@ pagesCatalog =
 -- ⛩
 
 
+root :
+    ContentList
+    -> Page
+    ->
+        StaticHttp.Request
+            { view :
+                Model
+                -> Interpretation Msg
+                ->
+                    { title : String
+                    , body : Html Msg
+                    }
+            , head : List (Head.Tag Pages.PathKey)
+            }
 root contentList page =
     let
         view latestBlogPosts model interpretation =

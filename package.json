@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "elm-pages develop",
-    "build": "elm-pages build"
+    "build": "elm-pages build",
+    "up-deps": "elm-json upgrade --unsafe && npm up && npm outdated"
   },
   "dependencies": {
     "fission-kit": "github:fission-suite/kit#52007072cf459d02de6b49f5ca13229a7a03f4c6",
@@ -16,11 +17,12 @@
     "elm-format": "^0.8.2",
     "elm-git-install": "^0.1.3",
     "elm-impfix": "^1.0.8",
-    "elm-pages": "1.3.0",
+    "elm-json": "^0.2.7",
+    "elm-pages": "^1.4.2",
     "postcss": "^7.0.32",
     "postcss-csso": "^4.0.0",
-    "postcss-elm-tailwind": "0.8.0",
-    "sharp": "^0.24.1",
+    "postcss-elm-tailwind": "^0.10.0",
+    "sharp": "^0.25.4",
     "tailwindcss": "^1.6.2"
   }
 }

@@ -15,7 +15,7 @@ import View
 
 main : Pages.Platform.Program Model Msg Metadata (Interpretation Msg)
 main =
-    Pages.Platform.application
+    Pages.Platform.init
         { init = State.init
         , update = State.update
         , subscriptions = State.subscriptions
@@ -24,11 +24,11 @@ main =
         -- Elm Pages
         ------------
         , canonicalSiteUrl = Content.Metadata.canonicalSiteUrl
-        , generateFiles = \_ -> []
         , documents = [ Content.Parsers.markdown, Content.Parsers.yaml ]
         , manifest = Content.Metadata.manifest
 
         --
         , internals = Pages.internals
-        , onPageChange = \_ -> Bypass
+        , onPageChange = Nothing
         }
+        |> Pages.Platform.toProgram
