@@ -6,21 +6,21 @@
     "build": "elm-pages build"
   },
   "dependencies": {
-    "fission-kit": "fission-suite/kit#52007072cf459d02de6b49f5ca13229a7a03f4c6",
+    "fission-kit": "github:fission-suite/kit#52007072cf459d02de6b49f5ca13229a7a03f4c6",
     "node-sass": "^4.14.1"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.0.6",
-    "autoprefixer": "^9.7.4",
+    "@fullhuman/postcss-purgecss": "^2.3.0",
+    "autoprefixer": "^9.8.6",
     "elm": "latest-0.19.1",
     "elm-format": "^0.8.2",
-    "elm-git-install": "^0.1.2",
+    "elm-git-install": "^0.1.3",
     "elm-impfix": "^1.0.8",
     "elm-pages": "1.3.0",
-    "postcss": "^7.0.26",
+    "postcss": "^7.0.32",
     "postcss-csso": "^4.0.0",
     "postcss-elm-tailwind": "0.8.0",
     "sharp": "^0.24.1",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.6.2"
   }
 }
