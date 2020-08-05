@@ -1,6 +1,7 @@
 .cache
 .deploy
 .fission.yaml
+.vscode/
 build
 dist
 elm-stuff
