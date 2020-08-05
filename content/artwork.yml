@@ -1,0 +1,40 @@
+menu:
+  index_link: Learn more
+
+
+
+overview:
+
+    tagline: "Need some guidance?"
+
+    items:
+      - icon: book-open
+        body: "Our [Guide](https://guide.fission.codes) has instructions on getting started and basic troubleshooting"
+      - icon: server
+        body: "The [API docs](https://runfission.com/docs) are interactive and document the Web API"
+      - icon: github
+        body: "If you're comfortable filing Github issues - for problems or for feature requests - head on over to [our repos](https://github.com/fission-suite)"
+
+
+
+contact:
+
+    title:
+      "Contact us"
+
+    body:
+      "Sorry to hear you're having trouble with Fission! You can chat with us, or send an email, using the button below. Alternatively, if you'd like to chat more often, you can join [our Discord](https://discord.gg/daDMAjE)."
+
+
+
+footer:
+
+  links:
+    - url: "https://discord.gg/daDMAjE"
+      label: Discord
+
+    - url: "https://twitter.com/FISSIONcodes"
+      label: Twitter
+
+    - url: "https://linkedin.com/company/fissioncodes"
+      label: LinkedIn
