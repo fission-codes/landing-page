@@ -60,6 +60,17 @@ badge =
         []
 
 
+badgeFission : Html msg
+badgeFission =
+    Html.img
+        [ A.src (ImagePath.toString images.logoDarkColored)
+        , A.title "FISSION"
+        , A.height 30
+        , A.width 144
+        ]
+        []
+
+
 
 -- ERROR
 
@@ -101,7 +112,7 @@ menu currentPage attributes contents =
           else
             Html.a
                 [ A.href (PagePath.toString pages.index) ]
-                [ badge ]
+                [ badgeFission ]
 
         --
         , Html.div
