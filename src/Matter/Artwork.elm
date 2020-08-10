@@ -125,7 +125,7 @@ view pagePath model data =
     Html.div
         []
         [ intro pagePath model data
-        , carusel pagePath model data
+        , carouselSection pagePath model data
         , callToAction pagePath model data
         , Common.footer pagePath data.footer
         ]
@@ -226,134 +226,182 @@ menuItems data =
 -- CARUSEL
 
 
-carusel : PagePath -> Model -> DecodedData -> Html Msg
-carusel pagePath model data =
+carouselSection : PagePath -> Model -> DecodedData -> Html Msg
+carouselSection pagePath model data =
     Html.div
         [ T.bg_white
         , T.flex
         , T.flex_col
         , T.overflow_hidden
-        , T.px_6
-        , T.py_16
-        , T.md__py_24
+        , T.py_6
+        , T.md__py_16
         ]
         [ Html.div
             [ T.flex
             , T.flex_col
             , T.m_auto
             ]
-            [ Html.div
-                [ T.py_6
-                , T.border_b
-                , T.border_gray_600
-                , T.flex_grow
-                , T.flex
-                , T.flex_row
+            [ carouselTitle "Characters"
+            , carousel
+                [ { image = images.content.artworkPage.characters01
+                  , name = "Haskell Lizard"
+                  , description = "Maybe for lack of practice or knowledge really, there will always be a good old Haskell Lizard.\nYou’ll get there buddy!"
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
+                , { image = images.content.artworkPage.characters02
+                  , name = "Haskell Wizard"
+                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
+                , { image = images.content.artworkPage.characters03
+                  , name = "Haskell High Priestess"
+                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
+                , { image = images.content.artworkPage.characters04
+                  , name = "UCAN Sam"
+                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
+                , { image = images.content.artworkPage.characters05
+                  , name = "Five Creatures"
+                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
                 ]
-                [ Html.button
-                    [ T.text_xl
-                    , T.mx_16
-                    , T.font_display
-                    , T.text_gray_100
-                    , T.ml_auto
-                    ]
-                    [ Html.text "Characters" ]
-                , Html.button
-                    [ T.text_xl
-                    , T.mx_16
-                    , T.font_display
-                    , T.text_gray_400
-                    , T.mr_auto
-                    ]
-                    [ Html.text "Jargons" ]
-                ]
-            , Html.div
-                [ T.py_6
-                , T.container
-                , T.mx_auto
-                , T.flex
-                , T.flex_col
-                ]
-                [ Html.div
-                    [ T.flex
-                    , T.flex_row
-                    , T.mx_auto
-                    ]
-                    [ Html.img
-                        [ A.src (ImagePath.toString images.content.artworkPage.characters04)
-                        , A.width 844
-                        , A.height 840
-                        , A.style "transform" "translateX(100px) scale(0.7)"
-                        , T.flex_shrink
-                        , T.max_w_sm
-                        , T.opacity_50
-                        , T.my_auto
-                        ]
-                        []
-                    , Html.img
-                        [ A.src (ImagePath.toString images.content.artworkPage.characters01)
-                        , A.width 844
-                        , A.height 840
-                        , T.flex_shrink
-                        , T.mx_auto
-                        , T.max_w_sm
-                        ]
-                        []
-                    , Html.img
-                        [ A.src (ImagePath.toString images.content.artworkPage.characters02)
-                        , A.width 844
-                        , A.height 840
-                        , A.style "transform" "translateX(-100px) scale(0.7)"
-                        , T.flex_shrink
-                        , T.max_w_sm
-                        , T.opacity_50
-                        , T.my_auto
-                        ]
-                        []
-                    ]
-                , Html.p
-                    [ T.max_w_sm
-                    , T.mx_auto
-                    , T.text_center
-                    , T.mt_4
-                    ]
-                    [ Html.h3
-                        [ T.text_xl
-                        , T.mx_16
-                        , T.font_display
-                        , T.text_gray_100
-                        ]
-                        [ Html.text "Haskell Lizard" ]
-                    , Html.p
-                        [ T.mt_2
-                        , T.font_body
-                        , T.text_gray_300
-                        , T.text_base
-                        ]
-                        [ Html.text "Maybe for lack of practice or knowledge really, there will always be a good old Haskell Lizard."
-                        , Html.br [] []
-                        , Html.text "You’ll get there buddy!"
-                        ]
-                    , Html.p
-                        [ T.mt_1
-                        , T.font_body
-                        , T.text_gray_300
-                        , T.text_base
-                        ]
-                        [ Html.text "Art by "
-                        , Html.span [ T.text_gray_100 ] [ Html.text "BrunoMonts" ]
-                        ]
-                    , Html.p
-                        [ T.mt_1
-                        , T.font_body
-                        , T.text_gray_300
-                        , T.text_base
-                        ]
-                        [ Html.text "Dec 2019" ]
-                    ]
+            , carouselTitle "Jargons"
+            , carousel
+                [ { image = images.content.artworkPage.jargons04
+                  , name = "Screaming_Snake_Case"
+                  , description = "Maybe for lack of practice or knowledge really, there will always be a good old Haskell Lizard.\nYou’ll get there buddy!"
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
+                , { image = images.content.artworkPage.jargons02
+                  , name = "Yak Shaving"
+                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
+                , { image = images.content.artworkPage.jargons01
+                  , name = "Because Math"
+                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
+                , { image = images.content.artworkPage.jargons03
+                  , name = "Kebab-Case"
+                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+                  , author = "BrunoMonts"
+                  , date = "Dec 2019"
+                  }
                 ]
             ]
         ]
+
+
+carouselTitle : String -> Html msg
+carouselTitle titleText =
+    Html.div
+        [ T.mt_6
+        , T.px_6
+        ]
+        [ Html.div
+            [ T.text_center
+            , T.text_xl
+            , T.font_display
+            , T.text_gray_100
+            , T.py_4
+            , T.border_b
+            , T.border_gray_600
+            ]
+            [ Html.text titleText ]
+        ]
+
+
+type alias CarouselItem =
+    { image : ImagePath
+    , name : String
+    , description : String
+    , author : String
+    , date : String
+    }
+
+
+carousel : List CarouselItem -> Html msg
+carousel items =
+    Html.div
+        [ T.flex
+        , T.flex_row
+        , T.py_4
+        , T.overflow_x_auto
+        , A.style "width" "100vw"
+        , A.style "scroll-snap-type" "x mandatory"
+        ]
+        (List.map
+            (\{ image, name, description, author, date } ->
+                Html.figure
+                    [ A.style "scroll-snap-align" "center"
+                    , T.flex
+                    , T.flex_col
+                    , T.items_center
+                    , T.min_w_full
+                    , T.px_6
+                    , T.box_border
+                    ]
+                    [ Html.img
+                        [ A.src (ImagePath.toString image)
+                        , T.block
+                        , A.style "max-height" "400px"
+                        ]
+                        []
+                    , Html.figcaption
+                        [ T.text_center
+                        ]
+                        [ Html.h3
+                            [ T.mt_2
+                            , T.text_xl
+                            , T.font_display
+                            , T.text_gray_100
+                            ]
+                            [ Html.text name ]
+                        , Html.p
+                            [ T.mt_2
+                            , T.font_body
+                            , T.text_gray_300
+                            , T.text_base
+                            ]
+                            (description
+                                |> String.split "\n"
+                                |> List.map Html.text
+                                |> List.intersperse (Html.br [] [])
+                            )
+                        , Html.p
+                            [ T.mt_1
+                            , T.font_body
+                            , T.text_gray_300
+                            , T.text_base
+                            ]
+                            [ Html.text "Art by "
+                            , Html.span [ T.text_gray_100 ] [ Html.text author ]
+                            ]
+                        , Html.p
+                            [ T.mt_1
+                            , T.font_body
+                            , T.text_gray_300
+                            , T.text_base
+                            ]
+                            [ Html.text date ]
+                        ]
+                    ]
+            )
+            items
+        )
 
 
 
