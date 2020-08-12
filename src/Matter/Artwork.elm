@@ -32,6 +32,7 @@ import Yaml.Decode.Extra as Yaml
 type alias DecodedData =
     { hero : HeroData
     , carousel : ArtworksData
+    , callToAction : CallToActionData
     , footer : Common.FooterData
     }
 
@@ -59,6 +60,13 @@ type alias ArtworkItem =
     }
 
 
+type alias CallToActionData =
+    { title : String
+    , body : List (Html Msg)
+    , button : String
+    }
+
+
 
 -- ⛩
 
@@ -76,10 +84,11 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map3
+    Yaml.map4
         DecodedData
         (Yaml.field "hero" heroDataDecoder)
         (Yaml.field "carousel" artworksDataDecoder)
+        (Yaml.field "call_to_action" callToActionDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
 
 
@@ -112,6 +121,15 @@ artworkItemDecoder =
         (Yaml.field "date" Yaml.string)
 
 
+callToActionDataDecoder : Yaml.Decoder CallToActionData
+callToActionDataDecoder =
+    Yaml.map3
+        CallToActionData
+        (Yaml.field "title" Yaml.string)
+        (Yaml.field "body" Yaml.markdownString)
+        (Yaml.field "button" Yaml.string)
+
+
 
 -- 🖼
 
@@ -122,7 +140,7 @@ view pagePath model data =
         []
         [ hero pagePath model data.hero
         , artworksSection pagePath model data.carousel
-        , callToAction pagePath model data
+        , callToAction pagePath model data.callToAction
         , Common.footer pagePath data.footer
         ]
 
@@ -315,7 +333,7 @@ artworkItem { image, name, description, author, date } =
 -- CALL TO ACTION
 
 
-callToAction : PagePath -> Model -> DecodedData -> Html Msg
+callToAction : PagePath -> Model -> CallToActionData -> Html Msg
 callToAction pagePath model data =
     Html.div
         [ T.bg_gray_600
@@ -357,15 +375,14 @@ callToAction pagePath model data =
                     , T.font_display
                     , T.md__text_3xl
                     ]
-                    [ Html.text "Get some swag!" ]
+                    [ Html.text data.title ]
                 , Html.p
                     [ T.mt_4
                     , T.font_body
                     , T.text_gray_300
                     , T.md__text_lg
                     ]
-                    [ Html.text "What about having some Fission\nArtwork on a t-shirt, mug or some stickers, huh? We are already working on some very cool swag for you."
-                    ]
+                    data.body
                 , Html.button
                     [ T.appearance_none
                     , T.cursor_pointer
@@ -379,7 +396,7 @@ callToAction pagePath model data =
                     , T.text_gray_600
                     , T.md__text_lg
                     ]
-                    [ Html.text "Sign up for swag" ]
+                    [ Html.text data.button ]
                 ]
             ]
         ]

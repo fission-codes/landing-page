@@ -76,6 +76,15 @@ carousel:
       date: "Dec 2019"
 
 
+call_to_action:
+
+  title: Get some swag!
+
+  body:
+    What about having some Fission Artwork on a t-shirt, mug or some stickers, huh?
+    We are already working on some very cool swag for you.
+
+  button: Sign up for swag
 
 footer:
 
