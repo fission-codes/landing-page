@@ -1,7 +1,7 @@
 module Content.Parsers exposing (..)
 
 import Content.Markdown
-import Content.Metadata as Metadata exposing (Metadata)
+import Content.Metadata as Metadata exposing (Frontmatter)
 import Html exposing (Html)
 import Json.Decode exposing (Decoder)
 import Yaml.Decode.Extra as Yaml
@@ -18,7 +18,7 @@ type Interpretation msg
 
 type alias Parser msg =
     { extension : String
-    , metadata : Decoder Metadata
+    , metadata : Decoder Frontmatter
     , body : String -> Result String (Interpretation msg)
     }
 
@@ -36,7 +36,7 @@ type alias EncodedData =
 yaml : Parser msg
 yaml =
     { extension = "yml"
-    , metadata = Metadata.metadataDecoder
+    , metadata = Metadata.frontmatterDecoder
     , body = Data >> Ok
 
     -- TODO:

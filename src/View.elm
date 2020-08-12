@@ -75,31 +75,26 @@ root contentList page =
 
 renderMatter : ContentList -> Page -> Model -> Interpretation Msg -> Html Msg
 renderMatter contentList page model interpretation =
-    case page.frontmatter of
-        -----------------------------------------
-        -- Pages
-        -----------------------------------------
-        Metadata.Page meta ->
-            let
-                maybeData =
-                    case interpretation of
-                        Interpretation.Data d ->
-                            Just d
+    let
+        maybeData =
+            case interpretation of
+                Interpretation.Data d ->
+                    Just d
 
-                        Interpretation.VirtualDom _ ->
-                            Nothing
-            in
-            case maybeData of
-                Just data ->
-                    -- Look up the associated Matter module in the catalog and render it.
-                    -- If it's not found, render a 404 page.
-                    pagesCatalogDictionary
-                        |> Dict.Any.get page.path
-                        |> Maybe.withDefault Matter.NotFound.render
-                        |> (\renderer -> renderer contentList page.path meta data model)
+                Interpretation.VirtualDom _ ->
+                    Nothing
+    in
+    case maybeData of
+        Just data ->
+            -- Look up the associated Matter module in the catalog and render it.
+            -- If it's not found, render a 404 page.
+            pagesCatalogDictionary
+                |> Dict.Any.get page.path
+                |> Maybe.withDefault Matter.NotFound.render
+                |> (\renderer -> renderer contentList page.path page.frontmatter data model)
 
-                Nothing ->
-                    Html.nothing
+        Nothing ->
+            Html.nothing
 
 
 pagesCatalogDictionary =
