@@ -24,7 +24,7 @@ main =
         -- Elm Pages
         ------------
         , canonicalSiteUrl = Content.Metadata.canonicalSiteUrl
-        , documents = [ Content.Parsers.markdown, Content.Parsers.yaml ]
+        , documents = [ Content.Parsers.yaml ]
         , manifest = Content.Metadata.manifest
 
         --

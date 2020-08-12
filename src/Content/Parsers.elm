@@ -33,18 +33,10 @@ type alias EncodedData =
 -- 🛠
 
 
-markdown : Parser msg
-markdown =
-    { extension = "md"
-    , metadata = Metadata.markdownMetadataDecoder
-    , body = Content.Markdown.process >> Html.div [] >> VirtualDom >> Ok
-    }
-
-
 yaml : Parser msg
 yaml =
     { extension = "yml"
-    , metadata = Metadata.yamlMetadataDecoder
+    , metadata = Metadata.metadataDecoder
     , body = Data >> Ok
 
     -- TODO:

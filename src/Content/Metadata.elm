@@ -13,11 +13,7 @@ import Pages.Manifest.Category as Manifest
 -- 🧩
 
 
-type Metadata
-    = Page MetadataForPages
-
-
-type alias MetadataForPages =
+type alias Metadata =
     {}
 
 
@@ -25,16 +21,10 @@ type alias MetadataForPages =
 -- DECODING
 
 
-markdownMetadataDecoder =
-    Json.succeed
-        (Page {})
-
-
-yamlMetadataDecoder =
+metadataDecoder =
     -- We actually don't need to use a YAML parser here,
     -- because elm-pages translates YAML metadata into JSON.
-    Json.succeed
-        (Page {})
+    Json.succeed {}
 
 
 
@@ -53,9 +43,7 @@ canonicalSiteUrl =
 head : Metadata -> List (Head.Tag Pages.PathKey)
 head metadata =
     -- TODO
-    case metadata of
-        Page _ ->
-            []
+    []
 
 
 {-| PWA Manifest.
@@ -80,6 +68,4 @@ manifest =
 -}
 title : Metadata -> String
 title metadata =
-    case metadata of
-        Page _ ->
-            "Fission"
+    "Fission"
