@@ -30,33 +30,14 @@ import Yaml.Decode.Extra as Yaml
 
 
 type alias DecodedData =
-    { contact : ContactData
+    { hero : HeroData
     , footer : Common.FooterData
-    , menu : MenuData
-    , overview : OverviewData
     }
 
 
-type alias MenuData =
-    { indexLink : String
-    }
-
-
-type alias OverviewData =
-    { items : List OverviewItem
-    , tagline : String
-    }
-
-
-type alias OverviewItem =
-    { body : List (Html Msg)
-    , icon : String
-    }
-
-
-type alias ContactData =
-    { body : List (Html Msg)
-    , title : String
+type alias HeroData =
+    { tagline : String
+    , message : List (Html Msg)
     }
 
 
@@ -77,43 +58,18 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map4
+    Yaml.map2
         DecodedData
-        (Yaml.field "contact" contactDataDecoder)
+        (Yaml.field "hero" heroDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
-        (Yaml.field "menu" menuDataDecoder)
-        (Yaml.field "overview" overviewDataDecoder)
 
 
-menuDataDecoder : Yaml.Decoder MenuData
-menuDataDecoder =
-    Yaml.map
-        MenuData
-        (Yaml.field "index_link" Yaml.string)
-
-
-overviewDataDecoder : Yaml.Decoder OverviewData
-overviewDataDecoder =
+heroDataDecoder : Yaml.Decoder HeroData
+heroDataDecoder =
     Yaml.map2
-        OverviewData
-        (Yaml.field "items" <| Yaml.list overviewItemDecoder)
+        HeroData
         (Yaml.field "tagline" Yaml.string)
-
-
-overviewItemDecoder : Yaml.Decoder OverviewItem
-overviewItemDecoder =
-    Yaml.map2
-        OverviewItem
-        (Yaml.field "body" Yaml.markdownString)
-        (Yaml.field "icon" Yaml.string)
-
-
-contactDataDecoder : Yaml.Decoder ContactData
-contactDataDecoder =
-    Yaml.map2
-        ContactData
-        (Yaml.field "body" Yaml.markdownString)
-        (Yaml.field "title" Yaml.string)
+        (Yaml.field "message" Yaml.markdownString)
 
 
 
@@ -124,7 +80,7 @@ view : PagePath -> Model -> DecodedData -> Html Msg
 view pagePath model data =
     Html.div
         []
-        [ intro pagePath model data
+        [ hero pagePath model data.hero
         , carouselSection pagePath model data
         , callToAction pagePath model data
         , Common.footer pagePath data.footer
@@ -132,11 +88,11 @@ view pagePath model data =
 
 
 
--- INTRO
+-- HERO
 
 
-intro : PagePath -> Model -> DecodedData -> Html Msg
-intro pagePath model data =
+hero : PagePath -> Model -> HeroData -> Html Msg
+hero pagePath model data =
     Html.div
         [ T.bg_gray_600
         , T.flex
@@ -182,7 +138,6 @@ intro pagePath model data =
                 , T.mt_8
                 , T.text_center
                 ]
-                -- TODO move to data
                 [ Html.h3
                     [ T.text_gray_100
                     , T.font_display
@@ -190,34 +145,15 @@ intro pagePath model data =
                     , T.text_2xl
                     , T.md__text_3xl
                     ]
-                    [ Html.text "Other than coding, we also love art!" ]
+                    [ Html.text data.tagline ]
                 , Html.p
                     [ T.mt_4
                     , T.font_body
                     , T.text_gray_300
                     , T.md__text_lg
                     ]
-                    [ Html.text "That’s why we always collaborate with great artists to create some funny, cute and awesome dev-related artwork."
-                    , Html.br [] []
-                    , Html.text "Here is a bit of what we’ve been creating so far:"
-                    ]
+                    data.message
                 ]
-            ]
-        ]
-
-
-menuItems : DecodedData -> Html msg
-menuItems data =
-    Html.div
-        [ T.flex
-        , T.items_center
-        ]
-        [ Html.a
-            (List.append
-                (A.href (PagePath.toString pages.index) :: Common.menuItemStyleAttributes)
-                Kit.menuButtonAttributes
-            )
-            [ Html.text data.menu.indexLink
             ]
         ]
 
@@ -473,64 +409,6 @@ callToAction pagePath model data =
                     , T.md__text_lg
                     ]
                     [ Html.text "Sign up for swag" ]
-                ]
-            ]
-        ]
-
-
-
--- CONTACT
-
-
-contact : Model -> DecodedData -> Html Msg
-contact model data =
-    Html.div
-        [ A.id "contact"
-        , T.bg_gray_600
-        ]
-        [ Html.div
-            Kit.containerAttributes
-            [ -----------------------------------------
-              -- Title
-              -----------------------------------------
-              Kit.h2 data.contact.title
-
-            -----------------------------------------
-            -- Text
-            -----------------------------------------
-            , Html.div
-                [ T.max_w_xl
-                , T.mx_auto
-                , T.pt_5
-                , T.px_3
-                , T.text_gray_300
-
-                -- Responsive
-                -------------
-                , T.md__pt_6
-                , T.md__text_lg
-                ]
-                data.contact.body
-
-            -----------------------------------------
-            -- Chat trigger
-            -----------------------------------------
-            , Html.button
-                (List.append
-                    Kit.buttonAttributes
-                    [ E.onClick OpenChat
-
-                    --
-                    , T.inline_flex
-                    , T.items_center
-                    , T.mt_10
-                    ]
-                )
-                [ FeatherIcons.messageCircle
-                    |> FeatherIcons.withClass "mr-2 opacity-30"
-                    |> FeatherIcons.withSize 20
-                    |> FeatherIcons.toHtml []
-                , Html.text "Chat with us"
                 ]
             ]
         ]
