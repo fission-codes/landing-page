@@ -235,16 +235,18 @@ artworksSection pagePath model data =
             , T.flex_col
             , T.m_auto
             ]
-            [ carouselTitle data.charactersTitle
-            , carousel data.characters
-            , carouselTitle data.jargonsTitle
-            , carousel data.jargons
+            [ sectionTitle data.charactersTitle
+            , artworkCarousel [ T.sm__hidden ] data.characters
+            , artworkGrid [ T.hidden, T.sm__grid ] data.characters
+            , sectionTitle data.jargonsTitle
+            , artworkCarousel [ T.sm__hidden ] data.jargons
+            , artworkGrid [ T.hidden, T.sm__grid ] data.jargons
             ]
         ]
 
 
-carouselTitle : String -> Html Msg
-carouselTitle titleText =
+sectionTitle : String -> Html Msg
+sectionTitle titleText =
     Html.div
         [ T.mt_6
         , T.px_6
@@ -262,30 +264,51 @@ carouselTitle titleText =
         ]
 
 
-carousel : List ArtworkItem -> Html Msg
-carousel items =
+artworkCarousel : List (Html.Attribute Msg) -> List ArtworkItem -> Html Msg
+artworkCarousel attributes items =
     Html.div
-        [ T.flex
-        , T.flex_row
-        , T.py_4
-        , T.overflow_x_auto
-        , A.style "width" "100vw"
-        , A.style "scroll-snap-type" "x mandatory"
-        ]
-        (List.map artworkItem items)
+        ([ T.flex
+         , T.flex_row
+         , T.py_4
+         , T.overflow_x_auto
+         , A.style "width" "100vw"
+         , A.style "scroll-snap-type" "x mandatory"
+         ]
+            ++ attributes
+        )
+        (List.map
+            (artworkItem [ T.px_6, T.box_border ])
+            items
+        )
 
 
-artworkItem : ArtworkItem -> Html Msg
-artworkItem { image, name, description, author, date } =
+artworkGrid : List (Html.Attribute Msg) -> List ArtworkItem -> Html Msg
+artworkGrid attributes items =
+    Html.div
+        ([ T.px_16
+         , T.py_16
+         , T.grid
+         , T.gap_12
+         , T.grid_cols_2
+         , T.lg__grid_cols_3
+         , T.max_w_screen_xl
+         ]
+            ++ attributes
+        )
+        (List.map (artworkItem []) items)
+
+
+artworkItem : List (Html.Attribute Msg) -> ArtworkItem -> Html Msg
+artworkItem attributes { image, name, description, author, date } =
     Html.figure
-        [ A.style "scroll-snap-align" "center"
-        , T.flex
-        , T.flex_col
-        , T.items_center
-        , T.min_w_full
-        , T.px_6
-        , T.box_border
-        ]
+        ([ A.style "scroll-snap-align" "center"
+         , T.flex
+         , T.flex_col
+         , T.items_center
+         , T.min_w_full
+         ]
+            ++ attributes
+        )
         [ Html.img
             [ A.src image
             , T.block
