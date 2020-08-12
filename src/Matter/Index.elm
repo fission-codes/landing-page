@@ -274,6 +274,7 @@ shortDescription data =
 
 fissionLive : PagePath -> Model -> DecodedData -> Element Msg
 fissionLive pagePath model data =
+<<<<<<< Updated upstream
     Element.column
         [ Element.width Element.fill ]
         [ -- Desktop
@@ -284,6 +285,63 @@ fissionLive pagePath model data =
             , Element.paddingXY horizontalPadding desktopVerticalPadding
             , Font.center
             , Responsive.hide_lt_md
+=======
+    Html.div
+        []
+        [ Html.div
+            (A.id "fission-live" :: A.style "max-width" "638px" :: Kit.containerAttributes)
+            [ -----------------------------------------
+              -- Title
+              -----------------------------------------
+              Kit.h2 data.fissionLive.title
+
+            -----------------------------------------
+            -- About
+            -----------------------------------------
+            , Html.img
+                [ A.src (ImagePath.toString images.content.cancelyak)
+
+                --
+                , T.mt_12
+                , T.rounded
+                , T.w_full
+                ]
+                []
+
+            , Kit.introParagraph data.fissionLive.about
+
+            -----------------------------------------
+            -- Terminal GIF
+            -----------------------------------------
+            , Html.img
+                [ A.src (ImagePath.toString images.content.fissionCliAppInit)
+
+                --
+                , T.mt_12
+                , T.rounded
+                , T.w_full
+                ]
+                []
+
+            -- Caption
+            ----------
+            , Html.div
+                [ T.mt_4
+                , T.text_gray_300
+                , T.text_sm
+                ]
+                data.fissionLive.terminalCaption
+
+            -----------------------------------------
+            -- Guide Link
+            -----------------------------------------
+            , Html.a
+                (A.href "https://guide.fission.codes/"
+                    :: T.mt_12
+                    :: Kit.buttonAltAttributes
+                )
+                [ Html.text "Install the CLI" ]
+>>>>>>> Stashed changes
             ]
             (fissionLiveParts pagePath model data)
 
