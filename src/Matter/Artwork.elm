@@ -31,6 +31,7 @@ import Yaml.Decode.Extra as Yaml
 
 type alias DecodedData =
     { hero : HeroData
+    , carousel : ArtworksData
     , footer : Common.FooterData
     }
 
@@ -38,6 +39,23 @@ type alias DecodedData =
 type alias HeroData =
     { tagline : String
     , message : List (Html Msg)
+    }
+
+
+type alias ArtworksData =
+    { charactersTitle : String
+    , characters : List ArtworkItem
+    , jargonsTitle : String
+    , jargons : List ArtworkItem
+    }
+
+
+type alias ArtworkItem =
+    { image : String
+    , name : String
+    , description : List (Html Msg)
+    , author : String
+    , date : String
     }
 
 
@@ -58,9 +76,10 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map2
+    Yaml.map3
         DecodedData
         (Yaml.field "hero" heroDataDecoder)
+        (Yaml.field "carousel" artworksDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
 
 
@@ -72,6 +91,27 @@ heroDataDecoder =
         (Yaml.field "message" Yaml.markdownString)
 
 
+artworksDataDecoder : Yaml.Decoder ArtworksData
+artworksDataDecoder =
+    Yaml.map4
+        ArtworksData
+        (Yaml.field "characters_title" Yaml.string)
+        (Yaml.field "characters" (Yaml.list artworkItemDecoder))
+        (Yaml.field "jargons_title" Yaml.string)
+        (Yaml.field "jargons" (Yaml.list artworkItemDecoder))
+
+
+artworkItemDecoder : Yaml.Decoder ArtworkItem
+artworkItemDecoder =
+    Yaml.map5
+        ArtworkItem
+        (Yaml.field "image" Yaml.string)
+        (Yaml.field "name" Yaml.string)
+        (Yaml.field "description" Yaml.markdownString)
+        (Yaml.field "author" Yaml.string)
+        (Yaml.field "date" Yaml.string)
+
+
 
 -- 🖼
 
@@ -81,7 +121,7 @@ view pagePath model data =
     Html.div
         []
         [ hero pagePath model data.hero
-        , carouselSection pagePath model data
+        , artworksSection pagePath model data.carousel
         , callToAction pagePath model data
         , Common.footer pagePath data.footer
         ]
@@ -162,8 +202,8 @@ hero pagePath model data =
 -- CARUSEL
 
 
-carouselSection : PagePath -> Model -> DecodedData -> Html Msg
-carouselSection pagePath model data =
+artworksSection : PagePath -> Model -> ArtworksData -> Html Msg
+artworksSection pagePath model data =
     Html.div
         [ T.bg_white
         , T.flex
@@ -177,71 +217,15 @@ carouselSection pagePath model data =
             , T.flex_col
             , T.m_auto
             ]
-            [ carouselTitle "Characters"
-            , carousel
-                [ { image = images.content.artworkPage.characters01
-                  , name = "Haskell Lizard"
-                  , description = "Maybe for lack of practice or knowledge really, there will always be a good old Haskell Lizard.\nYou’ll get there buddy!"
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                , { image = images.content.artworkPage.characters02
-                  , name = "Haskell Wizard"
-                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                , { image = images.content.artworkPage.characters03
-                  , name = "Haskell High Priestess"
-                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                , { image = images.content.artworkPage.characters04
-                  , name = "UCAN Sam"
-                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                , { image = images.content.artworkPage.characters05
-                  , name = "Five Creatures"
-                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                ]
-            , carouselTitle "Jargons"
-            , carousel
-                [ { image = images.content.artworkPage.jargons04
-                  , name = "Screaming_Snake_Case"
-                  , description = "Maybe for lack of practice or knowledge really, there will always be a good old Haskell Lizard.\nYou’ll get there buddy!"
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                , { image = images.content.artworkPage.jargons02
-                  , name = "Yak Shaving"
-                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                , { image = images.content.artworkPage.jargons01
-                  , name = "Because Math"
-                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                , { image = images.content.artworkPage.jargons03
-                  , name = "Kebab-Case"
-                  , description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
-                  , author = "BrunoMonts"
-                  , date = "Dec 2019"
-                  }
-                ]
+            [ carouselTitle data.charactersTitle
+            , carousel data.characters
+            , carouselTitle data.jargonsTitle
+            , carousel data.jargons
             ]
         ]
 
 
-carouselTitle : String -> Html msg
+carouselTitle : String -> Html Msg
 carouselTitle titleText =
     Html.div
         [ T.mt_6
@@ -260,16 +244,7 @@ carouselTitle titleText =
         ]
 
 
-type alias CarouselItem =
-    { image : ImagePath
-    , name : String
-    , description : String
-    , author : String
-    , date : String
-    }
-
-
-carousel : List CarouselItem -> Html msg
+carousel : List ArtworkItem -> Html Msg
 carousel items =
     Html.div
         [ T.flex
@@ -279,65 +254,61 @@ carousel items =
         , A.style "width" "100vw"
         , A.style "scroll-snap-type" "x mandatory"
         ]
-        (List.map
-            (\{ image, name, description, author, date } ->
-                Html.figure
-                    [ A.style "scroll-snap-align" "center"
-                    , T.flex
-                    , T.flex_col
-                    , T.items_center
-                    , T.min_w_full
-                    , T.px_6
-                    , T.box_border
-                    ]
-                    [ Html.img
-                        [ A.src (ImagePath.toString image)
-                        , T.block
-                        , A.style "max-height" "400px"
-                        ]
-                        []
-                    , Html.figcaption
-                        [ T.text_center
-                        ]
-                        [ Html.h3
-                            [ T.mt_2
-                            , T.text_xl
-                            , T.font_display
-                            , T.text_gray_100
-                            ]
-                            [ Html.text name ]
-                        , Html.p
-                            [ T.mt_2
-                            , T.font_body
-                            , T.text_gray_300
-                            , T.text_base
-                            ]
-                            (description
-                                |> String.split "\n"
-                                |> List.map Html.text
-                                |> List.intersperse (Html.br [] [])
-                            )
-                        , Html.p
-                            [ T.mt_1
-                            , T.font_body
-                            , T.text_gray_300
-                            , T.text_base
-                            ]
-                            [ Html.text "Art by "
-                            , Html.span [ T.text_gray_100 ] [ Html.text author ]
-                            ]
-                        , Html.p
-                            [ T.mt_1
-                            , T.font_body
-                            , T.text_gray_300
-                            , T.text_base
-                            ]
-                            [ Html.text date ]
-                        ]
-                    ]
-            )
-            items
-        )
+        (List.map artworkItem items)
+
+
+artworkItem : ArtworkItem -> Html Msg
+artworkItem { image, name, description, author, date } =
+    Html.figure
+        [ A.style "scroll-snap-align" "center"
+        , T.flex
+        , T.flex_col
+        , T.items_center
+        , T.min_w_full
+        , T.px_6
+        , T.box_border
+        ]
+        [ Html.img
+            [ A.src image
+            , T.block
+            , A.style "max-height" "400px"
+            ]
+            []
+        , Html.figcaption
+            [ T.text_center
+            ]
+            [ Html.h3
+                [ T.mt_2
+                , T.text_xl
+                , T.font_display
+                , T.text_gray_100
+                ]
+                [ Html.text name ]
+            , Html.p
+                [ T.mt_2
+                , T.font_body
+                , T.text_gray_300
+                , T.text_base
+                ]
+                description
+            , Html.p
+                [ T.mt_1
+                , T.font_body
+                , T.text_gray_300
+                , T.text_base
+                ]
+                [ Html.text "Art by "
+                , Html.span [ T.text_gray_100 ] [ Html.text author ]
+                ]
+            , Html.p
+                [ T.mt_1
+                , T.font_body
+                , T.text_gray_300
+                , T.text_base
+                ]
+                [ Html.text date ]
+            ]
+        ]
 
 
 
