@@ -22,7 +22,7 @@ function loadLinkIfNeeded(href) {
 
 
 loadLinkIfNeeded("application.css")
-loadLinkIfNeeded("https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:500,600,700&display=swap")
+loadLinkIfNeeded("https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Work+Sans:400,500,600,700&display=swap")
 
 
 

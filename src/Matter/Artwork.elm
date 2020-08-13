@@ -172,10 +172,8 @@ hero pagePath model data =
         , Html.div
             [ T.m_auto ]
             [ Html.h1
-                [ -- TODO this is actually supposed to be Work Sans, so font_display,
-                  -- but we have to make a thinner version available somehow.
-                  -- Karla on the other hand is a little thinner by default
-                  T.font_body
+                [ T.font_display
+                , T.font_normal
                 , T.text_2_5xl
                 , T.sm__text_3_5xl
                 , T.text_center
@@ -391,7 +389,6 @@ callToAction pagePath model data =
                 , T.lg__my_auto
                 , T.lg__ml_20
                 ]
-                -- TODO move to data
                 [ Html.h3
                     [ T.text_2xl
                     , T.text_gray_100
