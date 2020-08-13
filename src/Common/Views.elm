@@ -6,6 +6,7 @@ import Html.Attributes as A
 import Html.Events as E
 import Html.Events.Extra as E
 import Html.Extra as Html
+import Kit.Local as Kit
 import Pages exposing (images, pages)
 import Pages.ImagePath as ImagePath
 import Pages.PagePath as PagePath
@@ -26,6 +27,11 @@ type alias FooterLink =
     { url : String, label : String }
 
 
+type alias MenuData =
+    { indexLink : String
+    }
+
+
 
 -- 🗄
 
@@ -44,6 +50,13 @@ footerLinkDecoder =
         FooterLink
         (Yaml.field "url" Yaml.string)
         (Yaml.field "label" Yaml.string)
+
+
+menuDataDecoder : Yaml.Decoder MenuData
+menuDataDecoder =
+    Yaml.map
+        MenuData
+        (Yaml.field "index_link" Yaml.string)
 
 
 
@@ -150,6 +163,22 @@ menuItemStyleAttributes =
     -------------
     , T.first__ml_0
     ]
+
+
+menuItems : MenuData -> Html Msg
+menuItems data =
+    Html.div
+        [ T.flex
+        , T.items_center
+        ]
+        [ Html.a
+            (List.append
+                (A.href (PagePath.toString pages.index) :: menuItemStyleAttributes)
+                Kit.menuButtonAttributes
+            )
+            [ Html.text data.indexLink
+            ]
+        ]
 
 
 
