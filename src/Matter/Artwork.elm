@@ -30,7 +30,8 @@ import Yaml.Decode.Extra as Yaml
 
 
 type alias DecodedData =
-    { hero : HeroData
+    { menu : Common.MenuData
+    , hero : HeroData
     , carousel : ArtworksData
     , callToAction : CallToActionData
     , footer : Common.FooterData
@@ -84,8 +85,9 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map4
+    Yaml.map5
         DecodedData
+        (Yaml.field "menu" Common.menuDataDecoder)
         (Yaml.field "hero" heroDataDecoder)
         (Yaml.field "carousel" artworksDataDecoder)
         (Yaml.field "call_to_action" callToActionDataDecoder)
@@ -138,7 +140,7 @@ view : PagePath -> Model -> DecodedData -> Html Msg
 view pagePath model data =
     Html.div
         []
-        [ hero pagePath model data.hero
+        [ hero pagePath model data.menu data.hero
         , artworksSection pagePath model data.carousel
         , callToAction pagePath model data.callToAction
         , Common.footer pagePath data.footer
@@ -149,8 +151,8 @@ view pagePath model data =
 -- HERO
 
 
-hero : PagePath -> Model -> HeroData -> Html Msg
-hero pagePath model data =
+hero : PagePath -> Model -> Common.MenuData -> HeroData -> Html Msg
+hero pagePath model menuData data =
     Html.div
         [ T.bg_gray_600
         , T.flex
@@ -167,7 +169,7 @@ hero pagePath model data =
         [ Common.menu
             pagePath
             [ A.style "border-bottom-color" "rgba(165, 167, 184, 0.5)" ]
-            []
+            [ Common.menuItems menuData ]
 
         -----------------------------------------
         -- Content
