@@ -91,6 +91,9 @@ call_to_action:
 
   button: Sign up for swag
 
+  link: "https://swag.fission.codes/"
+
+
 footer:
 
   links:

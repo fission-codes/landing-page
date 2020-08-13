@@ -65,6 +65,7 @@ type alias CallToActionData =
     { title : String
     , body : List (Html Msg)
     , button : String
+    , link : String
     }
 
 
@@ -125,11 +126,12 @@ artworkItemDecoder =
 
 callToActionDataDecoder : Yaml.Decoder CallToActionData
 callToActionDataDecoder =
-    Yaml.map3
+    Yaml.map4
         CallToActionData
         (Yaml.field "title" Yaml.string)
         (Yaml.field "body" Yaml.markdownString)
         (Yaml.field "button" Yaml.string)
+        (Yaml.field "link" Yaml.string)
 
 
 
@@ -438,23 +440,26 @@ callToAction pagePath model data =
                     , T.md__text_lg
                     ]
                     data.body
-                , Html.button
-                    [ T.appearance_none
-                    , T.cursor_pointer
-                    , T.mt_8
-                    , T.text_gray_200
-                    , T.bg_gray_200
-                    , T.leading_relaxed
-                    , T.px_4
-                    , T.py_1
-                    , T.rounded_lg
-                    , T.text_gray_600
+                , Html.a
+                    [ A.href data.link ]
+                    [ Html.button
+                        [ T.appearance_none
+                        , T.cursor_pointer
+                        , T.mt_8
+                        , T.text_gray_200
+                        , T.bg_gray_200
+                        , T.leading_relaxed
+                        , T.px_4
+                        , T.py_1
+                        , T.rounded_lg
+                        , T.text_gray_600
 
-                    -- Responsive
-                    -------------
-                    , T.md__text_lg
+                        -- Responsive
+                        -------------
+                        , T.md__text_lg
+                        ]
+                        [ Html.text data.button ]
                     ]
-                    [ Html.text data.button ]
                 ]
             ]
         ]
