@@ -205,10 +205,11 @@ hero pagePath model menuData data =
                 , T.text_center
                 ]
                 [ Html.h3
-                    [ T.text_gray_100
-                    , T.font_display
+                    [ T.font_display
+                    , T.font_medium
                     , T.leading_tight
                     , T.text_2xl
+                    , T.text_gray_100
 
                     -- Responsive
                     -------------
@@ -272,6 +273,7 @@ sectionTitle titleText =
             [ T.text_center
             , T.text_xl
             , T.font_display
+            , T.font_medium
             , T.text_gray_100
             , T.py_4
             , T.border_b
@@ -340,8 +342,9 @@ artworkItem attributes { image, name, description, author, date } =
             ]
             [ Html.h3
                 [ T.mt_2
-                , T.text_xl
                 , T.font_display
+                , T.font_medium
+                , T.text_xl
                 , T.text_gray_100
                 ]
                 [ Html.text name ]
@@ -424,6 +427,7 @@ callToAction pagePath model data =
                     [ T.text_2xl
                     , T.text_gray_100
                     , T.font_display
+                    , T.font_medium
 
                     -- Responsive
                     -------------
