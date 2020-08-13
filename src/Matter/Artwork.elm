@@ -158,6 +158,9 @@ hero pagePath model data =
         , T.overflow_hidden
         , T.px_6
         , T.pb_16
+
+        -- Responsive
+        -------------
         , T.md__pb_24
         , T.md__min_h_screen
         ]
@@ -175,9 +178,12 @@ hero pagePath model data =
                 [ T.font_display
                 , T.font_normal
                 , T.text_2_5xl
-                , T.sm__text_3_5xl
                 , T.text_center
                 , T.mt_24
+
+                -- Responsive
+                -------------
+                , T.sm__text_3_5xl
                 ]
                 [ Html.text "Fission"
                 , Html.img
@@ -199,6 +205,9 @@ hero pagePath model data =
                     , T.font_display
                     , T.leading_tight
                     , T.text_2xl
+
+                    -- Responsive
+                    -------------
                     , T.md__text_3xl
                     ]
                     [ Html.text data.tagline ]
@@ -206,6 +215,9 @@ hero pagePath model data =
                     [ T.mt_4
                     , T.font_body
                     , T.text_gray_300
+
+                    -- Responsive
+                    -------------
                     , T.md__text_lg
                     ]
                     data.message
@@ -226,6 +238,9 @@ artworksSection pagePath model data =
         , T.flex_col
         , T.overflow_hidden
         , T.py_6
+
+        -- Responsive
+        -------------
         , T.md__py_16
         ]
         [ Html.div
@@ -268,9 +283,9 @@ artworkCarousel attributes items =
         ([ T.flex
          , T.flex_row
          , T.py_4
-         , T.overflow_x_auto
          , A.style "width" "100vw"
          , A.style "scroll-snap-type" "x mandatory"
+         , T.overflow_x_auto
          ]
             ++ attributes
         )
@@ -283,13 +298,16 @@ artworkCarousel attributes items =
 artworkGrid : List (Html.Attribute Msg) -> List ArtworkItem -> Html Msg
 artworkGrid attributes items =
     Html.div
-        ([ T.px_16
-         , T.py_16
-         , T.grid
+        ([ T.grid
          , T.gap_12
          , T.grid_cols_2
-         , T.lg__grid_cols_3
+         , T.px_16
+         , T.py_16
          , T.max_w_screen_xl
+
+         -- Responsive
+         -------------
+         , T.lg__grid_cols_3
          ]
             ++ attributes
         )
@@ -363,12 +381,18 @@ callToAction pagePath model data =
         , T.overflow_hidden
         , T.px_6
         , T.py_16
+
+        -- Responsive
+        -------------
         , T.md__py_24
         ]
         [ Html.div
             [ T.mx_auto
             , T.flex
             , T.flex_col
+
+            -- Responsive
+            -------------
             , T.lg__flex_row
             ]
             [ Html.img
@@ -384,6 +408,9 @@ callToAction pagePath model data =
                 []
             , Html.div
                 [ T.text_center
+
+                -- Responsive
+                -------------
                 , T.lg__text_left
                 , T.lg__max_w_sm
                 , T.lg__my_auto
@@ -393,6 +420,9 @@ callToAction pagePath model data =
                     [ T.text_2xl
                     , T.text_gray_100
                     , T.font_display
+
+                    -- Responsive
+                    -------------
                     , T.md__text_3xl
                     ]
                     [ Html.text data.title ]
@@ -400,6 +430,9 @@ callToAction pagePath model data =
                     [ T.mt_4
                     , T.font_body
                     , T.text_gray_300
+
+                    -- Responsive
+                    -------------
                     , T.md__text_lg
                     ]
                     data.body
@@ -414,6 +447,9 @@ callToAction pagePath model data =
                     , T.py_1
                     , T.rounded_lg
                     , T.text_gray_600
+
+                    -- Responsive
+                    -------------
                     , T.md__text_lg
                     ]
                     [ Html.text data.button ]
