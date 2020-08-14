@@ -4,8 +4,10 @@ import Content.Metadata as Metadata
 import Content.Parsers as Interpretation exposing (Interpretation)
 import Dict.Any
 import External.Blog
+import Head
 import Html exposing (Html)
 import Html.Extra as Html
+import Matter.Artwork
 import Matter.Index
 import Matter.NotFound
 import Matter.Support
@@ -23,6 +25,7 @@ import Types exposing (..)
 pagesCatalog =
     [ ( pages.index, Matter.Index.render )
     , ( pages.support, Matter.Support.render )
+    , ( pages.artwork, Matter.Artwork.render )
     ]
 
 
@@ -30,6 +33,20 @@ pagesCatalog =
 -- ⛩
 
 
+root :
+    ContentList
+    -> Page
+    ->
+        StaticHttp.Request
+            { view :
+                Model
+                -> Interpretation Msg
+                ->
+                    { title : String
+                    , body : Html Msg
+                    }
+            , head : List (Head.Tag Pages.PathKey)
+            }
 root contentList page =
     let
         view latestBlogPosts model interpretation =

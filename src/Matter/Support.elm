@@ -32,13 +32,8 @@ import Yaml.Decode.Extra as Yaml
 type alias DecodedData =
     { contact : ContactData
     , footer : Common.FooterData
-    , menu : MenuData
+    , menu : Common.MenuData
     , overview : OverviewData
-    }
-
-
-type alias MenuData =
-    { indexLink : String
     }
 
 
@@ -81,15 +76,8 @@ dataDecoder =
         DecodedData
         (Yaml.field "contact" contactDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
-        (Yaml.field "menu" menuDataDecoder)
+        (Yaml.field "menu" Common.menuDataDecoder)
         (Yaml.field "overview" overviewDataDecoder)
-
-
-menuDataDecoder : Yaml.Decoder MenuData
-menuDataDecoder =
-    Yaml.map
-        MenuData
-        (Yaml.field "index_link" Yaml.string)
 
 
 overviewDataDecoder : Yaml.Decoder OverviewData
@@ -150,7 +138,7 @@ intro pagePath model data =
         [ Common.menu
             pagePath
             [ A.style "border-bottom-color" "rgba(165, 167, 184, 0.5)" ]
-            [ menuItems data ]
+            [ Common.menuItems data.menu ]
 
         -----------------------------------------
         -- Content
@@ -168,21 +156,6 @@ intro pagePath model data =
             ]
             [ priestess
             , overview data
-            ]
-        ]
-
-
-menuItems data =
-    Html.div
-        [ T.flex
-        , T.items_center
-        ]
-        [ Html.a
-            (List.append
-                (A.href (PagePath.toString pages.index) :: Common.menuItemStyleAttributes)
-                Kit.menuButtonAttributes
-            )
-            [ Html.text data.menu.indexLink
             ]
         ]
 

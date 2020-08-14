@@ -1,9 +1,13 @@
 module Matter.NotFound exposing (render)
 
-import Html
+import Html exposing (Html)
 import Tailwind as T
+import Types exposing (..)
+import Content.Metadata exposing (MetadataForPages)
+import Content.Parsers exposing (EncodedData)
 
 
+render : ContentList -> PagePath -> MetadataForPages -> EncodedData -> Model -> Html Msg
 render _ _ _ _ _ =
     Html.div
         [ T.absolute

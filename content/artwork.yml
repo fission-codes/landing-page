@@ -1,0 +1,107 @@
+menu:
+
+  index_link: Learn more
+
+
+hero:
+
+  tagline: Other than coding, we also love art!
+
+  message:
+    That’s why we always collaborate with great artists to create some funny, cute and awesome dev-related artwork.<br />
+    Here is a bit of what we’ve been creating so far:
+
+
+carousel:
+
+  artist_prefix: Art by
+
+  characters_title: Characters
+
+  characters:
+
+    - name: "Haskell Lizard"
+      image: "images/content/artwork-page/characters01.png"
+      description:
+        Maybe for lack of practice or knowledge really, there will always be a good old Haskell Lizard.<br />
+        You’ll get there buddy!
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+    - name: "Haskell Wizard"
+      image: "images/content/artwork-page/characters02.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+    - name: "Haskell High Priestess"
+      image: "images/content/artwork-page/characters03.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+    - name: "UCAN Sam"
+      image: "images/content/artwork-page/characters04.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+    - name: "Five Creatures"
+      image: "images/content/artwork-page/characters05.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+  jargons_title: Jargons
+
+  jargons:
+
+    - name: "Screaming_Snake_Case"
+      image: "images/content/artwork-page/jargons04.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+    - name: "Yak Shaving"
+      image: "images/content/artwork-page/jargons02.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+    - name: "Because Math"
+      image: "images/content/artwork-page/jargons01.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+    - name: "Kebab-Case"
+      image: "images/content/artwork-page/jargons03.png"
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor incididunt ut labore et dolore magna aliqua."
+      author: "BrunoMonts"
+      date: "Dec 2019"
+
+
+call_to_action:
+
+  title: Get some swag!
+
+  body:
+    What about having some Fission Artwork on a t-shirt, mug or some stickers, huh?
+    We are already working on some very cool swag for you.
+
+  button: Sign up for swag
+
+  link: "https://swag.fission.codes/"
+
+
+footer:
+
+  links:
+    - url: "https://discord.gg/daDMAjE"
+      label: Discord
+
+    - url: "https://twitter.com/FISSIONcodes"
+      label: Twitter
+
+    - url: "https://linkedin.com/company/fissioncodes"
+      label: LinkedIn

@@ -2,7 +2,7 @@ module State.News exposing (..)
 
 import External.Blog
 import Http
-import Json.Decode.Exploration as StrictJson
+import OptimizedDecoder as Decode
 import Return
 import Types exposing (..)
 
@@ -15,11 +15,8 @@ gotPosts : Result Http.Error String -> Manager
 gotPosts result model =
     case result of
         Ok json ->
-            case StrictJson.decodeString External.Blog.latestPostsDecoder json of
-                StrictJson.Success latestBlogPosts ->
-                    Return.singleton { model | latestBlogPosts = latestBlogPosts }
-
-                StrictJson.WithWarnings _ latestBlogPosts ->
+            case Decode.decodeString External.Blog.latestPostsDecoder json of
+                Ok latestBlogPosts ->
                     Return.singleton { model | latestBlogPosts = latestBlogPosts }
 
                 _ ->

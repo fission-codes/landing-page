@@ -46,6 +46,15 @@ install-deps:
 	watchexec -p -w css -e "css,js" -- just css-large
 
 
+@upgrade-deps:
+	echo "⬆️  Upgrading Elm Dependencies"
+	elm-json upgrade --unsafe
+	echo "⬆️  Upgrading Js Dependencies"
+	npm update
+	npm outdated
+	echo "👀 Please review the output above and optionally upgrade some packages to newer major versions with `npm install package@latest`"
+
+
 
 # Parts
 # -----

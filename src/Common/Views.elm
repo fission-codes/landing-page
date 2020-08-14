@@ -6,6 +6,7 @@ import Html.Attributes as A
 import Html.Events as E
 import Html.Events.Extra as E
 import Html.Extra as Html
+import Kit.Local as Kit
 import Pages exposing (images, pages)
 import Pages.ImagePath as ImagePath
 import Pages.PagePath as PagePath
@@ -24,6 +25,11 @@ type alias FooterData =
 
 type alias FooterLink =
     { url : String, label : String }
+
+
+type alias MenuData =
+    { indexLink : String
+    }
 
 
 
@@ -46,6 +52,13 @@ footerLinkDecoder =
         (Yaml.field "label" Yaml.string)
 
 
+menuDataDecoder : Yaml.Decoder MenuData
+menuDataDecoder =
+    Yaml.map
+        MenuData
+        (Yaml.field "index_link" Yaml.string)
+
+
 
 -- BADGE
 
@@ -56,6 +69,17 @@ badge =
         [ A.src (ImagePath.toString images.badgeSolidFaded)
         , A.title "FISSION"
         , A.width 30
+        ]
+        []
+
+
+badgeFission : Html msg
+badgeFission =
+    Html.img
+        [ A.src (ImagePath.toString images.logoDarkColored)
+        , A.title "FISSION"
+        , A.height 30
+        , A.width 144
         ]
         []
 
@@ -101,7 +125,7 @@ menu currentPage attributes contents =
           else
             Html.a
                 [ A.href (PagePath.toString pages.index) ]
-                [ badge ]
+                [ badgeFission ]
 
         --
         , Html.div
@@ -139,6 +163,22 @@ menuItemStyleAttributes =
     -------------
     , T.first__ml_0
     ]
+
+
+menuItems : MenuData -> Html Msg
+menuItems data =
+    Html.div
+        [ T.flex
+        , T.items_center
+        ]
+        [ Html.a
+            (List.append
+                (A.href (PagePath.toString pages.index) :: menuItemStyleAttributes)
+                Kit.menuButtonAttributes
+            )
+            [ Html.text data.indexLink
+            ]
+        ]
 
 
 
