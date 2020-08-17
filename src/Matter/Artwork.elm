@@ -232,7 +232,7 @@ hero pagePath model menuData data =
 
 
 
--- CARUSEL
+-- CAROUSEL
 
 
 artworksSection : PagePath -> Model -> ArtworksData -> Html Msg
