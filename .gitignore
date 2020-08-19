@@ -1,6 +1,6 @@
 .cache
 .deploy
-.fission.yaml
+.fission.yaml*
 .vscode/
 build
 dist
