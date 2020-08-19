@@ -1,22 +1,25 @@
 tagline:
-  App & website hosting with user-controlled data
+  Build and Scale Apps
 
 short_description:
-  We’ve built a web native file system that combines files, encryption, and identity, like an open source iCloud.<br /><br />
-  As a developer, use it to host your apps, your users' files, and build using only client-side browser tech.
+  As a developer, if you can build an app for a single user, Fission will let you share it with 10 or 10,000 users, without any changes.
 
 
 
 fission_live:
 
   title:
-    Fission for Developers
+    No more yak shaving
 
   about:
-    Build apps that include passwordless login, end-to-end encryption, and offline support, without having to learn complicated DevOps techniques.<br /><br />Let your app users own their data, with more scale and less cost to you.
+    You've built an app, it looks great on your machine. Now you have to figure out where to host it, how to scale it, and how to make it easy for other people to try it as well. You've got nothing but days of yak shaving ahead of you!<br />
+    <br />
+    Build apps that include passwordless login, end-to-end encryption, and offline support, without having to learn complicated DevOps techniques.<br />
+    <br />
+    Let your app users own their data, with more scale and less cost to you. We’ve built a web native file system that combines files, encryption, and identity, like an open source iCloud.
 
   terminal_caption:
-    Download our <abbr title="Command Line Interface">CLI</abbr> and deploy apps instantly.
+    Download our <abbr title="Command Line Interface">CLI</abbr> and build and instantly share your app.
 
 
 
@@ -26,7 +29,11 @@ heroku:
     Fission Drive
 
   about:
-    Everyone creating a Fission Account gets access to Drive. Your files, available everywhere, even offline.<br /><br />Private files are encrypted end-to-end. Easily publish and share public files.<br /><br />Add an app, give permission to what files it can access, just like you're used to on mobile.
+    Every Fission Account gets access to the Drive app. Your files, available everywhere, even offline.<br />
+    <br />
+    Private files are encrypted end-to-end. Easily publish and share public files.<br />
+    <br />
+    Add an app, give permission to what files it can access, just like you're used to on mobile.
 
 
 

@@ -255,6 +255,17 @@ fissionLive pagePath model data =
               -----------------------------------------
               Kit.h2 data.fissionLive.title
 
+             , Html.img
+                [ A.src (ImagePath.toString images.content.cancelyak512)
+
+                --
+                , T.mt_12
+                , T.rounded
+                , T.w_full
+                ]
+                []
+
+
             -----------------------------------------
             -- About
             -----------------------------------------
