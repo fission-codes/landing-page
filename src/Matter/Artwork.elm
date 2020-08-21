@@ -397,6 +397,7 @@ callToAction pagePath model data =
             [ T.mx_auto
             , T.flex
             , T.flex_col
+            , T.items_center
 
             -- Responsive
             -------------
