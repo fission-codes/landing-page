@@ -1,6 +1,5 @@
 module Matter.Index exposing (render)
 
-import Common exposing (..)
 import Common.Views as Common
 import Content.Metadata exposing (Frontmatter)
 import Content.Parsers exposing (EncodedData)
@@ -73,8 +72,10 @@ type alias SubscribeData =
 render : ContentList -> PagePath -> Frontmatter -> EncodedData -> Model -> Html Msg
 render _ pagePath meta encodedData model =
     encodedData
-        |> Common.decodeYaml dataDecoder
-        |> Result.unpack Common.error (view pagePath model)
+        |> Yaml.fromValue dataDecoder
+        |> Result.unpack
+            (Yaml.errorToString >> Common.error)
+            (view pagePath model)
 
 
 

@@ -15,7 +15,7 @@ import Validation exposing (Validated(..))
 
 gotResponse : Result Http.Error () -> Manager
 gotResponse result model =
-    case result of
+    case Debug.log "Http result" result of
         Ok () ->
             Return.singleton { model | subscribing = Succeeded }
 

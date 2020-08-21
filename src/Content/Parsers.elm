@@ -4,6 +4,7 @@ import Content.Markdown
 import Content.Metadata as Metadata exposing (Frontmatter)
 import Html exposing (Html)
 import Json.Decode exposing (Decoder)
+import Yaml.Decode as Yaml
 import Yaml.Decode.Extra as Yaml
 
 
@@ -24,9 +25,7 @@ type alias Parser msg =
 
 
 type alias EncodedData =
-    -- TODO: This should ideally be Yaml.Value,
-    --       but there's a function missing from the Yaml library.
-    String
+    Yaml.Value
 
 
 
@@ -37,20 +36,8 @@ yaml : Parser msg
 yaml =
     { extension = "yml"
     , metadata = Metadata.frontmatterDecoder
-    , body = Data >> Ok
-
-    -- TODO:
-    -- See comment on `EncodedData` type
-    --
-    -- Yaml.fromString Yaml.value
-    --     >> Result.mapError
-    --         (\err ->
-    --             case err of
-    --                 Yaml.Parsing e ->
-    --                     "Failed to parse YAML: " ++ e
-    --
-    --                 Yaml.Decoding e ->
-    --                     "Failed to decode YAML: " ++ e
-    --         )
-    --     >> Result.map Data
+    , body =
+        Yaml.fromString Yaml.value
+            >> Result.mapError Yaml.errorToString
+            >> Result.map Data
     }
