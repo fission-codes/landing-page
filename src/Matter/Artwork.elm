@@ -356,7 +356,7 @@ artworkItem attributes { image, name, description, author, date } =
                 ]
                 description
             , Html.p
-                [ T.mt_1
+                [ T.mt_4
                 , T.font_body
                 , T.text_gray_300
                 , T.text_base
@@ -448,22 +448,15 @@ callToAction pagePath model data =
                 , Html.a
                     [ A.href data.link ]
                     [ Html.button
-                        [ T.appearance_none
-                        , T.bg_gray_200
-                        , T.cursor_pointer
-                        , T.font_display
-                        , T.font_medium
-                        , T.px_4
-                        , T.py_1
-                        , T.leading_relaxed
-                        , T.rounded_lg
-                        , T.mt_8
-                        , T.text_gray_600
-
-                        -- Responsive
-                        -------------
-                        , T.md__text_lg
-                        ]
+                        (List.append
+                            (Kit.buttonAttributesWithColor T.bg_purple)
+                            [ T.block
+                            , T.max_w_md
+                            , T.mt_5
+                            , T.p_4
+                            , T.w_full
+                            ]
+                        )
                         [ Html.text data.button ]
                     ]
                 ]
