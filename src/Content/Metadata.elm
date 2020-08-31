@@ -20,7 +20,15 @@ type alias Frontmatter =
     { title : String
     , image : ImagePath Pages.PathKey
     , imageAlt : String
+    , siteName : String
+    , description : String
+    , summaryType : SummaryType
     }
+
+
+type SummaryType
+    = SummaryLarge
+    | SummaryNormal
 
 
 
@@ -31,10 +39,28 @@ frontmatterDecoder : Json.Decoder Frontmatter
 frontmatterDecoder =
     -- We actually don't need to use a YAML parser here,
     -- because elm-pages translates YAML frontmatter into JSON.
-    Json.map3 Frontmatter
+    Json.map6 Frontmatter
         (Json.field "title" Json.string)
         (Json.field "image" imageDecoder)
         (Json.field "image_alt" Json.string)
+        (Json.field "site_name" Json.string)
+        (Json.field "description" Json.string)
+        (Json.field "summary_type"
+            (Json.string
+                |> Json.andThen
+                    (\summary ->
+                        case summary of
+                            "normal" ->
+                                Json.succeed SummaryNormal
+
+                            "large" ->
+                                Json.succeed SummaryLarge
+
+                            other ->
+                                Json.fail ("Unrecognized summary_type: " ++ other ++ ".")
+                    )
+            )
+        )
 
 
 imageDecoder : Json.Decoder (ImagePath Pages.PathKey)
@@ -76,16 +102,25 @@ canonicalSiteUrl =
 -}
 head : Frontmatter -> List (Head.Tag Pages.PathKey)
 head frontmatter =
-    Seo.summaryLarge
+    let
+        summary =
+            case frontmatter.summaryType of
+                SummaryNormal ->
+                    Seo.summary
+
+                SummaryLarge ->
+                    Seo.summaryLarge
+    in
+    summary
         { canonicalUrlOverride = Nothing
-        , siteName = siteName
+        , siteName = frontmatter.siteName
         , image =
             { url = frontmatter.image
             , alt = frontmatter.imageAlt
             , dimensions = ImagePath.dimensions frontmatter.image
             , mimeType = Nothing
             }
-        , description = siteTagline
+        , description = frontmatter.description
         , locale = Nothing
         , title = frontmatter.title
         }
