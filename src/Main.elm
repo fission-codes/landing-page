@@ -4,7 +4,6 @@ import Content.Metadata exposing (Frontmatter)
 import Content.Parsers exposing (Interpretation)
 import Pages
 import Pages.Platform
-import Redirects
 import State
 import Types exposing (..)
 import View
@@ -32,5 +31,4 @@ main =
         , internals = Pages.internals
         , onPageChange = Nothing
         }
-        |> Pages.Platform.withFileGenerator Redirects.generate
         |> Pages.Platform.toProgram

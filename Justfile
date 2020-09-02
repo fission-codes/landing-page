@@ -28,6 +28,10 @@ build-production:
 	@just css-small
 	@cp static/application.css dist/application.css
 
+	@# ipfs-404.html
+	rm dist/ipfs-404.html || true
+	@cp dist/ipfs-404/index.html dist/ipfs-404.html
+
 
 @elm-housekeeping:
 	echo "> Running elm-impfix"
