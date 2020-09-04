@@ -1,9 +1,10 @@
 module Content.Parsers exposing (..)
 
 import Content.Markdown
-import Content.Metadata as Metadata exposing (Metadata)
+import Content.Metadata as Metadata exposing (Frontmatter)
 import Html exposing (Html)
 import Json.Decode exposing (Decoder)
+import Yaml.Decode as Yaml
 import Yaml.Decode.Extra as Yaml
 
 
@@ -18,47 +19,25 @@ type Interpretation msg
 
 type alias Parser msg =
     { extension : String
-    , metadata : Decoder Metadata
+    , metadata : Decoder Frontmatter
     , body : String -> Result String (Interpretation msg)
     }
 
 
 type alias EncodedData =
-    -- TODO: This should ideally be Yaml.Value,
-    --       but there's a function missing from the Yaml library.
-    String
+    Yaml.Value
 
 
 
 -- 🛠
 
 
-markdown : Parser msg
-markdown =
-    { extension = "md"
-    , metadata = Metadata.markdownMetadataDecoder
-    , body = Content.Markdown.process >> Html.div [] >> VirtualDom >> Ok
-    }
-
-
 yaml : Parser msg
 yaml =
     { extension = "yml"
-    , metadata = Metadata.yamlMetadataDecoder
-    , body = Data >> Ok
-
-    -- TODO:
-    -- See comment on `EncodedData` type
-    --
-    -- Yaml.fromString Yaml.value
-    --     >> Result.mapError
-    --         (\err ->
-    --             case err of
-    --                 Yaml.Parsing e ->
-    --                     "Failed to parse YAML: " ++ e
-    --
-    --                 Yaml.Decoding e ->
-    --                     "Failed to decode YAML: " ++ e
-    --         )
-    --     >> Result.map Data
+    , metadata = Metadata.frontmatterDecoder
+    , body =
+        Yaml.fromString Yaml.value
+            >> Result.mapError Yaml.errorToString
+            >> Result.map Data
     }

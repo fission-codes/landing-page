@@ -1,6 +1,5 @@
 module Common.Views exposing (..)
 
-import Common exposing (..)
 import Html exposing (Html)
 import Html.Attributes as A
 import Html.Events as E

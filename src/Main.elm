@@ -1,6 +1,6 @@
 module Main exposing (main)
 
-import Content.Metadata exposing (Metadata)
+import Content.Metadata exposing (Frontmatter)
 import Content.Parsers exposing (Interpretation)
 import Pages
 import Pages.Platform
@@ -13,7 +13,7 @@ import View
 -- ⛩
 
 
-main : Pages.Platform.Program Model Msg Metadata (Interpretation Msg)
+main : Pages.Platform.Program Model Msg Frontmatter (Interpretation Msg)
 main =
     Pages.Platform.init
         { init = State.init
@@ -24,7 +24,7 @@ main =
         -- Elm Pages
         ------------
         , canonicalSiteUrl = Content.Metadata.canonicalSiteUrl
-        , documents = [ Content.Parsers.markdown, Content.Parsers.yaml ]
+        , documents = [ Content.Parsers.yaml ]
         , manifest = Content.Metadata.manifest
 
         --

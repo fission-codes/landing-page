@@ -1,6 +1,6 @@
 module Types exposing (..)
 
-import Content.Metadata exposing (Metadata)
+import Content.Metadata exposing (Frontmatter)
 import External.Blog
 import Http
 import Management
@@ -55,7 +55,7 @@ type Msg
 
 
 type alias ContentList =
-    List ( PagePath, Metadata )
+    List ( PagePath, Frontmatter )
 
 
 type alias ImagePath =
@@ -68,7 +68,7 @@ type alias Manager =
 
 type alias Page =
     { path : PagePath
-    , frontmatter : Metadata
+    , frontmatter : Frontmatter
     }
 
 
