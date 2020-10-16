@@ -6,6 +6,7 @@
     "build": "elm-pages build"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.2.0",
     "fission-kit": "github:fission-suite/kit#52007072cf459d02de6b49f5ca13229a7a03f4c6",
     "node-sass": "^4.14.1"
   },

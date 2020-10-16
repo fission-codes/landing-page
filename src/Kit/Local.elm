@@ -129,6 +129,23 @@ h2 text =
         [ Html.text text ]
 
 
+h3 : String -> Html msg
+h3 text =
+    Html.h3
+        [ T.font_display
+        , T.font_medium
+        , T.leading_tight
+        , T.text_xl
+        , T.tracking_tight
+
+        -- Responsive
+        -------------
+        , T.md__text_2xl
+        , T.lg__text_2_5xl
+        ]
+        [ Html.text text ]
+
+
 
 -- 🧱
 
@@ -153,7 +170,8 @@ introParagraph =
         , T.mx_auto
         , T.pt_5
         , T.px_3
-        , T.text_gray_300
+        , T.prose
+        , T.text_gray_200
 
         -- Responsive
         -------------

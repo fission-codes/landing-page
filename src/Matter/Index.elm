@@ -140,9 +140,13 @@ view pagePath model data =
     Html.div
         []
         [ intro pagePath model data
-        , fissionLive pagePath model data
-        , heroku pagePath model data
-        , news pagePath model data
+        , fissionDrive pagePath model data
+        , productFeatures pagePath model data
+        , fissionForDevelopers pagePath model data
+
+        -- , fissionLive pagePath model data
+        -- , heroku pagePath model data
+        -- , news pagePath model data
         , subscribe pagePath model data
         , Common.footer pagePath data.footer
         ]
@@ -187,13 +191,46 @@ intro pagePath model data =
             , T.items_center
             , T.justify_center
             , T.py_16
-            , T.text_center
+
+            -- , T.text_center
             ]
             [ logo
             , tagline data
             , shortDescription data
+            , demoVideo
             ]
         ]
+
+
+demoVideo =
+    let
+        aspectRatio =
+            9 / 16
+
+        width =
+            900
+
+        height =
+            aspectRatio * width
+
+        w =
+            round width
+
+        h =
+            round height
+    in
+    Html.iframe
+        [ A.width w
+        , A.height h
+        , A.src "https://www.youtube-nocookie.com/embed/6SO8EQb9xrk"
+        , A.attribute "frameborder" "0"
+        , A.attribute "allow" "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        , A.attribute "allowfullscreen" ""
+        , A.attribute "modestbranding" "1"
+        , A.attribute "rel" "0"
+        , T.mt_8
+        ]
+        []
 
 
 menuItems =
@@ -201,18 +238,21 @@ menuItems =
         [ T.flex
         , T.items_center
         ]
-        [ Common.menuItem "fission-live" "For Developers"
-        , Common.menuItem "heroku" "Drive"
-        , Common.menuItem "news" "News"
+        [ Common.menuItem "news" "News"
+        , Common.menuItem "" "Guide"
+        , Common.menuItem "" "Support"
+        , Common.menuItem "" "Sign Up"
 
+        -- , Common.menuItem "fission-live" "For Developers"
+        -- , Common.menuItem "heroku" "Drive"
         --
-        , Html.button
-            (List.append
-                (Common.menuItemAttributes "subscribe")
-                Kit.menuButtonAttributes
-            )
-            [ Html.text "Subscribe"
-            ]
+        -- , Html.button
+        --     (List.append
+        --         (Common.menuItemAttributes "subscribe")
+        --         Kit.menuButtonAttributes
+        --     )
+        --     [ Html.text "Subscribe"
+        --     ]
         ]
 
 
@@ -242,6 +282,90 @@ shortDescription data =
 
 
 
+-- FISSION DRIVE
+
+
+fissionDrive : PagePath -> Model -> DecodedData -> Html Msg
+fissionDrive pagePath model data =
+    Html.div
+        []
+        [ Html.div (A.id "fission-drive" :: Kit.containerAttributes)
+            [ Kit.h2 "Fission Drive"
+            , Kit.introParagraph [ Html.text "Fission Drive is a file storage and identity system that lets you take your files anywhere, and access them from any web or mobile browser.\n\nEvery Fission Drive account features a passwordless login that works in all web browsers, and has file storage included.\n\nOur webnative file system offers offline support as well - you can even access your files without an Internet connection.\n\nYou control your data! You can easily access, publish and share public files, websites, and apps. Private files are encrypted end-to-end. \nAdd an app, give permission to what files it can access - just like on mobile.\n\nClick the link to sign up and create your account!\n" ]
+            , Html.a
+                (A.href "https://drive.fission.codes"
+                    :: T.mt_12
+                    :: Kit.buttonAttributes
+                )
+                [ Html.text "Sign up for Fission Drive" ]
+            ]
+        ]
+
+
+
+-- PRODUCT FEATURES
+
+
+productFeatures : PagePath -> Model -> DecodedData -> Html Msg
+productFeatures pagePath model data =
+    Html.div
+        [ T.bg_gray_600 ]
+        [ Html.div (A.id "product-features" :: Kit.containerAttributes)
+            [ Kit.h2 "Product Features"
+            , Html.div
+                [ T.flex
+                , T.flex_row
+                ]
+                [ Html.div
+                    [ T.flex_grow
+                    , T.flex_shrink_0
+                    , T.prose
+                    ]
+                    [ Kit.h3 "Fission"
+                    , Html.ul [ T.text_left ]
+                        [ Html.li [] [ Html.text "No DevOps Required" ]
+                        , Html.li [] [ Html.text "Works in all Web Browsers" ]
+                        , Html.li [] [ Html.text "Built in Web Native file system" ]
+                        , Html.li [] [ Html.text "Offline authentication" ]
+                        , Html.li [] [ Html.text "End-to-end encryption" ]
+                        , Html.li [] [ Html.text "GDPR Security Compliance" ]
+                        , Html.li [] [ Html.text "Data Encrypted at Rest" ]
+                        ]
+                    ]
+                , Html.div
+                    [ T.flex_grow
+                    , T.flex_shrink_0
+                    , T.prose
+                    ]
+                    [ Kit.h3 "Fission Drive"
+                    , Html.ul [ T.text_left ]
+                        [ Html.li [] [ Html.text "User Accounts with Data Privacy and File Storage included." ]
+                        , Html.li [] [ Html.text "Passwordless Login & Authentication that works in all web browsers." ]
+                        , Html.li [] [ Html.text "Control your own data - your files, available everywhere, even offline." ]
+                        , Html.li [] [ Html.text "Easily control your file settings for public sharing or private use." ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+
+
+
+-- FISSION FOR DEVELOPERS
+
+
+fissionForDevelopers : PagePath -> Model -> DecodedData -> Html Msg
+fissionForDevelopers pagePath model data =
+    Html.div
+        []
+        [ Html.div (A.id "fission-for-developers" :: Kit.containerAttributes)
+            [ Kit.h2 "Fission For Developers"
+            , Html.text "Fission empowers front-end developers to build and scale apps with no backend or DevOps skills required.\n\nThe Fission webnative SDK takes advantage of all the capabilities your browser has to offer, as well as local computation, storage, and identity. Deploy web apps from your laptop that are secure and private by default, just like native mobile apps.\n\nLocal-first functionality also supports working without an Internet connection on desktop and mobile whenever possible. Apps scale running client side with offline support and sync.\nClick the button to install the tools on your local machine and... \n"
+            ]
+        ]
+
+
+
 -- FISSION LIVE
 
 
@@ -255,8 +379,7 @@ fissionLive pagePath model data =
               -- Title
               -----------------------------------------
               Kit.h2 data.fissionLive.title
-
-             , Html.img
+            , Html.img
                 [ A.src (ImagePath.toString images.content.cancelyak512)
 
                 --
@@ -265,7 +388,6 @@ fissionLive pagePath model data =
                 , T.w_full
                 ]
                 []
-
 
             -----------------------------------------
             -- About

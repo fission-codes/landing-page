@@ -1,6 +1,7 @@
 import defaultTheme from "tailwindcss/defaultTheme.js"
 import plugin from "tailwindcss/plugin.js"
 import * as kit from "fission-kit"
+import typography from "@tailwindcss/typography"
 
 
 export default {
@@ -94,6 +95,8 @@ export default {
   // PLUGINS //////////////////////////////
   /////////////////////////////////////////
 
-  plugins: []
+  plugins: [
+    typography,
+  ]
 
 }
