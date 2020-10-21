@@ -140,6 +140,7 @@ view pagePath model data =
     Html.div
         []
         [ intro pagePath model data
+        , video pagePath model data
         , fissionDrive pagePath model data
         , productFeatures pagePath model data
         , fissionForDevelopers pagePath model data
@@ -163,13 +164,12 @@ intro pagePath model data =
         , T.flex
         , T.flex_col
         , T.overflow_hidden
+        , T.px_6
         ]
-        [ Html.div [ T.px_6 ]
-            [ Common.menu
-                pagePath
-                [ T.border_gray_500 ]
-                [ menuItems ]
-            ]
+        [ Common.menu
+            pagePath
+            [ T.border_gray_500 ]
+            [ menuItems ]
 
         -----------------------------------------
         -- Hidden <h1>
@@ -188,16 +188,11 @@ intro pagePath model data =
             , T.items_center
             , T.justify_center
             , T.pt_16
+            , T.lg__pt_20
             ]
             [ logo
             , tagline data
             , shortDescription data
-            , Html.div [ T.my_8, T.px_6, T.text_center ] [ Kit.h2 "Watch a one-minute demo of fission!" ]
-            , Html.video
-                [ A.src "FissionProductDemo.mp4"
-                , A.controls True
-                ]
-                []
             ]
         ]
 
@@ -252,7 +247,7 @@ shortDescription data =
             "* Works in all browsers, including mobile devices\n* Uses web APIs, no plug-ins needed\n* Can function local-first, and in many cases, offline\n* User owned data and storage"
     in
     Html.div
-        [ T.max_w_lg
+        [ T.max_w_2xl
         , T.mx_auto
         , T.pt_5
         , T.px_6
@@ -270,15 +265,68 @@ shortDescription data =
             data.shortDescription
         , Html.div
             [ T.mt_6
-            , T.prose
+            , T.flex
+            , T.flex_row
+            , T.items_center
             ]
-            [ Html.ul []
-                [ Html.li [] [ Html.text "Works in all browsers, including mobile devices" ]
-                , Html.li [] [ Html.text "Uses web APIs, no plug-ins needed" ]
-                , Html.li [] [ Html.text "Can function local-first, and in many cases, offline" ]
-                , Html.li [] [ Html.text "User owned data and storage" ]
+            [ Html.div
+                [ T.prose
+                , T.flex_1
                 ]
+                [ Html.ul []
+                    [ Html.li [] [ Html.text "Works in all browsers, including mobile devices" ]
+                    , Html.li [] [ Html.text "Uses web APIs, no plug-ins needed" ]
+                    , Html.li [] [ Html.text "Can function local-first, and in many cases, offline" ]
+                    , Html.li [] [ Html.text "User owned data and storage" ]
+                    ]
+                ]
+            , Html.img
+                [ A.src (ImagePath.toString images.content.artworkPage.characters05)
+                , A.width 330
+                , A.style "margin-right" "-100px"
+                , T.flex_shrink_0
+                , T.hidden
+                , T.md__block
+                ]
+                []
             ]
+        ]
+
+
+
+-- VIDEO
+
+
+video : PagePath -> Model -> DecodedData -> Html Msg
+video pagePath model data =
+    Html.div
+        [ T.relative
+        , T.pt_4
+        , T.md__pt_8
+        , T.flex
+        , T.flex_col
+        , T.items_center
+        ]
+        [ Html.div
+            [ T.absolute
+            , T.bottom_1over4
+            , T.inset_0
+            , T.flex
+            , T.flex_col
+            , A.style "z-index" "-1"
+            ]
+            [ Html.div [ T.bg_gray_600, T.flex_1 ] [] ]
+        , Html.div [ T.px_6, T.text_center ] [ Kit.h2 "Watch a one-minute demo of fission!" ]
+        , Html.video
+            [ T.mt_6
+            , A.src "FissionProductDemo.mp4"
+            , A.controls True
+            , T.max_w_5xl
+            , T.w_full
+            , T.lg__rounded
+            , T.lg__shadow_xl
+            ]
+            []
         ]
 
 

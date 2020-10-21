@@ -11,9 +11,9 @@ tagline:
   Build and Scale Apps
 
 short_description:
-  "Fission helps front end developers to quickly and easily publish files, websites, and apps directly from your local machine. If you can build an app for a single user, you can share it with 10 or 10,000 users, without any changes.
-
-Use the frameworks you already know to create front end features, and power your app with Fission's backend-as-a-service capabilities including passwordless login, end-to-end encryption, and offline support — without having to learn complicated DevOps techniques!"
+  Fission helps front end developers to quickly and easily publish files, websites, and apps directly from your local machine. If you can build an app for a single user, you can share it with 10 or 10,000 users, without any changes.
+  <br />
+  Use the frameworks you already know to create front end features, and power your app with Fission's backend-as-a-service capabilities including passwordless login, end-to-end encryption, and offline support — without having to learn complicated DevOps techniques!
 
 
 
