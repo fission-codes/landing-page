@@ -163,16 +163,13 @@ intro pagePath model data =
         , T.flex
         , T.flex_col
         , T.overflow_hidden
-        , T.px_6
-
-        -- Responsive
-        -------------
-        , T.md__min_h_screen
         ]
-        [ Common.menu
-            pagePath
-            [ T.border_gray_500 ]
-            [ menuItems ]
+        [ Html.div [ T.px_6 ]
+            [ Common.menu
+                pagePath
+                [ T.border_gray_500 ]
+                [ menuItems ]
+            ]
 
         -----------------------------------------
         -- Hidden <h1>
@@ -190,47 +187,19 @@ intro pagePath model data =
             , T.flex_grow
             , T.items_center
             , T.justify_center
-            , T.py_16
-
-            -- , T.text_center
+            , T.pt_16
             ]
             [ logo
             , tagline data
             , shortDescription data
-            , demoVideo
+            , Html.div [ T.my_8, T.px_6, T.text_center ] [ Kit.h2 "Watch a one-minute demo of fission!" ]
+            , Html.video
+                [ A.src "FissionProductDemo.mp4"
+                , A.controls True
+                ]
+                []
             ]
         ]
-
-
-demoVideo =
-    let
-        aspectRatio =
-            9 / 16
-
-        width =
-            900
-
-        height =
-            aspectRatio * width
-
-        w =
-            round width
-
-        h =
-            round height
-    in
-    Html.iframe
-        [ A.width w
-        , A.height h
-        , A.src "https://www.youtube-nocookie.com/embed/6SO8EQb9xrk"
-        , A.attribute "frameborder" "0"
-        , A.attribute "allow" "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        , A.attribute "allowfullscreen" ""
-        , A.attribute "modestbranding" "1"
-        , A.attribute "rel" "0"
-        , T.mt_8
-        ]
-        []
 
 
 menuItems =
@@ -278,7 +247,39 @@ tagline data =
 
 
 shortDescription data =
-    Kit.introParagraph data.shortDescription
+    let
+        features =
+            "* Works in all browsers, including mobile devices\n* Uses web APIs, no plug-ins needed\n* Can function local-first, and in many cases, offline\n* User owned data and storage"
+    in
+    Html.div
+        [ T.max_w_lg
+        , T.mx_auto
+        , T.pt_5
+        , T.px_6
+        , T.text_gray_200
+
+        -- Responsive
+        -------------
+        , T.md__pt_6
+        , T.md__text_lg
+        ]
+        [ Html.div
+            [ T.prose
+            , T.text_center
+            ]
+            data.shortDescription
+        , Html.div
+            [ T.mt_6
+            , T.prose
+            ]
+            [ Html.ul []
+                [ Html.li [] [ Html.text "Works in all browsers, including mobile devices" ]
+                , Html.li [] [ Html.text "Uses web APIs, no plug-ins needed" ]
+                , Html.li [] [ Html.text "Can function local-first, and in many cases, offline" ]
+                , Html.li [] [ Html.text "User owned data and storage" ]
+                ]
+            ]
+        ]
 
 
 
@@ -319,7 +320,6 @@ productFeatures pagePath model data =
                 [ Html.div
                     [ T.flex_grow
                     , T.flex_shrink_0
-                    , T.prose
                     ]
                     [ Kit.h3 "Fission"
                     , Html.ul [ T.text_left ]
@@ -335,7 +335,6 @@ productFeatures pagePath model data =
                 , Html.div
                     [ T.flex_grow
                     , T.flex_shrink_0
-                    , T.prose
                     ]
                     [ Kit.h3 "Fission Drive"
                     , Html.ul [ T.text_left ]

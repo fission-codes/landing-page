@@ -170,7 +170,6 @@ introParagraph =
         , T.mx_auto
         , T.pt_5
         , T.px_3
-        , T.prose
         , T.text_gray_200
 
         -- Responsive
@@ -187,6 +186,7 @@ tagline text =
         , T.font_medium
         , T.leading_tight
         , T.text_2xl
+        , T.text_center
         , T.tracking_tight
 
         --

@@ -23,6 +23,6 @@
     "postcss-csso": "^4.0.0",
     "postcss-elm-tailwind": "^0.10.0",
     "sharp": "^0.25.4",
-    "tailwindcss": "^1.6.2"
+    "tailwindcss": "^1.9.3"
   }
 }
