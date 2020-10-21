@@ -33,9 +33,21 @@ type alias DecodedData =
     , subscribe : SubscribeData
 
     --
+    , fissionDrive : FissionDriveData
+
+    --
     , shortDescription : List (Html Msg)
     , tagline : String
     }
+
+
+type alias FissionDriveData =
+    { description : List (Html Msg)
+    }
+
+
+
+--
 
 
 type alias FissionLiveData =
@@ -84,7 +96,7 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map7
+    Yaml.map8
         DecodedData
         (Yaml.field "fission_live" fissionLiveDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
@@ -92,8 +104,25 @@ dataDecoder =
         (Yaml.field "news" newsDataDecoder)
         (Yaml.field "subscribe" subscribeDataDecoder)
         --
+        (Yaml.field "fission_drive" fissionDriveDataDecoder)
+        --
         (Yaml.field "short_description" Yaml.markdownString)
         (Yaml.field "tagline" Yaml.string)
+
+
+
+--
+
+
+fissionDriveDataDecoder : Yaml.Decoder FissionDriveData
+fissionDriveDataDecoder =
+    Yaml.map
+        FissionDriveData
+        (Yaml.field "description" Yaml.markdownString)
+
+
+
+--
 
 
 fissionLiveDataDecoder : Yaml.Decoder FissionLiveData
@@ -337,16 +366,68 @@ video pagePath model data =
 fissionDrive : PagePath -> Model -> DecodedData -> Html Msg
 fissionDrive pagePath model data =
     Html.div
-        []
-        [ Html.div (A.id "fission-drive" :: Kit.containerAttributes)
-            [ Kit.h2 "Fission Drive"
-            , Kit.introParagraph [ Html.text "Fission Drive is a file storage and identity system that lets you take your files anywhere, and access them from any web or mobile browser.\n\nEvery Fission Drive account features a passwordless login that works in all web browsers, and has file storage included.\n\nOur webnative file system offers offline support as well - you can even access your files without an Internet connection.\n\nYou control your data! You can easily access, publish and share public files, websites, and apps. Private files are encrypted end-to-end. \nAdd an app, give permission to what files it can access - just like on mobile.\n\nClick the link to sign up and create your account!\n" ]
-            , Html.a
-                (A.href "https://drive.fission.codes"
-                    :: T.mt_12
-                    :: Kit.buttonAttributes
-                )
-                [ Html.text "Sign up for Fission Drive" ]
+        [ A.id "fission-drive"
+        , T.px_6
+        , T.py_16
+        , T.lg__py_24
+        , T.flex
+        , T.flex_col
+        ]
+        [ Html.div
+            [ T.flex
+            , T.flex_row
+            , T.items_center
+            , T.mx_auto
+            , T.space_x_8
+            ]
+            [ Html.img
+                [ A.src (ImagePath.toString images.content.index.fissionDriveLight)
+                , A.style "max-width" "300px"
+                , T.w_full
+                , T.shadow_lg
+                , T.rounded
+                , T.hidden
+                , T.m_8
+                , T.md__block
+                ]
+                []
+            , Html.div
+                [ T.space_y_6
+                , T.items_center
+                , T.flex
+                , T.flex_col
+                , T.text_gray_200
+                , T.text_center
+                , T.md__items_start
+                , T.md__text_left
+                , T.md__text_lg
+                ]
+                [ Kit.h2 "Fission Drive"
+                , Html.img
+                    [ A.src (ImagePath.toString images.content.index.fissionDriveLight)
+                    , A.style "max-width" "300px"
+                    , T.w_full
+                    , T.shadow_lg
+                    , T.rounded
+                    , T.md__hidden
+                    ]
+                    []
+                , Html.p
+                    [ T.max_w_2xl
+                    , T.text_gray_200
+                    , T.prose
+
+                    -- Responsive
+                    -------------
+                    , T.md__text_lg
+                    ]
+                    data.fissionDrive.description
+                , Html.a
+                    (A.href "https://drive.fission.codes"
+                        :: Kit.buttonAttributes
+                    )
+                    [ Html.text "Sign up for Fission Drive" ]
+                ]
             ]
         ]
 
