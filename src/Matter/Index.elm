@@ -392,16 +392,42 @@ video pagePath model data =
             ]
             [ Html.div [ T.bg_gray_600, T.flex_1 ] [] ]
         , Html.div [ T.px_6, T.text_center ] [ Kit.h2 "Watch a one-minute demo of fission!" ]
-        , Html.video
+        , Html.div
             [ T.mt_6
-            , A.src "FissionProductDemo.mp4"
-            , A.controls True
             , T.max_w_5xl
             , T.w_full
-            , T.lg__rounded
             , T.lg__shadow_xl
             ]
-            []
+            [ -- This is a horrible hack to force the iframe to have a dynamic width,
+              -- but keep the aspect ratio
+              -- The key to this working is that percentage padding depends on the parent
+              -- element's width. Yea.
+              Html.div
+                [ T.relative
+                , T.h_0
+                , T.overflow_hidden
+
+                -- 16:9 aspect ratio
+                -- (String.fromFloat (9 / 16 * 100) ++ "%")
+                , A.style "padding-bottom" "56.25%"
+                ]
+                [ Html.iframe
+                    [ A.src "https://www.youtube-nocookie.com/embed/6SO8EQb9xrk"
+                    , A.attribute "frameborder" "0"
+                    , A.attribute "allow" "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    , A.attribute "allowfullscreen" ""
+                    , A.attribute "modestbranding" "1"
+                    , A.attribute "rel" "0"
+                    , T.absolute
+                    , T.top_0
+                    , T.left_0
+                    , T.w_full
+                    , T.h_full
+                    , T.lg__rounded
+                    ]
+                    []
+                ]
+            ]
         ]
 
 
