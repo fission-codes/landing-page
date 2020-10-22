@@ -29,22 +29,49 @@ import Yaml.Decode.Extra as Yaml
 
 
 type alias DecodedData =
-    { tagline : String
-    , shortDescription : List (Html Msg)
+    { hero : HeroData
     , fissionDrive : FissionDriveData
+    , productFeatures : ProductFeaturesData
     , fissionForDevelopers : FissionForDevelopersData
     , subscribe : SubscribeData
     , footer : Common.FooterData
     }
 
 
+type alias HeroData =
+    { tagline : String
+    , shortDescription : List (Html Msg)
+    , features : List String
+    , video : VideoData
+    }
+
+
+type alias VideoData =
+    { title : String
+    , link : String
+    }
+
+
 type alias FissionDriveData =
-    { description : List (Html Msg)
+    { title : String
+    , description : List (Html Msg)
+    , button : String
+    , buttonLink : String
+    }
+
+
+type alias ProductFeaturesData =
+    { title : String
+    , fissionFeatures : List String
+    , driveFeatures : List String
     }
 
 
 type alias FissionForDevelopersData =
-    { description : List (Html Msg)
+    { title : String
+    , description : List (Html Msg)
+    , button : String
+    , buttonLink : String
     }
 
 
@@ -77,26 +104,59 @@ dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
     Yaml.map6
         DecodedData
-        (Yaml.field "tagline" Yaml.string)
-        (Yaml.field "short_description" Yaml.markdownString)
+        (Yaml.field "hero" heroDataDecoder)
         (Yaml.field "fission_drive" fissionDriveDataDecoder)
+        (Yaml.field "product_features" productFeaturesDataDecoder)
         (Yaml.field "fission_for_developers" fissionForDevelopersDataDecoder)
         (Yaml.field "subscribe" subscribeDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
 
 
+heroDataDecoder : Yaml.Decoder HeroData
+heroDataDecoder =
+    Yaml.map4
+        HeroData
+        (Yaml.field "tagline" Yaml.string)
+        (Yaml.field "short_description" Yaml.markdownString)
+        (Yaml.field "features" (Yaml.list Yaml.string))
+        (Yaml.field "video" videoDataDecoder)
+
+
+videoDataDecoder : Yaml.Decoder VideoData
+videoDataDecoder =
+    Yaml.map2
+        VideoData
+        (Yaml.field "title" Yaml.string)
+        (Yaml.field "link" Yaml.string)
+
+
 fissionDriveDataDecoder : Yaml.Decoder FissionDriveData
 fissionDriveDataDecoder =
-    Yaml.map
+    Yaml.map4
         FissionDriveData
+        (Yaml.field "title" Yaml.string)
         (Yaml.field "description" Yaml.markdownString)
+        (Yaml.field "button" Yaml.string)
+        (Yaml.field "button_link" Yaml.string)
+
+
+productFeaturesDataDecoder : Yaml.Decoder ProductFeaturesData
+productFeaturesDataDecoder =
+    Yaml.map3
+        ProductFeaturesData
+        (Yaml.field "title" Yaml.string)
+        (Yaml.field "fission_features" (Yaml.list Yaml.string))
+        (Yaml.field "drive_features" (Yaml.list Yaml.string))
 
 
 fissionForDevelopersDataDecoder : Yaml.Decoder FissionForDevelopersData
 fissionForDevelopersDataDecoder =
-    Yaml.map
+    Yaml.map4
         FissionForDevelopersData
+        (Yaml.field "title" Yaml.string)
         (Yaml.field "description" Yaml.markdownString)
+        (Yaml.field "button" Yaml.string)
+        (Yaml.field "button_link" Yaml.string)
 
 
 subscribeDataDecoder : Yaml.Decoder SubscribeData
@@ -309,15 +369,11 @@ tagline : DecodedData -> Html Msg
 tagline data =
     Html.div
         [ T.mt_10 ]
-        [ Kit.tagline data.tagline ]
+        [ Kit.tagline data.hero.tagline ]
 
 
 shortDescription : DecodedData -> Html Msg
 shortDescription data =
-    let
-        features =
-            "* Works in all browsers, including mobile devices\n* Uses web APIs, no plug-ins needed\n* Can function local-first, and in many cases, offline\n* User owned data and storage"
-    in
     Html.div
         [ T.max_w_2xl
         , T.mx_auto
@@ -335,7 +391,7 @@ shortDescription data =
             , T.prose_lg
             , T.text_center
             ]
-            data.shortDescription
+            data.hero.shortDescription
         , Html.div
             [ T.mt_6
             , T.flex
@@ -347,12 +403,7 @@ shortDescription data =
                 , T.prose_lg
                 , T.flex_1
                 ]
-                [ Html.ul []
-                    [ Html.li [] [ Html.text "Works in all browsers, including mobile devices" ]
-                    , Html.li [] [ Html.text "Uses web APIs, no plug-ins needed" ]
-                    , Html.li [] [ Html.text "Can function local-first, and in many cases, offline" ]
-                    , Html.li [] [ Html.text "User owned data and storage" ]
-                    ]
+                [ bulletList data.hero.features
                 ]
             , Html.img
                 [ A.src (ImagePath.toString images.content.artworkPage.characters05)
@@ -391,7 +442,7 @@ video pagePath model data =
             , A.style "z-index" "-1"
             ]
             [ Html.div [ T.bg_gray_600, T.flex_1 ] [] ]
-        , Html.div [ T.px_6, T.text_center ] [ Kit.h2 "Watch a one-minute demo of fission!" ]
+        , Html.div [ T.px_6, T.text_center ] [ Kit.h2 data.hero.video.title ]
         , Html.div
             [ T.mt_6
             , T.max_w_5xl
@@ -412,7 +463,7 @@ video pagePath model data =
                 , A.style "padding-bottom" "56.25%"
                 ]
                 [ Html.iframe
-                    [ A.src "https://www.youtube-nocookie.com/embed/6SO8EQb9xrk"
+                    [ A.src data.hero.video.link
                     , A.attribute "frameborder" "0"
                     , A.attribute "allow" "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     , A.attribute "allowfullscreen" ""
@@ -474,7 +525,7 @@ fissionDrive pagePath model data =
                 , T.md__text_left
                 , T.md__text_lg
                 ]
-                [ Kit.h2 "Fission Drive"
+                [ Kit.h2 data.fissionDrive.title
                 , Html.img
                     [ A.src (ImagePath.toString images.content.index.fissionDriveLight)
                     , A.style "max-width" "300px"
@@ -496,10 +547,10 @@ fissionDrive pagePath model data =
                     ]
                     data.fissionDrive.description
                 , Html.a
-                    (A.href "https://drive.fission.codes"
+                    (A.href data.fissionDrive.buttonLink
                         :: Kit.buttonAttributes
                     )
-                    [ Html.text "Sign up for Fission Drive" ]
+                    [ Html.text data.fissionDrive.button ]
                 ]
             ]
         ]
@@ -522,7 +573,7 @@ productFeatures pagePath model data =
         , T.bg_gray_600
         , T.text_center
         ]
-        [ Kit.h2 "Product Features"
+        [ Kit.h2 data.productFeatures.title
         , Html.div
             [ T.flex
             , T.flex_col
@@ -560,16 +611,7 @@ productFeatures pagePath model data =
                     , T.mt_4
                     , T.max_w_sm
                     ]
-                    [ Html.ul []
-                        [ Html.li [] [ Html.text "No DevOps Required" ]
-                        , Html.li [] [ Html.text "Works in all Web Browsers" ]
-                        , Html.li [] [ Html.text "Built in Web Native file system" ]
-                        , Html.li [] [ Html.text "Offline authentication" ]
-                        , Html.li [] [ Html.text "End-to-end encryption" ]
-                        , Html.li [] [ Html.text "GDPR Security Compliance" ]
-                        , Html.li [] [ Html.text "Data Encrypted at Rest" ]
-                        ]
-                    ]
+                    [ bulletList data.productFeatures.fissionFeatures ]
                 ]
             , Html.div
                 [ T.flex
@@ -600,13 +642,7 @@ productFeatures pagePath model data =
                     , T.mt_4
                     , T.max_w_sm
                     ]
-                    [ Html.ul []
-                        [ Html.li [] [ Html.text "User Accounts with Data Privacy and File Storage included." ]
-                        , Html.li [] [ Html.text "Passwordless Login & Authentication that works in all web browsers." ]
-                        , Html.li [] [ Html.text "Control your own data - your files, available everywhere, even offline." ]
-                        , Html.li [] [ Html.text "Easily control your file settings for public sharing or private use." ]
-                        ]
-                    ]
+                    [ bulletList data.productFeatures.driveFeatures ]
                 ]
             ]
         ]
@@ -629,7 +665,7 @@ fissionForDevelopers pagePath model data =
         , T.text_center
         , T.space_y_8
         ]
-        [ Kit.h2 "Fission For Developers"
+        [ Kit.h2 data.fissionForDevelopers.title
         , Html.p
             [ T.prose
             , T.prose_lg
@@ -672,6 +708,7 @@ fissionForDevelopers pagePath model data =
                         , Html.span [] [ Html.text text ]
                         ]
                 )
+                -- TODO Figure out how to make this configurable in .yml
                 [ ( FeatherIcons.book
                   , "Front end static publishing"
                   )
@@ -687,12 +724,12 @@ fissionForDevelopers pagePath model data =
                 ]
             )
         , Html.a
-            (A.href "https://guide.fission.codes"
+            (A.href data.fissionForDevelopers.buttonLink
                 :: T.max_w_2xs
                 :: T.w_full
                 :: Kit.buttonAltAttributes
             )
-            [ Html.text "Get Started" ]
+            [ Html.text data.fissionForDevelopers.button ]
         ]
 
 
@@ -807,3 +844,15 @@ subscriptionButton model =
     Html.button
         buttonAttributes
         [ Html.text label ]
+
+
+
+-- UTILITIES
+
+
+bulletList : List String -> Html msg
+bulletList items =
+    Html.ul []
+        (List.map (\item -> Html.li [] [ Html.text item ])
+            items
+        )
