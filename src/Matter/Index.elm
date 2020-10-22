@@ -439,19 +439,49 @@ fissionDrive pagePath model data =
 productFeatures : PagePath -> Model -> DecodedData -> Html Msg
 productFeatures pagePath model data =
     Html.div
-        [ T.bg_gray_600 ]
-        [ Html.div (A.id "product-features" :: Kit.containerAttributes)
+        [ A.id "product-features"
+        , T.px_6
+        , T.py_16
+        , T.lg__py_24
+        , T.flex
+        , T.flex_col
+        , T.items_center
+        , T.bg_gray_600
+        ]
+        [ Html.div
+            [ T.flex
+            , T.flex_col
+            , T.items_center
+            , T.text_center
+            , T.mx_auto
+            ]
             [ Kit.h2 "Product Features"
             , Html.div
                 [ T.flex
-                , T.flex_row
+                , T.flex_col
+                , T.items_center
+                , T.self_start
+                , T.w_full
+                , T.mt_12
+                , T.flex_1
                 ]
-                [ Html.div
-                    [ T.flex_grow
-                    , T.flex_shrink_0
+                [ Html.img
+                    [ A.src (ImagePath.toString images.logoDarkColored)
+                    , A.style "max-width" "150px"
+                    , A.title "Fission"
+
+                    --
+                    , T.w_full
                     ]
-                    [ Kit.h3 "Fission"
-                    , Html.ul [ T.text_left ]
+                    []
+                , Html.div
+                    [ T.prose
+                    , T.text_left
+                    , T.self_start
+                    , T.mt_4
+                    , T.max_w_sm
+                    ]
+                    [ Html.ul []
                         [ Html.li [] [ Html.text "No DevOps Required" ]
                         , Html.li [] [ Html.text "Works in all Web Browsers" ]
                         , Html.li [] [ Html.text "Built in Web Native file system" ]
@@ -461,12 +491,38 @@ productFeatures pagePath model data =
                         , Html.li [] [ Html.text "Data Encrypted at Rest" ]
                         ]
                     ]
-                , Html.div
-                    [ T.flex_grow
-                    , T.flex_shrink_0
+                ]
+            , Html.div
+                [ T.flex
+                , T.flex_col
+                , T.items_center
+                , T.self_start
+                , T.w_full
+                , T.mt_12
+                , T.flex_1
+                ]
+                [ Html.div
+                    [ T.mt_12
+                    , T.flex
+                    , T.flex_row
+                    , T.space_x_4
+                    , T.items_center
                     ]
-                    [ Kit.h3 "Fission Drive"
-                    , Html.ul [ T.text_left ]
+                    [ Html.img
+                        [ A.src (ImagePath.toString images.content.index.fissionDriveLogo)
+                        , A.style "max-width" "66px"
+                        ]
+                        []
+                    , Kit.h2 "Fission Drive"
+                    ]
+                , Html.div
+                    [ T.prose
+                    , T.text_left
+                    , T.self_start
+                    , T.mt_4
+                    , T.max_w_sm
+                    ]
+                    [ Html.ul []
                         [ Html.li [] [ Html.text "User Accounts with Data Privacy and File Storage included." ]
                         , Html.li [] [ Html.text "Passwordless Login & Authentication that works in all web browsers." ]
                         , Html.li [] [ Html.text "Control your own data - your files, available everywhere, even offline." ]
