@@ -138,20 +138,7 @@ intro pagePath model data =
         , T.overflow_hidden
         , T.px_6
         ]
-        [ Html.div
-            [ T.border_b
-            , T.container
-            , T.flex
-            , T.items_center
-            , T.mx_auto
-            , T.py_8
-            , T.border_gray_500
-            ]
-            [ Common.badge
-            , Html.div
-                [ T.ml_auto ]
-                [ menuItems ]
-            ]
+        [ navigationBar pagePath model data
 
         -----------------------------------------
         -- Hidden <h1>
@@ -179,8 +166,26 @@ intro pagePath model data =
         ]
 
 
-menuItems : Html Msg
-menuItems =
+navigationBar : PagePath -> Model -> DecodedData -> Html Msg
+navigationBar pagePath model data =
+    Html.div
+        [ T.border_b
+        , T.container
+        , T.flex
+        , T.items_center
+        , T.mx_auto
+        , T.py_8
+        , T.border_gray_500
+        ]
+        [ Common.badge
+        , Html.div
+            [ T.ml_auto ]
+            [ navigationItems ]
+        ]
+
+
+navigationItems : Html Msg
+navigationItems =
     let
         menuItem link text =
             Html.a
