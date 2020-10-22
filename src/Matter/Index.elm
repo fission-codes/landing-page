@@ -172,41 +172,83 @@ navigationBar pagePath model data =
         [ T.border_b
         , T.container
         , T.flex
+        , T.flex_col
+        , T.space_y_4
         , T.items_center
         , T.mx_auto
         , T.py_8
         , T.border_gray_500
         ]
-        [ Common.badge
+        [ Html.div
+            [ T.flex
+            , T.flex_row
+            , T.w_full
+            ]
+            [ Html.div [ T.hidden, T.sm__block ] [ Common.badge ]
+            , Html.button
+                [ T.appearance_none
+                , T.w_8
+                , T.h_8
+                , T.items_center
+                , T.justify_center
+                , T.flex
+                , T.text_gray_200
+                , T.sm__hidden
+                ]
+                [ FeatherIcons.menu
+                    |> FeatherIcons.withSize 20
+                    |> FeatherIcons.toHtml []
+                ]
+            , Html.div
+                [ T.flex
+                , T.items_center
+                , T.space_x_8
+                , T.ml_auto
+                ]
+                [ Html.div
+                    [ T.flex
+                    , T.items_center
+                    , T.space_x_8
+                    , T.hidden
+                    , T.sm__block
+                    ]
+                    navigationItems
+                , signUpButton
+                ]
+            ]
         , Html.div
-            [ T.ml_auto ]
-            [ navigationItems ]
+            [ T.grid
+            , T.gap_3
+            , T.grid_cols_2
+            , T.w_full
+            , T.sm__hidden
+            ]
+            navigationItems
         ]
 
 
-navigationItems : Html Msg
+navigationItems : List (Html Msg)
 navigationItems =
     let
         menuItem link text =
             Html.a
-                [ T.text_gray_200
-                , A.href link
+                [ A.href link
+                , T.text_gray_200
                 ]
                 [ Html.text text ]
     in
-    Html.div
-        [ T.flex
-        , T.items_center
-        , T.space_x_8
-        ]
-        [ menuItem "https://guide.fission.codes" "Get Started"
-        , menuItem "https://blog.fission.codes" "Blog"
-        , menuItem "https://talk.fission.codes" "Forum"
-        , menuItem "https://fission.codes/support" "Support"
-        , Html.button
-            Kit.menuButtonAttributes
-            [ Html.text "Sign Up" ]
-        ]
+    [ menuItem "https://guide.fission.codes" "Get Started"
+    , menuItem "https://blog.fission.codes" "Blog"
+    , menuItem "https://talk.fission.codes" "Forum"
+    , menuItem "https://fission.codes/support" "Support"
+    ]
+
+
+signUpButton : Html Msg
+signUpButton =
+    Html.button
+        Kit.menuButtonAttributes
+        [ Html.text "Sign Up" ]
 
 
 logo : Html Msg
