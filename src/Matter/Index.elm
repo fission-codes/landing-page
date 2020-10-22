@@ -138,10 +138,20 @@ intro pagePath model data =
         , T.overflow_hidden
         , T.px_6
         ]
-        [ Common.menu
-            pagePath
-            [ T.border_gray_500 ]
-            [ menuItems ]
+        [ Html.div
+            [ T.border_b
+            , T.container
+            , T.flex
+            , T.items_center
+            , T.mx_auto
+            , T.py_8
+            , T.border_gray_500
+            ]
+            [ Common.badge
+            , Html.div
+                [ T.ml_auto ]
+                [ menuItems ]
+            ]
 
         -----------------------------------------
         -- Hidden <h1>
@@ -171,20 +181,26 @@ intro pagePath model data =
 
 menuItems : Html Msg
 menuItems =
+    let
+        menuItem link text =
+            Html.a
+                [ T.text_gray_200
+                , A.href link
+                ]
+                [ Html.text text ]
+    in
     Html.div
         [ T.flex
         , T.items_center
+        , T.space_x_8
         ]
-        [ Common.menuItem "news" "News"
-        , Common.menuItem "" "Guide"
-        , Common.menuItem "" "Support"
+        [ menuItem "https://guide.fission.codes" "Get Started"
+        , menuItem "https://blog.fission.codes" "Blog"
+        , menuItem "https://talk.fission.codes" "Forum"
+        , menuItem "https://fission.codes/support" "Support"
         , Html.button
-            (List.append
-                (Common.menuItemAttributes "sign-up")
-                Kit.menuButtonAttributes
-            )
-            [ Html.text "Sign Up"
-            ]
+            Kit.menuButtonAttributes
+            [ Html.text "Sign Up" ]
         ]
 
 
