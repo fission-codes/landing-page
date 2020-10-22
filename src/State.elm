@@ -32,6 +32,7 @@ init _ =
         { latestBlogPosts = []
         , subscribeToEmail = Blank
         , subscribing = Stopped
+        , menuBarOpen = False
         }
         -----------------------------------------
         -- Command
@@ -53,6 +54,19 @@ update msg =
         Bypass ->
             -- Don't do anything.
             Return.singleton
+
+        -----------------------------------------
+        -- Index page menu bar
+        -----------------------------------------
+        ToggleMenuBar ->
+            \model ->
+                Return.singleton
+                    { model | menuBarOpen = not model.menuBarOpen }
+
+        CloseMenuBar ->
+            \model ->
+                Return.singleton
+                    { model | menuBarOpen = False }
 
         -----------------------------------------
         -- News

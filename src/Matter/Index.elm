@@ -7,9 +7,11 @@ import External.Blog
 import FeatherIcons
 import Html exposing (Html)
 import Html.Attributes as A
+import Html.Attributes.Extra as A
 import Html.Events as E
 import Html.Events.Extra as E
 import Html.Extra as Html
+import Json.Decode as Json
 import Kit
 import Kit.Local as Kit
 import Pages exposing (images, pages)
@@ -114,7 +116,12 @@ subscribeDataDecoder =
 view : PagePath -> Model -> DecodedData -> Html Msg
 view pagePath model data =
     Html.div
-        []
+        [ if model.menuBarOpen then
+            E.onClick CloseMenuBar
+
+          else
+            A.empty
+        ]
         [ intro pagePath model data
         , video pagePath model data
         , fissionDrive pagePath model data
@@ -148,7 +155,7 @@ intro pagePath model data =
             [ Html.text "FISSION" ]
 
         -----------------------------------------
-        -- Centered content
+        -- Content
         -----------------------------------------
         , Html.div
             [ T.flex
@@ -178,6 +185,7 @@ navigationBar pagePath model data =
         , T.mx_auto
         , T.py_8
         , T.border_gray_500
+        , stopBubblingClickEvents
         ]
         [ Html.div
             [ T.flex
@@ -194,6 +202,7 @@ navigationBar pagePath model data =
                 , T.flex
                 , T.text_gray_200
                 , T.sm__hidden
+                , E.onClick ToggleMenuBar
                 ]
                 [ FeatherIcons.menu
                     |> FeatherIcons.withSize 20
@@ -222,9 +231,38 @@ navigationBar pagePath model data =
             , T.grid_cols_2
             , T.w_full
             , T.sm__hidden
+            , if model.menuBarOpen then
+                A.empty
+
+              else
+                T.hidden
             ]
             navigationItems
         ]
+
+
+stopBubblingClickEvents : Html.Attribute Msg
+stopBubblingClickEvents =
+    E.custom "click"
+        (Json.field "eventPhase" Json.int
+            |> Json.andThen
+                (\phaseInt ->
+                    let
+                        -- https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
+                        eventBubblingPhase =
+                            3
+                    in
+                    if phaseInt == eventBubblingPhase then
+                        Json.succeed
+                            { stopPropagation = True
+                            , preventDefault = False
+                            , message = Bypass
+                            }
+
+                    else
+                        Json.fail ""
+                )
+        )
 
 
 navigationItems : List (Html Msg)
@@ -240,7 +278,7 @@ navigationItems =
     [ menuItem "https://guide.fission.codes" "Get Started"
     , menuItem "https://blog.fission.codes" "Blog"
     , menuItem "https://talk.fission.codes" "Forum"
-    , menuItem "https://fission.codes/support" "Support"
+    , menuItem "/support" "Support"
     ]
 
 

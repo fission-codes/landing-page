@@ -22,6 +22,7 @@ type alias Model =
     { latestBlogPosts : List External.Blog.Post
     , subscribeToEmail : Validated String
     , subscribing : RemoteAction
+    , menuBarOpen : Bool
     }
 
 
@@ -33,6 +34,11 @@ type alias Model =
 -}
 type Msg
     = Bypass
+      -----------------------------------------
+      -- Index page menu bar
+      -----------------------------------------
+    | ToggleMenuBar
+    | CloseMenuBar
       -----------------------------------------
       -- News
       -----------------------------------------
