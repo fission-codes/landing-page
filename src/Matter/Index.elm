@@ -27,18 +27,12 @@ import Yaml.Decode.Extra as Yaml
 
 
 type alias DecodedData =
-    { fissionLive : FissionLiveData
-    , footer : Common.FooterData
-    , heroku : HerokuData
-    , subscribe : SubscribeData
-
-    --
+    { tagline : String
+    , shortDescription : List (Html Msg)
     , fissionDrive : FissionDriveData
     , fissionForDevelopers : FissionForDevelopersData
-
-    --
-    , shortDescription : List (Html Msg)
-    , tagline : String
+    , subscribe : SubscribeData
+    , footer : Common.FooterData
     }
 
 
@@ -49,29 +43,6 @@ type alias FissionDriveData =
 
 type alias FissionForDevelopersData =
     { description : List (Html Msg)
-    }
-
-
-
---
-
-
-type alias FissionLiveData =
-    { about : List (Html Msg)
-    , terminalCaption : List (Html Msg)
-    , title : String
-    }
-
-
-type alias HerokuData =
-    { about : List (Html Msg)
-    , title : String
-    }
-
-
-type alias NewsData =
-    { buttonText : String
-    , title : String
     }
 
 
@@ -102,22 +73,14 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map8
+    Yaml.map6
         DecodedData
-        (Yaml.field "fission_live" fissionLiveDataDecoder)
-        (Yaml.field "footer" Common.footerDataDecoder)
-        (Yaml.field "heroku" herokuDataDecoder)
-        (Yaml.field "subscribe" subscribeDataDecoder)
-        --
+        (Yaml.field "tagline" Yaml.string)
+        (Yaml.field "short_description" Yaml.markdownString)
         (Yaml.field "fission_drive" fissionDriveDataDecoder)
         (Yaml.field "fission_for_developers" fissionForDevelopersDataDecoder)
-        --
-        (Yaml.field "short_description" Yaml.markdownString)
-        (Yaml.field "tagline" Yaml.string)
-
-
-
---
+        (Yaml.field "subscribe" subscribeDataDecoder)
+        (Yaml.field "footer" Common.footerDataDecoder)
 
 
 fissionDriveDataDecoder : Yaml.Decoder FissionDriveData
@@ -132,35 +95,6 @@ fissionForDevelopersDataDecoder =
     Yaml.map
         FissionForDevelopersData
         (Yaml.field "description" Yaml.markdownString)
-
-
-
---
-
-
-fissionLiveDataDecoder : Yaml.Decoder FissionLiveData
-fissionLiveDataDecoder =
-    Yaml.map3
-        FissionLiveData
-        (Yaml.field "about" Yaml.markdownString)
-        (Yaml.field "terminal_caption" Yaml.markdownString)
-        (Yaml.field "title" Yaml.string)
-
-
-herokuDataDecoder : Yaml.Decoder HerokuData
-herokuDataDecoder =
-    Yaml.map2
-        HerokuData
-        (Yaml.field "about" Yaml.markdownString)
-        (Yaml.field "title" Yaml.string)
-
-
-newsDataDecoder : Yaml.Decoder NewsData
-newsDataDecoder =
-    Yaml.map2
-        NewsData
-        (Yaml.field "button_text" Yaml.string)
-        (Yaml.field "title" Yaml.string)
 
 
 subscribeDataDecoder : Yaml.Decoder SubscribeData
@@ -186,10 +120,6 @@ view pagePath model data =
         , fissionDrive pagePath model data
         , productFeatures pagePath model data
         , fissionForDevelopers pagePath model data
-
-        -- , fissionLive pagePath model data
-        -- , heroku pagePath model data
-        -- , news pagePath model data
         , subscribe pagePath model data
         , Common.footer pagePath data.footer
         ]
@@ -239,6 +169,7 @@ intro pagePath model data =
         ]
 
 
+menuItems : Html Msg
 menuItems =
     Html.div
         [ T.flex
@@ -247,21 +178,17 @@ menuItems =
         [ Common.menuItem "news" "News"
         , Common.menuItem "" "Guide"
         , Common.menuItem "" "Support"
-        , Common.menuItem "" "Sign Up"
-
-        -- , Common.menuItem "fission-live" "For Developers"
-        -- , Common.menuItem "heroku" "Drive"
-        --
-        -- , Html.button
-        --     (List.append
-        --         (Common.menuItemAttributes "subscribe")
-        --         Kit.menuButtonAttributes
-        --     )
-        --     [ Html.text "Subscribe"
-        --     ]
+        , Html.button
+            (List.append
+                (Common.menuItemAttributes "sign-up")
+                Kit.menuButtonAttributes
+            )
+            [ Html.text "Sign Up"
+            ]
         ]
 
 
+logo : Html Msg
 logo =
     Html.div
         [ T.px_10 ]
@@ -277,12 +204,14 @@ logo =
         ]
 
 
+tagline : DecodedData -> Html Msg
 tagline data =
     Html.div
         [ T.mt_10 ]
         [ Kit.tagline data.tagline ]
 
 
+shortDescription : DecodedData -> Html Msg
 shortDescription data =
     let
         features =
@@ -329,6 +258,7 @@ shortDescription data =
                 , A.width 330
                 , A.style "margin-right" "-100px"
                 , T.flex_shrink_0
+                , T.ml_6
                 , T.hidden
                 , T.md__block
                 ]
@@ -636,205 +566,6 @@ fissionForDevelopers pagePath model data =
                 :: Kit.buttonAltAttributes
             )
             [ Html.text "Get Started" ]
-        ]
-
-
-
--- FISSION LIVE
-
-
-fissionLive : PagePath -> Model -> DecodedData -> Html Msg
-fissionLive pagePath model data =
-    Html.div
-        []
-        [ Html.div
-            (A.id "fission-live" :: A.style "max-width" "638px" :: Kit.containerAttributes)
-            [ -----------------------------------------
-              -- Title
-              -----------------------------------------
-              Kit.h2 data.fissionLive.title
-            , Html.img
-                [ A.src (ImagePath.toString images.content.cancelyak512)
-
-                --
-                , T.mt_12
-                , T.rounded
-                , T.w_full
-                ]
-                []
-
-            -----------------------------------------
-            -- About
-            -----------------------------------------
-            , Kit.introParagraph data.fissionLive.about
-
-            -----------------------------------------
-            -- Terminal GIF
-            -----------------------------------------
-            , Html.img
-                [ A.src (ImagePath.toString images.content.fissionCliAppInit)
-
-                --
-                , T.mt_12
-                , T.rounded
-                , T.w_full
-                ]
-                []
-
-            -- Caption
-            ----------
-            , Html.div
-                [ T.mt_4
-                , T.text_gray_300
-                , T.text_sm
-                ]
-                data.fissionLive.terminalCaption
-
-            -----------------------------------------
-            -- Guide Link
-            -----------------------------------------
-            , Html.a
-                (A.href "https://guide.fission.codes/"
-                    :: T.mt_12
-                    :: Kit.buttonAltAttributes
-                )
-                [ Html.text "Install the CLI" ]
-            ]
-        ]
-
-
-
--- HEROKU
-
-
-heroku : PagePath -> Model -> DecodedData -> Html Msg
-heroku pagePath model data =
-    Html.div
-        [ T.bg_gray_600 ]
-        [ Html.div
-            (A.id "heroku" :: A.style "max-width" "638px" :: Kit.containerAttributes)
-            [ -----------------------------------------
-              -- Title
-              -----------------------------------------
-              Kit.h2 data.heroku.title
-
-            -----------------------------------------
-            -- About
-            -----------------------------------------
-            , Kit.introParagraph data.heroku.about
-
-            -----------------------------------------
-            -- Image
-            -----------------------------------------
-            , Html.img
-                [ A.src (ImagePath.toString images.content.driveDarkPublicRootVideoRedpanda)
-
-                --
-                , T.mt_12
-                , T.rounded
-                , T.w_full
-                ]
-                []
-
-            -----------------------------------------
-            -- Add-on Link
-            -----------------------------------------
-            , Html.a
-                (A.href "https://drive.fission.codes"
-                    :: T.mt_12
-                    :: Kit.buttonAttributes
-                )
-                [ Html.text "Sign up for Fission Drive" ]
-            ]
-        ]
-
-
-
--- NEWS
-
-
-news : PagePath -> Model -> DecodedData -> Html Msg
-news pagePath model data =
-    Html.div
-        []
-        [ Html.div
-            (A.id "news" :: T.flex :: Kit.containerAttributes)
-            [ -----------------------------------------
-              -- Left
-              -----------------------------------------
-              Html.div
-                [ T.md__w_5over12, T.text_left ]
-                [ Kit.h2 "From the blog"
-
-                --
-                , model.latestBlogPosts
-                    |> List.indexedMap
-                        (\idx ->
-                            newsItem (idx == 0)
-                        )
-                    |> Html.div
-                        [ T.mt_12
-                        , T.text_lg
-                        ]
-
-                --
-                , Html.a
-                    (A.href "https://blog.fission.codes"
-                        :: T.mt_12
-                        :: Kit.buttonAltAttributes
-                    )
-                    [ Html.text "Visit the Fission Blog »" ]
-                ]
-
-            -----------------------------------------
-            -- Right
-            -----------------------------------------
-            , Html.div
-                [ A.style
-                    "background-image"
-                    ("url(" ++ ImagePath.toString images.content.marvinMeyer571072Unsplash600 ++ ")")
-
-                --
-                , T.bg_gray_600
-                , T.bg_cover
-                , T.hidden
-                , T.ml_16
-                , T.rounded
-                , T.w_7over12
-
-                -- Responsive
-                -------------
-                , T.md__block
-                ]
-                []
-            ]
-        ]
-
-
-newsItem : Bool -> External.Blog.Post -> Html Msg
-newsItem isFirst post =
-    Html.div
-        []
-        [ if isFirst then
-            Html.nothing
-
-          else
-            Html.div
-                [ T.border
-                , T.border_gray_600
-                , T.h_0
-                , T.my_6
-                , T.w_32
-                ]
-                []
-
-        --
-        , Html.a
-            [ A.href post.url
-            , T.block
-            , T.leading_snug
-            ]
-            [ Html.text post.title ]
         ]
 
 

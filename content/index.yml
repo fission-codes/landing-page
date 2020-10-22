@@ -10,6 +10,7 @@ summary_type: normal
 tagline:
   Build and Scale Apps
 
+
 short_description:
   Fission helps front end developers to quickly and easily publish files, websites, and apps directly from your local machine. If you can build an app for a single user, you can share it with 10 or 10,000 users, without any changes.
   <br /><br />
@@ -42,44 +43,6 @@ fission_for_developers:
     Local-first functionality also supports working without an Internet connection on desktop and mobile whenever possible. Apps scale running client side with offline support and sync.
 
 
-fission_live:
-
-  title:
-    No more yak shaving
-
-  about:
-    You've built an app, it looks great on your machine. Now you have to figure out where to host it, how to scale it, and how to make it easy for other people to try it as well. You've got nothing but days of yak shaving ahead of you!<br />
-    <br />
-    Build apps that include passwordless login, end-to-end encryption, and offline support, without having to learn complicated DevOps techniques.<br />
-    <br />
-    Let your app users own their data, with more scale and less cost to you. We’ve built a web native file system that combines files, encryption, and identity, like an open source iCloud.
-
-  terminal_caption:
-    Download our <abbr title="Command Line Interface">CLI</abbr> and build and instantly share your app.
-
-
-
-heroku:
-
-  title:
-    Fission Drive
-
-  about:
-    Every Fission Account gets access to the Drive app. Your files, available everywhere, even offline.<br />
-    <br />
-    Private files are encrypted end-to-end. Easily publish and share public files.<br />
-    <br />
-    Add an app, give permission to what files it can access, just like you're used to on mobile.
-
-
-
-news:
-
-  title: From the blog
-  button_text: Subscribe to our product updates newsletter
-
-
-
 subscribe:
 
   title: Subscribe to our product updates newsletter
@@ -88,7 +51,6 @@ subscribe:
 
   note:
     "[Visit the subscribe page](https://5d04d668.sibforms.com/serve/MUIEAD0fi3_BJE-4eieeuK6_0_XZaOPiu1_nfh56jvP1pV9uWy9OLxWLrHtjC148osZF2vcRb0XAymSdzFxhVD7XgvvODjbrp5ClBvQLmY70hyvU1JKu7ucoOP5KFJVRcfNgYN-3qvVppxg72KGyYZlWAJr2IkO7Ae9CIhnjpufaP7npZGPrBFzpmyEaKKLGYyqu0dnQIobGLAMM) to pick from event, product, and weekly link newsletters"
-
 
 
 footer:
