@@ -99,6 +99,14 @@ export default {
 
   plugins: [
     typography,
-  ]
+  ],
+
+  typography: (theme) => ({
+    default: {
+      css: {
+        color: theme('colors.gray.200'),
+      },
+    },
+  }),
 
 }

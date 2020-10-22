@@ -289,6 +289,7 @@ shortDescription data =
         ]
         [ Html.div
             [ T.prose
+            , T.prose_lg
             , T.text_center
             ]
             data.shortDescription
@@ -300,6 +301,7 @@ shortDescription data =
             ]
             [ Html.div
                 [ T.prose
+                , T.prose_lg
                 , T.flex_1
                 ]
                 [ Html.ul []
@@ -378,7 +380,7 @@ fissionDrive pagePath model data =
             , T.flex_row
             , T.items_center
             , T.mx_auto
-            , T.space_x_8
+            , T.md__space_x_8
             ]
             [ Html.img
                 [ A.src (ImagePath.toString images.content.index.fissionDriveLight)
@@ -416,6 +418,7 @@ fissionDrive pagePath model data =
                     [ T.max_w_2xl
                     , T.text_gray_200
                     , T.prose
+                    , T.prose_lg
 
                     -- Responsive
                     -------------
@@ -447,22 +450,27 @@ productFeatures pagePath model data =
         , T.flex_col
         , T.items_center
         , T.bg_gray_600
+        , T.text_center
         ]
-        [ Html.div
+        [ Kit.h2 "Product Features"
+        , Html.div
             [ T.flex
             , T.flex_col
             , T.items_center
-            , T.text_center
-            , T.mx_auto
+            , T.mt_12
+            , T.space_y_12
+            , T.space_x_0
+            , T.md__space_y_0
+            , T.md__space_x_8
+            , T.md__flex_row
+            , T.md__items_start
             ]
-            [ Kit.h2 "Product Features"
-            , Html.div
+            [ Html.div
                 [ T.flex
                 , T.flex_col
                 , T.items_center
                 , T.self_start
                 , T.w_full
-                , T.mt_12
                 , T.flex_1
                 ]
                 [ Html.img
@@ -476,6 +484,7 @@ productFeatures pagePath model data =
                     []
                 , Html.div
                     [ T.prose
+                    , T.prose_lg
                     , T.text_left
                     , T.self_start
                     , T.mt_4
@@ -498,12 +507,10 @@ productFeatures pagePath model data =
                 , T.items_center
                 , T.self_start
                 , T.w_full
-                , T.mt_12
                 , T.flex_1
                 ]
                 [ Html.div
-                    [ T.mt_12
-                    , T.flex
+                    [ T.flex
                     , T.flex_row
                     , T.space_x_4
                     , T.items_center
@@ -517,6 +524,7 @@ productFeatures pagePath model data =
                     ]
                 , Html.div
                     [ T.prose
+                    , T.prose_lg
                     , T.text_left
                     , T.self_start
                     , T.mt_4
