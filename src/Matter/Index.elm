@@ -4,6 +4,7 @@ import Common.Views as Common
 import Content.Metadata exposing (Frontmatter)
 import Content.Parsers exposing (EncodedData)
 import External.Blog
+import FeatherIcons
 import Html exposing (Html)
 import Html.Attributes as A
 import Html.Events as E
@@ -29,11 +30,11 @@ type alias DecodedData =
     { fissionLive : FissionLiveData
     , footer : Common.FooterData
     , heroku : HerokuData
-    , news : NewsData
     , subscribe : SubscribeData
 
     --
     , fissionDrive : FissionDriveData
+    , fissionForDevelopers : FissionForDevelopersData
 
     --
     , shortDescription : List (Html Msg)
@@ -42,6 +43,11 @@ type alias DecodedData =
 
 
 type alias FissionDriveData =
+    { description : List (Html Msg)
+    }
+
+
+type alias FissionForDevelopersData =
     { description : List (Html Msg)
     }
 
@@ -101,10 +107,10 @@ dataDecoder =
         (Yaml.field "fission_live" fissionLiveDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
         (Yaml.field "heroku" herokuDataDecoder)
-        (Yaml.field "news" newsDataDecoder)
         (Yaml.field "subscribe" subscribeDataDecoder)
         --
         (Yaml.field "fission_drive" fissionDriveDataDecoder)
+        (Yaml.field "fission_for_developers" fissionForDevelopersDataDecoder)
         --
         (Yaml.field "short_description" Yaml.markdownString)
         (Yaml.field "tagline" Yaml.string)
@@ -118,6 +124,13 @@ fissionDriveDataDecoder : Yaml.Decoder FissionDriveData
 fissionDriveDataDecoder =
     Yaml.map
         FissionDriveData
+        (Yaml.field "description" Yaml.markdownString)
+
+
+fissionForDevelopersDataDecoder : Yaml.Decoder FissionForDevelopersData
+fissionForDevelopersDataDecoder =
+    Yaml.map
+        FissionForDevelopersData
         (Yaml.field "description" Yaml.markdownString)
 
 
@@ -549,11 +562,80 @@ productFeatures pagePath model data =
 fissionForDevelopers : PagePath -> Model -> DecodedData -> Html Msg
 fissionForDevelopers pagePath model data =
     Html.div
-        []
-        [ Html.div (A.id "fission-for-developers" :: Kit.containerAttributes)
-            [ Kit.h2 "Fission For Developers"
-            , Html.text "Fission empowers front-end developers to build and scale apps with no backend or DevOps skills required.\n\nThe Fission webnative SDK takes advantage of all the capabilities your browser has to offer, as well as local computation, storage, and identity. Deploy web apps from your laptop that are secure and private by default, just like native mobile apps.\n\nLocal-first functionality also supports working without an Internet connection on desktop and mobile whenever possible. Apps scale running client side with offline support and sync.\nClick the button to install the tools on your local machine and... \n"
+        [ A.id "fission-for-developers"
+        , T.px_6
+        , T.py_16
+        , T.lg__py_24
+        , T.flex
+        , T.flex_col
+        , T.items_center
+        , T.text_center
+        , T.space_y_8
+        ]
+        [ Kit.h2 "Fission For Developers"
+        , Html.p
+            [ T.prose
+            , T.prose_lg
+            , T.max_w_2xl
             ]
+            data.fissionForDevelopers.description
+        , Html.ul
+            [ T.flex
+            , T.flex_col
+            , T.space_y_6
+            , T.text_lg
+            , T.text_gray_200
+            , T.md__grid
+            , T.md__grid_cols_2
+            , T.md__gap_6
+            , T.md__space_y_0
+            ]
+            (List.map
+                (\( icon, text ) ->
+                    Html.li
+                        [ T.flex
+                        , T.flex_row
+                        , T.space_x_3
+                        , T.items_center
+                        ]
+                        [ Html.span
+                            [ T.w_8
+                            , T.h_8
+                            , T.rounded
+                            , T.bg_purple_shade
+                            , T.text_purple_tint
+                            , T.items_center
+                            , T.justify_center
+                            , T.flex
+                            ]
+                            [ icon
+                                |> FeatherIcons.withSize 20
+                                |> FeatherIcons.toHtml []
+                            ]
+                        , Html.span [] [ Html.text text ]
+                        ]
+                )
+                [ ( FeatherIcons.book
+                  , "Front end static publishing"
+                  )
+                , ( FeatherIcons.users
+                  , "Accounts & Identity"
+                  )
+                , ( FeatherIcons.file
+                  , "File storage for users"
+                  )
+                , ( FeatherIcons.database
+                  , "Database"
+                  )
+                ]
+            )
+        , Html.a
+            (A.href "https://guide.fission.codes"
+                :: T.max_w_2xs
+                :: T.w_full
+                :: Kit.buttonAltAttributes
+            )
+            [ Html.text "Get Started" ]
         ]
 
 

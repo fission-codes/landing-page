@@ -79,6 +79,10 @@ export default {
         dark: { raw: '(prefers-color-scheme: dark)' }
       },
 
+      maxWidth: {
+        "2xs": "16rem",
+      },
+
     },
 
   },

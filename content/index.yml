@@ -32,6 +32,16 @@ fission_drive:
     Click the link to sign up and create your account!
 
 
+fission_for_developers:
+
+  description:
+    Fission empowers front-end developers to build and scale apps with no backend or DevOps skills required.
+    <br /><br />
+    The Fission webnative SDK takes advantage of all the capabilities your browser has to offer, as well as local computation, storage, and identity. Deploy web apps from your laptop that are secure and private by default, just like native mobile apps.
+    <br /><br />
+    Local-first functionality also supports working without an Internet connection on desktop and mobile whenever possible. Apps scale running client side with offline support and sync.
+
+
 fission_live:
 
   title:
@@ -82,7 +92,7 @@ subscribe:
 
 
 footer:
-  
+
   links:
     - url: "https://discord.gg/daDMAjE"
       label: Discord
