@@ -7,6 +7,25 @@ description: App & website hosting with user-controlled data
 summary_type: normal
 ---
 
+navigation:
+
+  callToAction: Sign up
+
+  items:
+
+    - text: Get Started
+      link: "https://guide.fission.codes"
+
+    - text: Blog
+      link: "https://blog.fission.codes"
+
+    - text: Forum
+      link: "https://talk.fission.codes"
+
+    - text: Support
+      link: "/support"
+
+
 hero:
 
   tagline: Build and Scale Apps

@@ -29,12 +29,25 @@ import Yaml.Decode.Extra as Yaml
 
 
 type alias DecodedData =
-    { hero : HeroData
+    { navigation : NavigationData
+    , hero : HeroData
     , fissionDrive : FissionDriveData
     , productFeatures : ProductFeaturesData
     , fissionForDevelopers : FissionForDevelopersData
     , subscribe : SubscribeData
     , footer : Common.FooterData
+    }
+
+
+type alias NavigationData =
+    { callToAction : String
+    , items : List NavigationItemData
+    }
+
+
+type alias NavigationItemData =
+    { text : String
+    , link : String
     }
 
 
@@ -102,14 +115,31 @@ render _ pagePath meta encodedData model =
 
 dataDecoder : Yaml.Decoder DecodedData
 dataDecoder =
-    Yaml.map6
+    Yaml.map7
         DecodedData
+        (Yaml.field "navigation" navigationDataDecoder)
         (Yaml.field "hero" heroDataDecoder)
         (Yaml.field "fission_drive" fissionDriveDataDecoder)
         (Yaml.field "product_features" productFeaturesDataDecoder)
         (Yaml.field "fission_for_developers" fissionForDevelopersDataDecoder)
         (Yaml.field "subscribe" subscribeDataDecoder)
         (Yaml.field "footer" Common.footerDataDecoder)
+
+
+navigationDataDecoder : Yaml.Decoder NavigationData
+navigationDataDecoder =
+    Yaml.map2
+        NavigationData
+        (Yaml.field "callToAction" Yaml.string)
+        (Yaml.field "items" (Yaml.list navigationItemDataDecoder))
+
+
+navigationItemDataDecoder : Yaml.Decoder NavigationItemData
+navigationItemDataDecoder =
+    Yaml.map2
+        NavigationItemData
+        (Yaml.field "text" Yaml.string)
+        (Yaml.field "link" Yaml.string)
 
 
 heroDataDecoder : Yaml.Decoder HeroData
@@ -281,8 +311,8 @@ navigationBar pagePath model data =
                     , T.hidden
                     , T.sm__block
                     ]
-                    navigationItems
-                , signUpButton
+                    (navigationItems data)
+                , signUpButton data.navigation.callToAction
                 ]
             ]
         , Html.div
@@ -297,7 +327,7 @@ navigationBar pagePath model data =
               else
                 T.hidden
             ]
-            navigationItems
+            (navigationItems data)
         ]
 
 
@@ -325,28 +355,27 @@ stopBubblingClickEvents =
         )
 
 
-navigationItems : List (Html Msg)
-navigationItems =
+navigationItems : DecodedData -> List (Html Msg)
+navigationItems data =
     let
-        menuItem link text =
+        menuItem { link, text } =
             Html.a
                 [ A.href link
                 , T.text_gray_200
                 ]
                 [ Html.text text ]
     in
-    [ menuItem "https://guide.fission.codes" "Get Started"
-    , menuItem "https://blog.fission.codes" "Blog"
-    , menuItem "https://talk.fission.codes" "Forum"
-    , menuItem "/support" "Support"
-    ]
+    List.map menuItem data.navigation.items
 
 
-signUpButton : Html Msg
-signUpButton =
+signUpButton : String -> Html Msg
+signUpButton text =
     Html.button
-        Kit.menuButtonAttributes
-        [ Html.text "Sign Up" ]
+        (List.append
+            (Common.menuItemAttributes "subscribe")
+            Kit.menuButtonAttributes
+        )
+        [ Html.text text ]
 
 
 logo : Html Msg
