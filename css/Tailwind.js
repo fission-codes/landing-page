@@ -1,6 +1,7 @@
 import defaultTheme from "tailwindcss/defaultTheme.js"
 import plugin from "tailwindcss/plugin.js"
 import * as kit from "fission-kit"
+import typography from "@tailwindcss/typography"
 
 
 export default {
@@ -39,7 +40,9 @@ export default {
     inset: {
       "auto": "auto",
       "0": 0,
+      "1/4": "25%",
       "1/2": "50%",
+      "3/4": "75%",
       "full": "100%"
     },
 
@@ -76,6 +79,10 @@ export default {
         dark: { raw: '(prefers-color-scheme: dark)' }
       },
 
+      maxWidth: {
+        "2xs": "16rem",
+      },
+
     },
 
   },
@@ -94,6 +101,16 @@ export default {
   // PLUGINS //////////////////////////////
   /////////////////////////////////////////
 
-  plugins: []
+  plugins: [
+    typography,
+  ],
+
+  typography: (theme) => ({
+    default: {
+      css: {
+        color: theme('colors.gray.200'),
+      },
+    },
+  }),
 
 }
