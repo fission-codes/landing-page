@@ -9,6 +9,7 @@ import Html exposing (Html)
 import Html.Extra as Html
 import Matter.Artwork
 import Matter.Index
+import Matter.Ipfs404
 import Matter.NotFound
 import Matter.Support
 import Pages exposing (pages)
@@ -26,6 +27,7 @@ pagesCatalog =
     [ ( pages.index, Matter.Index.render )
     , ( pages.support, Matter.Support.render )
     , ( pages.artwork, Matter.Artwork.render )
+    , ( pages.ipfs404, Matter.Ipfs404.render )
     ]
 
 
