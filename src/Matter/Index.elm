@@ -214,9 +214,9 @@ view pagePath model data =
         ]
         [ intro pagePath model data
         , video pagePath model data
-        , fissionDrive pagePath model data
-        , productFeatures pagePath model data
+        --, productFeatures pagePath model data
         , fissionForDevelopers pagePath model data
+        , fissionDrive pagePath model data
         , subscribe pagePath model data
         , Common.footer pagePath data.footer
         ]
@@ -588,7 +588,8 @@ fissionDrive pagePath model data =
 
 -- PRODUCT FEATURES
 
-
+{-
+-- BM: commenting out, I don't want this list at all
 productFeatures : PagePath -> Model -> DecodedData -> Html Msg
 productFeatures pagePath model data =
     Html.div
@@ -675,7 +676,7 @@ productFeatures pagePath model data =
                 ]
             ]
         ]
-
+-}
 
 
 -- FISSION FOR DEVELOPERS
@@ -739,16 +740,16 @@ fissionForDevelopers pagePath model data =
                 )
                 -- TODO Figure out how to make this configurable in .yml
                 [ ( FeatherIcons.book
-                  , "Front end static publishing"
+                  , "Make your apps work offline"
                   )
                 , ( FeatherIcons.users
-                  , "Accounts & Identity"
+                  , "User accounts with passwordless login"
                   )
                 , ( FeatherIcons.file
-                  , "File storage for users"
+                  , "Persistent, encrypted file store per user"
                   )
                 , ( FeatherIcons.database
-                  , "Database"
+                  , "Backend included"
                   )
                 ]
             )
