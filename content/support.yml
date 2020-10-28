@@ -21,7 +21,7 @@ overview:
       - icon: book-open
         body: "Our [Guide](https://guide.fission.codes) has instructions on getting started and basic troubleshooting"
       - icon: server
-        body: "The [API docs](https://runfission.com/docs) are interactive and document the Web API"
+        body: "Join our [Discord server](https://discord.gg/daDMAjE) if you want to ask some questions live"
       - icon: github
         body: "If you're comfortable filing Github issues - for problems or for feature requests - head on over to [our repos](https://github.com/fission-suite)"
       
@@ -33,13 +33,16 @@ contact:
       "Contact us"
     
     body:
-      "Sorry to hear you're having trouble with Fission! You can chat with us, or send an email, using the button below. Alternatively, if you'd like to chat more often, you can join [our Discord](https://discord.gg/daDMAjE)."
+      "Sorry to hear you're having trouble with Fission! You can chat with us as well as send an email using the button below."
   
 
 
 footer:
   
   links:
+    - url: "https://github.com/fission-suite"
+      label: Github
+
     - url: "https://discord.gg/daDMAjE"
       label: Discord
 

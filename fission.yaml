@@ -1,0 +1,4 @@
+ignore:
+  - .DS_Store
+url: colossal-green-crab.fission.app
+build: ./dist
