@@ -1,4 +1,3 @@
-ignore:
-  - .DS_Store
-url: colossal-green-crab.fission.app
-build: ./dist
+ignore: []
+url: gigantic-geriatric-rocketship.fission.app
+build: build
