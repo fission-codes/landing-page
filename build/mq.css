@@ -8,13 +8,7 @@ main {
   grid-template-columns: repeat(1, 1fr);
 }
 
-.module12 {
-  display:grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(1, 1fr);
-}
-
-.module5 {
+.module12, .module5, .module4 {
   display:grid;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(1, 1fr);
