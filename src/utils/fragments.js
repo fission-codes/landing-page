@@ -16,7 +16,7 @@ export const ghostTagFields = graphql`
     fragment GhostTagFields on GhostTag {
         slug
         name
-        visibility
+        # visibility
         feature_image
         description
         meta_title
@@ -50,7 +50,7 @@ export const ghostPostFields = graphql`
         feature_image
         excerpt
         custom_excerpt
-        visibility
+        # visibility
 
         # Dates formatted
         created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
@@ -102,7 +102,7 @@ export const ghostPostFields = graphql`
             feature_image
             meta_description
             meta_title
-            visibility
+            # visibility
         }
         tags {
             name
@@ -111,7 +111,7 @@ export const ghostPostFields = graphql`
             feature_image
             meta_description
             meta_title
-            visibility
+            # visibility
         }
 
         # Content
@@ -141,7 +141,7 @@ export const ghostPageFields = graphql`
         feature_image
         excerpt
         custom_excerpt
-        visibility
+        # visibility
 
         # Dates formatted
         created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
@@ -193,7 +193,7 @@ export const ghostPageFields = graphql`
             feature_image
             meta_description
             meta_title
-            visibility
+            # visibility
         }
         tags {
             name
@@ -202,7 +202,7 @@ export const ghostPageFields = graphql`
             feature_image
             meta_description
             meta_title
-            visibility
+            # visibility
         }
 
         # Content

@@ -129,7 +129,7 @@ ArticleMetaGhost.propTypes = {
             PropTypes.shape({
                 name: PropTypes.string,
                 slug: PropTypes.string,
-                visibility: PropTypes.string,
+                // visibility: PropTypes.string,
             })
         ),
         primaryTag: PropTypes.shape({
