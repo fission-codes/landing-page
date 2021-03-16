@@ -1,10 +1,12 @@
 {
   "development": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://blog.fission.codes",
+    "contentApiKey": "706ffc90d8de75b2a5857ea882",
+    "version": "v2"
   },
   "production": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://blog.fission.codes",
+    "contentApiKey": "706ffc90d8de75b2a5857ea882",
+    "version": "v2"
   }
 }
