@@ -29,9 +29,10 @@ jobs:
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile
       # Build website into static files
+      # - run: ln -sf siteConfig.dev.js src/utils/siteConfig.js
       - name: Build website
         run: yarn build
-      - run: ln -sf fission.dev.yaml fission.yaml
+      # - run: ln -sf fission.dev.yaml fission.yaml
       - uses: fission-suite/publish-action@v1
         with:
           machine_key: ${{ secrets.FISSION_KEY }}
