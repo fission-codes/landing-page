@@ -6,17 +6,31 @@ export const getAuthorProperties = (primaryAuthor) => {
 
     authorProfiles.push(
         primaryAuthor.website ? primaryAuthor.website : null,
-        primaryAuthor.twitter ? `https://twitter.com/${primaryAuthor.twitter.replace(/^@/, ``)}/` : null,
-        primaryAuthor.facebook ? `https://www.facebook.com/${primaryAuthor.facebook.replace(/^\//, ``)}/` : null
+        primaryAuthor.twitter
+            ? `https://twitter.com/${primaryAuthor.twitter.replace(/^@/, ``)}/`
+            : null,
+        primaryAuthor.facebook
+            ? `https://www.facebook.com/${primaryAuthor.facebook.replace(
+                  /^\//,
+                  ``
+              )}/`
+            : null
     )
 
     authorProfiles = _.compact(authorProfiles)
 
     return {
         name: primaryAuthor.name || null,
-        sameAsArray: authorProfiles.length ? `["${_.join(authorProfiles, `", "`)}"]` : null,
+        sameAsArray: authorProfiles.length
+            ? `["${_.join(authorProfiles, `", "`)}"]`
+            : null,
         image: primaryAuthor.profile_image || null,
-        facebookUrl: primaryAuthor.facebook ? `https://www.facebook.com/${primaryAuthor.facebook.replace(/^\//, ``)}/` : null,
+        facebookUrl: primaryAuthor.facebook
+            ? `https://www.facebook.com/${primaryAuthor.facebook.replace(
+                  /^\//,
+                  ``
+              )}/`
+            : null,
     }
 }
 

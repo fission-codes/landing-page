@@ -7,21 +7,17 @@ import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
-* Single page (/:slug)
-*
-* This file renders a single page and loads all the content.
-*
-*/
+ * Single page (/:slug)
+ *
+ * This file renders a single page and loads all the content.
+ *
+ */
 const Page = ({ data, location }) => {
     const page = data.ghostPage
 
     return (
         <>
-            <MetaData
-                data={data}
-                location={location}
-                type="website"
-            />
+            <MetaData data={data} location={location} type="website" />
             <Helmet>
                 <style type="text/css">{`${page.codeinjection_styles}`}</style>
             </Helmet>

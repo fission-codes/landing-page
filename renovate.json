@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "@tryghost:quietJS"
-  ]
+  "extends": ["@tryghost:quietJS"]
 }

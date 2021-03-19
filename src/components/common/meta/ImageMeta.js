@@ -14,8 +14,11 @@ const ImageMeta = ({ image }) => {
             <meta name="twitter:image" content={image} />
             <meta property="og:image" content={image} />
             <meta property="og:image:width" content={config.shareImageWidth} />
-            <meta property="og:image:height" content={config.shareImageHeight} />
-        </Helmet >
+            <meta
+                property="og:image:height"
+                content={config.shareImageHeight}
+            />
+        </Helmet>
     )
 }
 
