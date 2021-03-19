@@ -18,10 +18,6 @@ var plugins = [{
       name: 'gatsby-plugin-react-helmet',
       plugin: require('/Users/agentofuser/.local/src/github.com/fission-suite/landing-page/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
       options: {"plugins":[]},
-    },{
-      name: 'gatsby-plugin-offline',
-      plugin: require('/Users/agentofuser/.local/src/github.com/fission-suite/landing-page/node_modules/gatsby-plugin-offline/gatsby-ssr'),
-      options: {"plugins":[]},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [

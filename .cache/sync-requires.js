@@ -4,7 +4,6 @@ const preferDefault = m => (m && m.default) || m
 
 
 exports.components = {
-  "component---cache-caches-gatsby-plugin-offline-app-shell-js": preferDefault(require("/Users/agentofuser/.local/src/github.com/fission-suite/landing-page/.cache/caches/gatsby-plugin-offline/app-shell.js")),
   "component---src-pages-404-js": preferDefault(require("/Users/agentofuser/.local/src/github.com/fission-suite/landing-page/src/pages/404.js")),
   "component---src-templates-author-js": preferDefault(require("/Users/agentofuser/.local/src/github.com/fission-suite/landing-page/src/templates/author.js")),
   "component---src-templates-index-js": preferDefault(require("/Users/agentofuser/.local/src/github.com/fission-suite/landing-page/src/templates/index.js")),
