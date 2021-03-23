@@ -33,7 +33,7 @@ to happen instead?
 
 ### Technical details:
 
--   Ghost Version:
--   Gatsby Version:
--   Node Version:
--   OS:
+- Ghost Version:
+- Gatsby Version:
+- Node Version:
+- OS:

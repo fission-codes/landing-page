@@ -70,9 +70,9 @@ property in your `.ghost.json` settings:
 
 ```json
 {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0",
-    "version": "v2"
+  "apiUrl": "https://gatsby.ghost.io",
+  "contentApiKey": "9cc5c67c358edfdd81455149d0",
+  "version": "v2"
 }
 ```
 
@@ -80,8 +80,8 @@ property in your `.ghost.json` settings:
 
 ```json
 {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+  "apiUrl": "https://gatsby.ghost.io",
+  "contentApiKey": "9cc5c67c358edfdd81455149d0"
 }
 ```
 
