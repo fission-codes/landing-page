@@ -77,3 +77,6 @@ yarn-error.log
 # Local Netlify folder
 .netlify
 
+# Test without gatsby's incremental builds
+.cache/
+public/
