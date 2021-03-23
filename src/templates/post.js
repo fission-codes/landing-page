@@ -9,7 +9,7 @@ import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
- * Single post view (/:slug)
+ * Single post view (/blog/:slug)
  *
  * This file renders a single post and loads all the content.
  *
