@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import { Layout } from '../components/common'
+import { BlogLayout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -21,7 +21,7 @@ const Page = ({ data, location }) => {
       <Helmet>
         <style type="text/css">{`${page.codeinjection_styles}`}</style>
       </Helmet>
-      <Layout>
+      <BlogLayout>
         <div className="container">
           <article className="content">
             <h1 className="content-title">{page.title}</h1>
@@ -33,7 +33,7 @@ const Page = ({ data, location }) => {
             />
           </article>
         </div>
-      </Layout>
+      </BlogLayout>
     </>
   )
 }

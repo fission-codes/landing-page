@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, Pagination } from '../components/common'
+import { BlogLayout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -24,7 +24,7 @@ const Author = ({ data, location, pageContext }) => {
   return (
     <>
       <MetaData data={data} location={location} type="profile" />
-      <Layout>
+      <BlogLayout>
         <div className="container">
           <header className="author-header">
             <div className="author-header-content">
@@ -77,7 +77,7 @@ const Author = ({ data, location, pageContext }) => {
           </section>
           <Pagination pageContext={pageContext} />
         </div>
-      </Layout>
+      </BlogLayout>
     </>
   )
 }

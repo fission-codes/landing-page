@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-import { Layout } from '../components/common'
+import { BlogLayout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -24,7 +24,7 @@ const Post = ({ data, location }) => {
       <Helmet>
         <style type="text/css">{`${post.codeinjection_styles}`}</style>
       </Helmet>
-      <Layout>
+      <BlogLayout>
         <div className="container">
           <article className="content">
             {post.feature_image ? (
@@ -43,7 +43,7 @@ const Post = ({ data, location }) => {
             </section>
           </article>
         </div>
-      </Layout>
+      </BlogLayout>
     </>
   )
 }

@@ -7,18 +7,19 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { Navigation } from '.'
 import config from '../../utils/siteConfig'
 
+// FIXME: blog.css conflicts with style.css+mq.css from skyrocket
 // Styles
-import '../../styles/app.css'
+// import '../../styles/blog.css'
 
 /**
  * Main layout component
  *
- * The Layout component wraps around each page and template.
+ * The BlogLayout component wraps around each page and template.
  * It also provides the header, footer as well as the main
  * styles, and meta data for each page.
  *
  */
-const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
+const BlogLayout = ({ data, children, bodyClass, isHome }) => {
   const site = data.allGhostSettings.edges[0].node
   const twitterUrl = site.twitter
     ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
@@ -165,7 +166,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
   )
 }
 
-DefaultLayout.propTypes = {
+BlogLayout.propTypes = {
   children: PropTypes.node.isRequired,
   bodyClass: PropTypes.string,
   isHome: PropTypes.bool,
@@ -175,7 +176,7 @@ DefaultLayout.propTypes = {
   }).isRequired,
 }
 
-const DefaultLayoutSettingsQuery = (props) => (
+const BlogLayoutSettingsQuery = (props) => (
   <StaticQuery
     query={graphql`
       query GhostSettings {
@@ -193,8 +194,8 @@ const DefaultLayoutSettingsQuery = (props) => (
         }
       }
     `}
-    render={(data) => <DefaultLayout data={data} {...props} />}
+    render={(data) => <BlogLayout data={data} {...props} />}
   />
 )
 
-export default DefaultLayoutSettingsQuery
+export default BlogLayoutSettingsQuery

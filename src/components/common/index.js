@@ -1,4 +1,5 @@
-export { default as Layout } from './Layout'
+export { default as BlogLayout } from './BlogLayout'
+export { default as HomeLayout } from './HomeLayout'
 export { default as PostCard } from './PostCard'
 export { default as Pagination } from './Pagination'
 export { default as Navigation } from './Navigation'

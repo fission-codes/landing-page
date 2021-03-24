@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, Pagination } from '../components/common'
+import { BlogLayout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -19,7 +19,7 @@ const Blog = ({ data, location, pageContext }) => {
   return (
     <>
       <MetaData location={location} />
-      <Layout isHome={false}>
+      <BlogLayout isHome={false}>
         <div className="container">
           <section className="post-feed">
             {posts.map(({ node }) => (
@@ -29,7 +29,7 @@ const Blog = ({ data, location, pageContext }) => {
           </section>
           <Pagination pageContext={pageContext} />
         </div>
-      </Layout>
+      </BlogLayout>
     </>
   )
 }

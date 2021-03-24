@@ -10,7 +10,7 @@ what's here to work the way you'd like it to.
 - Vars
 - Reset
 - Defaults
-- Layout
+- BlogLayout
 - Tag Archives
 - Author Archives
 - Pagination
@@ -514,7 +514,7 @@ h6 {
   font-weight: 500;
 }
 
-/* Layout
+/* BlogLayout
 /* ---------------------------------------------------------- */
 
 .viewport {

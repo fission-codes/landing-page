@@ -1,0 +1,169 @@
+@media only screen and (max-width: 1280px) {
+
+
+main {
+  display:grid;
+  padding:8rem 0;
+  margin-bottom:4rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.module12, .module5, .module4 {
+  display:grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
+
+nav .module12, footer .module {
+  grid-template-columns: repeat(2, 1fr);
+  padding:1rem 0;
+}
+
+.frame {
+  padding-left:0;
+  padding-right:0;
+  max-width:180rem;
+  margin:0 auto;
+}
+
+.std {
+  margin:4rem;
+}
+
+section {
+  padding-top:4rem;
+  padding-bottom:4rem;
+}
+
+.sub8 {
+  display:grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.col1 {
+  grid-column: span 1;
+  grid-row:span 1;
+  position:relative;
+}
+
+.col, .col2 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col3 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col4 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col5 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col6 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col7 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col8 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col9 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col10 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.col12 {
+  grid-column: span 1;
+  grid-row: span 1;
+  position:relative;
+}
+
+.mobile {
+  display:block;
+}
+
+.desktop {
+  display:none;
+}
+
+.o1 {
+  order:1;
+}
+
+.o2 {
+  order:2;
+}
+
+.o3 {
+  order:3;
+}
+
+.R6 {
+  padding:0;
+}
+
+.L6 {
+  padding:0;
+}
+
+.P4 {
+  padding:0;
+}
+
+.P6 {
+  padding:0;
+}
+
+.sticky {
+  position:relative;
+  top:0;
+}
+
+.mcenter {
+  text-align:center;
+}
+
+.mcenteralign {
+  align-self:center;
+}
+
+.dright {
+  text-align:left;
+}
+
+}
+
+@media only screen and (max-width: 1280px) and (min-width: 560px) {
+.tmodule {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
+}
