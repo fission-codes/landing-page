@@ -1044,6 +1044,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/archivo@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@fontsource/archivo/-/archivo-4.2.3.tgz#a591b1eb31c99550c1b2c486124bb22be5c30d25"
+  integrity sha512-OUjpEGxf58y8Nyj7fgk2UWFzZSRWijpLGyCVdx4OlCqrxjcR5Wpo0UwJ6YjqQaolwwdI25Ng7oKVGbaRmBPXxQ==
+
 "@gatsbyjs/reach-router@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@gatsbyjs/reach-router/-/reach-router-1.3.6.tgz#4e8225836959be247890b66f21a3198a0589e34d"

@@ -179,7 +179,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: SimplonMonoMedium;
+  font-family: 'Archivo';
   letter-spacing: 0rem;
   font-size: 4.5rem;
   line-height: 100%;
@@ -242,7 +242,7 @@ a {
 }
 
 .link {
-  font-family: SimplonMonoMedium, Helvetica Bold, sans-serif;
+  font-family: 'Archivo', Helvetica Bold, sans-serif;
   font-size: 6rem;
   line-height: 6rem;
   letter-spacing: -0.125rem;
@@ -515,16 +515,6 @@ section {
 .mobile {
   display: none;
 }
-
-/* @font-face {
-  font-family: SimplonMonoMedium;
-  src: url(./fonts/SimplonMono-Medium.otf);
-}
-
-@font-face {
-  font-family: SimplonMonoLight;
-  src: url(./fonts/SimplonMono-Light.otf);
-} */
 
 @keyframes main {
   0% {
