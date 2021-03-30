@@ -1,8 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-
-import { BlogLayout, PostCard, Pagination } from '../components/common'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { BlogLayout, Pagination, PostCard } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**

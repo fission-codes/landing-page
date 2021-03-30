@@ -7,10 +7,6 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { Navigation } from '.'
 import config from '../../utils/siteConfig'
 
-// FIXME: blog.css conflicts with style.css+mq.css from skyrocket
-// Styles
-// import '../../styles/blog.css'
-
 /**
  * Main layout component
  *
@@ -30,6 +26,9 @@ const BlogLayout = ({ data, children, bodyClass, isHome }) => {
 
   return (
     <>
+      <Helmet>
+        <link href="/blog.css" rel="stylesheet" />
+      </Helmet>
       <Helmet>
         <html lang={site.lang} />
         <style type="text/css">{`${site.codeinjection_styles}`}</style>

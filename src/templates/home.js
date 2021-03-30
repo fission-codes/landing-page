@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { MetaData } from '../components/common/meta'
 import { HomeLayout } from '../components/common'
 

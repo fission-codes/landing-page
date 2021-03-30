@@ -1,7 +1,5 @@
 import React from 'react'
-// Styles
-import '../../styles/style.css'
-import '../../styles/mq.css'
+import { Helmet } from 'react-helmet'
 
 /**
  * Main layout component
@@ -12,7 +10,15 @@ import '../../styles/mq.css'
  *
  */
 const HomeLayout = ({ children }) => {
-  return <>{children}</>
+  return (
+    <>
+      <Helmet>
+        <link href="/style.css" rel="stylesheet" />
+        <link href="/mq.css" rel="stylesheet" />
+      </Helmet>
+      {children}
+    </>
+  )
 }
 
 export default HomeLayout
