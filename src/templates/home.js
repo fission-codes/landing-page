@@ -44,15 +44,22 @@ const Home = ({ location }) => {
               <div className="module12 std">
                 <div className="col6 bottomalign mcenter">
                   <span style={{ marginBottom: '6rem' }}>
-                    <h1>
-                      {' '}
-                      Weightless SDK <br />
-                      for App Freedom{' '}
-                    </h1>
+                    <h1>Make Apps People Trust</h1>
                     <p>
-                      Create and publish your own webnative apps using Elm, Vue
-                      or React. Enjoy user accounts, encrypted storage and
-                      managed hosting with zero backend configuration.
+                      Build and publish webnative apps with{' '}
+                      <strong>end-to-end encrypted</strong>, versioned{' '}
+                      <strong>user-data sync</strong> built on{' '}
+                      <strong>IPFS</strong>, WebCrypto-based{' '}
+                      <strong>user-owned auth</strong> with multi-device
+                      linking, all in a simple <strong>open source</strong> SDK
+                      running <strong>in the browser</strong>, with no plugins
+                      to install and <strong>no blockchains required</strong>.
+                    </p>
+                    <p>
+                      Use <strong>React</strong>, Elm, or your favorite{' '}
+                      <strong>front-end framework</strong>, delight your users,
+                      and leave the cryptography, distributed systems, and
+                      DevOps to us.
                     </p>
                   </span>
                   <span>
