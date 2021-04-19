@@ -57,9 +57,9 @@ const Home = ({ location }) => {
                     </p>
                     <p>
                       Use <strong>React</strong>, Elm, or your favorite{' '}
-                      <strong>front-end framework</strong>, delight your users,
-                      and leave the cryptography, distributed systems, and
-                      DevOps to us.
+                      <strong>front-end tools</strong>, delight your users, and
+                      leave the cryptography, distributed systems, and DevOps
+                      to us.
                     </p>
                   </span>
                   <span>
