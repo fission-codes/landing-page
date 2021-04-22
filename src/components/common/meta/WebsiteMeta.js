@@ -96,6 +96,12 @@ const WebsiteMeta = ({
         <script type="application/ld+json">
           {JSON.stringify(jsonLd, undefined, 4)}
         </script>
+        <script
+          async
+          defer
+          data-domain="fission.codes"
+          src="https://s.fission.codes/js/index.js"
+        ></script>
       </Helmet>
       <ImageMeta image={shareImage} />
     </>
