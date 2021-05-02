@@ -72,6 +72,24 @@ const WebsiteMeta = ({
       <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="../images/icons/favicon-16x16.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="../images/icons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="48x48"
+          href="../images/icons/favicon-48x48.png"
+        />
         <link rel="canonical" href={canonical} />
         <meta property="og:site_name" content={settings.title} />
         <meta property="og:type" content="website" />
