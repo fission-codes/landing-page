@@ -1,4 +1,1 @@
-ignore:
-  - .DS_Store
-url: colossal-green-crab.fission.app
-build: ./dist
+/Users/agentofuser/.local/src/github.com/fission-suite/landing-page/fission.stg.yaml

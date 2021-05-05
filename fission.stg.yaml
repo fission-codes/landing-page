@@ -1,0 +1,4 @@
+ignore:
+  - .DS_Store
+url: fission-home-staging.fission.app
+build: ./dist

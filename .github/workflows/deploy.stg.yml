@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Continuous Deployment (Staging)
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the staging branch
+  push:
+    branches: [staging]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install the `just` command runner
+        run: curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to $PWD
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 14
+      - run: ./just install-deps
+      - run: ./just css-large
+      - run: find . -type d | grep elm
+      - run: ./just build-production
+      # Build website into static files
+      # - run: ln -sf siteConfig.stg.js src/utils/siteConfig.js
+      - name: Build website
+        run: yarn build
+      - run: ln -sf $PWD/fission.stg.yaml fission.yaml
+      # - uses: fission-suite/publish-action@v1
+      #   with:
+      #     machine_key: ${{ secrets.FISSION_KEY }}

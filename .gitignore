@@ -10,3 +10,4 @@ node_modules
 *.log
 src/Tailwind.elm
 static/application.css
+fission-home.secrets
