@@ -1,0 +1,21 @@
+<footer class="site-foot">
+    <div class="site-foot-nav container">
+        <div class="site-foot-nav-left">
+            <a aria-current="page" class="" href="/">
+                {{ site.title }}
+            </a> &copy; 2020 – Published with
+            <a class="site-foot-nav-item" href="https://ghost.org" target="_blank" rel="noopener noreferrer">
+                Ghost
+            </a>
+        </div>
+        {% if collections.docs %}
+            <div class="site-foot-nav-right">
+                {% for doc in collections.docs %}
+                    <a {% if page.url == doc.url %}aria-current="page"{% endif %}  class="site-foot-nav-item" href="{{ doc.url }}">
+                        {{ doc.meta_title if doc.meta_title else doc.title }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</footer>
