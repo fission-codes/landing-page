@@ -1,19 +1,25 @@
 ---
-pagination:
-  data: collections.posts
-  size: 3
-  alias: posts
+
 ---
 
 {% extends 'layouts/default.njk' %}
 {% from "partials/card.njk" import card %}
 
+{% set postslist = collections.posts | limit(3) %}
+
 {% set title = "Connecting people, devices, and apps to global data at the edge" %}
 
 {% block content %}
+
+    <p>Welcome. This is some intro text.</p>
+    <ul>
+        <li>For app users: your data, available everywhere</li>
+        <li>For front end devs: get rid of stack anxiety! Use Fission's webnative SDK to add user logins, data, and file storage to your favourite front end framework.</li>
+        <li>For integrators: explore <a href="https://whitepaper.fission.codes">Fission's technical whitepaper</a>, and choose which edge computing optimized building blocks to connect to your own protocols</li>
+    </ul>
+    <h2>Recent blog posts</h2>
     <section class="post-feed">
-        <h2>Recent blog posts</h2>
-        {% for post in posts %}
+        {% for post in postslist %}
             {{ card(post) }}
         {% endfor %}
     </section>

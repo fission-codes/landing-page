@@ -68,3 +68,5 @@ typings/
 yarn-error.log
 dist
 .env
+_ignored
+.lazyimages.json

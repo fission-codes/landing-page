@@ -30,7 +30,7 @@ module.exports = function(config) {
 
   // Apply performance attributes to images
   config.addPlugin(lazyImages, {
-    cacheFile: ""
+    cacheFile: ".lazyimages.json"
   });
 
   // Copy images over from Ghost
@@ -180,11 +180,13 @@ module.exports = function(config) {
     return collection;
   });
 
+  config.addNunjucksFilter("limit", (arr, limit) => arr.slice(0, limit));
+
   // Display 404 page in BrowserSnyc
   config.setBrowserSyncConfig({
     callbacks: {
       ready: (err, bs) => {
-        const content_404 = fs.readFileSync("dist/404.html");
+        const content_404 = fs.readFileSync("dist/ipfs_404.html");
 
         bs.addMiddleware("*", (req, res) => {
           // Provides the 404 content without redirect.

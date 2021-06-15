@@ -1,5 +1,5 @@
 {% macro card(post) %}
-    <a class="post-card{% if post.featured %}  post-card-featured{% endif %}" href="{{ post.url }}">
+    <a class="post-card{% if post.featured %}  post-card-featured{% endif %}" href="/blog{{ post.url }}">
         <header class="post-card-header">
             {% if post.feature_image %}
                 <img class="post-card-image" src="{{ post.feature_image }}" alt="{{ post.title }}">
