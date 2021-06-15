@@ -1,20 +1,21 @@
 ---
 pagination:
   data: collections.posts
-  size: 3
+  size: 7
   alias: posts
 ---
 
 {% extends 'layouts/default.njk' %}
 {% from "partials/card.njk" import card %}
 
-{% set title = "Connecting people, devices, and apps to global data at the edge" %}
+{% set title = "Blog" %}
 
 {% block content %}
     <section class="post-feed">
-        <h2>Recent blog posts</h2>
         {% for post in posts %}
             {{ card(post) }}
         {% endfor %}
     </section>
+
+    {% include "partials/pagination.njk" %}
 {% endblock%}
