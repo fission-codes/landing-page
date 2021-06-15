@@ -19,6 +19,9 @@ module.exports = async function() {
       console.error(err);
     });
 
+  siteData.subtitle = "Connecting people, devices, and apps to global data at the edge";
+  // siteData.description = "meta tag for SEO"
+
   if (process.env.SITE_URL) siteData.url = process.env.SITE_URL;
 
   return siteData;

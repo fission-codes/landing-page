@@ -29,9 +29,12 @@ module.exports = function(config) {
   config.addPlugin(pluginRSS);
 
   // Apply performance attributes to images
+  // LazyImages seems to keep re-processing and is soooo slow.....
+  /*
   config.addPlugin(lazyImages, {
     cacheFile: ".lazyimages.json"
   });
+  */
 
   // Copy images over from Ghost
   config.addPlugin(localImages, {
