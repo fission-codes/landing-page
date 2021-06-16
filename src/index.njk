@@ -11,12 +11,61 @@
 
 {% block content %}
 
-    <p>Welcome. This is some intro text.</p>
-    <ul>
-        <li>For app users: your data, available everywhere</li>
-        <li>For front end devs: get rid of stack anxiety! Use Fission's webnative SDK to add user logins, data, and file storage to your favourite front end framework.</li>
-        <li>For integrators: explore <a href="https://whitepaper.fission.codes">Fission's technical whitepaper</a>, and choose which edge computing optimized building blocks to connect to your own protocols</li>
-    </ul>
+<h2>Fission enables web developers to build the future of web applications at the edge.</h2>
+
+<style>
+
+h2, h3, p, li {
+    font-family: Karla, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+li {
+    font-size: 1.1em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h2.post-card-title {
+    font-size: 1.5em;
+}
+
+h2, h3 {
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.readmore {
+    padding: 5px 10px;
+    background-color: rgb(100,70,250);
+    color: white;
+    font-size: small;
+}
+</style>
+
+<h3>Get started today:</h3>
+<ul>
+    <li>Develop using the Web Native Filesystem <a class="readmore" href="/wnfs/">Read More »</a></li>
+    <li>Fast web app publishing on IPFS</li>
+    <li>Free SSL and subdomain</li>
+    <li>Built in user accounts with secure private data</li>
+</ul>
+
+<h3>What's coming next:</h3>
+<ul>
+    <li>Enabling data-driven applications with the Web Native Database <a class="readmore" href="/wndb/">Read More »</a></li>
+    <li>Empowering app users to to collaborate on private files and data</li>
+    <li>Easy domain registration</li>
+</ul>
+
+<h3>Join the conversation:</h3>
+<ul>
+    <li>Fission Whitepaper <a class="readmore" href="https://whitepaper.fission.codes">Read More »</a></li>
+    <li>Check out the blog</li>
+    <li>Join our <a href="https://fission.codes/discord">Discord chat</a></li>
+</ul>
+
     <h2>Recent blog posts</h2>
     <section class="post-feed">
         {% for post in postslist %}
