@@ -2,74 +2,306 @@
 
 ---
 
-{% extends 'layouts/default.njk' %}
 {% from "partials/card.njk" import card %}
 
 {% set postslist = collections.posts | limit(3) %}
 
-{% set title = "Connecting people, devices, and apps to global data at the edge" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fission • Build the future of web apps at the edge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://auth.fission.codes/favicon-32x32.png">
+    
+</head>
+<body>
 
-{% block content %}
+<!-- Header Nav -->
+<section class="relative w-full px-8 text-gray-700 bg-white body-font">
+    <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+        <a href="/" class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none">fission</a>
+{#
+<!-- Top Nav-->
+        <nav class="top-0 left-0 z-0 flex items-center justify-center w-full h-full py-5 -ml-0 space-x-5 text-base md:-ml-5 md:py-0 md:absolute">
+            <a href="/" class="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">Home</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0" style="display: none;"></span>
+                </span>
+            </a>
+            <a href="/support/" class="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">Support</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0" style="display: none;"></span>
+                </span>
+            </a>
+            <a href="https://talk.fission.codes" class="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">Forum</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0" style="display: none;"></span>
+                </span>
+            </a>
+            <a href="/blog/" class="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <span class="block">Blog</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" x-transition:enter="transition ease duration-200" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0" style="display: none;"></span>
+                </span>
+            </a>
+        </nav>
+#}
+        <div class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end">
+            <a href="https://fission-dashboard.fission.app" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none">Dashboard</a>
+            <span class="inline-flex rounded-md shadow-sm">
+                <a href="https://auth.fission.codes" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Sign up
+                </a>
+            </span>
+        </div>
+    </div>
+</section>
 
-<h2>Fission enables web developers to build the future of web applications at the edge.</h2>
+{#
+<!-- Saved Jeff Words -->
 
-<style>
+    <h3>Get started today:</h3>
+    <ul>
+        <li>Develop using the Web Native Filesystem <a class="readmore" href="/wnfs/">Read More »</a></li>
+        <li>Fast web app publishing on IPFS</li>
+        <li>Free SSL and subdomain</li>
+        <li>Built in user accounts with secure private data</li>
+    </ul>
 
-h2, h3, p, li {
-    font-family: Karla, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
+    <h3>What's coming next:</h3>
+    <ul>
+        <li>Enabling data-driven applications with the Web Native Database <a class="readmore" href="/wndb/">Read More »</a></li>
+        <li>Empowering app users to to collaborate on private files and data</li>
+        <li>Easy domain registration</li>
+    </ul>
 
-li {
-    font-size: 1.1em;
-}
+    <h3>Join the conversation:</h3>
+    <ul>
+        <li>Fission Whitepaper <a class="readmore" href="https://whitepaper.fission.codes">Read More »</a></li>
+        <li>Check out the blog</li>
+        <li>Join our <a href="https://fission.codes/discord">Discord chat</a></li>
+    </ul>
+#}
 
-h2 {
-    font-size: 2em;
-}
+<!-- Hero Build the Future -->
+<section class="relative w-full bg-white" x-data="{ showMenu: false }">
+{#
+    <div class="relative z-50 w-full h-24">
+        <div class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0">
 
-h2.post-card-title {
-    font-size: 1.5em;
-}
+            <a href="/" class="relative flex items-center inline-block h-5 h-full font-black leading-none">
+                <span class="ml-3 text-xl text-gray-800">tails<span class="text-indigo-600">.</span></span>
+            </a>
 
-h2, h3 {
-    font-weight: 700;
-    line-height: 1.15;
-}
+            <nav class="absolute top-0 left-0 z-50 flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 shadow-xl md:shadow-none md:flex md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:relative" :class="{'flex fixed': showMenu, 'hidden': !showMenu }">
+                <a href="#" class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Home</a>
+                <a href="#features" class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Features</a>
+                <a href="#pricing" class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Pricing</a>
+                <a href="#testimonials" class="font-bold duration-100 transition-color hover:text-indigo-600">Testimonials</a>
+                <div class="flex flex-col block w-full font-medium border-t border-gray-200 md:hidden">
+                    <a href="#_" class="w-full py-2 font-bold text-center text-indigo-600">Login</a>
+                    <a href="#_" class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-600 fold-bold">Get Started</a>
+                </div>
+            </nav>
 
-.readmore {
-    padding: 5px 10px;
-    background-color: rgb(100,70,250);
-    color: white;
-    font-size: small;
-}
-</style>
+            <div class="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
+                <a href="#_" class="relative z-40 px-3 py-2 mr-0 text-sm font-bold text-indigo-600 md:px-5 sm:mr-3 md:mt-0">Login</a>
+                <a href="#_" class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-600 rounded shadow-md fold-bold sm:w-full lg:shadow-none hover:shadow-xl">Get Started</a>
 
-<h3>Get started today:</h3>
-<ul>
-    <li>Develop using the Web Native Filesystem <a class="readmore" href="/wnfs/">Read More »</a></li>
-    <li>Fast web app publishing on IPFS</li>
-    <li>Free SSL and subdomain</li>
-    <li>Built in user accounts with secure private data</li>
-</ul>
+            </div>
 
-<h3>What's coming next:</h3>
-<ul>
-    <li>Enabling data-driven applications with the Web Native Database <a class="readmore" href="/wndb/">Read More »</a></li>
-    <li>Empowering app users to to collaborate on private files and data</li>
-    <li>Easy domain registration</li>
-</ul>
+            <div @click="showMenu = !showMenu" class="absolute top-0 right-0 z-50 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10">
+                <span class="block w-full h-1 mt-2 duration-200 transform bg-gray-800 rounded-full sm:mt-1"></span>
+                <span class="block w-full h-1 mt-1 duration-200 transform bg-gray-800 rounded-full"></span>
+            </div>
 
-<h3>Join the conversation:</h3>
-<ul>
-    <li>Fission Whitepaper <a class="readmore" href="https://whitepaper.fission.codes">Read More »</a></li>
-    <li>Check out the blog</li>
-    <li>Join our <a href="https://fission.codes/discord">Discord chat</a></li>
-</ul>
+        </div>
+    </div>
+#}
+    <div class="relative items-center justify-center w-full overflow-x-hidden lg:pb-40 sm:pt-8 md:pt-12">
+        <div class="container flex flex-col items-center justify-between h-full max-w-6xl px-8 mx-auto lg:flex-row xl:px-0">
+            <div class="z-30 flex flex-col items-center w-full max-w-xl text-center lg:items-start lg:w-1/2 lg:pt-24 lg:text-left">
+                <h1 class="relative mb-4 text-3xl font-black leading-tight text-gray-900 lg:pr-16 sm:text-6xl lg:mb-8">Build the future of web apps at the edge</h1>
+                <p class="pr-0 mb-8 text-base text-gray-600 sm:text-lg xl:text-xl lg:pr-20">Are you ready to start building the latest and greatest web application? Sign up for free today.</p>
 
-    <h2>Recent blog posts</h2>
-    <section class="post-feed">
-        {% for post in postslist %}
+
+                <a href="https://drive.fission.codes" class="relative self-start inline-block w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0">Try Fission Drive »</a>
+
+{#
+                <!-- Integrates with section -->
+                <div class="flex-col hidden mt-12 sm:flex lg:mt-24">
+                    <p class="mb-4 text-sm font-medium tracking-widest text-gray-500 uppercase">Powered by</p>
+                    <div class="flex">
+                        <!-- SVG logos go here -->
+                    </div>
+                </div>
+#}
+            </div>
+            <div class="relative z-50 flex flex-col items-end justify-center w-full h-full lg:w-1/2 lg:pl-10">
+                <div class="container relative left-0 w-full max-w-4xl lg:absolute lg:w-screen">
+                    <img src="https://ipfs.runfission.com/ipfs/bafybeicgl76hadrrpvhnpy43h22a4ss2jzezowukdtg6gxquwnbqpgjdqe/p/Screenshots/Drive/fission-drive-duckramen-sqoosh.jpg" alt="Screenshot of Fission Drive with a bowl of duck ramen - drive.fission.codes" class="mt-20 mb-20 ml-0 shadow-2xl rounded-xl lg:mb-0 xl:-ml-12">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="pt-20 pb-32 bg-white">
+    <div class="max-w-4xl px-20 mx-auto">
+        <h2 class="mb-1 text-3xl font-extrabold leading-tight text-gray-900">Use your front end skills to ship full edge apps</h2>
+        <div class="grid grid-cols-1 mt-16 sm:grid-cols-2 md:grid-cols-3 gap-x-10 lg:gap-x-16 gap-y-20">
+
+            <div class="feature-publishing">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight text-gray-900 lg:text-lg">Publishing</h3>
+                <p class="text-sm text-gray-500 lg:text-base">Use the <a href="https://guide.fission.codes/developers">Fission CLI to sign up</a>, and instantly register and publish apps. Free subdomain and SSL included.</p>
+            </div>
+
+            <div class="feature-appdata">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight text-gray-900 lg:text-lg">App Data</h3>
+                <p class="text-sm text-gray-500 lg:text-base">Read and write files and data directly from the web, including on mobile. Versioning and archive links built in.</p>
+            </div>
+
+            <div class="feature-accounts">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight text-gray-900 lg:text-lg">User Accounts</h3>
+                <p class="text-sm text-gray-500 lg:text-base">Add passwordless logins, and a personal data store for every account. No data exports needed: your users always have access.</p>
+            </div>
+
+            <div class="feature-privacy">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight text-gray-900 lg:text-lg">Security & Privacy</h3>
+                <p class="text-sm text-gray-500 lg:text-base">Don't leak your users' data, because you don't need to store it. User data is end-to-end encrypted, and encrypted at rest.</p>
+            </div>
+
+            <div class="feature-privacy">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight text-gray-900 lg:text-lg">MicroSaaS</h3>
+                <p class="text-sm text-gray-500 lg:text-base">Use Fission's platform APIs to run your own MicroSaaS: yes, you can build an app that creates apps, direct from the web, custom domains included.</p>
+            </div>
+
+            <div class="feature-advanced-web">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight text-gray-900 lg:text-lg">Advanced Web</h3>
+                <p class="text-sm text-gray-500 lg:text-base">We integrate modern, advanced browser features into our SDK. Run your web apps offline, encrypt data, and more.</p>
+            </div>
+
+            <div class="feature-ipfs">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight text-gray-900 lg:text-lg">Global Serverless Files</h3>
+                <p class="text-sm text-gray-500 lg:text-base">We build on top of the InterPlanetary File System (IPFS), which powers a global data commons.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Blog -->
+<section class="w-full py-8 bg-white sm:py-12 md:py-16">
+
+    <div class="px-10 mx-auto max-w-7xl">
+        <div class="flex items-center justify-between w-full pb-5 mb-8 border-b border-gray-200">
+            <h2 class="text-3xl font-bold text-gray-800">From the blog</h2>
+            <a href="/blog/" class="flex items-center text-base font-semibold text-blue-400 hover:text-blue-500 group">
+                <span>View More Posts</span>
+                <svg class="w-4 h-4 mt-0.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6">
+
+            {% for post in postslist %}
             {{ card(post) }}
-        {% endfor %}
-    </section>
-{% endblock%}
+            {% endfor %}
+
+        </div>
+
+{#
+<!-- Could be events? -->
+        <div class="flex items-center justify-between w-full pb-5 mt-16 mb-8 border-b border-gray-200">
+            <h2 class="text-3xl font-bold text-gray-800">Events</h2>
+            <a href="https://talk.fission.codes/t/fission-tech-talks/1902" class="flex items-center text-base font-semibold text-blue-400 hover:text-blue-500 group">
+                <span>View More Posts</span>
+                <svg class="w-4 h-4 mt-0.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6">
+            <div class="relative col-span-12 mb-10 space-y-4 md:col-span-6 lg:col-span-4">
+                <a href="#_" class="relative block w-full h-64 overflow-hidden rounded">
+                    <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="https://cdn.devdojo.com/images/may2021/blog-image-04.jpg">
+                </a>
+                <p class="text-xs font-bold text-gray-400 uppercase">Inspiration</p>
+                <a href="#_" class="block text-2xl font-medium leading-tight text-gray-700 hover:text-gray-900">Learn How the Creator of Techstreet Crushed the Competition</a>
+            </div>
+
+            <div class="relative col-span-12 mb-10 space-y-4 md:col-span-6 lg:col-span-4">
+                <a href="#_" class="relative block w-full h-64 overflow-hidden rounded">
+                    <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="https://cdn.devdojo.com/images/may2021/blog-image-05.jpg">
+                </a>
+                <p class="text-xs font-bold text-gray-400 uppercase">Resources</p>
+                <a href="#_" class="block text-2xl font-medium leading-tight text-gray-700 hover:text-gray-900">Learn how Reading Can Accellerate your Earning Potential</a>
+            </div>
+
+            <div class="relative col-span-12 mb-10 space-y-4 md:col-span-6 lg:col-span-4">
+                <a href="#_" class="relative block w-full h-64 overflow-hidden rounded">
+                    <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="https://cdn.devdojo.com/images/may2021/blog-image-06.jpg">
+                </a>
+                <p class="text-xs font-bold text-gray-400 uppercase">REsources</p>
+                <a href="#_" class="block text-2xl font-medium leading-tight text-gray-700 hover:text-gray-900">Best Entrepreneurs you should be Following this Year</a>
+            </div>
+        </div>
+#}
+    </div>
+</section>
+
+<!-- Footer -->
+<section class="box-border pt-5 leading-7 text-gray-900 bg-white border-0 border-gray-200 border-solid pb-7">
+    <div class="box-border px-4 mx-auto border-solid md:px-6 lg:px-8 max-w-7xl">
+        <div class="relative flex flex-col items-start justify-between leading-7 text-gray-900 border-0 border-gray-200 md:flex-row md:items-center">
+            <a href="/" class="left-0 flex items-center justify-center order-first w-full mb-4 font-medium text-gray-900 md:justify-start md:absolute md:w-64 lg:order-none lg:w-auto title-font lg:items-center lg:justify-center md:mb-0">
+                <span class="text-xl font-black leading-none text-gray-900 select-none logo">fission<span class="text-indigo-600">.</span></span>
+            </a>
+            <ul class="box-border flex mx-auto my-6 space-x-6">
+
+                <li class="relative mt-2 leading-7 text-left text-gray-900 border-0 border-gray-200 md:border-b-0 md:mt-0">
+                    <a href="/support/" class="box-border items-center block w-full px-4 text-base font-normal leading-normal text-gray-900 no-underline border-solid cursor-pointer hover:text-blue-600 focus-within:text-blue-700 sm:px-0 sm:text-left">Support</a>
+                </li>
+                <li class="relative mt-2 leading-7 text-left text-gray-900 border-0 border-gray-200 md:border-b-0 md:mt-0">
+                    <a href="https://talk.fission.codes" class="box-border items-center block w-full px-4 text-base font-normal leading-normal text-gray-900 no-underline border-solid cursor-pointer hover:text-blue-600 focus-within:text-blue-700 sm:px-0 sm:text-left">Community Forum</a>
+                </li>
+                <li class="relative mt-2 leading-7 text-left text-gray-900 border-0 border-gray-200 md:border-b-0 md:mt-0">
+                    <a href="https://fission.codes/discord" class="box-border items-center block w-full px-4 text-base font-normal leading-normal text-gray-900 no-underline border-solid cursor-pointer hover:text-blue-600 focus-within:text-blue-700 sm:px-0 sm:text-left">Discord Chat</a>
+                </li>
+            </ul>
+            <div class="box-border right-0 flex justify-center w-full mt-4 space-x-3 border-solid md:w-auto md:justify-end md:absolute md:mt-0">
+    
+                <a href="https://github.com/fission-suite" class="inline-flex items-center leading-7 text-gray-900 no-underline border-0 border-gray-200 cursor-pointer hover:text-blue-700 focus-within:text-blue-700">
+                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" stroke="none"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+                </a>
+
+                <a href="https://twitter.com/fissionsuite" class="inline-flex items-center leading-7 text-gray-900 no-underline border-0 border-gray-200 cursor-pointer hover:text-blue-700 focus-within:text-blue-700">
+                    <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" stroke="none"></path><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="12" cy="12" r="3"></circle><path d="M16.5 7.5v.001"></path></svg>
+                </a>
+            </div>
+        </div>
+        <div class="pt-4 mt-4 leading-7 text-center text-gray-600 border-t border-gray-200 md:mt-5 md:pt-5 md:mt-6 md:pt-6">
+            <p class="box-border mt-0 text-sm border-0 border-solid">
+                © 2021 Fission.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- AlpineJS Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
+
+</body>
+</html>
