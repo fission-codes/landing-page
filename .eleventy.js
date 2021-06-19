@@ -29,7 +29,7 @@ module.exports = function(config) {
   config.addPlugin(pluginRSS);
 
   // Apply performance attributes to images
-  // LazyImages seems to keep re-processing and is soooo slow.....
+  // NOTE: LazyImages seems to keep re-processing and is soooo slow.....
   /*
   config.addPlugin(lazyImages, {
     cacheFile: ".lazyimages.json"
@@ -37,6 +37,7 @@ module.exports = function(config) {
   */
 
   // Copy images over from Ghost
+  // TODO: is this actually running?
   config.addPlugin(localImages, {
     distPath: "dist",
     assetPath: "/assets/images",
@@ -50,11 +51,13 @@ module.exports = function(config) {
     return new cleanCSS({}).minify(code).styles;
   });
 
+/*
   config.addFilter("getReadingTime", text => {
     const wordsPerMinute = 200;
     const numberOfWords = text.split(/\s/g).length;
     return Math.ceil(numberOfWords / wordsPerMinute);
   });
+*/
 
   // Date formatting filter
   config.addFilter("htmlDateString", dateObj => {
@@ -183,6 +186,7 @@ module.exports = function(config) {
     return collection;
   });
 
+  // Custom filter to get the first N items
   config.addNunjucksFilter("limit", (arr, limit) => arr.slice(0, limit));
 
   // Display 404 page in BrowserSnyc
