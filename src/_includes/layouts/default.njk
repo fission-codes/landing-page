@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang }}" class="no-js">
     <head>
+        <meta charset="UTF-8" />
         <title>
             {%- if title -%}
                 {{ title }} – {{ site.title }}
@@ -12,10 +13,13 @@
         <meta name="robots" content="index,follow">
         <meta name="generator" content="Eleventy">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+{#
         {% if site.icon %}
             <link rel="shortcut icon" type="image/png" href="{{ site.icon }}"/>
         {% endif %}
+#}
+        {# TODO: figure out how to reference / generate local image #}
+        <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://auth.fission.codes/favicon-32x32.png">
 
         {%- block seo -%}
             <!--Twitter Card-->
@@ -45,9 +49,12 @@
             <meta property="article:author" content="{{ site.url }}">
         {%- endblock -%}
 
+        {# TODO: "local" tailwind? #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+{#
         {% set css %}{% include "css/styles.css" %}{% endset %}
         <style>{{ css | cssmin | safe }}</style>
-
+#}
         <script>document.documentElement.classList.remove('no-js');</script>
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}

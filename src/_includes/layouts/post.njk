@@ -4,7 +4,9 @@
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
 
+{#
 {% block content %}
+<section class="w-full py-8 bg-white sm:py-12 md:py-16">
     <article class="content">
         {% if post.feature_image %}
             <figure class="post-feature-image">
@@ -18,7 +20,67 @@
             </section>
         </section>
     </article>
+</section>
+
 {% endblock %}
+#}
+
+{% block content %}
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+                {# TODO: tag and date meta
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2021-06-07">7 June 2021</time>
+                        <span class="date-divider">/</span> <a href="/tag/presentation/">Presentations</a>
+                </section>
+                #}
+                <h1 class="post-full-title">{{ title }}</h1>
+            </header>
+
+            <figure class="post-full-image">
+                <img
+                    src="{{ post.feature_image }}"
+                    alt="{{ title }}"
+                />
+            </figure>
+
+            <section class="post-full-content load-external-scripts content-body">
+                <div class="post-content">
+                    {{ content | safe }}
+                </div>
+            </section>
+
+{# TODO: check this Discourse embed     
+<section class="post-full-comments">
+    <div id='discourse-comments'></div>
+
+<script type="text/javascript">
+  DiscourseEmbed = { discourseUrl: 'https://talk.fission.codes/',
+                     discourseEmbedUrl: 'https://fission.codes/blog/{{ post.url }}' };
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+    d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+</script>
+</section>
+#}
+        </article>
+
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
 
 {%- block seo -%}
     <!--Twitter Card-->
