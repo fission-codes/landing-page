@@ -49,29 +49,26 @@
             <meta property="article:author" content="{{ site.url }}">
         {%- endblock -%}
 
-        {# TODO: "local" tailwind? #}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
-{#
-        {% set css %}{% include "css/styles.css" %}{% endset %}
-        <style>{{ css | cssmin | safe }}</style>
-#}
+        {% set css %}{% include "css/tailwind.css" %}{% endset %}
+        {# <style>{{ css | cssmin | safe }}</style> #}
+        <style>{{ css | safe }}</style>
+        <style>body { text-rendering: geometricPrecision; }</style>
+
         <script>document.documentElement.classList.remove('no-js');</script>
 
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
     </head>
-    <body>
+    <body class="bg-white font-body text-base-900 dark:bg-base-900 dark:text-base-200">
         {% include "partials/icons.njk" %}
         <div class="viewport">
 
             <div class="viewport-top">
                 {% include "partials/header.njk" %}
 
-                <main class="site-main">
-                    <div class="container">
-                        {% block content %}
-                        {% endblock content %}
-                    </div>
+                <main class="site-main overflow-x-hidden">
+                    {% block content %}
+                    {% endblock content %}
                 </main>
             </div>
 
