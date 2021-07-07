@@ -1,14 +1,59 @@
 {% if pagination.previousPageHref or pagination.nextPageHref %}
-    <nav class="pagination" role="pagination">
-        {% if page.permalink != pagination.previousPageHref %}
-            <a href="{{ pagination.previousPageHref }}">Prev page</a>
-        {% else %}
-            <span>Prev page</span>
-        {% endif %}
-        {% if page.permalink != pagination.nextPageHref %}
-            <a href="{{ pagination.nextPageHref }}">Next page</a>
-        {% else %}
-            <span>Next page</span>
-        {% endif %}
+    <nav class="pagination mb-12" role="pagination">
+        <ol class="flex font-medium items-center justify-center opacity-90 space-x-6 text-sm tracking-wider uppercase">
+
+            {#  #}
+            {% if page.url != pagination.href.first %}
+              <li><a href="{{ pagination.href.first }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              First
+            {% if page.url != pagination.href.first %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+            {#  #}
+            {% if pagination.href.previous %}
+              <li><a href="{{ pagination.href.previous }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
+            {% if pagination.href.previous %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+            {#  #}
+            {% if pagination.href.next %}
+              <li><a href="{{ pagination.href.next }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            {% if pagination.href.next %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+            {#  #}
+            {% if page.url != pagination.href.last %}
+              <li><a href="{{ pagination.href.last }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              Last
+            {% if page.url != pagination.href.last %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+        </ol>
     </nav>
 {% endif %}
