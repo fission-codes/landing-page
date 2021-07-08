@@ -1,6 +1,6 @@
 {% if pagination.previousPageHref or pagination.nextPageHref %}
-    <nav class="pagination mb-12" role="pagination">
-        <ol class="flex font-medium items-center justify-center opacity-90 space-x-6 text-sm tracking-wider uppercase">
+    <nav class="pagination mb-12 flex justify-center" role="pagination">
+        <ol class="bg-base-50 inline-flex font-semibold items-center justify-center text-opacity-80 text-base-900 px-5 py-4 rounded-lg space-x-6 text-[12px] tracking-widest uppercase dark:bg-base-800 dark:text-base-200 dark:text-opacity-80">
 
             {#  #}
             {% if page.url != pagination.href.first %}
@@ -21,7 +21,7 @@
             {% else %}
               <li class="opacity-30">
             {% endif %}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clip-rule="evenodd" /></svg>
             {% if pagination.href.previous %}
               </a></li>
             {% else %}
@@ -34,7 +34,7 @@
             {% else %}
               <li class="opacity-30">
             {% endif %}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
             {% if pagination.href.next %}
               </a></li>
             {% else %}
