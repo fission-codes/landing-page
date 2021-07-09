@@ -41,7 +41,8 @@ article section hr,
 article section p,
 article section pre,
 article section ol,
-article section ul {
+article section ul,
+article section video {
   @apply mt-8;
 }
 
@@ -114,6 +115,21 @@ article section iframe {
 }
 
 article section img,
-article section iframe {
+article section iframe,
+article section video {
   @apply rounded-md shadow-md;
+}
+
+article section iframe[src*="twitter.com/"] {
+  @apply shadow-none;
+}
+
+
+
+/**
+ * Blog (legacy)
+ */
+
+article .kg-gallery-image {
+  @apply mt-4;
 }
