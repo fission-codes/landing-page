@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  text-rendering: geometricPrecision;
+}
+
+
+
+/**
+ * Blog
+ */
+
+article header h1 {
+  @apply font-light leading-[1.125] mb-16 text-5xl tracking-tight;
+}
+
+article section h1 {
+  @apply font-bold mb-12 mt-20 text-3xl tracking-tight;
+}
+
+article section h2 {
+  @apply font-bold mt-12 text-2xl tracking-tight;
+}
+
+article section h3 {
+  @apply font-bold mt-10 text-xl tracking-tight;
+}
+
+article section h4,
+article section h5,
+article section h6 {
+  @apply font-bold mt-8 tracking-tight;
+}
+
+article section blockquote,
+article section figure,
+article section hr,
+article section p,
+article section pre,
+article section ol,
+article section ul {
+  @apply mt-8;
+}
+
+article section p {
+  @apply mb-8;
+}
+
+article section figcaption {
+  @apply mt-3 text-base-500 text-sm;
+}
+
+article section hr {
+  @apply border-base-100 dark:border-base-800;
+}
+
+article section a {
+  @apply text-purple underline dark:text-purple-tint;
+  text-underline-offset: 2px;
+}
+
+article section ol,
+article section ul {
+  @apply ml-6;
+}
+
+article section ol li,
+article section ul li {
+  @apply mb-2;
+}
+
+article section ul li::before {
+  @apply mr-3;
+  content: "•";
+  display: inline-block;
+  opacity: 0.25;
+}
+
+article section ol {
+  counter-reset: ordered-list;
+}
+
+article section ol li {
+  counter-increment: ordered-list;
+}
+
+article section ol li::before {
+  @apply mr-3;
+  content: counter(ordered-list) ".";
+  display: inline-block;
+  opacity: 0.25;
+}
+
+article section code {
+  @apply bg-base-100 border-t border-transparent dark:bg-base-800 dark:bg-opacity-50;
+  font-size: 15px;
+}
+
+article section pre > code {
+  @apply block overflow-x-scroll px-8 py-6 rounded-md;
+}
+
+article section :not(pre) > code {
+  @apply px-1 py-1 rounded;
+}
+
+article section iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  width: 100%;
+}
+
+article section img,
+article section iframe {
+  @apply rounded-md shadow-md;
+}

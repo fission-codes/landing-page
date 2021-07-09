@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "\"$npm_execpath\" run prep && \"$npm_execpath\" run css:prod && cross-env ELEVENTY_ENV=prod eleventy",
-    "css:dev": "tailwindcss -c tailwind.config.js -o src/_includes/css/tailwind.css --watch",
+    "css:dev": "tailwindcss -c tailwind.config.js -i src/css/stylesheet.css -o dist/stylesheet.css --watch",
     "dev": "\"$npm_execpath\" run prep && concurrently '\"$npm_execpath\" run css:dev' 'cross-env ELEVENTY_ENV=dev eleventy --serve'",
     "fonts": "copy-fission-fonts src/fonts/ --woff2",
     "images": "copy-fission-images src/images/kit/",

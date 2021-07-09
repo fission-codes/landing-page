@@ -49,10 +49,7 @@
             <meta property="article:author" content="{{ site.url }}">
         {%- endblock -%}
 
-        {% set css %}{% include "css/tailwind.css" %}{% endset %}
-        {# <style>{{ css | cssmin | safe }}</style> #}
-        <style>{{ css | safe }}</style>
-        <style>body { text-rendering: geometricPrecision; }</style>
+        <link rel="stylesheet" href="/stylesheet.css" />
 
         <script>document.documentElement.classList.remove('no-js');</script>
 
@@ -64,9 +61,10 @@
         <div class="viewport">
 
             <div class="viewport-top">
-                {% include "partials/header.njk" %}
+                {% block header %}
+                {% endblock header %}
 
-                <main class="site-main overflow-x-hidden">
+                <main class="site-main">
                     {% block content %}
                     {% endblock content %}
                 </main>

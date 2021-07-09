@@ -3,8 +3,17 @@
 ---
 {% extends 'layouts/default.njk' %}
 {% from "partials/card.njk" import card %}
+{% from "partials/header.njk" import header %}
 {% set postslist = collections.posts | limit(3) %}
 {% set title = "Build the future of web apps at the edge" %}
+
+
+
+{% block header %}
+  {{ header() }}
+{% endblock %}
+
+
 
 {#
 <!-- Saved Jeff Words -->
@@ -31,9 +40,12 @@
         <li>Join our <a href="https://fission.codes/discord">Discord chat</a></li>
     </ul>
 #}
+
+
+
 {% block content %}
 <!-- Hero Build the Future -->
-<section class="relative w-full" x-data="{ showMenu: false }">
+<section class="relative overflow-x-hidden w-full" x-data="{ showMenu: false }">
 {#
     <div class="relative z-50 w-full h-24">
         <div class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0">
@@ -157,7 +169,9 @@
 
     <div class="px-5 mx-auto max-w-7xl sm:px-8">
         <div class="flex items-center justify-between w-full pb-5 mb-8 border-b border-base-200 dark:border-base-800">
-            <h2 class="text-xl font-light font-display !leading-tight uppercase">From the blog</h2>
+            <a href="/blog/">
+              <h2 class="text-xl font-light font-display !leading-tight uppercase">From the blog</h2>
+            </a>
             <a href="/blog/" class="flex items-center text-xs font-semibold !leading-tight ml-3 text-base-400 group dark:text-base-500 md:text-sm">
                 <span>View More Posts</span>
                 <svg class="w-3 h-3 mt-0.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
