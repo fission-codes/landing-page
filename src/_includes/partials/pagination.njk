@@ -1,14 +1,59 @@
 {% if pagination.previousPageHref or pagination.nextPageHref %}
-    <nav class="pagination" role="pagination">
-        {% if page.permalink != pagination.previousPageHref %}
-            <a href="{{ pagination.previousPageHref }}">Prev page</a>
-        {% else %}
-            <span>Prev page</span>
-        {% endif %}
-        {% if page.permalink != pagination.nextPageHref %}
-            <a href="{{ pagination.nextPageHref }}">Next page</a>
-        {% else %}
-            <span>Next page</span>
-        {% endif %}
+    <nav class="pagination mb-12 flex justify-center" role="pagination">
+        <ol class="bg-base-50 inline-flex font-semibold items-center justify-center text-opacity-80 text-base-900 px-5 py-4 rounded-lg space-x-6 text-[12px] tracking-widest uppercase dark:bg-base-800 dark:text-base-200 dark:text-opacity-80">
+
+            {#  #}
+            {% if page.url != pagination.href.first %}
+              <li><a href="{{ pagination.href.first }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              First
+            {% if page.url != pagination.href.first %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+            {#  #}
+            {% if pagination.href.previous %}
+              <li><a href="{{ pagination.href.previous }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clip-rule="evenodd" /></svg>
+            {% if pagination.href.previous %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+            {#  #}
+            {% if pagination.href.next %}
+              <li><a href="{{ pagination.href.next }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
+            {% if pagination.href.next %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+            {#  #}
+            {% if page.url != pagination.href.last %}
+              <li><a href="{{ pagination.href.last }}">
+            {% else %}
+              <li class="opacity-30">
+            {% endif %}
+              Last
+            {% if page.url != pagination.href.last %}
+              </a></li>
+            {% else %}
+              </li>
+            {% endif %}
+
+        </ol>
     </nav>
 {% endif %}

@@ -1,12 +1,21 @@
 {% extends 'layouts/default.njk' %}
 
+{% from "partials/header.njk" import header %}
 {% set title = post.title %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
 
+
+
+{% block header %}
+  {{ header("px-5 sm:px-8", "max-w-2xl") }}
+{% endblock %}
+
+
+
 {#
 {% block content %}
-<section class="w-full py-8 bg-white sm:py-12 md:py-16">
+<section class="w-full py-8 sm:py-12 md:py-16">
     <article class="content">
         {% if post.feature_image %}
             <figure class="post-feature-image">
@@ -25,10 +34,18 @@
 {% endblock %}
 #}
 
-{% block content %}
-    <div class="inner">
 
-        <article class="post-full post ">
+
+{% block content %}
+    <div class="inner overflow-x-hidden px-5 md:px-8">
+
+        <article class="post-full post max-w-2xl mb-24 mx-auto">
+
+            <div class="mb-8 mt-5">
+              <a href="../" class="bg-base-900 font-semibold inline-block px-[7px] py-1 rounded text-[12px] text-white tracking-wider uppercase dark:bg-base-200 dark:text-base-900 md:text-[13px]">
+                <span class="inline-block">Blog</span>
+              </a>
+            </div>
 
             <header class="post-full-header">
                 {# TODO: tag and date meta
@@ -40,20 +57,21 @@
                 <h1 class="post-full-title">{{ title }}</h1>
             </header>
 
-            <figure class="post-full-image">
+            <figure class="post-full-image -mx-12">
                 <img
                     src="{{ post.feature_image }}"
                     alt="{{ title }}"
+                    class="rounded-md w-full"
                 />
             </figure>
 
             <section class="post-full-content load-external-scripts content-body">
-                <div class="post-content">
+                <div class="post-content sm:text-lg">
                     {{ content | safe }}
                 </div>
             </section>
 
-{# TODO: check this Discourse embed     
+{# TODO: check this Discourse embed
 <section class="post-full-comments">
     <div id='discourse-comments'></div>
 
@@ -73,12 +91,6 @@
 
     </div>
 {% endblock %}
-
-
-
-
-
-
 
 
 

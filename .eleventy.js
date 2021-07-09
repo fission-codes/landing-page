@@ -6,8 +6,11 @@ const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const localImages = require("eleventy-plugin-local-images");
 const lazyImages = require("eleventy-plugin-lazyimages");
 const ghostContentAPI = require("@tryghost/content-api");
+const svgContents = require("eleventy-plugin-svg-contents");
 
 const htmlMinTransform = require("./src/transforms/html-min-transform.js");
+
+
 
 // Init Ghost API
 const api = new ghostContentAPI({
@@ -16,10 +19,13 @@ const api = new ghostContentAPI({
   version: "v2"
 });
 
+
 // Strip Ghost domain from urls
 const stripDomain = url => {
   return url.replace(process.env.GHOST_API_URL, "");
 };
+
+
 
 module.exports = function(config) {
   // Minify HTML
@@ -46,10 +52,17 @@ module.exports = function(config) {
     verbose: false
   });
 
+  // Copy static assets
+  config.addPassthroughCopy("src/fonts")
+  config.addPassthroughCopy("src/images")
+
   // Inline CSS
   config.addFilter("cssmin", code => {
     return new cleanCSS({}).minify(code).styles;
   });
+
+  // Inline SVG
+  config.addPlugin(svgContents)
 
 /*
   config.addFilter("getReadingTime", text => {
@@ -67,8 +80,35 @@ module.exports = function(config) {
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
 
+  // Custom filter to get the first N items
+  config.addNunjucksFilter("limit", (arr, limit) => arr.slice(0, limit));
+
+  // Display 404 page in BrowserSnyc
+  config.setBrowserSyncConfig({
+    callbacks: {
+      ready: (err, bs) => {
+        const content_404 = fs.readFileSync("dist/ipfs_404.html");
+
+        bs.addMiddleware("*", (req, res) => {
+          // Provides the 404 content without redirect.
+          res.write(content_404);
+          res.end();
+        });
+      }
+    }
+  });
+
+
+
+  /////////////////////////////////////////////
+  // COLLECTIONS
+  /////////////////////////////////////////////
+
+  // Docs
+  // ====
   // Get all pages, called 'docs' to prevent
   // conflicting the eleventy page object
+
   config.addCollection("docs", async function(collection) {
     collection = await api.pages
       .browse({
@@ -91,7 +131,10 @@ module.exports = function(config) {
     return collection;
   });
 
-  // Get all posts
+
+  // Posts
+  // =====
+
   config.addCollection("posts", async function(collection) {
     collection = await api.posts
       .browse({
@@ -117,7 +160,10 @@ module.exports = function(config) {
     return collection;
   });
 
-  // Get all authors
+
+  // Authors
+  // =======
+
   config.addCollection("authors", async function(collection) {
     collection = await api.authors
       .browse({
@@ -151,7 +197,10 @@ module.exports = function(config) {
     return collection;
   });
 
-  // Get all tags
+
+  // Tags
+  // ====
+
   config.addCollection("tags", async function(collection) {
     collection = await api.tags
       .browse({
@@ -186,25 +235,12 @@ module.exports = function(config) {
     return collection;
   });
 
-  // Custom filter to get the first N items
-  config.addNunjucksFilter("limit", (arr, limit) => arr.slice(0, limit));
 
-  // Display 404 page in BrowserSnyc
-  config.setBrowserSyncConfig({
-    callbacks: {
-      ready: (err, bs) => {
-        const content_404 = fs.readFileSync("dist/ipfs_404.html");
 
-        bs.addMiddleware("*", (req, res) => {
-          // Provides the 404 content without redirect.
-          res.write(content_404);
-          res.end();
-        });
-      }
-    }
-  });
+  /////////////////////////////////////////////
+  // 11TY CONFIG
+  /////////////////////////////////////////////
 
-  // Eleventy configuration
   return {
     dir: {
       input: "src",
