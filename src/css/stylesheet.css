@@ -14,7 +14,7 @@ body {
  */
 
 article header h1 {
-  @apply font-light leading-[1.125] mb-16 text-5xl tracking-tight;
+  @apply font-light leading-[1.125] mb-16 text-4xl tracking-tight sm:text-5xl sm:leading-[1.125];
 }
 
 article section h1 {
@@ -22,7 +22,7 @@ article section h1 {
 }
 
 article section h2 {
-  @apply font-bold mt-12 text-2xl tracking-tight;
+  @apply font-bold mt-16 text-2xl tracking-tight;
 }
 
 article section h3 {
@@ -50,6 +50,14 @@ article section p {
   @apply mb-8;
 }
 
+article section h2 + p,
+article section h3 + p,
+article section h4 + p,
+article section h5 + p,
+article section h6 + p {
+  @apply mt-5;
+}
+
 article section figcaption {
   @apply mt-3 text-base-500 text-sm;
 }
@@ -65,7 +73,7 @@ article section a {
 
 article section ol,
 article section ul {
-  @apply ml-6;
+  @apply md:ml-6;
 }
 
 article section ol li,
@@ -97,11 +105,11 @@ article section ol li::before {
 
 article section code {
   @apply bg-base-100 border-t border-transparent dark:bg-base-800 dark:bg-opacity-50;
-  font-size: 15px;
+  font-size: 0.85em;
 }
 
 article section pre > code {
-  @apply block overflow-x-scroll px-8 py-6 rounded-md;
+  @apply block overflow-x-scroll px-5 py-6 rounded-md md:px-8;
 }
 
 article section :not(pre) > code {

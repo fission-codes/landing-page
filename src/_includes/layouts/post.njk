@@ -37,12 +37,12 @@
 
 
 {% block content %}
-    <div class="inner">
+    <div class="inner overflow-x-hidden px-5 md:px-8">
 
         <article class="post-full post max-w-2xl mb-24 mx-auto">
 
             <div class="mb-8 mt-5">
-              <a href="../" class="bg-base-900 font-semibold inline-block px-[7px] py-1 rounded text-[13px] text-white tracking-wider uppercase dark:bg-base-200 dark:text-base-900">
+              <a href="../" class="bg-base-900 font-semibold inline-block px-[7px] py-1 rounded text-[12px] text-white tracking-wider uppercase dark:bg-base-200 dark:text-base-900 md:text-[13px]">
                 <span class="inline-block">Blog</span>
               </a>
             </div>
@@ -66,7 +66,7 @@
             </figure>
 
             <section class="post-full-content load-external-scripts content-body">
-                <div class="post-content text-lg">
+                <div class="post-content sm:text-lg">
                     {{ content | safe }}
                 </div>
             </section>
