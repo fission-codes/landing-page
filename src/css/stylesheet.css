@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  text-rendering: geometricPrecision;
+}
+
+
+
+/**
+ * Blog
+ */
+
+article header h1 {
+  @apply font-light leading-[1.125] mb-16 text-4xl tracking-tight sm:text-5xl sm:leading-[1.125];
+}
+
+article section h1 {
+  @apply font-bold mb-12 mt-20 text-3xl tracking-tight;
+}
+
+article section h2 {
+  @apply font-bold mt-16 text-2xl tracking-tight;
+}
+
+article section h3 {
+  @apply font-bold mt-10 text-xl tracking-tight;
+}
+
+article section h4,
+article section h5,
+article section h6 {
+  @apply font-bold mt-8 tracking-tight;
+}
+
+article section blockquote,
+article section figure,
+article section hr,
+article section p,
+article section pre,
+article section ol,
+article section ul,
+article section video {
+  @apply mt-8;
+}
+
+article section p {
+  @apply mb-8;
+}
+
+article section h2 + p,
+article section h3 + p,
+article section h4 + p,
+article section h5 + p,
+article section h6 + p {
+  @apply mt-5;
+}
+
+article section figcaption {
+  @apply mt-3 text-base-500 text-sm;
+}
+
+article section hr {
+  @apply border-base-100 dark:border-base-800;
+}
+
+article section a {
+  @apply text-purple underline dark:text-purple-tint;
+  text-underline-offset: 2px;
+}
+
+article section ol,
+article section ul {
+  @apply md:ml-6;
+}
+
+article section ol li,
+article section ul li {
+  @apply mb-2;
+}
+
+article section ul li::before {
+  @apply mr-3;
+  content: "•";
+  display: inline-block;
+  opacity: 0.25;
+}
+
+article section ol {
+  counter-reset: ordered-list;
+}
+
+article section ol li {
+  counter-increment: ordered-list;
+}
+
+article section ol li::before {
+  @apply mr-3;
+  content: counter(ordered-list) ".";
+  display: inline-block;
+  opacity: 0.25;
+}
+
+article section code {
+  @apply bg-base-100 border-t border-transparent dark:bg-base-800 dark:bg-opacity-50;
+  font-size: 0.85em;
+}
+
+article section pre > code {
+  @apply block overflow-x-scroll px-5 py-6 rounded-md md:px-8;
+}
+
+article section :not(pre) > code {
+  @apply px-1 py-1 rounded;
+}
+
+article section iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  width: 100%;
+}
+
+article section img,
+article section iframe,
+article section video {
+  @apply rounded-md shadow-md;
+}
+
+article section iframe[src*="twitter.com/"] {
+  @apply shadow-none;
+}
+
+
+
+/**
+ * Blog (legacy)
+ */
+
+article .kg-gallery-image {
+  @apply mt-4;
+}

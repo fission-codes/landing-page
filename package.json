@@ -1,28 +1,37 @@
 {
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "elm-pages develop",
-    "build": "elm-pages build"
-  },
-  "dependencies": {
-    "@tailwindcss/typography": "^0.2.0",
-    "fission-kit": "github:fission-suite/kit#52007072cf459d02de6b49f5ca13229a7a03f4c6",
-    "node-sass": "^4.14.1"
+    "build": "\"$npm_execpath\" run prep && \"$npm_execpath\" run css:prod && cross-env ELEVENTY_ENV=prod eleventy",
+    "css:dev": "tailwindcss -c tailwind.config.js -i src/css/stylesheet.css -o dist/stylesheet.css --watch",
+    "css:prod": "tailwindcss -c tailwind.config.js -i src/css/stylesheet.css -o dist/stylesheet.css --minify",
+    "dev": "\"$npm_execpath\" run prep && concurrently '\"$npm_execpath\" run css:dev' 'cross-env ELEVENTY_ENV=dev eleventy --serve'",
+    "fonts": "copy-fission-fonts src/fonts/ --woff2",
+    "images": "copy-fission-images src/images/kit/",
+    "lint": "eslint . --ext .js --cache",
+    "prep": "\"$npm_execpath\" run fonts && \"$npm_execpath\" run images",
+    "start": "\"$npm_execpath\" run dev",
+    "test": "\"$npm_execpath\" run build"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.3.0",
-    "autoprefixer": "^9.8.6",
-    "elm": "latest-0.19.1",
-    "elm-format": "^0.8.3",
-    "elm-git-install": "^0.1.3",
-    "elm-impfix": "^1.0.8",
-    "elm-json": "^0.2.7",
-    "elm-pages": "^1.4.2",
-    "postcss": "^7.0.32",
-    "postcss-csso": "^4.0.0",
-    "postcss-elm-tailwind": "^0.10.0",
-    "sharp": "^0.25.4",
-    "tailwindcss": "^1.9.3"
+    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-plugin-rss": "^1.1.1",
+    "@tryghost/content-api": "^1.5.7",
+    "@tryghost/helpers": "^1.1.46",
+    "autoprefixer": "^10.2.6",
+    "clean-css": "^5.1.2",
+    "concurrently": "^6.2.0",
+    "cross-env": "^7.0.0",
+    "dotenv": "^10.0.0",
+    "eleventy-plugin-lazyimages": "liamfiddler/eleventy-plugin-lazyimages",
+    "eleventy-plugin-local-images": "^0.4.0",
+    "eleventy-plugin-svg-contents": "^0.7.0",
+    "eslint": "7.28.0",
+    "eslint-plugin-ghost": "2.3.0",
+    "eslint-utils": "3.0.0",
+    "html-minifier": "^4.0.0"
+  },
+  "dependencies": {
+    "@fission-suite/kit": "^1.1.1",
+    "tailwindcss": "^2.2.4"
   }
 }

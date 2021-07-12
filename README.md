@@ -1,24 +1,37 @@
-# FISSION Landing Page
+# Fission Eleventy Headless Ghost
 
-## Setup
+Install dependencies
 
-Prerequisites:
-- [`brew install just`](https://github.com/casey/just)
-- [`brew install pnpm`](https://pnpm.js.org)
-- [`brew install watchexec`](https://github.com/watchexec/watchexec)
+```bash
+yarn
+```
 
-Uses `elm-git` for install, so you'll need to have your [SSH key setup for Github](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
+# Create .env
 
-## How to use
+Get the Content API key from `Settings > Integrations > Eleventy` on the blog.
 
-```shell
-# 🍱
-just install-deps
+```
+GHOST_API_URL=https://blog.fission.codes
+GHOST_CONTENT_API_KEY=()
+SITE_URL=http://localhost:8080
+```
 
-# Build, watch & start server
-just
+# Running
 
+Start the development server
 
-# Build for production and put in `dist` folder
-just build-production
+```bash
+yarn start
+```
+
+This will grab all posts and images and the site will be running at `https://localhost:8080`
+# Optimising
+
+You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Eleventy front-end becomes the source of truth for SEO.
+
+# Extra options
+
+```bash
+# Build the site locally
+yarn build
 ```
