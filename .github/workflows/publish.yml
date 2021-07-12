@@ -2,7 +2,7 @@ name: 🚀 Publish
 on:
   push:
     branches:
-      - eleventy # TODO switch to main when merged
+      - master
 jobs:
   publish_job:
     name: 🚀 Publish
