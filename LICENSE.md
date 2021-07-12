@@ -10,4 +10,4 @@ If you have questions about using it, file an issue, or get in touch with us at 
 * [Forum](https://talk.fission.codes)
 * [Developer Guide](https://guide.fission.codes)
 
-Ghost - Eleventy template code is MIT: [TryGhost/eleventy-starter-ghost]https://github.com/TryGhost/eleventy-starter-ghost()
+Ghost - Eleventy template code is MIT: [TryGhost/eleventy-starter-ghost](https://github.com/TryGhost/eleventy-starter-ghost)
