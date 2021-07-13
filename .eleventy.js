@@ -35,7 +35,7 @@ module.exports = function(config) {
   config.addPlugin(pluginRSS);
 
   // Apply performance attributes to images
-  // NOTE: LazyImages seems to keep re-processing and is soooo slow.....
+  // NOTE: LazyImages seems to keep re-processing and is soooo slow, so turned off
   /*
   config.addPlugin(lazyImages, {
     cacheFile: ".lazyimages.json"
@@ -43,12 +43,13 @@ module.exports = function(config) {
   */
 
   // Copy images over from Ghost
-  // TODO: is this actually running?
+  // TODO: use this as a basis for an IPFS version, which only has to grab images once
   config.addPlugin(localImages, {
     distPath: "dist",
     assetPath: "/assets/images",
     selector: "img",
-    attribute: "data-src", // Lazy images attribute
+    /* attribute: "data-src", // Lazy images attribute */
+    attribute: "src", // if not using LazyImages, just grab src
     verbose: true
   });
 
