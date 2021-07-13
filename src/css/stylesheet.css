@@ -10,7 +10,7 @@ body {
 
 
 /**
- * Blog
+ * Blog & Pages
  */
 
 article header h1 {
@@ -122,9 +122,9 @@ article section iframe {
   width: 100%;
 }
 
-article section img,
-article section iframe,
-article section video {
+article.post section img,
+article.post section iframe,
+article.post section video {
   @apply rounded-md shadow-md;
 }
 
