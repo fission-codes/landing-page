@@ -1759,7 +1759,7 @@ eleventy-plugin-lazyimages@liamfiddler/eleventy-plugin-lazyimages:
     node-fetch "^2.6.0"
     sharp "^0.25.3"
 
-eleventy-plugin-local-images@fission-suite/eleventy-plugin-local-images:
+eleventy-plugin-local-images@fission-suite/eleventy-plugin-local-images#master:
   version "0.4.0"
   resolved "https://codeload.github.com/fission-suite/eleventy-plugin-local-images/tar.gz/b5269a2a2219c111ce6019a621cc83d3e0e39ce3"
   dependencies:
