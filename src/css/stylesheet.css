@@ -116,6 +116,10 @@ article section :not(pre) > code {
   @apply px-1 py-1 rounded;
 }
 
+article section blockquote {
+  @apply italic text-xl;
+}
+
 article section iframe {
   aspect-ratio: 16 / 9;
   height: auto;
