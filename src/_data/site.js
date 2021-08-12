@@ -20,7 +20,7 @@ module.exports = async function() {
     });
 
   siteData.subtitle = "Connecting people, devices, and apps to global data at the edge";
-  // siteData.description = "meta tag for SEO"
+  siteData.description = "Build the future of web apps at the edge: auth, data, and publishing for front end devs"
 
   if (process.env.SITE_URL) siteData.url = process.env.SITE_URL;
 
