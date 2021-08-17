@@ -1,5 +1,9 @@
 # Fission Eleventy Headless Ghost
 
+The [Publish action](https://github.com/fission-suite/landing-page/actions/workflows/publish.yml) will build and publish the site to https://fission.codes for every main branch commit
+
+## Eleventy
+
 Install dependencies
 
 ```bash
