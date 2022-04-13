@@ -6,8 +6,8 @@ pagination:
 ---
 
 {% extends 'layouts/default.njk' %}
-{% from "partials/card.njk" import card %}
-{% from "partials/header.njk" import header %}
+{% from "partials/card.njk" import card with context %}
+{% from "partials/header.njk" import header with context %}
 {% set title = "Blog" %}
 
 

@@ -1,6 +1,6 @@
 {% extends 'layouts/default.njk' %}
 
-{% from "partials/header.njk" import header %}
+{% from "partials/header.njk" import header with context %}
 {% set title = post.title %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
@@ -62,6 +62,7 @@
                     src="{{ post.feature_image }}"
                     alt="{{ title }}"
                     class="rounded-md w-full"
+                    data-page-url="{{ page.url }}"
                 />
             </figure>
 
