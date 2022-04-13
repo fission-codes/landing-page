@@ -13,13 +13,7 @@
         <meta name="robots" content="index,follow">
         <meta name="generator" content="Eleventy">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{#
-        {% if site.icon %}
-            <link rel="shortcut icon" type="image/png" href="{{ site.icon }}"/>
-        {% endif %}
-#}
-        {# TODO: figure out how to reference / generate local image #}
-        <link rel="shortcut icon" type="image/png" sizes="32x32" href="https://auth.fission.codes/favicon-32x32.png">
+        <link rel="icon" type="image/svg+xml" href="{{ "/images/favicon.svg"}}" sizes="any">
 
         {%- block seo -%}
             <!--Twitter Card-->
