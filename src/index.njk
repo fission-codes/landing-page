@@ -2,8 +2,8 @@
 
 ---
 {% extends 'layouts/default.njk' %}
-{% from "partials/card.njk" import card %}
-{% from "partials/header.njk" import header %}
+{% from "partials/card.njk" import card with context %}
+{% from "partials/header.njk" import header with context %}
 {% set postslist = collections.posts | limit(3) %}
 {% set title = "Build the future of web apps at the edge" %}
 
@@ -103,8 +103,8 @@
             </div>
             <div class="relative z-50 flex flex-col items-end justify-center w-full h-full lg:w-1/2 lg:pl-10">
                 <div class="container relative left-0 w-full max-w-4xl lg:absolute lg:w-screen">
-                    <img src="/images/drive.fission.codes-light.png" alt="Screenshot of Fission Drive - drive.fission.codes" class="mt-20 mb-20 ml-0 shadow-2xl rounded-lg md:rounded-xl lg:mb-0 xl:-ml-12 dark:hidden">
-                    <img src="/images/drive.fission.codes-dark.png" alt="Screenshot of Fission Drive - drive.fission.codes" class="hidden mt-20 mb-20 ml-0 shadow-2xl rounded-lg md:rounded-xl lg:mb-0 xl:-ml-12 dark:block">
+                    <img src="{{ "/images/drive.fission.codes-light.png" | relativePath(page) }}" alt="Screenshot of Fission Drive - drive.fission.codes" class="mt-20 mb-20 ml-0 shadow-2xl rounded-lg md:rounded-xl lg:mb-0 xl:-ml-12 dark:hidden">
+                    <img src="{{ "/images/drive.fission.codes-dark.png" | relativePath(page) }}" alt="Screenshot of Fission Drive - drive.fission.codes" class="hidden mt-20 mb-20 ml-0 shadow-2xl rounded-lg md:rounded-xl lg:mb-0 xl:-ml-12 dark:block">
                 </div>
             </div>
         </div>
@@ -169,10 +169,10 @@
 
     <div class="px-5 mx-auto max-w-7xl sm:px-8">
         <div class="flex items-center justify-between w-full pb-5 mb-8 border-b border-base-200 dark:border-base-800">
-            <a href="/blog/">
+            <a href="{{ "/blog" | relativePath(page) }}">
               <h2 class="text-xl font-light font-display !leading-tight uppercase">From the blog</h2>
             </a>
-            <a href="/blog/" class="flex items-center text-sm font-semibold !leading-tight ml-3 text-base-400 group dark:text-base-500">
+            <a href="{{ "/blog" | relativePath(page) }}" class="flex items-center text-sm font-semibold !leading-tight ml-3 text-base-400 group dark:text-base-500">
                 <span>View More Posts</span>
                 <svg class="w-3 h-3 mt-0.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>

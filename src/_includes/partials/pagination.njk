@@ -4,7 +4,7 @@
 
             {#  #}
             {% if page.url != pagination.href.first %}
-              <li><a href="{{ pagination.href.first }}">
+              <li><a href="{{ pagination.href.first | relativePath(page) }}">
             {% else %}
               <li class="opacity-30">
             {% endif %}
@@ -17,7 +17,7 @@
 
             {#  #}
             {% if pagination.href.previous %}
-              <li><a href="{{ pagination.href.previous }}">
+              <li><a href="{{ pagination.href.previous | relativePath(page) }}">
             {% else %}
               <li class="opacity-30">
             {% endif %}
@@ -30,7 +30,7 @@
 
             {#  #}
             {% if pagination.href.next %}
-              <li><a href="{{ pagination.href.next }}">
+              <li><a href="{{ pagination.href.next | relativePath(page) }}">
             {% else %}
               <li class="opacity-30">
             {% endif %}
@@ -43,7 +43,7 @@
 
             {#  #}
             {% if page.url != pagination.href.last %}
-              <li><a href="{{ pagination.href.last }}">
+              <li><a href="{{ pagination.href.last | relativePath(page) }}">
             {% else %}
               <li class="opacity-30">
             {% endif %}

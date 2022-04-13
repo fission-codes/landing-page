@@ -23,7 +23,7 @@ module.exports = {
     plugin(function({ addBase }) {
       // this `fontsPath` will be the relative path
       // to the fonts from the generated stylesheet
-      kit.fontFaces({ fontsPath: "/fonts/" }).forEach(fontFace => {
+      kit.fontFaces({ fontsPath: "./fonts/" }).forEach(fontFace => {
         addBase({ "@font-face": fontFace })
       })
     })
