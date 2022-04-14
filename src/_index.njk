@@ -1,0 +1,191 @@
+---
+
+---
+{% extends 'layouts/default.njk' %}
+{% from "partials/card.njk" import card with context %}
+{% from "partials/header.njk" import header with context %}
+{% set postslist = collections.posts | limit(3) %}
+{% set title = "Build the future of web apps at the edge" %}
+
+
+
+{% block header %}
+  {{ header() }}
+{% endblock %}
+
+
+
+{#
+<!-- Saved Jeff Words -->
+
+    <h3>Get started today:</h3>
+    <ul>
+        <li>Develop using the Web Native Filesystem <a class="readmore" href="/wnfs/">Read More »</a></li>
+        <li>Fast web app publishing on IPFS</li>
+        <li>Free SSL and subdomain</li>
+        <li>Built in user accounts with secure private data</li>
+    </ul>
+
+    <h3>What's coming next:</h3>
+    <ul>
+        <li>Enabling data-driven applications with the Web Native Database <a class="readmore" href="/wndb/">Read More »</a></li>
+        <li>Empowering app users to to collaborate on private files and data</li>
+        <li>Easy domain registration</li>
+    </ul>
+
+    <h3>Join the conversation:</h3>
+    <ul>
+        <li>Fission Whitepaper <a class="readmore" href="https://whitepaper.fission.codes">Read More »</a></li>
+        <li>Check out the blog</li>
+        <li>Join our <a href="https://fission.codes/discord">Discord chat</a></li>
+    </ul>
+#}
+
+
+
+{% block content %}
+<!-- Hero Build the Future -->
+<section class="relative overflow-x-hidden w-full" x-data="{ showMenu: false }">
+{#
+    <div class="relative z-50 w-full h-24">
+        <div class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0">
+
+            <a href="/" class="relative flex items-center inline-block h-5 h-full font-black leading-none">
+                <span class="ml-3 text-xl">tails<span class="text-indigo-600">.</span></span>
+            </a>
+
+            <nav class="absolute top-0 left-0 z-50 flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm bg-white border-t border-gray-200 shadow-xl md:shadow-none md:flex md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:relative" :class="{'flex fixed': showMenu, 'hidden': !showMenu }">
+                <a href="#" class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Home</a>
+                <a href="#features" class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Features</a>
+                <a href="#pricing" class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Pricing</a>
+                <a href="#testimonials" class="font-bold duration-100 transition-color hover:text-indigo-600">Testimonials</a>
+                <div class="flex flex-col block w-full font-medium border-t border-gray-200 md:hidden">
+                    <a href="#_" class="w-full py-2 font-bold text-center text-indigo-600">Login</a>
+                    <a href="#_" class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-600">Get Started</a>
+                </div>
+            </nav>
+
+            <div class="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
+                <a href="#_" class="relative z-40 px-3 py-2 mr-0 text-sm font-bold text-indigo-600 md:px-5 sm:mr-3 md:mt-0">Login</a>
+                <a href="#_" class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-600 rounded shadow-md sm:w-full lg:shadow-none hover:shadow-xl">Get Started</a>
+
+            </div>
+
+            <div @click="showMenu = !showMenu" class="absolute top-0 right-0 z-50 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10">
+                <span class="block w-full h-1 mt-2 duration-200 transform bg-gray-800 rounded-full sm:mt-1"></span>
+                <span class="block w-full h-1 mt-1 duration-200 transform bg-gray-800 rounded-full"></span>
+            </div>
+
+        </div>
+    </div>
+#}
+    <div class="px-5 relative sm:px-8 sm:pt-8 md:pt-12 lg:pb-40">
+        <div class="container flex flex-col items-center justify-between h-full mx-auto lg:flex-row">
+            <div class="z-30 flex flex-col items-center w-full max-w-xl text-center lg:items-start lg:w-1/2 lg:pt-24 lg:text-left">
+                <h1 class="antialiased relative mb-6 text-3xl font-black font-body tracking-tighter text-base-700 dark:text-base-200 sm:!leading-[1.05] sm:text-6xl lg:mb-8 lg:pr-16">Build the future of web apps at the edge</h1>
+                <p class="pr-0 mb-8 text-base opacity-60 sm:text-lg xl:text-xl lg:pr-20">Are you ready to start building the latest and greatest web application? <a href="https://guide.fission.codes/developers">Get started with the developer guide & install the CLI tool</a>.</p>
+
+
+                <a href="https://drive.fission.codes" target="_blank" class="relative self-start inline-flex items-center w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-purple rounded-md shadow-xl sm:mt-1 lg:mx-0">
+                  Try Fission Drive
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
+
+{#
+                <!-- Integrates with section -->
+                <div class="flex-col hidden mt-12 sm:flex lg:mt-24">
+                    <p class="mb-4 text-sm font-medium tracking-widest uppercase">Powered by</p>
+                    <div class="flex">
+                        <!-- SVG logos go here -->
+                    </div>
+                </div>
+#}
+            </div>
+            <div class="relative z-50 flex flex-col items-end justify-center w-full h-full lg:w-1/2 lg:pl-10">
+                <div class="container relative left-0 w-full max-w-4xl lg:absolute lg:w-screen">
+                    <img src="{{ "/images/drive.fission.codes-light.png" | relativePath(page) }}" alt="Screenshot of Fission Drive - drive.fission.codes" class="mt-20 mb-20 ml-0 shadow-2xl rounded-lg md:rounded-xl lg:mb-0 xl:-ml-12 dark:hidden">
+                    <img src="{{ "/images/drive.fission.codes-dark.png" | relativePath(page) }}" alt="Screenshot of Fission Drive - drive.fission.codes" class="hidden mt-20 mb-20 ml-0 shadow-2xl rounded-lg md:rounded-xl lg:mb-0 xl:-ml-12 dark:block">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="pt-20 pb-32">
+    <div class="max-w-5xl px-10 md:px-20 mx-auto">
+        <h2 class="mb-24 italic text-3xl font-bold leading-tight text-center">Use your front end skills to ship full edge apps</h2>
+        <div class="grid grid-cols-1 mt-16 sm:grid-cols-2 md:grid-cols-3 gap-x-10 lg:gap-x-16 gap-y-16 sm:gap-y-20">
+
+            <div class="feature-publishing">
+                <svg class="w-10 h-10 text-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight lg:text-lg">Publishing</h3>
+                <p class="opacity-70 text-sm lg:text-base">Use the <a href="https://guide.fission.codes/developers">Fission CLI to sign up</a>, and instantly register and publish apps. Free subdomain and SSL included.</p>
+            </div>
+
+            <div class="feature-appdata">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight lg:text-lg">App Data</h3>
+                <p class="opacity-70 text-sm lg:text-base">Read and write files and data directly from the web, including on mobile. Versioning and archive links built in.</p>
+            </div>
+
+            <div class="feature-accounts">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight lg:text-lg">User Accounts</h3>
+                <p class="opacity-70 text-sm lg:text-base">Add passwordless logins, and a personal data store for every account. No data exports needed: your users always have access.</p>
+            </div>
+
+            <div class="feature-privacy">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight lg:text-lg">Security & Privacy</h3>
+                <p class="opacity-70 text-sm lg:text-base">Don't leak your users' data, because you don't need to store it. User data is end-to-end encrypted, and encrypted at rest.</p>
+            </div>
+
+            {# <div class="feature-privacy">
+                <svg class="w-10 h-10 text-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" class=""></path></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight lg:text-lg">MicroSaaS</h3>
+                <p class="opacity-70 text-sm lg:text-base">Use Fission's platform APIs to run your own MicroSaaS: yes, you can build an app that creates apps, direct from the web, custom domains included.</p>
+            </div> #}
+
+            <div class="feature-advanced-web">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight lg:text-lg">Advanced Web</h3>
+                <p class="opacity-70 text-sm lg:text-base">We integrate modern, advanced browser features into our SDK. Run your web apps offline, encrypt data, and more.</p>
+            </div>
+
+            <div class="feature-ipfs">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <h3 class="mt-4 mb-2 text-base font-semibold leading-tight lg:text-lg">Global Serverless Files</h3>
+                <p class="opacity-70 text-sm lg:text-base">We build on top of the InterPlanetary File System (IPFS), which powers a global data commons.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Blog -->
+<section class="w-full py-8 sm:py-12 md:py-16">
+
+    <div class="px-5 mx-auto max-w-7xl sm:px-8">
+        <div class="flex items-center justify-between w-full pb-5 mb-8 border-b border-base-200 dark:border-base-800">
+            <a href="{{ "/blog" | relativePath(page) }}">
+              <h2 class="text-xl font-light font-display !leading-tight uppercase">From the blog</h2>
+            </a>
+            <a href="{{ "/blog" | relativePath(page) }}" class="flex items-center text-sm font-semibold !leading-tight ml-3 text-base-400 group dark:text-base-500">
+                <span>View More Posts</span>
+                <svg class="w-3 h-3 mt-0.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6">
+
+            {% for post in postslist %}
+            {{ card(post) }}
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endblock %}

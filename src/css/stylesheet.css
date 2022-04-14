@@ -7,7 +7,31 @@ body {
   text-rendering: geometricPrecision;
 }
 
+/**
+ * Home Page
+ */
 
+@layer utilities {
+  .hashed-border {
+    border-width:16px;
+    border-image:url('/images/hashmark-border-small-light.svg') 16 16 17 17;
+  }
+
+  .hashed-border-dark {
+    border-width:16px;
+    border-image:url('/images/hashmark-border-small-dark.svg') 16 16 17 17;
+  }
+
+  .hashed-border-lg {
+    border-width:40px;
+    border-image:url('/images/hashmark-border-large-light.svg') 40 40 41 41;
+  }
+
+  .hashed-border-lg-dark {
+    border-width:40px;
+    border-image:url('/images/hashmark-border-large-dark.svg') 40 40 41 41;
+  }
+}
 
 /**
  * Blog & Pages
