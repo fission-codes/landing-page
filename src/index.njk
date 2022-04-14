@@ -98,9 +98,9 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-12 hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark ">
+            <div class="grid grid-cols-3 divide-y lg:divide-x lg:divide-y-0 divide-neutral-300 dark:divide-neutral-600 hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark ">
                 {% for post in postslist %}
-                    <div class="col-span-12 lg:col-span-4">
+                    <div class="col-span-3 lg:col-span-1">
                         <div class="bg-neutral-100 dark:bg-neutral-700 h-full p-6 relative">
                             <a href="{{ ["/blog", post.url] | join | relativePath(page) }}" class="relative block w-full h-64 overflow-hidden rounded">
                                 <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.feature_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}">
