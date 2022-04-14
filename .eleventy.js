@@ -44,16 +44,16 @@ module.exports = function(config) {
   });
   */
 
-  // // Copy images over from Ghost
-  // // TODO: use this as a basis for an IPFS version, which only has to grab images once
-  // config.addPlugin(localImages, {
-  //   distPath: "dist",
-  //   assetPath: "/assets/images",
-  //   selector: "img",
-  //   /* attribute: "data-src", // Lazy images attribute */
-  //   attribute: "src", // if not using LazyImages, just grab src
-  //   verbose: true,
-  // });
+  // Copy images over from Ghost
+  // TODO: use this as a basis for an IPFS version, which only has to grab images once
+  config.addPlugin(localImages, {
+    distPath: "dist",
+    assetPath: "/assets/images",
+    selector: "img",
+    /* attribute: "data-src", // Lazy images attribute */
+    attribute: "src", // if not using LazyImages, just grab src
+    verbose: true,
+  });
 
   // Post-processor to add relative paths to localImages
   // note: this needs to be placed after the localImages plugin because
