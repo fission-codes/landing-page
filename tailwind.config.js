@@ -25,26 +25,62 @@ module.exports = {
       },
       colors: {
         ...kit.dasherizeObjectKeys(kit.colors),
-        "dark-body-bg": "#101632",
+        neutral: {
+          50: "#F5F5FA",
+          100: "#ECECF5",
+          200: "#E1E2EF",
+          300: "#CBCBDE",
+          400: "#A3A3BE",
+          500: "#696A8B",
+          600: "#3E4268",
+          700: "#1E2347",
+          800: "#101632",
+          900: "#0A1024",
+        },
+        yellow: {
+          50: "#FEFCE8",
+          100: "#FFE8A4",
+          200: "#FFC967",
+          300: "#FFB238",
+          400: "#EB971B",
+          500: "#CC7B0B",
+          600: "#A96103",
+          700: "#7B4401",
+          800: "#5E3403",
+          900: "#4A2A07",
+        },
+        /* 
+          Named `newpurple` and `newpink` to avoid breaking Fission Kit imports 
+          TODO: these color definitions should be updated in Fission Kit,
+          and then updated throughout templates that depend on them.
 
-        "blue-dark": "#1E2347",
-
-        "gray-dark": "#A3A3BE",
-        "gray-light": "#CBCBDE",
-        "gray-lighest": "#ECECF5",
-        "gray-white": "#F5F5FA",
-
-        neutral: "#101632",
-
-        pink: "#FF4A70",
-        "pink-light": "#FF7390",
-
-        purple: "#6144F3",
-        "purple-dark": "#281566",
-        "purple-light": "#5133D3",
-        "purple-lightest": "#E0DEFF",
-
-        yellow: "#FFB238",
+          For color migration guide, see the Fission Kit figma:
+          https://www.figma.com/file/Np45Vc6bM943XFdXIeEGFJ/Fission-Kit?node-id=500%3A1624
+        */
+        newpurple: {
+          50: "#E0DEFF",
+          100: "#B1ABFF",
+          200: "#9287FF",
+          300: "#7967FF",
+          400: "#6144F3",
+          500: "#6950FF",
+          600: "#5133D3",
+          700: "#3C229B",
+          800: "#281566",
+          900: "#160A38",
+        },
+        newpink: {
+          50: "#FFDAE1",
+          100: "#FFA2B5",
+          200: "#FF7390",
+          300: "#FF4A70",
+          400: "#E9254F",
+          500: "#CC1139",
+          600: "#A20827",
+          700: "#74051C",
+          800: "#4C0514",
+          900: "#340612",
+        },
       },
     },
   },
