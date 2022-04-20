@@ -33,6 +33,6 @@
   },
   "dependencies": {
     "@fission-suite/kit": "^1.1.1",
-    "tailwindcss": "^2.2.4"
+    "tailwindcss": "^3.0.24"
   }
 }
