@@ -12,35 +12,38 @@
 <div aria-label="homepage" class="bg-light-body-bg dark:bg-neutral-800">
 
     <!-- Hero Build the Future -->
-    <section aria-label="hero" class="relative w-full pt-16 md:pt-20 mb-72 sm:mb-56 md:mb-40 flex flex-col justify-center items-center bg-blend-lighten bg-hero-bg-light dark:bg-hero-bg-dark" x-data="{ showMenu: false }">
+    {# <section aria-label="hero" class="relative w-full min-h-screen pt-16 md:pt-0 mb-72 sm:mb-56 md:mb-40 flex flex-col justify-center items-center bg-blend-lighten bg-hero-bg-light dark:bg-hero-bg-dark" x-data="{ showMenu: false }"> #}
+    <section aria-label="hero" class="relative w-full min-h-screen pt-16 md:pt-0 flex flex-col bg-blend-lighten bg-hero-bg-light dark:bg-hero-bg-dark" x-data="{ showMenu: false }">
         <a href="https://fission.codes/discord" target="_blank" class="absolute z-10 top-8 right-8 py-3 px-4 items-center justify-between hidden md:inline-flex bg-purple text-newpurple-50 text-base rounded">
             <img src="{{ "/images/icon-discord.svg" | relativePath(page) }}" class="inline-block mr-2 pb-[1px]" alt="Discord" /><span>Join our Discord</span>
         </a>
 
-        <div class="flex flex-col items-center justify-between md:mb-12">
-            <a href="{{ "/" | relativePath(page) }}" class="flex flex-col items-center justify-between w-auto text-2xl select-none mb-7">
-                <img src="{{ "/images/logo-icon-colored-updated.svg" | relativePath(page) }}" class="w-auto inline-block" alt="Fission" />
+        <div class="flex flex-col items-center justify-center grow">
+            <a href="{{ "/" | relativePath(page) }}" class="flex flex-col items-center justify-between w-auto text-2xl select-none mb-[27px]">
+                <img src="{{ "/images/logo-icon-colored.svg" | relativePath(page) }}" class="w-auto inline-block mb-[88px]" alt="Fission" />
                 <img src="{{ "/images/logo-name-colored.svg" | relativePath(page) }}" class="w-auto inline-block" alt="Fission" />
             </a>
 
             <h1 class="max-w-lg text-center text-newpink-200 dark:text-neutral-400 text-3xl font-display pl-8 pr-8">Building protocols for the future of the Internet</h1>
         </div>
 
-        <!-- Pitch -->
-        <section aria-label="pitch" class="max-w-5xl w-full flex items-center justify-center translate-y-1/2 hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark">
-            <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 bg-newpurple-600 dark:bg-newpurple-800">
-                <img src="{{ "/images/stack-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:ml-11" alt="Fission stack" />
-                <img src="{{ "/images/stack-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:ml-11" alt="Fission stack" />
-                <div>
-                    <h2 class="text-neutral-50 text-xl md:text-2xl font-display mb-2">Cloud native stacks won't deliver the future</h2>
-                    <p class="text-neutral-200 dark:text-neutral-300 text-lg md:text-xl font-body">We're building the <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">data</span>, <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">auth</span> & <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">compute</span> primitives that enable true local-first edge applications. But we don’t get to the future alone. Our edge computing stack is already embedded into leading protocols, platforms and products.</p>
+        <div class="relative w-full mt-auto">
+            <!-- Pitch -->
+            <section aria-label="pitch" class="relative z-10 mx-auto max-w-5xl w-full flex items-center justify-centerhashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark">
+                <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 bg-newpurple-600 dark:bg-newpurple-800">
+                    <img src="{{ "/images/stack-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:ml-11" alt="Fission stack" />
+                    <img src="{{ "/images/stack-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:ml-11" alt="Fission stack" />
+                    <div>
+                        <h2 class="text-neutral-50 text-xl md:text-2xl font-display mb-2">Cloud native stacks won't deliver the future</h2>
+                        <p class="text-neutral-200 dark:text-neutral-300 text-lg md:text-xl font-body">We're building the <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">data</span>, <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">auth</span> & <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">compute</span> primitives that enable true local-first edge applications. But we don’t get to the future alone. Our edge computing stack is already embedded into leading protocols, platforms and products.</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            <div class="absolute w-full top-1/2 h-1/2 z-0 bg-light-body-bg dark:bg-neutral-800"></div>
+        </div>
     </section>
 
-   
-    <section aria-label="body" class="flex flex-col items-center mt-4 md:mt-42">
+    <section aria-label="body" class="flex flex-col items-center">
 
         <!-- Current Projects -->
         <section aria-label="current-products" class="max-w-5xl w-full flex flex-col items-center justify-between">
