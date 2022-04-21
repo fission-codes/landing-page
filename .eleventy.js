@@ -45,7 +45,6 @@ module.exports = function(config) {
   */
 
   // Copy images over from Ghost
-  // TODO: use this as a basis for an IPFS version, which only has to grab images once
   config.addPlugin(localImages, {
     distPath: "dist",
     assetPath: "/assets/images",
