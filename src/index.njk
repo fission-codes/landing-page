@@ -13,8 +13,10 @@
 
     <!-- Hero Build the Future -->
     <section aria-label="hero" class="relative w-full min-h-screen pt-16 md:pt-11 flex flex-col bg-blend-lighten bg-hero-bg-light dark:bg-hero-bg-dark" x-data="{ showMenu: false }">
+        <h1 class="sr-only">Fission: Building protocols for the future of the internet</h1>
+
         <a href="https://fission.codes/discord" target="_blank" class="absolute z-10 top-8 right-8 py-3 px-4 items-center justify-between hidden md:inline-flex bg-purple text-newpurple-50 text-base rounded">
-            <img src="{{ "/images/icon-discord.svg" | relativePath(page) }}" class="inline-block mr-2 pb-[1px]" alt="Discord" /><span>Join our Discord</span>
+            <img src="{{ "/images/icon-discord.svg" | relativePath(page) }}" class="inline-block mr-2 pb-[1px]" alt="Discord logo" /><span>Join our Discord</span>
         </a>
 
         <div class="flex flex-col items-center justify-center grow mb-10 sm:mb-0">
@@ -22,8 +24,7 @@
                 <img src="{{ "/images/logo-icon-colored.svg" | relativePath(page) }}" class="w-auto inline-block mb-[88px]" alt="Fission" />
                 <img src="{{ "/images/logo-name-colored.svg" | relativePath(page) }}" class="w-auto inline-block" alt="Fission" />
             </a>
-
-            <h1 class="max-w-lg text-center text-newpink-200 dark:text-neutral-400 text-3xl font-display pl-8 pr-8">Building protocols for the future of the Internet</h1>
+            <h2 class="max-w-lg text-center text-newpink-200 dark:text-neutral-400 text-3xl font-display pl-8 pr-8">Building protocols for the future of the Internet</h2>
         </div>
 
         <div class="relative flex justify-center w-full mt-auto">
@@ -33,7 +34,7 @@
                     <img src="{{ "/images/stack-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:ml-11" alt="Fission stack" />
                     <img src="{{ "/images/stack-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:ml-11" alt="Fission stack" />
                     <div>
-                        <h2 class="text-neutral-50 text-xl md:text-2xl font-display mb-2">Cloud native stacks won't deliver the future</h2>
+                        <h3 class="text-neutral-50 text-xl md:text-2xl font-display mb-2">Cloud native stacks won't deliver the future</h3>
                         <p class="text-neutral-200 dark:text-neutral-300 text-lg md:text-xl font-body">We're building the <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">data</span>, <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">auth</span> & <span class="text-newpink-200 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">compute</span> primitives that enable true local-first edge applications. But we don’t get to the future alone. Our edge computing stack is already embedded into leading protocols, platforms and products.</p>
                     </div>
                 </div>
@@ -46,14 +47,14 @@
 
         <!-- Current Projects -->
         <section aria-label="current-products" class="max-w-5xl w-full flex flex-col items-center justify-between">
-            <h2 class="mt-8 text-s font-light font-display uppercase text-newpink-300 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">Current projects</h2>
+            <h3 class="mt-8 text-s font-light font-display uppercase text-newpink-300 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">Current projects</h3>
 
             <div aria-label="protocol-labs" class="-mb-2 lg:-mb-10 hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark">
                 <div class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 bg-neutral-100 dark:bg-neutral-700">
-                    <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:mr-11" alt="Protocol Labs" />
-                    <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:mr-11" alt="Protocol Labs" />
+                    <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:mr-11" alt="Protocol Labs logo" />
+                    <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:mr-11" alt="Protocol Labs logo" />
                     <div>
-                        <h3 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">Protocol Labs: making decentralized storage resilient</h3>
+                        <h4 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">Protocol Labs: making decentralized storage resilient</h4>
                         <p class="text-neutral-600 dark:text-neutral-300 text-lg md:text-xl font-body"><a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Protocol Labs</a> pioneered decentralized storage with the introduction of IPFS. Our WebNative File System brings encrypted-at-rest storage and multi-player capabilities to the protocol. We collaborate with Protocol Labs and other key partners to enhance the <a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">IPFS</a> and <a href="https://ipfs.io/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Filecoin</a> ecosystem.</p>
                     </div>
                 </div>
@@ -61,10 +62,10 @@
 
             <div aria-label="laconic" class="-mb-2 lg:-mb-10 hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark">
                 <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 bg-neutral-100 dark:bg-neutral-700">
-                    <img src="{{ "/images/laconic-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:ml-11" alt="Laconic" />
-                    <img src="{{ "/images/laconic-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:ml-11" alt="Laconic" />
+                    <img src="{{ "/images/laconic-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:ml-11" alt="Laconic logo" />
+                    <img src="{{ "/images/laconic-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:ml-11" alt="Laconic logo" />
                     <div>
-                        <h3 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">Laconic: fast multi-chain data, available everywhere</h3>
+                        <h4 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">Laconic: fast multi-chain data, available everywhere</h4>
                         <p class="text-neutral-600 dark:text-neutral-300 text-lg md:text-xl font-body"><a href="https://laconic.com" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Laconic</a> is a new, multi-chain data availability service built on <a href="https://cosmos.network/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Cosmos</a> & <a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">IPFS</a>. It helps teams serve the blockchain data their customers depend on. Fission is a founding technical member of the <a href="https://laconic.com" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Laconic Network</a>.</p>
                     </div>
                 </div>
@@ -72,9 +73,9 @@
 
             <div aria-label="ucans" class="-mb-2 lg:-mb-10 hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark">
                 <div class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 bg-neutral-100 dark:bg-neutral-700">
-                    <img src="{{ "/images/ucan.png" | relativePath(page) }}" class="w-auto inline-block mb-6 md:mb-0 md:mr-11" alt="UCAN" />
+                    <img src="{{ "/images/ucan.png" | relativePath(page) }}" class="w-auto inline-block mb-6 md:mb-0 md:mr-11" alt="UCAN logo" />
                     <div>
-                        <h3 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">UCANs: decentralized authorization</h3>
+                        <h4 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">UCANs: decentralized authorization</h4>
                         <p class="text-neutral-600 dark:text-neutral-300 text-lg md:text-xl font-body"><a href="https://ucan.xyz/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">UCANs</a> extend JWTs to enable distributed identity (<a href="https://www.w3.org/TR/did-core/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">DIDs</a>) and authorization in local-first apps & distributed systems. They make passwordless interop between apps trustless & simple—like OAuth but small, light and decentralized. They have been adopted by <a href="https://nft.storage" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">NFT.Storage</a> & <a href="https://blueskyweb.org/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Bluesky</a>.</p>
                     </div>
                 </div>
@@ -82,10 +83,10 @@
 
             <div aria-label="webnative" class="hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark">
                 <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 bg-neutral-100 dark:bg-neutral-700">
-                    <img src="{{ "/images/webnative-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:ml-11" alt="Webnative" />
-                    <img src="{{ "/images/webnative-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:ml-11" alt="Webnative" />
+                    <img src="{{ "/images/webnative-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block mb-6 md:mb-0 md:ml-11" alt="Webnative icon" />
+                    <img src="{{ "/images/webnative-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden mb-6 md:mb-0 md:ml-11" alt="Webnative icon" />
                     <div>
-                        <h3 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">WebNative SDK: a true local-first edge computing stack</h3>
+                        <h4 class="text-neutral-800 dark:text-neutral-50 text-xl md:text-2xl font-display mb-2">WebNative SDK: a true local-first edge computing stack</h4>
                         <p class="text-neutral-600 dark:text-neutral-300 text-lg md:text-xl font-body">The <a href="https://guide.fission.codes/developers/webnative" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">WebNative SDK</a> empowers developers to build fully distributed web applications without needing a complex back-end. <a href="https://fission.codes/apps/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">WebNative applications</a> work offline and store data encrypted for the user by leveraging UCANs, IPFS and the power of the web platform.</p>
                     </div>
                 </div>
@@ -96,7 +97,7 @@
         <section aria-label="blog" class="max-w-5xl w-full flex flex-col items-center justify-between">
             <div class="w-full text-center">
                 <a href="{{ "/blog" | relativePath(page) }}">
-                    <h2 class="mt-8 text-s font-light font-display uppercase text-newpink-300 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">From the blog</h2>
+                    <h3 class="mt-8 text-s font-light font-display uppercase text-newpink-300 dark:bg-text-bg-dark dark:bg-clip-text dark:text-transparent">From the blog</h3>
                 </a>
             </div>
 
@@ -121,14 +122,14 @@
         <section aria-label="discord" class="max-w-5xl w-full -mt-4 md:-mt-10 mb-5 md:mb-10">
             <div class="justify-center hashed-border dark:hashed-border-dark md:hashed-border-lg md:dark:hashed-border-lg-dark">
                 <div class="p-10 md:p-12 bg-discord-bg-light dark:bg-discord-bg-dark">
-                    <h3 class="text-neutral-50 text-xl md:text-2xl font-display mb-2">Help us get to the future faster</h3>
+                    <h4 class="text-neutral-50 text-xl md:text-2xl font-display mb-2">Help us get to the future faster</h4>
 
                     <p class="text-neutral-50 text-base md:text-xl">Are you struggling at the edge of what's possible?</p>
                     <p class="text-neutral-50 text-base md:text-xl">Do you have an ambitious problem you're having trouble solving?</p>
                     <p class="text-neutral-50 text-base md:text-xl mb-6">Do you enjoy Rust? Datalog? The inventoried self? Flippant backronyms?</p>
 
                     <a href="https://fission.codes/discord" target="_blank" class="py-3 px-4 inline-flex items-center justify-between bg-purple text-newpurple-50 text-base rounded">
-                        <img src="{{ "/images/icon-discord.svg" | relativePath(page) }}" class="inline-block mr-2 pb-[1px]" alt="Discord" /><span>Join our Discord</span>
+                        <img src="{{ "/images/icon-discord.svg" | relativePath(page) }}" class="inline-block mr-2 pb-[1px]" alt="Discord logo" /><span>Join our Discord</span>
                     </a>
                 </div>
             </div>
