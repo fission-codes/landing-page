@@ -128,7 +128,7 @@ article section ol li::before {
 }
 
 article section code {
-  @apply bg-base-100 border-t border-transparent dark:bg-base-800 dark:bg-opacity-50;
+  @apply bg-base-200 border-t border-transparent dark:bg-base-500 dark:bg-opacity-50;
   font-size: 0.85em;
 }
 
