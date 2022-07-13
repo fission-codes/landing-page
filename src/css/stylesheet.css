@@ -169,3 +169,17 @@ article section iframe[src*="twitter.com/"] {
 article .kg-gallery-image {
   @apply mt-4;
 }
+
+
+/**
+ * Discourse blog comments
+ */
+
+.discourse-comments {
+  @apply mt-10;
+}
+
+.discourse-comments iframe {
+  @apply p-6;
+  background-color: #ffffff;
+}
