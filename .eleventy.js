@@ -171,6 +171,19 @@ module.exports = function(config) {
 
       // Convert publish date into a Date object
       post.published_at = new Date(post.published_at);
+
+      // Append discourse comments to `.html` of post
+      post.html = `${post.html}<div id='discourse-comments' class='discourse-comments'></div>
+        <script type="text/javascript">
+          DiscourseEmbed = { discourseUrl: 'https://talk.fission.codes/',
+                            discourseEmbedUrl: 'https://fission.codes/blog/${post.slug}/' };
+
+          (function() {
+            var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+            d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+          })();
+        </script>`;
     });
 
     // Bring featured post to the top of the list
