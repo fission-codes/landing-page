@@ -178,3 +178,7 @@ article .kg-gallery-image {
 .discourse-comments {
   @apply mt-10;
 }
+
+.discourse-comments iframe {
+  @apply p-6;
+}
