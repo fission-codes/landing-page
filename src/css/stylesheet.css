@@ -2,61 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import fonts */
+@font-face {
+  font-family: 'PPFragment';
+  src: url('./fonts/PPFragment-SansVariable.woff2') format('woff2'),
+        url('./fonts/PPFragment-SansVariable.woff') format('woff');
+  font-weight: 450;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PPFragment';
+  src: url('./fonts/PPFragment-SansVariable.woff2') format('woff2'),
+        url('./fonts/PPFragment-SansVariable.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PPFragment';
+  src: url('./fonts/PPFragment-SansVariable.woff2') format('woff2'),
+        url('./fonts/PPFragment-SansVariable.woff') format('woff');
+  font-weight: 550;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UncutSans';
+  src: url('./fonts/Uncut-Sans-Variable.woff2') format('woff2'),
+        url('./fonts/Uncut-Sans-Variable.woff') format('woff');
+  font-weight: 350;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UncutSans';
+  src: url('./fonts/Uncut-Sans-Variable.woff2') format('woff2'),
+        url('./fonts/Uncut-Sans-Variable.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  @apply w-full;
+}
 
 body {
   text-rendering: geometricPrecision;
+  @apply font-sans text-body-base;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display;
+}
+
+h1 {
+  font-weight: 550;
+}
+
+h2, h3 {
+  font-weight: 500;
+}
+
+h4, h5, h6 {
+  font-weight: 450;
+}
+
+.page-wrapper {
+  padding-top: 110px;
+  margin-top: -110px;
+}
+
+/**
+ * Buttons
+ */
+
+.btn {
+  @apply normal-case;
 }
 
 /**
  * Home Page
  */
 
-@layer utilities {
-  .hashed-border {
-    border-width:16px;
-    border-image:url('./images/hashmark-border-small-light.svg') 16 16 17 17;
-  }
-
-  .hashed-border-dark {
-    border-width:16px;
-    border-image:url('./images/hashmark-border-small-dark.svg') 16 16 17 17;
-  }
-
-  .hashed-border-lg {
-    border-width:40px;
-    border-image:url('./images/hashmark-border-large-light.svg') 40 40 41 41;
-  }
-
-  .hashed-border-lg-dark {
-    border-width:40px;
-    border-image:url('./images/hashmark-border-large-dark.svg') 40 40 41 41;
-  }
-}
 
 /**
  * Blog & Pages
  */
 
+article header h1,
+article section h1,
+article section h2,
+article section h3,
+article section h4,
+article section h5,
+article section h6
+{
+  @apply text-neutral-600 dark:text-neutral-100;
+}
 article header h1 {
-  @apply font-light leading-[1.125] mb-16 text-4xl tracking-tight sm:text-5xl sm:leading-[1.125];
+  @apply leading-[1.125] mb-16 text-xl sm:text-3xl;
+  font-weight: 550;
 }
 
 article section h1 {
-  @apply font-bold mb-12 mt-20 text-3xl tracking-tight;
+  @apply mb-12 mt-20 text-3xl;
+  font-weight: 550;
 }
 
 article section h2 {
-  @apply font-bold mt-16 text-2xl tracking-tight;
+  @apply mt-16 text-lg sm:text-2xl;
 }
 
 article section h3 {
-  @apply font-bold mt-10 text-xl tracking-tight;
+  @apply mt-10 text-base sm:text-xl;
 }
 
 article section h4,
 article section h5,
 article section h6 {
-  @apply font-bold mt-8 tracking-tight;
+  @apply mt-8;
 }
 
 article section blockquote,

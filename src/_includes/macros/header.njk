@@ -1,0 +1,26 @@
+{% from "macros/icons/ExternalLink.njk" import ExternalLink %}
+{% from "macros/icons/Hamburger.njk" import Hamburger %}
+{% from "macros/icons/FissionLogoLight.njk" import FissionLogoLight %}
+{% from "macros/icons/FissionLogoDark.njk" import FissionLogoDark %}
+
+{% macro header(showLogo=true) %}
+    <div class="navbar py-8 px-4 md:px-8 relative z-10 items-center md:items-start bg-transparent">
+        <a href="{{ "/" | relativePath(page) }}" class="block md:hidden {%- if showLogo %}!md:block{%- endif -%} pb-2">
+            <div class="block dark:hidden">
+                {{ FissionLogoLight() }}
+            </div>
+            <div class="hidden dark:block">
+                {{ FissionLogoDark() }}
+            </div>
+        </a>
+
+        <div class="ml-auto">
+            <ul class="hidden md:flex menu menu-horizontal gap-8 px-1 text-body-lg text-newpurple-500 dark:text-newpurple-200">
+                <li class="!bg-none !rounded-none pt-0.5"><a href="{{ "/blog" | relativePath(page) }}" class="!bg-transparent !rounded-none h-fit transition-colors hover:text-newpink-300 dark:hover:text-newpink-100 !px-0 !pb-4 !pt-0 border-b border-b-transparent hover:border-b-newpink-300 dark:hover:border-b-newpink-100 {% if '/blog' in page.url %}text-newpink-300 dark:text-newpink-100 border-b-newpink-300 dark:border-b-newpink-100{% endif %}">Read Our Blog</a></li>
+                <li class="!bg-none !rounded-none pt-0.5"><a href="https://shop.fission.codes" target="_blank" class="!bg-transparent !rounded-none h-fit transition-colors hover:text-newpink-300 dark:hover:text-newpink-100 !px-0 !pb-4 !pt-0 border-b border-b-transparent hover:border-b-newpink-300 dark:hover:border-b-newpink-100">Shop Fission Swag {{ ExternalLink() }}</a></li>
+            </ul>
+
+            <button class="open-menu z-20 inline-block md:hidden text-neutral-900 dark:text-neutral-100">{{ Hamburger() }}</button>
+        </div>
+    </div>
+{% endmacro %}

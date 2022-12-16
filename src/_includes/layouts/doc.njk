@@ -1,6 +1,6 @@
 {% extends 'layouts/default.njk' %}
 
-{% from "partials/header.njk" import header with context %}
+{% from "macros/header.njk" import header with context %}
 {% set title = doc.title %}
 {% set codeinjection_head = doc.codeinjection_head %}
 {% set codeinjection_foot = doc.codeinjection_foot %}
@@ -8,7 +8,7 @@
 
 
 {% block header %}
-  {{ header("px-5 sm:px-8", "max-w-2xl") }}
+  {{ header() }}
 {% endblock %}
 
 
