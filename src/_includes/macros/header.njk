@@ -4,7 +4,7 @@
 {% from "macros/icons/FissionLogoDark.njk" import FissionLogoDark %}
 
 {% macro header(showLogo=true) %}
-    <div class="navbar py-8 px-4 md:px-8 relative z-10 items-center md:items-start bg-transparent">
+    <div class="navbar p-8 relative z-10 items-center md:items-start bg-transparent">
         <a href="{{ "/" | relativePath(page) }}" class="block md:hidden {%- if showLogo %}!md:block{%- endif -%} pb-2">
             <div class="block dark:hidden">
                 {{ FissionLogoLight() }}
