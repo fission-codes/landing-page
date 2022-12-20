@@ -5,14 +5,16 @@
 
 {% macro header(showLogo=true) %}
     <div class="navbar p-8 relative z-10 items-center md:items-start bg-transparent">
-        <a href="{{ "/" | relativePath(page) }}" class="block md:hidden {%- if showLogo %}!md:block{%- endif -%} pb-2">
-            <div class="block dark:hidden">
-                {{ FissionLogoLight() }}
-            </div>
-            <div class="hidden dark:block">
-                {{ FissionLogoDark() }}
-            </div>
-        </a>
+        {%- if showLogo %}
+            <a href="{{ "/" | relativePath(page) }}" class="block pb-2">
+                <div class="block dark:hidden">
+                    {{ FissionLogoLight() }}
+                </div>
+                <div class="hidden dark:block">
+                    {{ FissionLogoDark() }}
+                </div>
+            </a>
+        {%- endif -%}
 
         <div class="ml-auto">
             <ul class="hidden md:flex menu menu-horizontal gap-8 px-1 text-body-lg text-newpurple-500 dark:text-newpurple-200">

@@ -141,7 +141,7 @@ article section video {
 }
 
 article section p {
-  @apply mb-8;
+  @apply mb-8 text-body-lg;
 }
 
 article section h2 + p,
