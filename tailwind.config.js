@@ -103,6 +103,7 @@ module.exports = {
         "3xl": ["57px", { lineHeight: "69px" }],
       },
       maxWidth: {
+        "3xl": "775px",
         "5xl": "936px",
       },
       zIndex: {
