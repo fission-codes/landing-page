@@ -6,7 +6,7 @@
 {% macro header(showLogo=true) %}
     <div class="navbar p-8 relative z-10 items-center md:items-start bg-transparent">
         {%- if showLogo %}
-            <a href="{{ "/" | relativePath(page) }}" class="block pb-2">
+            <a href="{{ "/" | relativePath(page) }}" class="block">
                 <div class="block dark:hidden">
                     {{ FissionLogoLight() }}
                 </div>
