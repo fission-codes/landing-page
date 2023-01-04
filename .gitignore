@@ -71,5 +71,5 @@ dist
 _ignored
 .lazyimages.json
 /src/_includes/css/tailwind.css
-/src/fonts/
+# /src/fonts/
 /src/images/kit/
