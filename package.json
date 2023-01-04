@@ -23,7 +23,7 @@
     "cross-env": "^7.0.0",
     "dotenv": "^10.0.0",
     "eleventy-plugin-lazyimages": "^2.1.2",
-    "eleventy-plugin-local-images": "fission-suite/eleventy-plugin-local-images#master",
+    "eleventy-plugin-local-images": "fission-codes/eleventy-plugin-local-images#master",
     "eleventy-plugin-svg-contents": "^0.7.0",
     "eslint": "7.28.0",
     "eslint-plugin-ghost": "2.3.0",

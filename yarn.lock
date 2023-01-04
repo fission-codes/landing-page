@@ -1665,9 +1665,9 @@ eleventy-plugin-lazyimages@^2.1.2:
     jsdom ">=18.1.1"
     sharp ">=0.29.3"
 
-eleventy-plugin-local-images@fission-suite/eleventy-plugin-local-images#master:
+eleventy-plugin-local-images@fission-codes/eleventy-plugin-local-images#master:
   version "0.4.0"
-  resolved "git+ssh://git@github.com/fission-suite/eleventy-plugin-local-images.git#b5269a2a2219c111ce6019a621cc83d3e0e39ce3"
+  resolved "https://codeload.github.com/fission-codes/eleventy-plugin-local-images/tar.gz/b5269a2a2219c111ce6019a621cc83d3e0e39ce3"
   dependencies:
     file-type "^12.0.1"
     fs-extra "^8.1.0"
