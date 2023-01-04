@@ -11,22 +11,14 @@ jobs:
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - name: 🔑 Get cache directory
-        id: yarn-cache-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: 💾 Cache modules
-        uses: actions/cache@v2
-        id: yarn-cache
+      - name: 🧱 Setup node
+        uses: actions/setup-node@v2
         with:
-          path: ${{ steps.yarn-cache-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: '16'
       - name: 📦 Install packages
-        run: yarn install
+        run: npm install
       - name: 🏗 Build assets
-        run: yarn build
+        run: npm run build
         env:
           GHOST_API_URL: ${{ secrets.GHOST_API_URL }}
           GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
