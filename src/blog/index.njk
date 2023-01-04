@@ -7,23 +7,25 @@ pagination:
 
 {% extends 'layouts/default.njk' %}
 {% from "partials/card.njk" import card with context %}
-{% from "partials/header.njk" import header with context %}
+{% from "macros/header.njk" import header with context %}
 {% set title = "Blog" %}
 
 
 
 {% block header %}
-  {{ header("", "px-5 max-w-7xl sm:px-8") }}
+  {{ header() }}
 {% endblock %}
 
 
 
 {% block content %}
-<section class="w-full py-8 sm:py-12 md:py-16">
+<section>
 
     {# TODO: Some blog intro content, maybe latest event #}
 
     <div class="px-5 mx-auto max-w-7xl sm:px-8">
+        <h1 class="text-2xl mb-20 pt-8 text-neutral-600 dark:text-neutral-100">Our Blog</h1>
+
         <div class="grid grid-cols-12 gap-6">
 
             {% for post in posts %}

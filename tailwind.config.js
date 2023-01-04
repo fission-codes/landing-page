@@ -1,41 +1,42 @@
-const plugin = require("tailwindcss/plugin")
 const kit = require("@fission-suite/kit")
 
 
 module.exports = {
   mode: "jit",
   darkMode: "media",
-
+  plugins: [require("daisyui")],
   purge: ["./src/**/*.{html,md,njk}", ...kit.tailwindPurgeList()],
-
   theme: {
     fontFamily: kit.fonts,
 
     extend: {
       backgroundImage: {
-        "hero-bg-dark":
-          "linear-gradient(134.46deg, rgba(255, 82, 116, 0.1) 0%, rgba(100, 70, 250, 0.1) 100%)",
-        "hero-bg-light":
-          "linear-gradient(134.46deg, rgba(255, 82, 116, 0.15) 0%, rgba(100, 70, 250, 0.15) 100%)",
+        "hero-dark":
+          "linear-gradient(358.98deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%);",
+        "hero-light":
+          "linear-gradient(358.98deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%)",
         "text-bg-dark": "linear-gradient(92.57deg, #FF5274 0%, #6446FA 99.99%)",
-        "discord-bg-dark":
+        "newsletter-dark":
           "linear-gradient(134.46deg, rgba(255, 82, 116, 0.4) 0%, rgba(100, 70, 250, 0.4) 100%)",
-        "discord-bg-light":
+        "newsletter-light":
           "linear-gradient(92.57deg, #FF5274 0%, #6446FA 99.99%)",
+        "overlay-menu":
+          "linear-gradient(358.98deg, rgba(255, 82, 116, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%)",
       },
       colors: {
         ...kit.dasherizeObjectKeys(kit.colors),
         neutral: {
-          50: "#F5F5FA",
-          100: "#ECECF5",
-          200: "#E1E2EF",
-          300: "#CBCBDE",
+          0: "#FBFBFC",
+          50: "#F5F5F9",
+          100: "#EEEEF5",
+          200: "#E3E3EF",
+          300: "#CBCCDE",
           400: "#A3A3BE",
           500: "#696A8B",
-          600: "#3E4268",
-          700: "#1E2347",
-          800: "#101632",
-          900: "#0A1024",
+          600: "#3F4161",
+          700: "#1F223D",
+          800: "#0E1225",
+          900: "#070B16",
         },
         yellow: {
           50: "#FEFCE8",
@@ -49,8 +50,8 @@ module.exports = {
           800: "#5E3403",
           900: "#4A2A07",
         },
-        /* 
-          Named `newpurple` and `newpink` to avoid breaking Fission Kit imports 
+        /*
+          Named `newpurple` and `newpink` to avoid breaking Fission Kit imports
           TODO: these color definitions should be updated in Fission Kit,
           and then updated throughout templates that depend on them.
 
@@ -63,17 +64,17 @@ module.exports = {
           200: "#9287FF",
           300: "#7967FF",
           400: "#6144F3",
-          500: "#6950FF",
+          500: "#6446FA",
           600: "#5133D3",
-          700: "#3C229B",
-          800: "#281566",
+          700: "#3C2399",
+          800: "#26155E",
           900: "#160A38",
         },
         newpink: {
           50: "#FFDAE1",
-          100: "#FFA2B5",
+          100: "#FFA4B5",
           200: "#FF7390",
-          300: "#FF4A70",
+          300: "#FF5274",
           400: "#E9254F",
           500: "#CC1139",
           600: "#A20827",
@@ -82,16 +83,32 @@ module.exports = {
           900: "#340612",
         },
       },
+      fontFamily: {
+        display: ["PPFragment"],
+        sans: ["UncutSans"],
+      },
+      fontSize: {
+        "body-xs": ["12px", { lineHeight: "17px" }],
+        "body-sm": ["15px", { lineHeight: "20px" }],
+        "body-base": ["18px", { lineHeight: "23px" }],
+        "body-lg": ["22px", { lineHeight: "29px" }],
+        "body-xl": ["26px", { lineHeight: "34px" }],
+        "body-2xl": ["31px", { lineHeight: "40px" }],
+        xs: ["13px", { lineHeight: "15px" }],
+        sm: ["16px", { lineHeight: "24px" }],
+        base: ["18px", { lineHeight: "21px" }],
+        lg: ["24px", { lineHeight: "30px" }],
+        xl: ["32px", { lineHeight: "38px" }],
+        "2xl": ["43px", { lineHeight: "52px" }],
+        "3xl": ["57px", { lineHeight: "69px" }],
+      },
+      maxWidth: {
+        "3xl": "775px",
+        "5xl": "936px",
+      },
+      zIndex: {
+        max: "1000",
+      },
     },
   },
-
-  plugins: [
-    plugin(function ({ addBase }) {
-      // this `fontsPath` will be the relative path
-      // to the fonts from the generated stylesheet
-      kit.fontFaces({ fontsPath: "./fonts/" }).forEach((fontFace) => {
-        addBase({ "@font-face": fontFace });
-      });
-    }),
-  ],
 };

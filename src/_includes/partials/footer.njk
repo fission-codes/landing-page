@@ -1,66 +1,64 @@
+{% from "macros/icons/GithubOutline.njk" import GithubOutline %}
+{% from "macros/icons/TwitterOutline.njk" import TwitterOutline %}
+{% from "macros/icons/MastodonOutline.njk" import MastodonOutline %}
+{% from "macros/icons/DiscordOutline.njk" import DiscordOutline %}
+{% from "macros/icons/LinkedinOutline.njk" import LinkedinOutline %}
+{% from "macros/icons/DiscordBigFill.njk" import DiscordBigFill %}
+{% from "macros/icons/ExternalLink.njk" import ExternalLink %}
+{% from "macros/NewsletterForm.njk" import NewsletterForm %}
+
+<!-- Newsletter -->
+{{ NewsletterForm() }}
+
 <!-- Footer -->
-<section class="box-border pt-5 pb-7">
-    <div class="box-border px-5 mx-auto border-solid md:px-8 max-w-7xl">
-        <div class="relative flex flex-col items-start justify-between border-0 border-gray-200 py-6 md:flex-row md:items-center">
-            <a href="/" class="left-0 flex items-center justify-center order-first w-full mb-4 font-medium md:justify-start md:absolute md:w-64 lg:order-none lg:w-auto title-font lg:items-center lg:justify-center md:mb-0">
-                {{ "/src/images/kit/logo-inherit.svg" | svgContents("text-neutral-400 w-24 dark:text-neutral-600") | safe }}
-            </a>
-            <ul class="box-border flex flex-col md:flex-row mx-auto md:space-x-6 text-center text-xs md:text-sm">
-                <li class="mt-2 md:mt-0">
-                    <a href="/support/" class="box-border items-center block w-full cursor-pointer text-base-500 focus-within:text-blue-700">Support</a>
-                </li>
-                <li class="mt-2 md:mt-0">
-                    <a href="https://guide.fission.codes" class="box-border items-center block w-full cursor-pointer text-base-500 focus-within:text-blue-700">Documentation</a>
-                </li>
-                <li class="mt-2 md:mt-0">
-                    <a href="https://talk.fission.codes" class="box-border items-center block w-full cursor-pointer text-base-500 focus-within:text-blue-700">Community Forum</a>
-                </li>
-                <li class="mt-2 md:mt-0">
-                    <a href="https://fission.codes/discord" class="box-border items-center block w-full cursor-pointer text-base-500 focus-within:text-blue-700">Discord Chat</a>
-                </li>
-                <li class="mt-2 md:mt-0">
-                    <a href="https://fission.codes/careers" class="box-border items-center block w-full cursor-pointer text-base-500 focus-within:text-blue-700">Careers</a>
-                </li>
-            </ul>
-            <div class="box-border right-0 flex justify-center w-full mt-4 space-x-3 border-solid md:w-auto md:justify-end md:absolute md:mt-0">
-
-                <a href="https://github.com/fission-codes" class="inline-flex items-center leading-7 no-underline cursor-pointer text-gray-500 focus-within:text-blue-700">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" stroke="none"></path><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"></path></svg>
+<section class="bg-neutral-100 dark:bg-neutral-900">
+    <div class="py-12 px-8 md:pt-20 md:pb-[62px] lg:px-0 mx-auto max-w-5xl">
+        <div class="flex flex-col md:flex-row-reverse w-full gap-10 mb-10 md:mb-20">
+            <div class="flex flex-col gap-4 w-full text-center md:text-left">
+                <h5 class="text-lg font-[450]">Looking to Get Involved?</h5>
+                <a href="https://fission.codes/discord" target="_blank" class="btn btn-primary h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit bg-newpurple-500 text-neutral-0 text-base rounded">
+                    Join Our Discord {{ DiscordBigFill() }}
                 </a>
-
-                <a href="https://twitter.com/FISSIONcodes" class="inline-flex items-center leading-7 no-underline cursor-pointer text-gray-500 focus-within:text-blue-700">
-                  <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+                <a href="{{ "/careers" | relativePath(page) }}" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
+                    Careers At Fission {{ ExternalLink() }}
+                </a>
+                <a href="https://lu.ma/fission-online-events" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
+                    Attend Fission Events {{ ExternalLink() }}
                 </a>
             </div>
+
+            <div class="flex flex-col w-full gap-10">
+                <div class="flex flex-col gap-4 w-full text-center md:text-left">
+                    <h5 class="text-lg font-[450]">Want to Learn More?</h5>
+                    <a href="{{ "/blog" | relativePath(page) }}" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Read Our Blog</a>
+                    <a href="https://talk.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Dive Deeper on Discourse</a>
+                </div>
+
+                <div class="flex flex-col gap-4 w-full text-center md:text-left">
+                    <h5 class="text-lg font-[450]">Other Helpful Links</h5>
+                    <a href="https://talk.fission.codes/t/fission-branding/244" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Logos & Brand Guidelines</a>
+                    <a href="https://shop.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Shop Fission's Swag</a>
+                </div>
+            </div>
         </div>
-        <div class="pt-4 mt-4 leading-7 text-center border-t border-base-200 md:mt-5 md:pt-5 md:mt-6 md:pt-6 dark:border-base-800">
-            <p class="box-border mt-0 text-sm border-0 border-solid text-base-300 dark:text-base-600">
-                © {{ copyrightDate() }} Fission
-            </p>
+
+        <div class="w-full">
+            <div class="flex flex-col md:flex-row items-center gap-[54px] md:gap-0 md:justify-between mb-4 md:mb-[46px]">
+                <div>
+                    <img src="{{ "/images/fission-footer-light.svg" | relativePath(page) }}" class="inline-block dark:hidden" alt="Fission" />
+                    <img src="{{ "/images/fission-footer-dark.svg" | relativePath(page) }}" class="hidden dark:inline-block" alt="Fission" />
+                </div>
+
+                <div class="flex gap-4 items-center text-neutral-500 dark:text-neutral-200">
+                    <a href="https://github.com/fission-codes/" target="_blank" class="transition-opacity hover:opacity-80">{{ GithubOutline() }}</a>
+                    <a href="https://twitter.com/FISSIONcodes" target="_blank" class="transition-opacity hover:opacity-80">{{ TwitterOutline() }}</a>
+                    <a href="https://mastodon.online/@fission@plnetwork.xyz" target="_blank" class="transition-opacity hover:opacity-80">{{ MastodonOutline() }}</a>
+                    <a href="https://fission.codes/discord/" target="_blank" class="transition-opacity hover:opacity-80">{{ DiscordOutline() }}</a>
+                    <a href="https://ca.linkedin.com/company/fissioncodes" target="_blank" class="transition-opacity hover:opacity-80">{{ LinkedinOutline() }}</a>
+                </div>
+            </div>
+
+            <p class="text-body-sm md:text-[20px] text-neutral-500 text-center">© {{ copyrightDate() }} Fission</p>
         </div>
     </div>
 </section>
-
-<!-- AlpineJS Library -->
-{# <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script> #}
-
-{#
-<footer class="site-foot">
-    <div class="site-foot-nav container">
-        <div class="site-foot-nav-left">
-            <a aria-current="page" class="" href="/">
-                {{ site.title }}
-            </a> &copy; 2021
-        </div>
-        {% if collections.docs %}
-            <div class="site-foot-nav-right">
-                {% for doc in collections.docs %}
-                    <a {% if page.url == doc.url %}aria-current="page"{% endif %}  class="site-foot-nav-item" href="{{ doc.url }}">
-                        {{ doc.meta_title if doc.meta_title else doc.title }}
-                    </a>
-                {% endfor %}
-            </div>
-        {% endif %}
-    </div>
-</footer>
-#}
