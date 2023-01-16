@@ -197,17 +197,20 @@ article section ol li::before {
   opacity: 0.25;
 }
 
-article section code {
+/* article section code {
   @apply bg-base-200 border-t border-transparent dark:bg-base-500 dark:bg-opacity-50;
   font-size: 0.85em;
-}
+} */
 
-article section pre > code {
+/* article section pre > code {
   @apply block overflow-x-scroll px-5 py-6 rounded-md md:px-8;
-}
+} */
 
 article section :not(pre) > code {
-  @apply px-1 py-1 rounded;
+  @apply px-1 py-0 rounded break-words;
+  background: #2d2d2d;
+  font-size: 0.85em;
+  color: #cccccc;
 }
 
 article section blockquote {
