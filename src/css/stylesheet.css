@@ -207,7 +207,7 @@ article section ol li::before {
 } */
 
 article section :not(pre) > code {
-  @apply px-1 py-0 rounded break-words;
+  @apply px-1 py-0 rounded break-all;
   background: #2d2d2d;
   font-size: 0.85em;
   color: #cccccc;
