@@ -1,5 +1,4 @@
 {% from "macros/icons/ExternalLinkBig.njk" import ExternalLinkBig %}
-{% from "macros/icons/FissionLogoDark.njk" import FissionLogoDark %}
 {% from "macros/icons/GithubOutline.njk" import GithubOutline %}
 {% from "macros/icons/TwitterOutline.njk" import TwitterOutline %}
 {% from "macros/icons/MastodonOutline.njk" import MastodonOutline %}
@@ -10,7 +9,7 @@
 <div class="overlay-menu fixed z-max w-0 h-0 bg-neutral-700 bg-overlay-menu opacity-0 overflow-hidden">
     <div class="flex flex-col h-full p-8 w-full">
         <div class="flex justify-between items-center mb-12">
-            <a href="{{ "/" | relativePath(page) }}">{{ FissionLogoDark() }}</a>
+            <a href="{{ "/" | relativePath(page) }}"><img src="{{ "/images/fission-logo-dark.png" | relativePath(page) }}" alt="Fission" /></a>
             <button class="close-menu transition-opacity hover:opacity-80 translate-x-1">{{ X() }}</button>
         </div>
 
