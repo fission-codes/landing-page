@@ -8,10 +8,10 @@
         {%- if showLogo %}
             <a href="{{ "/" | relativePath(page) }}" class="block">
                 <div class="block dark:hidden">
-                    {{ FissionLogoLight() }}
+                    <img src="{{ "/images/fission-header-light.png" | relativePath(page) }}" alt="Fission" class="max-w-[155px] h-auto" />
                 </div>
                 <div class="hidden dark:block">
-                    {{ FissionLogoDark() }}
+                    <img src="{{ "/images/fission-header-dark.png" | relativePath(page) }}" alt="Fission" class="max-w-[155px] h-auto" />
                 </div>
             </a>
         {%- endif -%}
