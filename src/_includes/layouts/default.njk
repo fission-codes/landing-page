@@ -52,7 +52,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
         {% block js %}{% endblock %}
 
         <script>
@@ -62,11 +61,13 @@
                     event.preventDefault();
                     try {
                         const formData = new FormData(event.target)
+
                         const res = await fetch(
-                            'https://5d04d668.sibforms.com/serve/MUIEAGneWU80LYD8vYmPG0ONFxDMdGlb_4kRzLmRO0YxOJAS_5998kPNVyDbqpubzyUaUvgL9eK-epRsnMpHZ3QIhWuz9ti_fQDPVDGOE1bHJfzWymXISErUj70aJT2m7mzWyGoOuEC22pO7HyB74t6BrjxLYhPUYGSzZpo1iRMrtfM9VWZ2X4ztCdh2NR-WxMwGln0kbsdTP5gc?isAjax=1',
+                            'https://api.form-data.com/f/aowqx8bp00phzprfdtxzqu',
                             {
                                 method: 'POST',
-                                body: formData
+                                body: JSON.stringify({ email: formData.get('email') }),
+                                headers: { 'Content-Type': 'application/json' }
                             }
                         )
                         document.querySelector('.newsletter-form-wrapper').innerHTML = '<p class="input input-bordered font-normal pl-[25px] pr-[70px] relative z-10 h-[66px] leading-[66px] text-[20px] rounded-sm bg-neutral-0 text-neutral-500 border-neutral-700 ">Please check your email!</p>'

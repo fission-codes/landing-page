@@ -7,18 +7,11 @@
           <p>Sign up for our newsletter to keep a pulse on what we're doing, where we'll be next, and interesting things we've found.</p>
       </div>
       <div class="newsletter-form-wrapper w-full md:max-w-[377px]">
-          <form class="newsletter-form w-full relative">
-              <input type="text" placeholder="Enter your email" id="EMAIL" name="EMAIL" type="email" class="input input-bordered font-normal pl-[25px] pr-[70px] relative z-10 h-[66px] text-[20px] rounded-sm bg-neutral-0 text-neutral-500 placeholder:text-neutral-500 border-neutral-700 w-full" />
-              <input
-                  type="checkbox"
-                  class="hidden"
-                  value="1"
-                  checked={true}
-                  id="OPT_IN"
-                  name="OPT_IN"
-              />
+          <form class="newsletter-form w-full relative" data-members-form>
+              <input placeholder="Enter your email" data-members-email type="email" required="true" id="email" name="email" class="input input-bordered font-normal pl-[25px] pr-[70px] relative z-10 h-[66px] text-[20px] rounded-sm bg-neutral-0 text-neutral-500 placeholder:text-neutral-500 border-neutral-700 w-full" />
               <button class="absolute z-20 right-[18px] top-1/2 -translate-y-1/2 transition-opacity hover:opacity-90 text-neutral-500" type="submit">{{ ArrowRightCircle() }}</button>
           </form>
+
       </div>
   </section>
 {% endmacro %}
