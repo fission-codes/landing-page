@@ -16,6 +16,7 @@
 
 {% block content %}
 <div aria-label="homepage" class="-mt-[110px]">
+
     <!-- Hero Build the Future -->
     <section aria-label="hero" class="relative w-full pt-[226px] md:pt-[228px] mb-[170px] md:mb-[120px] flex flex-col bg-blend-lighten bg-hero-light dark:bg-hero-dark">
         <h1 class="sr-only">Fission: We build identity, data, and compute protocols for the future of the Internet.</h1>
@@ -30,6 +31,11 @@
     </section>
 
     <section aria-label="body" class="w-full max-w-5xl m-auto flex flex-col items-center">
+        <a aria-label="causal islands" href="https://causalislands.com/" target="_blank" class="w-full block mb-24 transition-opacity hover:opacity-90">
+            <img src="{{ "/images/ci-banner.png" | relativePath(page) }}" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" />
+            <img src="{{ "/images/ci-banner-mobile.png" | relativePath(page) }}" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" />
+        </a>
+
         <!-- Pitch -->
         <section aria-label="pitch" class="relative z-10 mx-4 w-full flex items-center justify-center mb-[60px] md:mb-20 rounded-sm">
             <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse gap-8 md:gap-10 p-10 md:p-12 bg-newpurple-700 dark:bg-newpurple-800">
@@ -53,21 +59,7 @@
         <section aria-label="current-products" class="max-w-5xl w-full flex flex-col md:gap-8 items-center justify-between mb-[50px] md:mb-20">
             <h4 class="text-xs md:text-base rounded-2xl py-2 px-[22px] sm:px-[34px] mb-8 md:mb-0 uppercase text-newpink-50 bg-gradient-to-r from-newpink-300 to-newpurple-500">Current projects</h4>
 
-            <a href="https://causalislands.com/" target="_blank" class="block w-full transition-opacity hover:opacity-90">
-                <img src="{{ "/images/ci-banner.png" | relativePath(page) }}" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" />
-                <img src="{{ "/images/ci-banner-mobile.png" | relativePath(page) }}" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" />
-            </a>
-
-            <div aria-label="protocol-labs" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
-                <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Protocol Labs logo" />
-                <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Protocol Labs logo" />
-                <div>
-                    <h4 class="text-lg md:text-xl mb-2">Protocol Labs: making decentralized storage resilient</h4>
-                    <p><a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Protocol Labs</a> pioneered decentralized storage with the introduction of IPFS. Our WebNative File System brings encrypted-at-rest storage and multi-player capabilities to the protocol. We collaborate with Protocol Labs and other key partners to enhance the <a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">IPFS</a> and <a href="https://ipfs.io/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Filecoin</a> ecosystem.</p>
-                </div>
-            </div>
-
-            <div aria-label="ucans" class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
+            <div aria-label="ucans" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
                 <img src="{{ "/images/ucan.png" | relativePath(page) }}" class="w-auto inline-block" alt="UCAN logo" />
                 <div>
                     <h4 class="text-lg md:text-xl mb-2">UCANs: decentralized authorization</h4>
@@ -75,12 +67,21 @@
                 </div>
             </div>
 
-            <div aria-label="webnative" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm">
+            <div aria-label="webnative" class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm">
                 <img src="{{ "/images/webnative-dark.svg" | relativePath(page) }}" class="hidden dark:inline-block w-auto inline-block" alt="Webnative icon" />
                 <img src="{{ "/images/webnative-light.svg" | relativePath(page) }}" class="inline-block dark:hidden w-auto inline-block" alt="Webnative icon" />
                 <div>
                     <h4 class="text-lg md:text-xl mb-2">Webnative SDK: a true local-first edge computing stack</h4>
-                    <p>The <a href="https://guide.fission.codes/developers/webnative" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative SDK</a> empowers developers to build fully distributed web applications without needing a complex back-end. <a href="https://fission.codes/apps/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative applications</a> work offline and store data encrypted for the user by leveraging UCANs, IPFS and the power of the web platform.</p>
+                    <p>The <a href="https://guide.fission.codes/developers/webnative" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative SDK</a> empowers developers to build fully distributed web applications without needing a complex back-end. <a href="https://github.com/webnative-examples/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative applications</a> work offline and store data encrypted for the user by leveraging UCANs, IPFS and the power of the web platform.</p>
+                </div>
+            </div>
+
+            <div aria-label="protocol-labs" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
+                <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Protocol Labs logo" />
+                <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Protocol Labs logo" />
+                <div>
+                    <h4 class="text-lg md:text-xl mb-2">Protocol Labs: making decentralized storage resilient</h4>
+                    <p><a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Protocol Labs</a> pioneered decentralized storage with the introduction of IPFS. Our WebNative File System brings encrypted-at-rest storage and multi-player capabilities to the protocol. We collaborate with Protocol Labs and other key partners to enhance the <a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">IPFS</a> and <a href="https://ipfs.io/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Filecoin</a> ecosystem.</p>
                 </div>
             </div>
         </section>
