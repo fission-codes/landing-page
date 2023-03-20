@@ -16,13 +16,13 @@
         <div class="flex flex-col md:flex-row-reverse w-full gap-10 mb-10 md:mb-20">
             <div class="flex flex-col gap-4 w-full text-center md:text-left">
                 <h5 class="text-lg font-[450]">Looking to Get Involved?</h5>
-                <a href="https://fission.codes/discord" target="_blank" class="btn btn-primary h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit bg-newpurple-500 text-neutral-0 text-base rounded">
+                <a aria-label="View the Fission Discord" href="https://fission.codes/discord" target="_blank" class="btn btn-primary h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit bg-newpurple-500 text-neutral-0 text-base rounded">
                     Join Our Discord {{ DiscordBigFill() }}
                 </a>
-                <a href="{{ "/careers" | relativePath(page) }}" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
+                <a aria-label="View the Fission Careers page" href="{{ "/careers" | relativePath(page) }}" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
                     Careers At Fission {{ ExternalLink() }}
                 </a>
-                <a href="https://lu.ma/fission-online-events" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
+                <a aria-label="View the Fission Events page" href="https://lu.ma/fission-online-events" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
                     Attend Fission Events {{ ExternalLink() }}
                 </a>
             </div>
@@ -30,14 +30,14 @@
             <div class="flex flex-col w-full gap-10">
                 <div class="flex flex-col gap-4 w-full text-center md:text-left">
                     <h5 class="text-lg font-[450]">Want to Learn More?</h5>
-                    <a href="{{ "/blog" | relativePath(page) }}" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Read Our Blog</a>
-                    <a href="https://talk.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Dive Deeper on Discourse</a>
+                    <a aria-label="View the Fission Blog" href="{{ "/blog" | relativePath(page) }}" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Read Our Blog</a>
+                    <a aria-label="View the Fission community forum" href="https://talk.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Dive Deeper on Discourse</a>
                 </div>
 
                 <div class="flex flex-col gap-4 w-full text-center md:text-left">
                     <h5 class="text-lg font-[450]">Other Helpful Links</h5>
-                    <a href="https://talk.fission.codes/t/fission-branding/244" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Logos & Brand Guidelines</a>
-                    <a href="https://shop.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Shop Fission's Swag</a>
+                    <a aria-label="View Fission brand guide" href="https://talk.fission.codes/t/fission-branding/244" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Logos & Brand Guidelines</a>
+                    <a aria-label="View the Fission store" href="https://shop.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Shop Fission's Swag</a>
                 </div>
             </div>
         </div>
@@ -50,11 +50,11 @@
                 </div>
 
                 <div class="flex gap-4 items-center text-neutral-500 dark:text-neutral-200">
-                    <a href="https://github.com/fission-codes/" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ GithubOutline() }}</a>
-                    <a href="https://twitter.com/FISSIONcodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ TwitterOutline() }}</a>
-                    <a href="https://plnetwork.xyz/@fission" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ MastodonOutline() }}</a>
-                    <a href="https://fission.codes/discord/" target="_blank" class="transition-opacity hover:opacity-80">{{ DiscordOutline() }}</a>
-                    <a href="https://ca.linkedin.com/company/fissioncodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ LinkedinOutline() }}</a>
+                    <a aria-label="View Fission GitHub" href="https://github.com/fission-codes/" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ GithubOutline() }}</a>
+                    <a aria-label="View Fission Twitter" href="https://twitter.com/FISSIONcodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ TwitterOutline() }}</a>
+                    <a aria-label="View Fission on the Protocol Labs Network directory" href="https://plnetwork.xyz/@fission" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ MastodonOutline() }}</a>
+                    <a aria-label="View Fission Discord" href="https://fission.codes/discord/" target="_blank" class="transition-opacity hover:opacity-80">{{ DiscordOutline() }}</a>
+                    <a aria-label="View Fission on LinkedIn" href="https://ca.linkedin.com/company/fissioncodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ LinkedinOutline() }}</a>
                 </div>
             </div>
 
