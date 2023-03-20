@@ -4,8 +4,8 @@ const cleanCSS = require("clean-css");
 const fs = require("fs");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const Image = require("@11ty/eleventy-img");
-const localImages = require("eleventy-plugin-local-images");
-const lazyImages = require("eleventy-plugin-lazyimages");
+// const localImages = require("eleventy-plugin-local-images");
+// const lazyImages = require("eleventy-plugin-lazyimages");
 const ghostContentAPI = require("@tryghost/content-api");
 const svgContents = require("eleventy-plugin-svg-contents");
 const path = require("path");
@@ -41,8 +41,16 @@ const imageShortcode = async (src, alt, widths) => {
   });
 
   return {
-    feature: metadata.jpeg[1].url,
-    thumbnail: metadata.jpeg[0].url,
+    feature: {
+      url: metadata.jpeg[1].url,
+      width: metadata.jpeg[1].width,
+      height: metadata.jpeg[1].height,
+    },
+    thumbnail: {
+      url: metadata.jpeg[0].url,
+      width: metadata.jpeg[0].width,
+      height: metadata.jpeg[0].height,
+    },
   };
 }
 
@@ -188,8 +196,12 @@ module.exports = function(config) {
 
       // Resize feature_image for detail views and generate smaller thumbnail_image for archive views
       const { feature, thumbnail } = await imageShortcode(post.feature_image, post.title, ['auto', 800]);
-      post.feature_image = feature;
-      post.thumbnail_image = thumbnail;
+      post.feature_image = feature.url;
+      post.feature_image_width = feature.width;
+      post.feature_image_height = feature.width;
+      post.thumbnail_image = thumbnail.url;
+      post.thumbnail_image_width = thumbnail.width;
+      post.thumbnail_image_height = thumbnail.height;
 
       // Convert publish date into a Date object
       post.published_at = new Date(post.published_at);

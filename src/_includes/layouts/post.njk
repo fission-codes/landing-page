@@ -60,7 +60,8 @@
                 <img
                     src="{{ post.feature_image }}"
                     alt="{{ title }}"
-                    width="640" height="360"
+                    width="{{ post.feature_image_width }}"
+                    height="{{ post.feature_image_height }}"
                     class="rounded-md w-full"
                     data-page-url="{{ page.url }}"
                     loading="lazy" decoding="async"
