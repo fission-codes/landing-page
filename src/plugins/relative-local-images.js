@@ -6,7 +6,7 @@ let config = {}
 // Pull the page url front matter in from the data-page-url attribute and
 // use it to build a relative image path based on the src attribute
 const generateRelativePath = (img) => {
-  const ASSETS_PATH = "assets/images";
+  const ASSETS_PATH = "resized-images";
   const SRC_ATTR = "src";
   const PAGE_URL_ATTR = "data-page-url";
 
