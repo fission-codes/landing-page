@@ -23,8 +23,8 @@
 
         <div class="flex flex-col items-center justify-center grow px-10">
             <a href="{{ "/" | relativePath(page) }}" class="flex flex-col items-center justify-between w-auto text-2xl select-none mb-[50px] md:mb-[64px]">
-                <img src="{{ "/images/hero-logo-light.png" | relativePath(page) }}" class="w-[80%] md:w-full max-w-[614px] block dark:hidden" alt="Fission" />
-                <img src="{{ "/images/hero-logo-dark.png" | relativePath(page) }}" class="w-[80%] md:w-full max-w-[614px] hidden dark:block" alt="Fission" />
+                <img src="{{ "/images/hero-logo-light.png" | relativePath(page) }}" class="w-[80%] md:w-full max-w-[614px] block dark:hidden" alt="Fission" loading="lazy" decoding="async" />
+                <img src="{{ "/images/hero-logo-dark.png" | relativePath(page) }}" class="w-[80%] md:w-full max-w-[614px] hidden dark:block" alt="Fission" loading="lazy" decoding="async" />
             </a>
             <h2 class="w-[80%] md:w-full max-w-[825px] text-center text-neutral-600 dark:text-neutral-300 text-xl md:text-2xl font-display">We build <span class="text-newpink-300 dark:text-newpink-100">identity</span>, <span class="text-newpink-300 dark:text-newpink-100">data</span>, and <span class="text-newpink-300 dark:text-newpink-100">compute</span> protocols for the future of the Internet.</h2>
         </div>
@@ -32,15 +32,15 @@
 
     <section aria-label="body" class="w-full max-w-5xl m-auto flex flex-col items-center">
         <a aria-label="causal islands" href="https://causalislands.com/" target="_blank" class="w-full block mb-24 transition-opacity hover:opacity-90">
-            <img src="{{ "/images/ci-banner.jpeg" | relativePath(page) }}" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" />
-            <img src="{{ "/images/ci-banner-mobile.jpeg" | relativePath(page) }}" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" />
+            <img src="{{ "/images/ci-banner.jpeg" | relativePath(page) }}" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" loading="lazy" decoding="async" />
+            <img src="{{ "/images/ci-banner-mobile.jpeg" | relativePath(page) }}" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" loading="lazy" decoding="async" />
         </a>
 
         <!-- Pitch -->
         <section aria-label="pitch" class="relative z-10 mx-4 w-full flex items-center justify-center mb-[60px] md:mb-20 rounded-sm">
             <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse gap-8 md:gap-10 p-10 md:p-12 bg-newpurple-700 dark:bg-newpurple-800">
-                <img src="{{ "/images/stack-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Fission stack" />
-                <img src="{{ "/images/stack-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Fission stack" />
+                <img src="{{ "/images/stack-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Fission stack" loading="lazy" decoding="async" />
+                <img src="{{ "/images/stack-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Fission stack" loading="lazy" decoding="async" />
                 <div class="flex flex-col gap-4 md:gap-6 text-neutral-50">
                     <h3 class="text-lg md:text-xl">The world deserves more humane software</h3>
                     <div class="flex flex-col gap-4 mb-4 md:mb-0 md:text-body-lg">
@@ -60,7 +60,7 @@
             <h4 class="text-xs md:text-base rounded-2xl py-2 px-[22px] sm:px-[34px] mb-8 md:mb-0 uppercase text-newpink-50 bg-gradient-to-r from-newpink-300 to-newpurple-500">Current projects</h4>
 
             <div aria-label="ucans" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
-                <img src="{{ "/images/ucan.png" | relativePath(page) }}" class="w-auto inline-block" alt="UCAN logo" />
+                <img src="{{ "/images/ucan.png" | relativePath(page) }}" class="w-auto inline-block" alt="UCAN logo" loading="lazy" decoding="async" />
                 <div>
                     <h4 class="text-lg md:text-xl mb-2">UCANs: decentralized authorization</h4>
                     <p><a href="https://ucan.xyz/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">UCANs</a> extend JWTs to enable distributed identity (<a href="https://www.w3.org/TR/did-core/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">DIDs</a>) and authorization in local-first apps & distributed systems. Simple, passwordless authentication without browser plugins—like OAuth, but small, light and decentralized. They have been adopted by <a href="https://web3.storage" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">web3.storage</a> & <a href="https://blueskyweb.org/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Bluesky</a>.</p>
@@ -68,8 +68,8 @@
             </div>
 
             <div aria-label="webnative" class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm">
-                <img src="{{ "/images/webnative-dark.svg" | relativePath(page) }}" class="hidden dark:inline-block w-auto inline-block" alt="Webnative icon" />
-                <img src="{{ "/images/webnative-light.svg" | relativePath(page) }}" class="inline-block dark:hidden w-auto inline-block" alt="Webnative icon" />
+                <img src="{{ "/images/webnative-dark.svg" | relativePath(page) }}" class="hidden dark:inline-block w-auto inline-block" alt="Webnative icon" loading="lazy" decoding="async" />
+                <img src="{{ "/images/webnative-light.svg" | relativePath(page) }}" class="inline-block dark:hidden w-auto inline-block" alt="Webnative icon" loading="lazy" decoding="async" />
                 <div>
                     <h4 class="text-lg md:text-xl mb-2">Webnative SDK: a true local-first edge computing stack</h4>
                     <p>The <a href="https://guide.fission.codes/developers/webnative" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative SDK</a> empowers developers to build fully distributed web applications without needing a complex back-end. <a href="https://github.com/webnative-examples/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative applications</a> work offline and store data encrypted for the user by leveraging UCANs, IPFS and the power of the web platform.</p>
@@ -77,8 +77,8 @@
             </div>
 
             <div aria-label="protocol-labs" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
-                <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Protocol Labs logo" />
-                <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Protocol Labs logo" />
+                <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Protocol Labs logo" loading="lazy" decoding="async" />
+                <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Protocol Labs logo" loading="lazy" decoding="async" />
                 <div>
                     <h4 class="text-lg md:text-xl mb-2">Protocol Labs: making decentralized storage resilient</h4>
                     <p><a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Protocol Labs</a> pioneered decentralized storage with the introduction of IPFS. Our WebNative File System brings encrypted-at-rest storage and multi-player capabilities to the protocol. We collaborate with Protocol Labs and other key partners to enhance the <a href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">IPFS</a> and <a href="https://ipfs.io/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Filecoin</a> ecosystem.</p>
@@ -99,7 +99,7 @@
                     <div class="col-span-3 md:col-span-1">
                         <div class="h-full relative">
                             <a href="{{ ["/blog", post.url] | join | relativePath(page) }}" class="relative block w-full h-64 mb-6 overflow-hidden rounded-sm">
-                                <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.feature_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}">
+                                <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.thumbnail_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}" loading="lazy" decoding="async">
                             </a>
                             <a href="{{ ["/blog", post.url] | join | relativePath(page) }}" class="block text-lg font-display text-newpurple-500 dark:text-newpurple-200 leading-tight mb-2">{{ post.title }}</a>
                             <div class="post-card-excerpt text-neutral-800 dark:text-neutral-100">
