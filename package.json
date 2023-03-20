@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-img": "^3.0.0",
     "@11ty/eleventy-plugin-rss": "^1.1.1",
     "@tryghost/content-api": "^1.5.7",
     "@tryghost/helpers": "^1.1.46",

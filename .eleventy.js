@@ -3,6 +3,7 @@ require("dotenv").config();
 const cleanCSS = require("clean-css");
 const fs = require("fs");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
+const Image = require("@11ty/eleventy-img");
 const localImages = require("eleventy-plugin-local-images");
 const lazyImages = require("eleventy-plugin-lazyimages");
 const ghostContentAPI = require("@tryghost/content-api");
@@ -11,8 +12,6 @@ const path = require("path");
 
 const htmlMinTransform = require("./src/transforms/html-min-transform.js");
 const relativeLocalImages = require("./src/plugins/relative-local-images.js");
-
-
 
 // Init Ghost API
 const api = new ghostContentAPI({
@@ -27,7 +26,25 @@ const stripDomain = url => {
   return url.replace(process.env.GHOST_API_URL, "");
 };
 
+// Resize image
+const imageShortcode = async (src, alt, widths) => {
+  if (alt === undefined) {
+    // You bet we throw an error on missing alt (alt="" works okay)
+    throw new Error(`Missing \`alt\` on myImage from: ${src}`);
+  }
 
+  let metadata = await Image(src, {
+    widths: widths,
+    formats: ["jpeg"],
+    outputDir: "./dist/resized-images/",
+    urlPath: "/resized-images/",
+  });
+
+  return {
+    feature: metadata.jpeg[1].url,
+    thumbnail: metadata.jpeg[0].url,
+  };
+}
 
 module.exports = function(config) {
   // Minify HTML
@@ -44,15 +61,15 @@ module.exports = function(config) {
   });
   */
 
-  // Copy images over from Ghost
-  config.addPlugin(localImages, {
-    distPath: "dist",
-    assetPath: "/assets/images",
-    selector: "img",
-    /* attribute: "data-src", // Lazy images attribute */
-    attribute: "src", // if not using LazyImages, just grab src
-    verbose: true,
-  });
+  // // Copy images over from Ghost
+  // config.addPlugin(localImages, {
+  //   distPath: "dist",
+  //   assetPath: "/assets/images",
+  //   selector: "img",
+  //   /* attribute: "data-src", // Lazy images attribute */
+  //   attribute: "src", // if not using LazyImages, just grab src
+  //   verbose: true,
+  // });
 
   // Post-processor to add relative paths to localImages
   // note: this needs to be placed after the localImages plugin because
@@ -164,10 +181,15 @@ module.exports = function(config) {
         console.error(err);
       });
 
-    collection.forEach((post) => {
+    collection.forEach(async (post) => {
       post.url = stripDomain(post.url);
       post.primary_author.url = stripDomain(post.primary_author.url);
       post.tags.map((tag) => (tag.url = stripDomain(tag.url)));
+
+      // Resize feature_image for detail views and generate smaller thumbnail_image for archive views
+      const { feature, thumbnail } = await imageShortcode(post.feature_image, post.title, ['auto', 800]);
+      post.feature_image = feature;
+      post.thumbnail_image = thumbnail;
 
       // Convert publish date into a Date object
       post.published_at = new Date(post.published_at);
