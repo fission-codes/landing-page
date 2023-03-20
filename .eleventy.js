@@ -35,21 +35,21 @@ const imageShortcode = async (src, alt, widths) => {
 
   let metadata = await Image(src, {
     widths: widths,
-    formats: ["jpeg"],
+    formats: ["webp"],
     outputDir: "./dist/resized-images/",
     urlPath: "/resized-images/",
   });
 
   return {
     feature: {
-      url: metadata.jpeg[1].url,
-      width: metadata.jpeg[1].width,
-      height: metadata.jpeg[1].height,
+      url: metadata.webp[1].url,
+      width: metadata.webp[1].width,
+      height: metadata.webp[1].height,
     },
     thumbnail: {
-      url: metadata.jpeg[0].url,
-      width: metadata.jpeg[0].width,
-      height: metadata.jpeg[0].height,
+      url: metadata.webp[0].url,
+      width: metadata.webp[0].width,
+      height: metadata.webp[0].height,
     },
   };
 }
