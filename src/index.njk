@@ -32,8 +32,8 @@
 
     <section aria-label="body" class="w-full max-w-5xl m-auto flex flex-col items-center">
         <a aria-label="causal islands" href="https://causalislands.com/" target="_blank" class="w-full block mb-24 transition-opacity hover:opacity-90">
-            <img src="{{ "/images/ci-banner.webp" | relativePath(page) }}" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" width="936" height="312" />
-            <img src="{{ "/images/ci-banner-mobile.webp" | relativePath(page) }}" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" width="412" height="231" />
+            <img src="{{ "/images/ci-banner.webp" | relativePath(page) }}" srcset="{{ "/images/ci-banner.webp" | relativePath(page) }} 1x, {{ "/images/ci-banner-2x.webp" | relativePath(page) }} 2x" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" width="936" height="312" />
+            <img src="{{ "/images/ci-banner-mobile.webp" | relativePath(page) }}" srcset="{{ "/images/ci-banner-mobile.webp" | relativePath(page) }} 1x, {{ "/images/ci-banner-mobile-2x.webp" | relativePath(page) }} 2x" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" width="412" height="231" />
         </a>
 
         <!-- Pitch -->
