@@ -90,11 +90,6 @@ h4, h5, h6 {
 }
 
 /**
- * Home Page
- */
-
-
-/**
  * Blog & Pages
  */
 
@@ -200,15 +195,6 @@ article section ol li::before {
   opacity: 0.25;
 }
 
-/* article section code {
-  @apply bg-base-200 border-t border-transparent dark:bg-base-500 dark:bg-opacity-50;
-  font-size: 0.85em;
-} */
-
-/* article section pre > code {
-  @apply block overflow-x-scroll px-5 py-6 rounded-md md:px-8;
-} */
-
 article section :not(pre) > code {
   @apply px-1 py-0 rounded break-all;
   background: #2d2d2d;
@@ -236,8 +222,6 @@ article section iframe[src*="twitter.com/"] {
   @apply shadow-none;
 }
 
-
-
 /**
  * Blog (legacy)
  */
@@ -245,7 +229,6 @@ article section iframe[src*="twitter.com/"] {
 article .kg-gallery-image {
   @apply mt-4;
 }
-
 
 /**
  * Discourse blog comments

@@ -32,8 +32,8 @@
 
     <section aria-label="body" class="w-full max-w-5xl m-auto flex flex-col items-center">
         <a aria-label="causal islands" href="https://causalislands.com/" target="_blank" class="w-full block mb-24 transition-opacity hover:opacity-90">
-            <img src="{{ "/images/ci-banner.webp" | relativePath(page) }}" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" width="1872" height="624" />
-            <img src="{{ "/images/ci-banner-mobile.webp" | relativePath(page) }}" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" width="780" height="438" />
+            <img src="{{ "/images/ci-banner.webp" | relativePath(page) }}" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" width="936" height="312" />
+            <img src="{{ "/images/ci-banner-mobile.webp" | relativePath(page) }}" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" width="412" height="231" />
         </a>
 
         <!-- Pitch -->
@@ -99,7 +99,8 @@
                     <div class="col-span-3 md:col-span-1">
                         <div class="h-full relative">
                             <a aria-label="View {{ post.title }} blog post" href="{{ ["/blog", post.url] | join | relativePath(page) }}" class="relative block w-full h-64 mb-6 overflow-hidden rounded-sm">
-                                <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.thumbnail_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}" loading="lazy" decoding="async" width="{{ post.thumbnail_image_width }}" height="{{ post.thumbnail_image_height }}" />
+                                {# <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.thumbnail_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}" loading="lazy" decoding="async" width="{{ post.thumbnail_image_width }}" height="{{ post.thumbnail_image_height }}" /> #}
+                                <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.thumbnail_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}" loading="lazy" decoding="async" width="348" height="256" />
                             </a>
                             <a aria-label="View {{ post.title }} blog post" href="{{ ["/blog", post.url] | join | relativePath(page) }}" class="block text-lg font-display text-newpurple-500 dark:text-newpurple-200 leading-tight mb-2">{{ post.title }}</a>
                             <div class="post-card-excerpt text-neutral-800 dark:text-neutral-100">
