@@ -6,7 +6,7 @@
 {% macro header(showLogo=true) %}
     <div class="navbar p-8 relative z-10 items-center md:items-start bg-transparent">
         {%- if showLogo %}
-            <a href="{{ "/" | relativePath(page) }}" class="block">
+            <a aria-label="Navigate to home page" href="/" class="block homepage-link">
                 <div class="block dark:hidden">
                     <img src="{{ "/images/fission-header-light.webp" | relativePath(page) }}" srcset="{{ "/images/fission-header-light.webp" | relativePath(page) }} 1x, {{ "/images/fission-header-light-2x.webp" | relativePath(page) }} 2x" alt="Fission" class="max-w-[155px] h-auto" width="312" height="66" />
                 </div>

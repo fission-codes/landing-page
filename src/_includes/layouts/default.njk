@@ -90,6 +90,14 @@
 
                 document.querySelector('.open-menu').addEventListener('click', openOverlayMenu)
                 document.querySelector('.close-menu').addEventListener('click', closeOverlayMenu)
+
+                // Modify home links if viewing the site via IPFS(doing this here instead of via relativePath to optimize performance metrics)
+                if (window.location.origin.includes('https://ipfs.')) {
+                    const homeLinks = document.querySelectorAll('.homepage-link')
+                    homeLinks.forEach((link) => {
+                        link.setAttribute('href', `${window.location.origin}/ipns/fissioncodes.fission.app/`);
+                    })
+                }
             });
         </script>
         <script>document.documentElement.classList.remove('no-js');</script>
