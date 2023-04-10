@@ -11,8 +11,9 @@
 
 {% if projects.length %}
   {% for project in projects %}
-    {# <code>{{ project | dump }}</code> #}
-    <a href="/ecosystem/{{ project.Name | slugify }}">{{project.Name}}</a>
+    <ul>
+        <li><a href="/ecosystem/{{ project.name | slugify }}">{{project.name}}</a></li>
+    </ul>
   {% endfor %}
 {% else %}
   <p>No data pulled from Airtable</p>
