@@ -22,7 +22,7 @@
     "clean-css": "^5.1.2",
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.0",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.3",
     "eleventy-plugin-lazyimages": "^2.1.2",
     "eleventy-plugin-local-images": "fission-codes/eleventy-plugin-local-images#master",
     "eleventy-plugin-svg-contents": "^0.7.0",
@@ -33,7 +33,9 @@
     "jsdom": "^15.1.1"
   },
   "dependencies": {
+    "@11ty/eleventy-cache-assets": "^2.3.0",
     "@fission-suite/kit": "^1.1.1",
+    "airtable": "^0.11.6",
     "daisyui": "^2.45.0",
     "tailwindcss": "^3.2.1"
   }

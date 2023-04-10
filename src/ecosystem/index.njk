@@ -1,0 +1,21 @@
+{% extends 'layouts/default.njk' %}
+{% from "partials/card.njk" import card with context %}
+{% from "macros/header.njk" import header with context %}
+{% set title = "Ecosystem" %}
+
+{% block header %}
+  {{ header() }}
+{% endblock %}
+
+{% block content %}
+
+{% if projects.length %}
+  {% for project in projects %}
+    {# <code>{{ project | dump }}</code> #}
+    <a href="/ecosystem/{{ project.Name | slugify }}">{{project.Name}}</a>
+  {% endfor %}
+{% else %}
+  <p>No data pulled from Airtable</p>
+{% endif %}
+
+{% endblock%}

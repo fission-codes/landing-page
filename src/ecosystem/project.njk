@@ -1,0 +1,12 @@
+---
+pagination:
+    data: projects
+    size: 1
+    alias: project
+layout: 'layouts/project.njk'
+permalink: "ecosystem/{{ project.Name | slugify }}/"
+---
+
+<h1>{{ project.Name }} is {{ project.Type }}</h1>
+<p>{{ project["Short Description"]}}</p>
+<div>{{ project["Long Description"]}}</div>
