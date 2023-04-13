@@ -32,7 +32,16 @@ module.exports = function() {
                     records.forEach(record => {
                         var tempRecord = {
                             id: record._rawJson.id,
-                            ...record._rawJson.fields,
+                            name: record._rawJson.fields.Name,
+                            avatar: record._rawJson.fields.Avatar ? record._rawJson.fields.Avatar[0] : null,
+                            title: record._rawJson.fields.Title,
+                            about: record._rawJson.fields.About,
+                            personalWebsiteUrl: record._rawJson.fields["Personal Website"],
+                            discordUsername: record._rawJson.fields["Discord Username"],
+                            githubProfileUrl: record._rawJson.fields["Github Profile"],
+                            twitterProfileUrl: record._rawJson.fields["Twitter Profile"],
+                            mastodonProfileUrl: record._rawJson.fields["Mastodon Profile"],
+                            blueskyProfileUrl: record._rawJson.fields["Bluesky Profile"],
                         }
                         allTeamMembers.push(tempRecord);
                     });

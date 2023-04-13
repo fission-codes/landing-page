@@ -15,7 +15,25 @@
 
         <div class="grid grid-cols-12 gap-6">
             {% for member in team %}
-            * {{ member.Name }}
+            <h3>{{ member.name }} ({{ member.title }})</h3>
+            <img 
+                src="{{ member.avatar.url }}" 
+                width="{{ member.avatar.width / 2}}"
+                height="{{ member.avatar.height / 2}}"
+                alt="{{ member.name }}" 
+                data-page-url="{{ page.url }}" 
+                loading="lazy" 
+                decoding="async" 
+            />
+            <p>{{ member.about }}</p>
+            <ul>
+                <li>{{ member.discordUsername }}</li>
+                <li><a href="{{ member.personalWebsiteUrl }}">{{ member.personalWebsiteUrl }}</a></li>
+                <li><a href="{{ member.twitterProfileUrl }}">{{ member.twitterProfileUrl }}</a></li>
+                <li><a href="{{ member.githubProfileUrl }}">{{ member.githubProfileUrl }}</a></li>
+                <li><a href="{{ member.mastodonProfileUrl }}">{{ member.mastodonProfileUrl }}</a></li>
+                <li><a href="{{ member.blueskyProfileUrl }}">{{ member.blueskyProfileUrl }}</a></li>
+            </ul>
             {% endfor %}
         </div>
     </div>
