@@ -1,6 +1,7 @@
 {% extends 'layouts/default.njk' %}
 
 {% from "macros/header.njk" import header with context %}
+{% from "partials/project-card.njk" import projectCard with context %}
 {% from "macros/icons/ArrowLeft.njk" import ArrowLeft %}
 {% set title = post.title %}
 {% set codeinjection_head = post.codeinjection_head %}
@@ -13,31 +14,53 @@
 {% block content %}
     <div class="inner overflow-x-hidden px-8">
 
-        <article class="post-full post max-w-3xl mb-24 mx-auto">
+        <article class="project-full project max-w-3xl mb-24 mx-auto">
 
             <div class="mb-8 mt-5">
-              <a href="../" class="flex gap-2 items-center link link-hover text-newpurple-500 dark:text-newpurple-200 text-body-base md:text-body-lg">{{ ArrowLeft() }} Whole ecosystem</a>
+                <a href="../" class="flex gap-2 items-center link link-hover text-newpurple-500 dark:text-newpurple-200 text-body-base md:text-body-lg">
+                    {{ ArrowLeft() }} Whole ecosystem
+                </a>
             </div>
 
-            <header class="post-full-header">
-                <h1 class="post-full-title">{{ title }}</h1>
+            <header class="project-full-header">
+                <h1 class="project-full-title">{{ project.name }}</h1>
             </header>
 
-            <figure class="post-full-image lg:-mx-20">
-                {# <img
-                    src="{{ post.feature_image }}"
-                    alt="{{ title }}"
-                    width="{{ post.feature_image_width }}"
-                    height="{{ post.feature_image_height }}"
+            <figure class="project-full-image lg:-mx-20">
+                <img 
+                    src="{{ project.featureImage.url }}" 
+                    width="{{ project.featureImage.width / 2}}"
+                    height="{{ project.featureImage.height / 2}}"
                     class="rounded-md w-full"
                     data-page-url="{{ page.url }}"
                     loading="lazy" decoding="async"
-                /> #}
+                />
             </figure>
 
-            <section class="post-full-content load-external-scripts content-body">
-                <div class="post-content sm:text-lg">
-                    {{ content | safe }}
+            <section class="project-full-content load-external-scripts content-body">
+                <div class="project-content sm:text-lg">
+                    <ul>
+                        <li>{{ project.type}}</li>
+                        <li>{{ project.relationship}}</li>
+                        <li>{{ project.timeHorizon}}</li>
+                        <li>{{ project.topics}}</li>
+                    </ul>
+                    {{ project.fullDescription | safe}}
+                </div>
+                <div>
+                    <a 
+                        aria-label="{{ project.primaryCTA.label }}" 
+                        href="{{ project.primaryCTA.url }}" 
+                        target="_blank" 
+                        class="btn btn-primary h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit bg-newpurple-500 text-neutral-0 text-base rounded">
+                        {{ project.primaryCTA.label }}
+                    </a>
+                    {{ project.secondaryCTAs | safe}}
+                </div>
+                <div class="project-related-projects">
+                    {% for relatedProject in project.relatedProjects %}
+                        {{ projectCard(relatedProject) }}
+                    {% endfor %}
                 </div>
             </section>
         </article>

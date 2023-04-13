@@ -1,0 +1,30 @@
+{% macro projectCard(project) %}
+
+<div class="relative col-span-12 mb-10 md:col-span-6 lg:col-span-4">
+    <a  
+        aria-label="View {{ project.name }}" 
+        href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
+        class="relative block w-full h-64 mb-6 overflow-hidden rounded-sm">
+        <img 
+            class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" 
+            src="{{ project.thumbnailImage.url }}" 
+            width="{{ project.thumbnailImage.width / 2}}"
+            height="{{ project.thumbnailImage.height / 2}}"
+            alt="{{ project.name }}" 
+            data-page-url="{{ page.url }}" 
+            loading="lazy" 
+            decoding="async" 
+        />
+    </a>
+    <a 
+        aria-label="View {{ project.name }}" 
+        href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
+        class="block text-lg font-display text-newpurple-500 dark:text-newpurple-200 leading-tight mb-2">
+        {{ project.name }}
+    </a>
+    <div class="text-neutral-800 dark:text-neutral-100">
+        <p>{{ project.summary }}</p>
+    </div>
+</div>
+
+{% endmacro %}

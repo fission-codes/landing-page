@@ -20,7 +20,7 @@ module.exports = function() {
     // }
 
     return new Promise((resolve, reject) => {
-        const allCases = [];
+        const allProjects = [];
 
         base("Projects")
             .select({ 
@@ -28,28 +28,49 @@ module.exports = function() {
             })
             .eachPage(
                 function page(records, fetchNextPage) {
-                records.forEach(record => {
-                    // console.log(record);
-                    var tempRecord = {
-                        id: record._rawJson.id,
-                        name: record._rawJson.fields.Name,
-                        type: record._rawJson.fields.Type,
-                        shortDesc: record._rawJson.fields["Short Description"],
-                        // ...record._rawJson.fields,
-                        longDesc: md.render(record._rawJson.fields["Long Description"] || ''),
+                    records.forEach(record => {
+                        var tempRecord = {
+                            id: record._rawJson.id,
+                            name: record._rawJson.fields.Name,
+                            featureImage: record._rawJson.fields["Feature Image"] ? record._rawJson.fields["Feature Image"][0] : null,
+                            thumbnailImage: record._rawJson.fields["Thumbnail Image"] ? record._rawJson.fields["Thumbnail Image"][0] : null,
+
+                            relationship: record._rawJson.fields["Fission Relationship"],
+                            timeHorizon: record._rawJson.fields["Time Horizon"],
+                            type: record._rawJson.fields.Type,
+                            topics: record._rawJson.fields.Topics,
+
+                            summary: record._rawJson.fields["Summary"],
+                            fullDescription: md.render(record._rawJson.fields["Full Description"] || ''),
+                            primaryCTA: {
+                                label: record._rawJson.fields["Primary CTA Label"],
+                                url: record._rawJson.fields["Primary CTA URL"],
+                            },
+                            secondaryCTAs: md.render(record._rawJson.fields["Secondary CTAs"] || ''),
+
+                            connectionIds: record._rawJson.fields.Connections || [],
+                        }
+                        allProjects.push(tempRecord);
+                    });
+
+                    // attach related projects info
+                    allProjects.forEach((project, index) => {
+                        project.relatedProjects = [];
+                        project.connectionIds.forEach( id => 
+                            allProjects[index].relatedProjects.push(
+                                allProjects.find(proj => proj.id === id)
+                            ))
+                    });
+
+                    fetchNextPage();
+                },
+                function done(err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(allProjects);
                     }
-                    // console.log(md.render(record._rawJson.fields["Long Description"] || ''));
-                    allCases.push(tempRecord);
-                });
-                fetchNextPage();
-            },
-            function done(err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(allCases);
                 }
-            }
-        );
-  });
+            );
+    });
 };

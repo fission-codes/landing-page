@@ -1,5 +1,5 @@
 {% extends 'layouts/default.njk' %}
-{% from "partials/card.njk" import card with context %}
+{% from "partials/project-card.njk" import projectCard with context %}
 {% from "macros/header.njk" import header with context %}
 {% set title = "Ecosystem" %}
 
@@ -10,13 +10,44 @@
 {% block content %}
 
 {% if projects.length %}
-  {% for project in projects %}
-    <ul>
-        <li><a href="/ecosystem/{{ project.name | slugify }}">{{project.name}}</a></li>
-    </ul>
-  {% endfor %}
+
+    <h2>Core</h2>
+    <div>
+        {% for project in projects %}
+        {% if project.relationship == "Core" %}
+            {{ projectCard(project) }}
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <h2>Fission-led</h2>
+    <div>
+        {% for project in projects %}
+        {% if project.relationship == "Fission-led" %}
+            {{ projectCard(project) }}
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <h2>Contributor</h2>
+    <div>
+        {% for project in projects %}
+        {% if project.relationship == "Contributor" %}
+            {{ projectCard(project) }}
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <h2>Collaborators & Adopters</h2>
+    <div>
+        {% for project in projects %}
+        {% if project.relationship == "Collaborators & Adopters" %}
+        {{ projectCard(project) }}
+        {% endif %}
+        {% endfor %}
+    </div>
 {% else %}
-  <p>No data pulled from Airtable</p>
+  <p>No projects could be found.</p>
 {% endif %}
 
 {% endblock%}
