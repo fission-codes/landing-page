@@ -2,7 +2,7 @@ require("dotenv").config();
 
 var Airtable = require("airtable");
 var base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
-    process.env.AIRTABLE_PROJECTS_BASE
+    process.env.AIRTABLE_BASE
 );
 // const { AssetCache } = require("@11ty/eleventy-cache-assets");
 // const assetCacheId = "airtableCMS";
@@ -22,9 +22,9 @@ module.exports = function() {
     return new Promise((resolve, reject) => {
         const allProjects = [];
 
-        base("Projects")
+        base("tblGc9MFKGecJMvjW")
             .select({ 
-                view: "Grid view",
+                view: "viwKEVkeHMc6J2ym4",
             })
             .eachPage(
                 function page(records, fetchNextPage) {
