@@ -1,6 +1,8 @@
 {% macro projectCard(project) %}
 
-<div class="relative col-span-12 mb-10 md:col-span-6 lg:col-span-4">
+<div class="col-span-4 bg-neutral-700 p-6 rounded-lg flex flex-col items-center gap-4"
+    data-time-horizon="{{ project.timeHorizon }}"
+    data-topic="{{ project.topics.join(',') }}">
     <a  
         aria-label="View {{ project.name }}" 
         href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 

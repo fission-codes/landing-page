@@ -9,45 +9,83 @@
 
 {% block content %}
 
-{% if projects.length %}
+<section>
+    <div class="px-8 mx-auto max-w-7xl">
+        <h1 class="text-2xl mb-20 pt-8 text-neutral-600 dark:text-neutral-100">
+            We won't get to the future alone
+        </h1>
+        
+        <form>
+            <fieldset>
+                <legend>What timeline are you on?</legend>
+                <label>
+                    <input class="save-preferences-input" type="radio" name="timeHorizon" value="Now">
+                    Today
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="radio" name="timeHorizon" value="Tomorrow">
+                    Tomorrow
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="radio" name="timeHorizon" value="flat-circle">
+                    Time is a flat circle
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>What topics?</legend>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Identity">
+                    Decentralized Identity
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Data"> User-owned data
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Compute">
+                    Edge computing
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Commons">
+                    Commons networks
+                </label>
+                <label>
+                    <input type="checkbox" name="all-topics" value="All">
+                    All of the above
+                </label>
+            </fieldset>
+        </form>
 
-    <h2>Core</h2>
-    <div>
-        {% for project in projects %}
-        {% if project.relationship == "Core" %}
-            {{ projectCard(project) }}
-        {% endif %}
-        {% endfor %}
-    </div>
+        <div class="grid grid-cols-6 md:grid-cols-12 gap-5 auto-rows-max">     
 
-    <h2>Fission-led</h2>
-    <div>
-        {% for project in projects %}
-        {% if project.relationship == "Fission-led" %}
-            {{ projectCard(project) }}
-        {% endif %}
-        {% endfor %}
+            <h2 class="col-span-12 text-xl">Core</h2>
+            {% for project in projects %}
+                {% if project.relationship == "Core" %}
+                    {{ projectCard(project) }}
+                {% endif %}
+            {% endfor %}
+
+            <h2 class="col-span-12 text-xl">Fission-led</h2>
+            {% for project in projects %}
+                {% if project.relationship == "Fission-led" %}
+                    {{ projectCard(project) }}
+                {% endif %}
+            {% endfor %}
+            
+            <h2 class="col-span-12 text-xl">Contributor</h2>
+            {% for project in projects %}
+                {% if project.relationship == "Contributor" %}
+                    {{ projectCard(project) }}
+                {% endif %}
+            {% endfor %}
+            
+            <h2 class="col-span-12 text-xl">Collaborators & Adopters</h2>
+            {% for project in projects %}
+                {% if project.relationship == "Collaborators & Adopters" %}
+                {{ projectCard(project) }}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
-    
-    <h2>Contributor</h2>
-    <div>
-        {% for project in projects %}
-        {% if project.relationship == "Contributor" %}
-            {{ projectCard(project) }}
-        {% endif %}
-        {% endfor %}
-    </div>
-    
-    <h2>Collaborators & Adopters</h2>
-    <div>
-        {% for project in projects %}
-        {% if project.relationship == "Collaborators & Adopters" %}
-        {{ projectCard(project) }}
-        {% endif %}
-        {% endfor %}
-    </div>
-{% else %}
-  <p>No projects could be found.</p>
-{% endif %}
+</section>
 
 {% endblock%}
