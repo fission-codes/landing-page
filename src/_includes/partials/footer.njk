@@ -7,58 +7,102 @@
 {% from "macros/icons/ExternalLink.njk" import ExternalLink %}
 {% from "macros/NewsletterForm.njk" import NewsletterForm %}
 
-<!-- Newsletter -->
-{{ NewsletterForm() }}
-
 <!-- Footer -->
-<section class="bg-neutral-100 dark:bg-neutral-900">
-    <div class="py-12 px-8 md:pt-20 md:pb-[62px] lg:px-0 mx-auto max-w-5xl">
-        <div class="flex flex-col md:flex-row-reverse w-full gap-10 mb-10 md:mb-20">
-            <div class="flex flex-col gap-4 w-full text-center md:text-left">
-                <h5 class="text-lg font-[450]">Looking to Get Involved?</h5>
-                <a aria-label="View the Fission Discord" href="https://fission.codes/discord" target="_blank" class="btn btn-primary h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit bg-newpurple-500 text-neutral-0 text-base rounded">
-                    Join Our Discord {{ DiscordBigFill() }}
-                </a>
-                <a aria-label="View the Fission Careers page" href="{{ "/careers" | relativePath(page) }}" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
-                    Careers At Fission {{ ExternalLink() }}
-                </a>
-                <a aria-label="View the Fission Events page" href="https://lu.ma/fission-online-events" target="_blank" class="btn btn-outline h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit text-neutral-700 dark:text-neutral-300 text-base rounded border-neutral-700 dark:border-neutral-300 border">
-                    Attend Fission Events {{ ExternalLink() }}
-                </a>
+<section class="mt-16">
+
+    <div class="mx-auto max-w-[1536px]">
+        
+        <!-- Newsletter -->
+        <div class="2xl:rounded-bl-lg 2xl:rounded-br-lg overflow-hidden">
+
+            <svg width="0" height="0">
+                <clipPath id="footerArch" clipPathUnits="objectBoundingBox">
+                    <path d="M1,0.727 V1 H0 V0.727 C0,0.326,0.224,0,0.5,0 C0.776,0,1,0.326,1,0.727"></path>
+                </clipPath>
+            </svg>
+
+            <div class="bg-newpurple-500 h-0 pb-[68%] [clip-path:url(#footerArch)]">
+                {{ NewsletterForm() }}
             </div>
 
-            <div class="flex flex-col w-full gap-10">
-                <div class="flex flex-col gap-4 w-full text-center md:text-left">
-                    <h5 class="text-lg font-[450]">Want to Learn More?</h5>
-                    <a aria-label="View the Fission Blog" href="{{ "/blog" | relativePath(page) }}" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Read Our Blog</a>
-                    <a aria-label="View the Fission community forum" href="https://talk.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Dive Deeper on Discourse</a>
+            <div class="relative bg-newpurple-500 flex flex-col md:flex-row w-full gap-16 p-4 md:p-16">
+
+                <div class="flex flex-col gap-4 w-full text-center md:text-left md:mt-[-25%]">
+                    <h5 class="text-lg text-center uppercase font-semibold">Looking to Get Involved?</h5>
+                    <a aria-label="View the Fission Discord" 
+                        href="https://fission.codes/discord" 
+                        target="_blank" 
+                        class="btn btn-primary font-semibold items-center gap-2 w-full bg-neutral-700 text-neutral-0 text-base rounded-lg">
+                        {{ DiscordBigFill() }} Join Our Discord
+                    </a>
+                    <a aria-label="View the Fission Careers page" 
+                        href="{{ "/careers" | relativePath(page) }}" 
+                        target="_blank" 
+                        class="btn btn-outline font-normal items-center gap-2 w-full text-neutral-700 dark:text-neutral-300 text-base rounded-lg border-neutral-700 dark:border-neutral-300 border">
+                        Check Out Our Open Roles
+                    </a>
+                    <a aria-label="View the Fission Events page" 
+                        href="https://lu.ma/fission-online-events" 
+                        target="_blank" 
+                        class="btn btn-outline font-normal items-center gap-2 w-full text-neutral-700 dark:text-neutral-300 text-base rounded-lg border-neutral-700 dark:border-neutral-300 border">
+                        View Our Events Calendar
+                    </a>
                 </div>
 
-                <div class="flex flex-col gap-4 w-full text-center md:text-left">
-                    <h5 class="text-lg font-[450]">Other Helpful Links</h5>
-                    <a aria-label="View Fission brand guide" href="https://talk.fission.codes/t/fission-branding/244" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Logos & Brand Guidelines</a>
-                    <a aria-label="View the Fission store" href="https://shop.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Shop Fission's Swag</a>
+                <div class="flex flex-col w-full gap-4 text-center md:text-left md:mt-[-25%]">
+                    <h5 class="text-lg uppercase text-center font-semibold">Want to Learn More?</h5>
+                    <a aria-label="View the Fission Ecosystem" 
+                        href="{{ "/ecosystem" | relativePath(page) }}" 
+                        class="btn btn-outline font-normal items-center gap-2 w-full text-neutral-700 dark:text-neutral-300 text-base rounded-lg border-neutral-700 dark:border-neutral-300 border">
+                        Explore Our Ecosystem
+                    </a>
+                    <a aria-label="View the Fission Blog" 
+                        href="{{ "/blog" | relativePath(page) }}" 
+                        class="btn btn-outline font-normal items-center gap-2 w-full text-neutral-700 dark:text-neutral-300 text-base rounded-lg border-neutral-700 dark:border-neutral-300 border">
+                        Read Our Blog
+                    </a>
+                    <a aria-label="Meet Our Team" 
+                        href="{{ "/team" | relativePath(page) }}" 
+                        class="btn btn-outline font-normal items-center gap-2 w-full text-neutral-700 dark:text-neutral-300 text-base rounded-lg border-neutral-700 dark:border-neutral-300 border">
+                        Meet Our Team
+                    </a>
                 </div>
             </div>
+
         </div>
 
-        <div class="w-full">
-            <div class="flex flex-col md:flex-row items-center gap-[54px] md:gap-0 md:justify-between mb-4 md:mb-[46px]">
-                <div>
-                    <img src="{{ "/images/fission-footer-light.webp" | relativePath(page) }}" srcset="{{ "/images/fission-footer-light.webp" | relativePath(page) }} 1x, {{ "/images/fission-footer-light-2x.webp" | relativePath(page) }} 2x" class="inline-block dark:hidden max-w-[155px] h-auto" alt="Fission" width="155" height="33" />
-                    <img src="{{ "/images/fission-footer-dark.webp" | relativePath(page) }}" srcset="{{ "/images/fission-footer-dark.webp" | relativePath(page) }} 1x, {{ "/images/fission-footer-dark-2x.webp" | relativePath(page) }} 2x" class="hidden dark:inline-block max-w-[155px] h-auto" alt="Fission" width="155" height="33" />
-                </div>
-
-                <div class="flex gap-4 items-center text-neutral-500 dark:text-neutral-200">
-                    <a aria-label="View Fission GitHub" href="https://github.com/fission-codes/" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ GithubOutline() }}</a>
-                    <a aria-label="View Fission Twitter" href="https://twitter.com/FISSIONcodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ TwitterOutline() }}</a>
-                    <a aria-label="View Fission on the Protocol Labs Network directory" href="https://plnetwork.xyz/@fission" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ MastodonOutline() }}</a>
-                    <a aria-label="View Fission Discord" href="https://fission.codes/discord/" target="_blank" class="transition-opacity hover:opacity-80">{{ DiscordOutline() }}</a>
-                    <a aria-label="View Fission on LinkedIn" href="https://ca.linkedin.com/company/fissioncodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ LinkedinOutline() }}</a>
-                </div>
+        <div class="flex flex-col md:grid md:grid-cols-12 gap-5 auto-rows-max p-6 md:py-32 md:px-20">
+            <div class="flex flex-col gap-4 items-start md:col-span-5">
+                <img src="{{ "/images/fission-footer-light.webp" | relativePath(page) }}" srcset="{{ "/images/fission-footer-light.webp" | relativePath(page) }} 1x, {{ "/images/fission-footer-light-2x.webp" | relativePath(page) }} 2x" class="inline-block dark:hidden max-w-[155px] h-auto" alt="Fission" width="155" height="33" />
+                <img src="{{ "/images/fission-footer-dark.webp" | relativePath(page) }}" srcset="{{ "/images/fission-footer-dark.webp" | relativePath(page) }} 1x, {{ "/images/fission-footer-dark-2x.webp" | relativePath(page) }} 2x" class="hidden dark:inline-block max-w-[155px] h-auto" alt="Fission" width="155" height="33" />
+                <p class="text-body-sm md:text-[20px] text-neutral-500 text-center">© {{ copyrightDate() }} Fission</p>
             </div>
 
-            <p class="text-body-sm md:text-[20px] text-neutral-500 text-center">© {{ copyrightDate() }} Fission</p>
+            <div class="md:col-span-5 flex flex-col gap-4 w-full text-center md:text-left">
+                <h5 class="text-lg font-[450]">Other Helpful Links</h5>
+                <a aria-label="View Fission brand guide" href="https://talk.fission.codes/t/fission-branding/244" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Press Kit & Logos</a>
+                <a aria-label="Visit the commmunity forum" href="https://talk.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Visit Our Community Forum</a>
+                <a aria-label="View the Fission store" href="https://shop.fission.codes/" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Shop Fission's Swag</a>
+                <a aria-label="View Fission on Luma" href="https://lu.ma/fission" target="_blank" class="link link-hover text-newpurple-500 dark:text-newpurple-300">Join Our Luma Community</a>
+            </div>
+
+            <div class="md:col-span-2 flex flex-col gap-4 text-neutral-500 dark:text-neutral-200">
+                <a aria-label="View Fission GitHub" href="https://github.com/fission-codes/" rel="me" target="_blank" class="flex gap-2 transition-opacity hover:opacity-80">
+                    <span class="w-10 -ml-12 text-center">{{ GithubOutline() }}</span> Github
+                </a>
+                <a aria-label="View Fission Twitter" href="https://twitter.com/FISSIONcodes" rel="me" target="_blank" class="flex gap-2 transition-opacity hover:opacity-80">
+                    <span class="w-10 -ml-12 text-center">{{ TwitterOutline() }}</span> Twitter
+                </a>
+                <a aria-label="View Fission on the Protocol Labs Network directory" href="https://plnetwork.xyz/@fission" rel="me" target="_blank" class="flex gap-2 transition-opacity hover:opacity-80">
+                    <span class="w-10 -ml-12 text-center">{{ MastodonOutline() }}</span> Mastodon
+                </a>
+                <a aria-label="View Fission Discord" href="https://fission.codes/discord/" target="_blank" class="flex gap-2 transition-opacity hover:opacity-80">
+                    <span class="w-10 -ml-12 text-center">{{ DiscordOutline() }}</span> Discord
+                </a>
+                <a aria-label="View Fission on LinkedIn" href="https://ca.linkedin.com/company/fissioncodes" rel="me" target="_blank" class="flex gap-2 transition-opacity hover:opacity-80">
+                    <span class="w-10 -ml-12 text-center">{{ LinkedinOutline() }}</span> LinkedIn
+                </a>
+            </div>
         </div>
     </div>
 </section>

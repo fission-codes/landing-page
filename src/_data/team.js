@@ -28,7 +28,6 @@ module.exports = function() {
             })
             .eachPage(
                 function page(records, fetchNextPage) {
-                    console.log("# of members", records.length);
                     records.forEach(record => {
                         var tempRecord = {
                             id: record._rawJson.id,

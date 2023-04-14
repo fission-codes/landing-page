@@ -13,27 +13,31 @@
             Our Team
         </h1>
 
-        <div class="grid grid-cols-12 gap-6">
+        <div class="grid grid-cols-6 md:grid-cols-12 gap-5 auto-rows-max">
             {% for member in team %}
-            <h3>{{ member.name }} ({{ member.title }})</h3>
-            <img 
-                src="{{ member.avatar.url }}" 
-                width="{{ member.avatar.width / 2}}"
-                height="{{ member.avatar.height / 2}}"
-                alt="{{ member.name }}" 
-                data-page-url="{{ page.url }}" 
-                loading="lazy" 
-                decoding="async" 
-            />
-            <p>{{ member.about }}</p>
-            <ul>
-                <li>{{ member.discordUsername }}</li>
-                <li><a href="{{ member.personalWebsiteUrl }}">{{ member.personalWebsiteUrl }}</a></li>
-                <li><a href="{{ member.twitterProfileUrl }}">{{ member.twitterProfileUrl }}</a></li>
-                <li><a href="{{ member.githubProfileUrl }}">{{ member.githubProfileUrl }}</a></li>
-                <li><a href="{{ member.mastodonProfileUrl }}">{{ member.mastodonProfileUrl }}</a></li>
-                <li><a href="{{ member.blueskyProfileUrl }}">{{ member.blueskyProfileUrl }}</a></li>
-            </ul>
+            <div class="col-span-4 bg-neutral-700 p-6 rounded-lg flex flex-col items-center gap-4">
+                <img 
+                    class="h-[132px] w-[132px] bg-neutral-600 overflow-hidden rounded-full"
+                    src="{{ member.avatar.url }}" 
+                    width="{{ member.avatar.width / 2}}"
+                    height="{{ member.avatar.height / 2}}"
+                    alt="{{ member.name }}" 
+                    data-page-url="{{ page.url }}" 
+                    loading="lazy" 
+                    decoding="async" 
+                />
+                <h3>{{ member.name }}</h3>
+                <h4>({{ member.title }})</h4>
+                <p>{{ member.about }}</p>
+                <ul>
+                    <li>{{ member.discordUsername }}</li>
+                    <li><a href="{{ member.personalWebsiteUrl }}">{{ member.personalWebsiteUrl }}</a></li>
+                    <li><a href="{{ member.twitterProfileUrl }}">{{ member.twitterProfileUrl }}</a></li>
+                    <li><a href="{{ member.githubProfileUrl }}">{{ member.githubProfileUrl }}</a></li>
+                    <li><a href="{{ member.mastodonProfileUrl }}">{{ member.mastodonProfileUrl }}</a></li>
+                    <li><a href="{{ member.blueskyProfileUrl }}">{{ member.blueskyProfileUrl }}</a></li>
+                </ul>
+            </div>
             {% endfor %}
         </div>
     </div>
