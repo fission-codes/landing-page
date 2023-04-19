@@ -16,79 +16,94 @@ module.exports = {
           "linear-gradient(358.98deg, rgba(255, 82, 116, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%)",
       },
       colors: {
-        // ...kit.dasherizeObjectKeys(kit.colors),
-        newneutral: {
-          0: "#FBFBFC",
-          50: "#F5F5F9",
-          100: "#EEEEF5",
-          200: "#E3E3EF",
-          300: "#CBCCDE",
-          400: "#A3A3BE",
-          500: "#696A8B",
-          600: "#3F4161",
-          700: "#1F223D",
-          800: "#0E1225",
-          900: "#070B16",
+        "newneutral": {
+          "0": "#fcfcfd",
+          "100": "#eeeef5",
+          "200": "#c8c8d4",
+          "300": "#a3a3b3",
+          "400": "#808094",
+          "500": "#5e5f76",
+          "600": "#3e3f59",
+          "700": "#1f223d",
+          "800": "#17172b"
         },
-        /*
-          Named `newpurple` and `newpink` to avoid breaking Fission Kit imports
-          TODO: these color definitions should be updated in Fission Kit,
-          and then updated throughout templates that depend on them.
-
-          For color migration guide, see the Fission Kit figma:
-          https://www.figma.com/file/Np45Vc6bM943XFdXIeEGFJ/Fission-Kit?node-id=500%3A1624
-        */
-        newpurple: {
-          50: "#E0DEFF",
-          100: "#B1ABFF",
-          200: "#9287FF",
-          300: "#7967FF",
-          400: "#6144F3",
-          500: "#6446FA",
-          600: "#5133D3",
-          700: "#3C2399",
-          800: "#26155E",
-          900: "#160A38",
+        "newpink": {
+          "100": "#ffdbe2",
+          "200": "#ffadb8",
+          "300": "#ff8697",
+          "400": "#fd5375",
+          "500": "#fa2e55",
+          "600": "#ec1345"
         },
-        newpink: {
-          50: "#FFDAE1",
-          100: "#FFA4B5",
-          200: "#FF7390",
-          300: "#FF5274",
-          400: "#E9254F",
-          500: "#CC1139",
-          600: "#A20827",
-          700: "#74051C",
-          800: "#4C0514",
-          900: "#340612",
+        "newpurple": {
+          "100": "#e0deff",
+          "200": "#c0baff",
+          "300": "#a195ff",
+          "400": "#836fff",
+          "500": "#6446fa",
+          "600": "#523ee5"
         },
+        "yellow": {
+          "100": "#fff0ad",
+          "200": "#f9dd90",
+          "300": "#f2ca74",
+          "400": "#eab757"
+        },
+        "red": {
+          "100": "#ffbdc8",
+          "200": "#ff9c9f",
+          "300": "#fd7977",
+          "400": "#f65555"
+        },
+        "green": {
+          "100": "#a1e2c1",
+          "200": "#82d1a6",
+          "300": "#61c18c",
+          "400": "#3bb073"
+        }, 
       },
       fontFamily: {
         display: ["PPFragment"],
         sans: ["UncutSans"],
       },
       fontSize: {
-        "body-xs": ["12px", { lineHeight: "17px" }],
-        "body-sm": ["15px", { lineHeight: "20px" }],
-        "body-base": ["18px", { lineHeight: "23px" }],
-        "body-lg": ["22px", { lineHeight: "29px" }],
-        "body-xl": ["26px", { lineHeight: "34px" }],
-        "body-2xl": ["31px", { lineHeight: "40px" }],
-        xs: ["14px", { lineHeight: "18px" }],
-        sm: ["18px", { lineHeight: "23.4px" }],
-        base: ["20px", { lineHeight: "26px" }],
-        lg: ["24px", { lineHeight: "36px" }],
-        xl: ["32px", { lineHeight: "41px" }],
-        "2xl": ["48px", { lineHeight: "57.6px" }],
-        "3xl": ["60px", { lineHeight: "78px" }],
+        "header": {
+          "2xl": ["3.052rem", { lineHeight: "120%" }],
+          "xl": ["2.441rem", { lineHeight: "120%" }],
+          "lg": ["1.953rem", { lineHeight: "120%" }],
+          "base": ["1.563rem", { lineHeight: "120%" }],
+          "sm": ["1.266rem", { lineHeight: "120%" }],
+          "xs": ["1.125rem", { lineHeight: "120%" }]
+        },
+        "body": {
+          "3xl": ["1.602rem", { lineHeight: "130%" }],
+          "2xl": ["1.424rem", { lineHeight: "130%" }],
+          "xl": ["1.266rem", { lineHeight: "130%" }],
+          "lg": ["1.125rem", { lineHeight: "130%" }],
+          "base": ["1rem", { lineHeight: "130%" }],
+          "sm": [".889rem", { lineHeight: "130%" }],
+          "xs": ["0.79rem", { lineHeight: "130%" }],
+          "2xs": ["0.702rem", { lineHeight: "130%" }],
+        },
+        "button": {
+          "xl": ["1.266rem", { lineHeight: "100%" }],
+          "lg": ["1.125rem", { lineHeight: "100%" }],
+          "base": ["1rem", { lineHeight: "100%" }],
+          "sm": [".889rem", { lineHeight: "100%" }],
+          "xs": ["0.79rem", { lineHeight: "100%" }]
+        },
       },
       maxWidth: {
-        "3xl": "948px",
-        "5xl": "1352px",
+        "contain": "1352px",
       },
       zIndex: {
         max: "1000",
       },
+      "borderRadius": {
+        "none": "0",
+        "xs": "0.5rem",
+        "sm": "0.7rem"
+       }
     },
   },
   plugins: [
