@@ -15,19 +15,20 @@
 {% endblock %}
 
 {% block content %}
-<div aria-label="homepage" class="-mt-[110px]">
+<div aria-label="homepage">
 
     <!-- Hero Build the Future -->
-    <section aria-label="hero" class="relative w-full pt-[226px] md:pt-[228px] mb-[170px] md:mb-[120px] flex flex-col bg-blend-lighten bg-hero-light dark:bg-hero-dark">
+    <section aria-label="hero" class="grid grid-cols-12 gap-5 auto-rows-max">
+        <a aria-label="Navigate to the Fission homepage" 
+            href="/" 
+            class="col-span-6 flex flex-col items-center justify-between w-auto text-2xl select-none mb-[50px] md:mb-[64px] homepage-link">
+            <img src="{{ "/images/hero-logo-light.webp" | relativePath(page) }}" srcset="{{ "/images/hero-logo-light.webp" | relativePath(page) }} 1x, {{ "/images/hero-logo-light-2x.webp" | relativePath(page) }} 2x" class="w-[80%] md:w-full max-w-[614px] block dark:hidden" alt="Fission" width="645" height="136" />
+            <img src="{{ "/images/hero-logo-dark.webp" | relativePath(page) }}" srcset="{{ "/images/hero-logo-dark.webp" | relativePath(page) }} 1x, {{ "/images/hero-logo-dark-2x.webp" | relativePath(page) }} 2x" class="w-[80%] md:w-full max-w-[614px] hidden dark:block" alt="Fission" width="645" height="136" />
+        </a>
+        <h2 class="col-start-7 col-span-6 text-neutral-600 dark:text-neutral-300 text-xl md:text-2xl font-display">
+            We build <span class="text-newpink-300 dark:text-newpink-100">identity</span>, <span class="text-newpink-300 dark:text-newpink-100">data</span>, and <span class="text-newpink-300 dark:text-newpink-100">compute</span> protocols for the future of the Internet.
+        </h2>
         <h1 class="sr-only">Fission: We build identity, data, and compute protocols for the future of the Internet.</h1>
-
-        <div class="flex flex-col items-center justify-center grow px-10">
-            <a aria-label="Navigate to the Fission homepage" href="/" class="flex flex-col items-center justify-between w-auto text-2xl select-none mb-[50px] md:mb-[64px] homepage-link">
-                <img src="{{ "/images/hero-logo-light.webp" | relativePath(page) }}" srcset="{{ "/images/hero-logo-light.webp" | relativePath(page) }} 1x, {{ "/images/hero-logo-light-2x.webp" | relativePath(page) }} 2x" class="w-[80%] md:w-full max-w-[614px] block dark:hidden" alt="Fission" width="645" height="136" />
-                <img src="{{ "/images/hero-logo-dark.webp" | relativePath(page) }}" srcset="{{ "/images/hero-logo-dark.webp" | relativePath(page) }} 1x, {{ "/images/hero-logo-dark-2x.webp" | relativePath(page) }} 2x" class="w-[80%] md:w-full max-w-[614px] hidden dark:block" alt="Fission" width="645" height="136" />
-            </a>
-            <h2 class="w-[80%] md:w-full max-w-[825px] text-center text-neutral-600 dark:text-neutral-300 text-xl md:text-2xl font-display">We build <span class="text-newpink-300 dark:text-newpink-100">identity</span>, <span class="text-newpink-300 dark:text-newpink-100">data</span>, and <span class="text-newpink-300 dark:text-newpink-100">compute</span> protocols for the future of the Internet.</h2>
-        </div>
     </section>
 
     <section aria-label="body" class="w-full max-w-5xl m-auto flex flex-col items-center">
