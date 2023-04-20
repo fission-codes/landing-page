@@ -9,15 +9,15 @@
 {% block content %}
 <section>
     <div class="px-8 mx-auto max-w-7xl">
-        <h1 class="text-2xl mb-20 pt-8 text-neutral-600 dark:text-neutral-100">
+        <h1 class="text-2xl mb-20 pt-8 text-newneutral-600 dark:text-newneutral-100">
             Our Team
         </h1>
 
         <div class="grid grid-cols-6 md:grid-cols-12 gap-5 auto-rows-max">
             {% for member in team %}
-            <div class="col-span-4 bg-neutral-700 p-6 rounded-lg flex flex-col items-center gap-4">
+            <div class="col-span-4 bg-newneutral-700 p-6 rounded-lg flex flex-col items-center gap-4">
                 <img 
-                    class="h-[132px] w-[132px] bg-neutral-600 overflow-hidden rounded-full"
+                    class="h-[132px] w-[132px] bg-newneutral-600 overflow-hidden rounded-full"
                     src="{{ member.avatar.url }}" 
                     width="{{ member.avatar.width / 2}}"
                     height="{{ member.avatar.height / 2}}"

@@ -5,35 +5,48 @@
 {% from "macros/icons/DiscordOutline.njk" import DiscordOutline %}
 {% from "macros/icons/LinkedinOutline.njk" import LinkedinOutline %}
 {% from "macros/icons/X.njk" import X %}
+{% from "macros/fission-logo.njk" import fissionLogo %}
 
-<div class="overlay-menu fixed z-max w-0 h-0 bg-neutral-700 bg-overlay-menu opacity-0 overflow-auto">
-    <div class="flex flex-col h-full p-8 w-full">
-        <div class="flex justify-between items-center mb-4">
-            <a aria-label="Navigate home" href="/" class="homepage-link"><img src="{{ "/images/fission-logo-dark.webp" | relativePath(page) }}" srcset="{{ "/images/fission-logo-dark.webp" | relativePath(page) }} 1x, {{ "/images/fission-logo-dark-2x.webp" | relativePath(page) }} 2x" alt="Fission" class="max-w-[155px] h-auto" width="155" height="33" /></a>
-            <button aria-label="close-menu" name="close-menu" class="close-menu transition-opacity hover:opacity-80 translate-x-1">{{ X() }}</button>
+<div class="overlay-menu fixed z-max w-0 h-0 bg-newneutral-100 opacity-0 overflow-auto">
+    <div class="flex flex-col h-full px-7 py-3 w-full">
+
+        <div class="fixed left-0 bottom-0 rotate-180 w-full h-32 pointer-events-none overflow-hidden">        
+            <div class="bg-blend-lighten bg-purple-fade -mt-32 h-64 w-full"></div>
         </div>
 
-        <p class="text-body-sm text-neutral-300 mb-10">
+        <div class="flex justify-between items-center mb-2">
+            <a aria-label="Navigate to home page" href="/" class="block w-[101px] lg:w-[131px] homepage-link">
+                {{ fissionLogo() }}
+            </a>
+            <button 
+                aria-label="close-menu" 
+                name="close-menu" 
+                class="close-menu text-purple-400 transition-opacity hover:opacity-80 translate-x-1">
+                {{ X() }}
+            </button>
+        </div>
+
+        <p class="text-body-xs mb-8">
             We build identity, data, and compute protocols for the future of the Internet.
         </p>
 
-        <div class="flex flex-col gap-4 text-center text-neutral-100 font-[450] text-lg mb-9">
-            <a aria-label="Navigate to the home page" class="transition-colors hover:text-newpink-200 {% if '/' === page.url %}text-newpink-200{% endif %} homepage-link" href="/">Home</a>
-            <a aria-label="View the Fission blog" class="transition-colors hover:text-newpink-200 {% if '/ecosystem' in page.url %}text-newpink-200{% endif %}" href="{{ "/ecosystem" | relativePath(page) }}">Explore Our Ecosystem</a>
-            <a aria-label="View the Fission blog" class="transition-colors hover:text-newpink-200 {% if '/team' in page.url %}text-newpink-200{% endif %}" href="{{ "/team" | relativePath(page) }}">Meet Our Team</a>
-            <a aria-label="View the Fission blog" class="transition-colors hover:text-newpink-200 {% if '/blog' in page.url %}text-newpink-200{% endif %}" href="{{ "/blog" | relativePath(page) }}">Read Our Blog</a>
-            <a aria-label="View the Fission store" class="transition-colors hover:text-newpink-200 justify-center flex gap-2" href="https://shop.fission.codes/" target="_blank">Shop Fission Swag {{ ExternalLinkBig() }}</a>
+        <div class="flex font-display flex-col gap-2 text-heading-sm text-center text-purple-500 text-lg mb-8">
+            <a aria-label="Navigate to the home page" class="transition-colors hover:text-pink-400 {% if '/' === page.url %}text-pink-400{% endif %} homepage-link" href="/">Home</a>
+            <a aria-label="View the Fission blog" class="transition-colors hover:text-pink-400 {% if '/ecosystem' in page.url %}text-pink-400{% endif %}" href="{{ "/ecosystem" | relativePath(page) }}">Explore Our Ecosystem</a>
+            <a aria-label="View the Fission blog" class="transition-colors hover:text-pink-400 {% if '/team' in page.url %}text-pink-400{% endif %}" href="{{ "/team" | relativePath(page) }}">Meet Our Team</a>
+            <a aria-label="View the Fission blog" class="transition-colors hover:text-pink-400 {% if '/blog' in page.url %}text-pink-400{% endif %}" href="{{ "/blog" | relativePath(page) }}">Read Our Blog</a>
+            <a aria-label="View the Fission store" class="transition-colors hover:text-pink-400 justify-center flex gap-2" href="https://shop.fission.codes/" target="_blank">Shop Fission Swag {{ ExternalLinkBig() }}</a>
         </div>
 
-        <div class="flex flex-col gap-4 text-center text-newpurple-100 text-base mb-9">
+        <div class="flex flex-col gap-2 underline underline-offset-4 text-center text-sm mb-8">
             <a aria-label="Visit the Fission Discord" href="https://fission.codes/discord/" target="_blank" class="link link-hover">Join Us on Discord</a>
             <a aria-label="View the Fission community forum" href="https://talk.fission.codes/" target="_blank" class="link link-hover">Dive Deeper on Discourse</a>
             <a aria-label="View the Fission Events page" href="https://lu.ma/fission-online-events" target="_blank" class="link link-hover">Attend Fission Events</a>
             <a aria-label="View the Fission Careers page" href="{{ "/careers" | relativePath(page) }}" target="_blank" class="link link-hover">Careers at Fission</a>
         </div>
 
-        <div class="mt-auto pb-12 flex flex-col gap-2">
-            <div class="flex gap-4 items-center justify-center text-neutral-400">
+        <div class="mt-auto pb-8 flex flex-col gap-2">
+            <div class="flex gap-4 items-center justify-center text-purple-500">
                 <a aria-label="View Fission GitHub" href="https://github.com/fission-codes/" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ GithubOutline() }}</a>
                 <a aria-label="View Fission Twitter" href="https://twitter.com/FISSIONcodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ TwitterOutline() }}</a>
                 <a aria-label="View Fission on the Protocol Labs Network directory" href="https://plnetwork.xyz/@fission" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ MastodonOutline() }}</a>
@@ -41,7 +54,7 @@
                 <a aria-label="View Fission on LinkedIn" href="https://ca.linkedin.com/company/fissioncodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ LinkedinOutline() }}</a>
             </div>
 
-            <p class="text-body-sm text-neutral-400 text-center">© {{ copyrightDate() }} Fission</p>
+            <p class="text-body-xs text-newneutral-400 text-center">© {{ copyrightDate() }} Fission</p>
         </div>
     </div>
 </div>

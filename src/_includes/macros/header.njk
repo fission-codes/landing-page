@@ -1,71 +1,54 @@
 {% from "macros/icons/ExternalLink.njk" import ExternalLink %}
 {% from "macros/icons/Hamburger.njk" import Hamburger %}
-{% from "macros/icons/FissionLogoLight.njk" import FissionLogoLight %}
-{% from "macros/icons/FissionLogoDark.njk" import FissionLogoDark %}
+{% from "macros/fission-logo.njk" import fissionLogo %}
 
 {% macro header() %}
-    <div class="navbar items-center p-6 fixed top-0 z-10 bg-newneutral-100 dark:bg-newneutral-700">
-        <div class="navbar-wrapper m-auto w-full max-w-5xl flex">
-            <a aria-label="Navigate to home page" href="/" class="block homepage-link">
-                <div class="block dark:hidden">
-                    <img 
-                        src="{{ "/images/fission-header-light.webp" | relativePath(page) }}" 
-                        srcset="{{ "/images/fission-header-light.webp" | relativePath(page) }} 1x, {{ "/images/fission-header-light-2x.webp" | relativePath(page) }} 2x" 
-                        alt="Fission" 
-                        class="max-w-[155px] h-auto" 
-                        width="131" height="29" />
-                </div>
-                <div class="hidden dark:block">
-                    <img 
-                        src="{{ "/images/fission-header-dark.webp" | relativePath(page) }}" 
-                        srcset="{{ "/images/fission-header-dark.webp" | relativePath(page) }} 1x, {{ "/images/fission-header-dark-2x.webp" | relativePath(page) }} 2x" 
-                        alt="Fission" 
-                        class="max-w-[155px] h-auto" 
-                        width="131" height="29" />
-                </div>
+    <div class="w-full flex items-center px-7 py-3 lg:py-4 fixed top-0 z-10 bg-newneutral-100">
+        <div class="m-auto w-full max-w-screen-xl flex justify-between items-center">
+            <a aria-label="Navigate to home page" href="/" class="block w-[101px] lg:w-[131px] homepage-link">
+                {{ fissionLogo() }}
             </a>
 
-            <div class="ml-auto">
-                <ul class="hidden font-semibold md:flex gap-6 text-newneutral-700 dark:text-newneutral-100">
-                    <li>
-                        <a 
-                            href="{{ "/ecosystem" | relativePath(page) }}" 
-                            class="{% if '/ecosystem' in page.url %}text-newpink-300{% endif %}">
-                            ● Ecosystem
-                        </a>
-                    </li>
-                    <li>
-                        <a 
-                            href="{{ "/team" | relativePath(page) }}" 
-                            class="{% if '/team' in page.url %}text-newpink-300{% endif %}">
-                            ● Our Team
-                        </a>
-                    </li>
-                    <li>
-                        <a 
-                            href="{{ "/blog" | relativePath(page) }}" 
-                            class="{% if '/blog' in page.url %}text-newpink-300{% endif %}">
-                            ● Blog
-                        </a>
-                    </li>
-                    <li>
-                        <a 
-                            href="https://shop.fission.codes" 
-                            target="_blank" 
-                            class="flex gap-2">
-                            ● Shop Fission Swag {{ ExternalLink() }}
-                        </a>
-                    </li>
-                </ul>
+            <ul class="hidden font-semibold lg:flex gap-5">
+                <li>
+                    <a 
+                        href="{{ "/ecosystem" | relativePath(page) }}" 
+                        class="{% if '/ecosystem' in page.url %}text-pink-300{% endif %}">
+                        ● Ecosystem
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="{{ "/team" | relativePath(page) }}" 
+                        class="{% if '/team' in page.url %}text-pink-300{% endif %}">
+                        ● Our Team
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="{{ "/blog" | relativePath(page) }}" 
+                        class="{% if '/blog' in page.url %}text-pink-300{% endif %}">
+                        ● Blog
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="https://shop.fission.codes" 
+                        target="_blank" 
+                        class="flex items-center gap-1w">
+                        ● Shop Fission Swag {{ ExternalLink() }}
+                    </a>
+                </li>
+            </ul>
 
-                <button 
-                    aria-label="open-menu" 
-                    name="open-menu" 
-                    class="open-menu z-20 inline-block md:hidden text-newneutral-700 dark:text-newneutral-100">
-                    {{ Hamburger() }}
-                </button>
-            </div>
+            <button 
+                aria-label="open-menu" 
+                name="open-menu" 
+                class="open-menu z-20 inline-block lg:hidden text-purple-500">
+                {{ Hamburger() }}
+            </button>
+
+            <div class="bg-blend-lighten bg-purple-fade h-16 lg:h-28 w-full absolute left-0 top-[100%] pointer-events-none"></div>
         </div>
     </div>
-    <div class="bg-blend-lighten bg-hero h-[225px] w-full absolute top-0 l-0 r-0 dark:opacity-65">&nbsp;</div>
 {% endmacro %}

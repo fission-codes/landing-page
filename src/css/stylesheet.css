@@ -97,7 +97,7 @@ article section h4,
 article section h5,
 article section h6
 {
-  @apply text-neutral-600 dark:text-neutral-100;
+  @apply text-newneutral-600 dark:text-newneutral-100;
 }
 article header h1 {
   @apply leading-[1.125] mb-16 text-xl sm:text-3xl;
@@ -147,15 +147,15 @@ article section h6 + p {
 }
 
 article section figcaption {
-  @apply mt-3 text-base-500 text-sm;
+  @apply mt-3 text-newneutral-500 text-sm;
 }
 
 article section hr {
-  @apply border-base-100 dark:border-base-800;
+  @apply border-newneutral-100 dark:border-newneutral-800;
 }
 
 article section a {
-  @apply text-purple underline dark:text-purple-tint;
+  @apply text-purple-500 underline dark:text-purple-300;
   text-underline-offset: 2px;
 }
 

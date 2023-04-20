@@ -10,13 +10,11 @@ module.exports = {
 
     extend: {
       backgroundImage: {
-        "hero":
-          "linear-gradient(358.98deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%);",
-        "overlay-menu":
-          "linear-gradient(358.98deg, rgba(255, 82, 116, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%)",
+        "purple-fade":
+          "linear-gradient(360deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.04) 32.78%, rgba(100, 70, 250, 0.08) 51.82%, rgba(100, 70, 250, 0.12) 70.86%, rgba(100, 70, 250, 0.16) 84.79%, rgba(100, 70, 250, 0.2) 99.18%);",
       },
       colors: {
-        "newneutral": {
+        newneutral: {
           "0": "#fcfcfd",
           "100": "#eeeef5",
           "200": "#c8c8d4",
@@ -27,7 +25,7 @@ module.exports = {
           "700": "#1f223d",
           "800": "#17172b"
         },
-        "newpink": {
+        pink: {
           "100": "#ffdbe2",
           "200": "#ffadb8",
           "300": "#ff8697",
@@ -35,7 +33,7 @@ module.exports = {
           "500": "#fa2e55",
           "600": "#ec1345"
         },
-        "newpurple": {
+        purple: {
           "100": "#e0deff",
           "200": "#c0baff",
           "300": "#a195ff",
@@ -43,19 +41,19 @@ module.exports = {
           "500": "#6446fa",
           "600": "#523ee5"
         },
-        "yellow": {
+        yellow: {
           "100": "#fff0ad",
           "200": "#f9dd90",
           "300": "#f2ca74",
           "400": "#eab757"
         },
-        "red": {
+        red: {
           "100": "#ffbdc8",
           "200": "#ff9c9f",
           "300": "#fd7977",
           "400": "#f65555"
         },
-        "green": {
+        green: {
           "100": "#a1e2c1",
           "200": "#82d1a6",
           "300": "#61c18c",
@@ -67,34 +65,25 @@ module.exports = {
         sans: ["UncutSans"],
       },
       fontSize: {
-        "header": {
-          "2xl": ["3.052rem", { lineHeight: "120%" }],
-          "xl": ["2.441rem", { lineHeight: "120%" }],
-          "lg": ["1.953rem", { lineHeight: "120%" }],
-          "base": ["1.563rem", { lineHeight: "120%" }],
-          "sm": ["1.266rem", { lineHeight: "120%" }],
-          "xs": ["1.125rem", { lineHeight: "120%" }]
-        },
-        "body": {
-          "3xl": ["1.602rem", { lineHeight: "130%" }],
-          "2xl": ["1.424rem", { lineHeight: "130%" }],
-          "xl": ["1.266rem", { lineHeight: "130%" }],
-          "lg": ["1.125rem", { lineHeight: "130%" }],
-          "base": ["1rem", { lineHeight: "130%" }],
-          "sm": [".889rem", { lineHeight: "130%" }],
-          "xs": ["0.79rem", { lineHeight: "130%" }],
-          "2xs": ["0.702rem", { lineHeight: "130%" }],
-        },
-        "button": {
-          "xl": ["1.266rem", { lineHeight: "100%" }],
-          "lg": ["1.125rem", { lineHeight: "100%" }],
-          "base": ["1rem", { lineHeight: "100%" }],
-          "sm": [".889rem", { lineHeight: "100%" }],
-          "xs": ["0.79rem", { lineHeight: "100%" }]
-        },
-      },
-      maxWidth: {
-        "contain": "1352px",
+        "heading-2xl": ["3.052rem", { lineHeight: "120%" }],
+        "heading-xl": ["2.441rem", { lineHeight: "120%" }],
+        "heading-lg": ["1.953rem", { lineHeight: "120%" }],
+        "heading-base": ["1.563rem", { lineHeight: "120%" }],
+        "heading-sm": ["1.266rem", { lineHeight: "120%" }],
+        "heading-xs": ["1.125rem", { lineHeight: "120%" }],
+        "body-3xl": ["1.602rem", { lineHeight: "130%" }],
+        "body-2xl": ["1.424rem", { lineHeight: "130%" }],
+        "body-xl": ["1.266rem", { lineHeight: "130%" }],
+        "body-lg": ["1.125rem", { lineHeight: "130%" }],
+        "body-base": ["1rem", { lineHeight: "130%" }],
+        "body-sm": [".889rem", { lineHeight: "130%" }],
+        "body-xs": ["0.79rem", { lineHeight: "130%" }],
+        "body-2xs": ["0.702rem", { lineHeight: "130%" }],
+        "button-xl": ["1.266rem", { lineHeight: "100%" }],
+        "button-lg": ["1.125rem", { lineHeight: "100%" }],
+        "button-base": ["1rem", { lineHeight: "100%" }],
+        "button-sm": [".889rem", { lineHeight: "100%" }],
+        "button-xs": ["0.79rem", { lineHeight: "100%" }]
       },
       zIndex: {
         max: "1000",
@@ -103,7 +92,12 @@ module.exports = {
         "none": "0",
         "xs": "0.5rem",
         "sm": "0.7rem"
-       }
+       },
+       extend: {
+        screens: {
+          'xl': '1352px',
+        },
+      },
     },
   },
   plugins: [
