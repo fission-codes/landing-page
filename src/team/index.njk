@@ -1,5 +1,6 @@
 {% extends 'layouts/default.njk' %}
 {% from "macros/header.njk" import header with context %}
+{% from "macros/icons/DiscordOutline.njk" import DiscordOutline %}
 {% set title = "Team" %}
 
 {% block header %}
@@ -7,36 +8,83 @@
 {% endblock %}
 
 {% block content %}
-<section>
-    <div class="px-8 mx-auto max-w-7xl">
-        <h1 class="text-2xl mb-20 pt-8 text-newneutral-600 dark:text-newneutral-100">
-            Our Team
-        </h1>
+<section aria-label="team">
 
-        <div class="grid grid-cols-6 md:grid-cols-12 gap-5 auto-rows-max">
+    <section 
+        aria-label="hero" 
+        class="
+            mx-auto flex flex-col lg:flex-row lg:gap-16 max-w-screen-xl auto-rows-max 
+            gap-4 px-5 lg:px-8 mx-5 mt-24 mb-8 lg:mt-40 lg:mb-40
+        ">
+        <div class="col-span-6 basis-1/2 flex flex-col justify-between mb-12 lg:mb-0 gap-4">
+            <h1 class="text-center text-purple-500 text-heading-sm sm:text-heading-lg xl:text-heading-xl font-display">
+                Meet Our Team
+            </h1>
+            <p class="text-justify">
+                Say hello to a globally distributed set of wicked smart & highly curious people. Our world-class applied research lab collaborates with a broad ecosystem to build a future Internet that is local-first, offline-first, resilient, and accessible.
+            </p>
+        </div>
+        <div class="basis-1/2 flex flex-col gap-2">
+            <a aria-label="View Fission's Ecosystem" 
+                href="{{ "/blog" | relativePath(page) }}" 
+                class="btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg">
+                Read our origin story
+            </a>
+            <a aria-label="View the Fission Discord" 
+                href="https://fission.codes/discord" 
+                target="_blank" 
+                class="btn btn-outline font-normal items-center gap-2 w-full text-purple-500 rounded-lg border-purple-500 border">
+                {{ DiscordOutline() }} Talk To Us On Discord
+            </a>
+            <a aria-label="View the Fission Careers page" 
+                href="{{ "/careers" | relativePath(page) }}" 
+                target="_blank" 
+                class="btn btn-outline font-normal items-center gap-2 w-full text-purple-500 rounded-lg border-purple-500 border">
+                Check Out Our Open Roles
+            </a>
+        </div>
+    </section>
+
+    <div class="bg-newneutral-300 p-7 md:p-14">
+
+        <div class="text-body-sm mb-7 text-center text-newneutral-0">(in order of appearance)</div>
+
+        <div class="mx-auto max-w-screen-xl gap-4 grid grid-cols-8 lg:grid-cols-12 auto-rows-max">
             {% for member in team %}
-            <div class="col-span-4 bg-newneutral-700 p-6 rounded-lg flex flex-col items-center gap-4">
-                <img 
-                    class="h-[132px] w-[132px] bg-newneutral-600 overflow-hidden rounded-full"
-                    src="{{ member.avatar.url }}" 
-                    width="{{ member.avatar.width / 2}}"
-                    height="{{ member.avatar.height / 2}}"
-                    alt="{{ member.name }}" 
-                    data-page-url="{{ page.url }}" 
-                    loading="lazy" 
-                    decoding="async" 
-                />
-                <h3>{{ member.name }}</h3>
-                <h4>({{ member.title }})</h4>
-                <p>{{ member.about }}</p>
-                <ul>
-                    <li>{{ member.discordUsername }}</li>
+            <div class="text-center col-span-8 sm:col-span-4 bg-newneutral-0 p-5 rounded-sm flex flex-col items-center gap-3">
+                <div class="h-[132px]">
+                    <img 
+                        class="h-[132px] w-[132px] object-cover object-center bg-newneutral-100 overflow-hidden rounded-full"
+                        src="{{ member.avatar.url }}" 
+                        width="{{ member.avatar.width / 2}}"
+                        height="{{ member.avatar.height / 2}}"
+                        alt="{{ member.name }}" 
+                        data-page-url="{{ page.url }}" 
+                        loading="lazy" 
+                        decoding="async" 
+                    />
+                </div>
+                <h3 class="text-heading-sm font-semibold text-purple-500">{{ member.name }}</h3>
+                <h4 class="font-sans font-normal text-body-sm">
+                    {{ member.title }}<br/>
+                     <a aria-label="View the Fission Discord" 
+                        href="https://fission.codes/discord" 
+                        target="_blank" 
+                        class="link flex justify-center items-center">
+                        <span class="scale-50">{{ DiscordOutline() }}</span>
+                        <span>{{ member.discordUsername }}</span>
+                    </a>
+                </h4>
+                <p class="text-body-sm">
+                    {{ member.about }}
+                </p>
+                {# <ul>
                     <li><a href="{{ member.personalWebsiteUrl }}">{{ member.personalWebsiteUrl }}</a></li>
                     <li><a href="{{ member.twitterProfileUrl }}">{{ member.twitterProfileUrl }}</a></li>
                     <li><a href="{{ member.githubProfileUrl }}">{{ member.githubProfileUrl }}</a></li>
                     <li><a href="{{ member.mastodonProfileUrl }}">{{ member.mastodonProfileUrl }}</a></li>
                     <li><a href="{{ member.blueskyProfileUrl }}">{{ member.blueskyProfileUrl }}</a></li>
-                </ul>
+                </ul> #}
             </div>
             {% endfor %}
         </div>
