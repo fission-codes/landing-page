@@ -98,7 +98,7 @@ module.exports = {
       },
       screens: {
         'xl': '1352px',
-      },
+      }
     },
   },
   plugins: [

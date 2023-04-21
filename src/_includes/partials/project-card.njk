@@ -2,7 +2,7 @@
 
 {% macro projectCard(project, featured) %}
     {% if (featured) %}
-    <div class="max-h-[calc(100vh_-_6rem)] justify-around drop-shadow-purple-glow bg-newneutral-0 border border-purple-200 rounded-sm w-full p-6 flex flex-col items-center gap-2 transition duration-500 ease-out transform scale-100 hover:scale-102"
+    <div class="max-h-[calc(100vh_-_6rem)] drop-shadow-[0px_0px_10px_rgba(100, 70, 250, 0.1)] justify-around bg-newneutral-0 border border-purple-200 rounded-sm w-full p-6 flex flex-col items-center gap-2 transition duration-500 ease-out transform scale-100 hover:scale-102"
         data-projectCard
         data-time-horizon="{{ project.timeHorizon }}"
         data-topic="{{ project.topics.join(',') }}">
