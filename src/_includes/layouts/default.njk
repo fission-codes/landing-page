@@ -117,28 +117,27 @@
             };
 
             const updateHighlighting = async () => {
-                const storedRadioData = await getTimeSelection();
-                const storedTopicData = await getTopicSelections();
+                const timeHorizon = await getTimeSelection();
+                const topics = await getTopicSelections() || [];
+                const highlightClass = 'relevant-item';
+
+                // Establish selectors
+                const timeSelector = (timeHorizon.value === 'Flat') || !timeHorizon.value ? '[data-time-horizon]' : `[data-time-horizon*=${timeHorizon.value}]`;
+                const topicSelector = [];
+                topics.value.forEach(topic => {
+                    topicSelector.push(`${timeSelector}[data-topic*="${topic}"]`);
+                });
+                const highlightSelector = topics.length > 0 ? topicSelector.join(',') : timeSelector;
 
                 // Clear existing highlighting
-                document.querySelectorAll('[data-time-horizon].relevant-to-this-human, [data-topic].relevant-to-this-human').forEach(el => {
-                    el.classList.remove('relevant-to-this-human');
+                document.querySelectorAll(`.${highlightClass}`).forEach(el => {
+                    el.classList.remove(highlightClass);
                 });
 
-                // Apply new highlighting based on preferences
-                if (storedRadioData) {
-                    document.querySelectorAll(`[data-time-horizon="${storedRadioData.value}"]`).forEach(el => {
-                        el.classList.add('relevant-to-this-human');
-                    });
-                }
-
-                if (storedTopicData) {
-                    storedTopicData.value.forEach(topic => {
-                        document.querySelectorAll(`[data-topic*="${topic}"]`).forEach(el => {
-                            el.classList.add('relevant-to-this-human');
-                        });
-                    });
-                }
+                // Apply new highlighting
+                document.querySelectorAll(highlightSelector).forEach(el => {
+                    el.classList.add(highlightClass);
+                });
             };
 
             document.addEventListener('DOMContentLoaded', async () => {
@@ -190,39 +189,39 @@
                 }
 
                 // Radio button change event listener
-                document.querySelectorAll('input[name="timeHorizon"]').forEach(radio => {
-                    radio.addEventListener('change', async (event) => {
+                document.querySelectorAll('input[name="timeHorizon"]').forEach(timeHorizonRadio => {
+                    timeHorizonRadio.addEventListener('change', async (event) => {
                         if (event.target.checked) {
                             await saveTimeSelection(event.target.value);
-                            console.log('Time horizon option saved successfully.');
                             await updateHighlighting();
                         }
                     });
                 });
 
                 // Checkbox change event listener
-                document.querySelectorAll('input[name="topic"]').forEach(checkbox => {
-                    checkbox.addEventListener('change', async () => {
+                document.querySelectorAll('input[name="topic"]').forEach(topicCheckbox => {
+                    topicCheckbox.addEventListener('change', async () => {
                         const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="topic"]:checked'));
-                        const selectedValues = selectedCheckboxes.map(checkbox => checkbox.value);
+                        const selectedValues = selectedCheckboxes.map(checkbox => topicCheckbox.value);
 
-                        if (!checkbox.checked) document.querySelector('input[name="all-topics"]').checked = false;
+                        if (!topicCheckbox.checked) document.querySelector('input[name="all-topics"]').checked = false;
 
                         await saveTopicSelections(selectedValues);
-                        console.log('Topic selections saved successfully.');
                         await updateHighlighting();
                     });
                 });
 
-                document.querySelectorAll('input[name="all-topics"]').forEach(checkbox => {
-                    checkbox.addEventListener('change', async () => {
+                // "All Topics" change event listener
+                var allTopicCheckbox = document.querySelector('input[name="all-topics"]');
+                if (allTopicCheckbox) {
+                    allTopicCheckbox.addEventListener('change', async () => {
+                        if (!allTopicCheckbox.checked) return; 
                         document.querySelectorAll('input[name="topic"]').forEach(topicCheckbox => {
-                            if (!checkbox.checked) return; 
                             topicCheckbox.checked = true;
                             topicCheckbox.dispatchEvent( new Event('change') );
                         });
                     });
-                });
+                }
 
                 const storedTimeData = await getTimeSelection();
                 const storedTopicData = await getTopicSelections();

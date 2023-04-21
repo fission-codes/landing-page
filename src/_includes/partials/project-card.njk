@@ -1,32 +1,72 @@
-{% macro projectCard(project) %}
+{% from "macros/icons/ExternalLink.njk" import ExternalLink %}
 
-<div class="col-span-4 bg-newneutral-700 p-6 rounded-lg flex flex-col items-center gap-4"
-    data-time-horizon="{{ project.timeHorizon }}"
-    data-topic="{{ project.topics.join(',') }}">
-    <a  
-        aria-label="View {{ project.name }}" 
-        href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
-        class="relative block w-full h-64 mb-6 overflow-hidden rounded-sm">
-        <img 
-            class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" 
-            src="{{ project.thumbnailImage.url }}" 
-            width="{{ project.thumbnailImage.width / 2}}"
-            height="{{ project.thumbnailImage.height / 2}}"
-            alt="{{ project.name }}" 
-            data-page-url="{{ page.url }}" 
-            loading="lazy" 
-            decoding="async" 
-        />
-    </a>
-    <a 
-        aria-label="View {{ project.name }}" 
-        href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
-        class="block text-lg font-display text-purple-500 dark:text-purple-200 leading-tight mb-2">
-        {{ project.name }}
-    </a>
-    <div class="text-newneutral-800 dark:text-newneutral-100">
-        <p>{{ project.summary }}</p>
+{% macro projectCard(project, featured) %}
+    {% if (featured) %}
+    <div class="max-h-[calc(100vh_-_6rem)] justify-around drop-shadow-purple-glow bg-newneutral-0 border border-purple-200 rounded-sm w-full p-6 flex flex-col items-center gap-2 transition duration-500 ease-out transform scale-100 hover:scale-102"
+        data-projectCard
+        data-time-horizon="{{ project.timeHorizon }}"
+        data-topic="{{ project.topics.join(',') }}">
+        <a  
+            aria-label="View {{ project.name }}" 
+            href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
+            class="relative block w-full h-1/3 py-8 rounded-sm overflow-hidden">
+            <img 
+                class="object-contain object-center w-full h-full" 
+                src="{{ project.featureImage.url }}" 
+                width="100%"
+                height="80px"
+                alt="{{ project.name }}" 
+                data-page-url="{{ page.url }}" 
+                loading="lazy" 
+                decoding="async" 
+            />
+        </a>
+        <a 
+            aria-label="View {{ project.name }}" 
+            href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
+            class="block text-lg font-display text-purple-500 leading-tight mb-2">
+            {{ project.name }}
+        </a>
+        <div class="grow-1">
+            {{ project.featureSummary | safe }}
+        </div>
+        <a aria-label="{{project.primaryCTA.label}}" 
+            href="{{project.primaryCTA.url}}" 
+            target="_blank" 
+            class="btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg">
+            {{project.primaryCTA.label}} {{ ExternalLink() }}
+        </a>
     </div>
-</div>
-
+    {% else %}
+    <div class="col-span-4 bg-newneutral-0 p-6 rounded-sm flex flex-col items-center gap-4 border-4"
+        data-projectCard
+        data-time-horizon="{{ project.timeHorizon }}"
+        data-topic="{{ project.topics.join(',') }}">
+        not
+        <a  
+            aria-label="View {{ project.name }}" 
+            href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
+            class="relative block w-full h-64 mb-6 overflow-hidden rounded-sm">
+            <img 
+                class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" 
+                src="{{ project.thumbnailImage.url }}" 
+                width="{{ project.thumbnailImage.width / 2}}"
+                height="{{ project.thumbnailImage.height / 2}}"
+                alt="{{ project.name }}" 
+                data-page-url="{{ page.url }}" 
+                loading="lazy" 
+                decoding="async" 
+            />
+        </a>
+        <a 
+            aria-label="View {{ project.name }}" 
+            href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
+            class="block text-lg font-display text-purple-500 leading-tight mb-2">
+            {{ project.name }}
+        </a>
+        <div>
+            <p>{{ project.summary }}</p>
+        </div>
+    </div>
+    {% endif %}
 {% endmacro %}

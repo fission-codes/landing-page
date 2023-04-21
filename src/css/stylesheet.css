@@ -238,8 +238,8 @@ article .kg-gallery-image {
   @apply p-6;
 }
 
-.relevant-to-this-human {
-  border: 10px solid red;
+.relevant-item {
+  @apply border-pink-400 border-2;
 }
 
 /**

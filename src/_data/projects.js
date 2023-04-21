@@ -34,6 +34,7 @@ module.exports = function() {
                             name: record._rawJson.fields.Name,
                             featureImage: record._rawJson.fields["Feature Image"] ? record._rawJson.fields["Feature Image"][0] : null,
                             thumbnailImage: record._rawJson.fields["Thumbnail Image"] ? record._rawJson.fields["Thumbnail Image"][0] : null,
+                            fullImage: record._rawJson.fields["Full Image"] ? record._rawJson.fields["Full Image"][0] : null,
 
                             relationship: record._rawJson.fields["Fission Relationship"],
                             timeHorizon: record._rawJson.fields["Time Horizon"],
@@ -42,6 +43,7 @@ module.exports = function() {
 
                             summary: record._rawJson.fields["Summary"],
                             fullDescription: md.render(record._rawJson.fields["Full Description"] || ''),
+                            featureSummary: md.render(record._rawJson.fields["Feature Summary"] || ''),
                             primaryCTA: {
                                 label: record._rawJson.fields["Primary CTA Label"],
                                 url: record._rawJson.fields["Primary CTA URL"],

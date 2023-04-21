@@ -65,22 +65,22 @@ module.exports = {
         sans: ["UncutSans"],
       },
       fontSize: {
-        "heading-2xl": ["3.052rem", { lineHeight: "120%" }],
-        "heading-xl": ["2.441rem", { lineHeight: "120%" }],
-        "heading-lg": ["1.953rem", { lineHeight: "120%" }],
-        "heading-base": ["1.563rem", { lineHeight: "120%" }],
-        "heading-sm": ["1.266rem", { lineHeight: "120%" }],
-        "heading-xs": ["1.125rem", { lineHeight: "120%" }],
+        "heading-2xl": ["3.052rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-xl": ["2.441rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-lg": ["1.953rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-base": ["1.563rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-sm": ["1.266rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-xs": ["1rem", { lineHeight: "120%", letterSpacing: "-0.01em" }],
         "body-3xl": ["1.602rem", { lineHeight: "130%" }],
         "body-2xl": ["1.424rem", { lineHeight: "130%" }],
         "body-xl": ["1.266rem", { lineHeight: "130%" }],
-        "body-lg": ["1.125rem", { lineHeight: "130%" }],
+        "body-lg": ["1.1rem", { lineHeight: "130%" }],
         "body-base": ["1rem", { lineHeight: "130%" }],
         "body-sm": [".889rem", { lineHeight: "130%" }],
         "body-xs": ["0.79rem", { lineHeight: "130%" }],
         "body-2xs": ["0.702rem", { lineHeight: "130%" }],
         "button-xl": ["1.266rem", { lineHeight: "100%" }],
-        "button-lg": ["1.125rem", { lineHeight: "100%" }],
+        "button-lg": ["1.1rem", { lineHeight: "100%" }],
         "button-base": ["1rem", { lineHeight: "100%" }],
         "button-sm": [".889rem", { lineHeight: "100%" }],
         "button-xs": ["0.79rem", { lineHeight: "100%" }]
@@ -88,15 +88,16 @@ module.exports = {
       zIndex: {
         max: "1000",
       },
+      borderWidth: {
+        DEFAULT: '1.4px',
+      },
       "borderRadius": {
         "none": "0",
         "xs": "0.5rem",
         "sm": "0.7rem"
-       },
-       extend: {
-        screens: {
-          'xl': '1352px',
-        },
+      },
+      screens: {
+        'xl': '1352px',
       },
     },
   },
@@ -109,5 +110,6 @@ module.exports = {
         addBase({ "@font-face": fontFace });
       });
     }),
+    require('@tailwindcss/typography'),
   ],
 };

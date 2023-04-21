@@ -7,6 +7,8 @@
 {% from "macros/header.njk" import header with context %}
 {% from "macros/fission-logo.njk" import fissionLogo with context %}
 {% from "macros/icons/DiscordSmallFill.njk" import DiscordSmallFill %}
+{% from "macros/icons/ExternalLink.njk" import ExternalLink %}
+{% from "partials/project-card.njk" import projectCard with context %}
 
 {% set postslist = collections.posts | limit(3) %}
 {% set title = "Build the future of web apps at the edge" %}
@@ -20,110 +22,176 @@
 
     <section 
         aria-label="hero" 
-        class="flex flex-col md:grid grid-cols-12 gap-4 items-center max-w-contain auto-rows-max mx-5 my-16 md:my-20 md:mx-auto">
-        <a aria-label="Navigate to the Fission homepage" 
-            href="/" 
-            class="col-span-6 max-w-[37vw] select-none homepage-link">
-            {{ fissionLogo(true) }}
-        </a>
-        <h2 class="text-center col-start-7 col-span-6 text-purple-500 text-heading-sm dark:text-purple-200 md:text-heading-xl font-display md:p-6">
+        class="
+            mx-auto flex flex-col lg:grid grid-cols-12 items-center max-w-screen-xl auto-rows-max 
+            gap-4 px-5 lg:px-0 mx-5 mt-24 mb-8 lg:mt-20 lg:mb-20
+        ">
+        <div class="col-span-6 flex items-center justify-center mb-12 lg:mb-0">
+            <figure alt="Fission Symbol" class="max-w-[33vw] lg:max-w-[206px] select-none homepage-link">
+                {{ fissionLogo(true) }}
+            </figure>
+        </div>
+        <h2 class="text-center lg:text-left col-start-7 col-span-6 text-purple-500 text-heading-sm sm:text-heading-lg xl:text-heading-xl font-display sm:p-6">
             We construct <span class="text-pink-500">identity</span>, <span class="text-pink-500">data</span>, and <span class="text-pink-500">compute</span> solutions for the future of the Internet.
         </h2>
         <h1 class="sr-only">Fission: We build identity, data, and compute protocols for the future of the Internet.</h1>
     </section>
 
-    <section aria-label="body" class="w-full m-auto flex flex-col items-center">
+    <section 
+        aria-label="pitch" 
+        class="
+            flex flex-col max-w-screen-xl auto-rows-max 
+            gap-4 mx-2 mb-7 p-5 bg-newneutral-0 rounded-lg
+            md:grid grid-cols-12 md:gap-0 md:mb-14 md:bg-transparent md:mx-auto 
+            xl:p-0
+        ">
+            <div class="col-span-6 flex gap-4 items-center md:bg-newneutral-0 rounded-lg md:py-12 md:px-8">
+                <figure alt="Tools" class="text-body-3xl lg:text-heading-xl">
+                    🛠️
+                </figure>
+                <p class="text-body-sm lg:text-body-3xl font-semibold">
+                    Our world deserves more humane software. You need better methods of building it.
+                </p>
+            </div>
+            <div class="text-body-xs lg:text-body-xl col-span-6 md:bg-purple-500 md:text-newneutral-0 prose rounded-lg md:p-8">
+                <p>Fission makes local-first methods a reality, starting at the protocols. We ship tools you can use today, and invent tech that will power tomorrow.</p>
+                <p>Join us in creating a more compassionate and connected world of software.</p>
+            </div>
+    </section>
 
-        <section class="w-full max-w-full bg-pink-400 text-newneutral-0">
-            <form class="max-w-screem-xl">
-                <fieldset>
-                    <legend>What timeline are you on?</legend>
-                    <label>
-                        <input class="save-preferences-input" type="radio" name="timeHorizon" value="Now">
-                        Today
+    <section aria-label="body" class="w-full flex flex-col justify-center">
+
+        <section aria-label="topics" class="w-full max-w-full bg-pink-400 p-7 lg:p-12 sticky">
+            <form class="flex flex-col gap-4 items-center">
+                <h2 class="lg:text-body-2xl uppercase font-sans font-semibold text-newneutral-0">
+                    Which timeline are you on?
+                </h2>
+                <div class="flex flex-col gap-2 lg:gap-4 lg:flex-row">
+                    <label for="timeHorizon-now" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border-pink-300">
+                        <input id="timeHorizon-now" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Now">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Tools for today</span>
+                            <span class="text-body-sm">Proven & production-ready</span>
+                        </span>
                     </label>
-                    <label>
-                        <input class="save-preferences-input" type="radio" name="timeHorizon" value="Tomorrow">
-                        Tomorrow
+                    <label for="timeHorizon-tomorrow" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border-pink-300">
+                        <input id="timeHorizon-tomorrow" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Tomorrow">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Tech for tomorrow</span>
+                            <span class="text-body-sm">Speculative & experimental</span>
+                        </span>
                     </label>
-                    <label>
-                        <input class="save-preferences-input" type="radio" name="timeHorizon" value="flat-circle">
-                        Time is a flat circle
+                    <label for="timeHorizon-flatCircle" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border-pink-300">
+                        <input id="timeHorizon-flatCircle" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Flat">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Time is a flat circle</span>
+                            <span class="text-body-sm">Physics cannot contain me</span>
+                        </span>
                     </label>
-                </fieldset>
-                <fieldset>
-                    <legend>What topics?</legend>
-                    <label>
-                        <input class="save-preferences-input" type="checkbox" name="topic" value="Identity">
-                        Decentralized Identity
-                    </label>
-                    <label>
-                        <input class="save-preferences-input" type="checkbox" name="topic" value="Data"> User-owned data
-                    </label>
-                    <label>
-                        <input class="save-preferences-input" type="checkbox" name="topic" value="Compute">
-                        Edge computing
-                    </label>
-                    <label>
-                        <input class="save-preferences-input" type="checkbox" name="topic" value="Commons">
-                        Commons networks
-                    </label>
-                    <label>
-                        <input type="checkbox" name="all-topics" value="All">
-                        All of the above
-                    </label>
-                </fieldset>
+                </div>
             </form>
         </section>
 
-        <!-- Pitch -->
-        <section aria-label="pitch" class="mx-4 w-full flex items-center justify-center mb-[60px] md:mb-20 rounded-sm">
-            <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse gap-8 md:gap-10 p-10 md:p-12 bg-purple-700">
-                <div class="flex flex-col gap-4 md:gap-6 text-newneutral-50">
-                    <h3 class="text-lg md:text-xl">The world deserves more humane software</h3>
-                    <div class="flex flex-col gap-4 mb-4 md:mb-0 md:text-body-lg">
-                        <p>You need better methods of building it.</p>
-                        <p>Fission is a world-class applied research lab building those better methods, from the protocol up. Our team does the heavy lifting so you can focus on bringing your ideas to life.</p>
-                        <p>We ship tech that is ready to be used today, and invent tech that will be ready tomorrow.</p>
+        <section aria-label="featured projects">
+            <h2 class="mx-auto max-w-screen-xl font-sans font-semibold lg:font-normal px-7 mt-10 mb-7 text-body-sm lg:text-body-3xl lg:mt-12 lg:mb-12 sm:text-center">
+                Here are the 3 projects we’re most excited about right now:
+            </h2>
+            <div class="carousel carousel-center gap-2 sm:gap-4 max-w-screen-xl xl:mx-auto">
+                {% for id in todayProjectIDs %}
+                    {% for project in projects %}
+                        {% if project.id === id %}
+                        <div class="carousel-item overflow-hidden first:ml-7 last:mr-7 xl:first:ml-0 xl:last:mr-0 w-[calc(100%_-_3.5rem)] sm:w-[40%] lg:max-w-[437.333333px]">{{ projectCard(project, true) }}</div>
+                        {% endif %}
+                    {% endfor %}    
+                {% endfor %}
+            </div>
+        </section>
+
+        <form class="max-w-screen-xl">
+            <fieldset>
+                <legend>What topics?</legend>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Identity">
+                    Decentralized Identity
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Data"> User-owned data
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Compute">
+                    Edge computing
+                </label>
+                <label>
+                    <input class="save-preferences-input" type="checkbox" name="topic" value="Commons">
+                    Commons networks
+                </label>
+                <label>
+                    <input type="checkbox" name="all-topics" value="All">
+                    All of the above
+                </label>
+            </fieldset>
+        </form>
+
+        <section class="w-full px-2">
+            <section class="mx-auto overflow-hidden max-w-screen-xl rounded-sm bg-newneutral-0 items-center">
+                <header class="p-2 md:p-4 bg-newneutral-700 text-newneutral-0 text-center">
+                    <h2 class="text-heading-xs md:text-heading-base">
+                        Proudly Supported By
+                    </h2>
+                </header>
+                <div class="mx-auto flex flex-wrap justify-center max-w-3xl p-6 lg:p-12">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a 
+                            aria-label="Navigate to Blueyard" 
+                            target="_blank" 
+                            href="https://www.blueyard.com/" 
+                            class="flex bg-newneutral-100 justify-center items-center w-20 h-20 lg:w-36 lg:h-36">
+                            Blueyard
+                        </a>
+                        <a 
+                            aria-label="Navigate to Blueyard" 
+                            target="_blank" 
+                            href="https://www.blueyard.com/" 
+                            class="flex bg-newneutral-100 justify-center items-center w-20 h-20 lg:w-36 lg:h-36">
+                            Protocol Labs
+                        </a>
+                        <a 
+                            aria-label="Navigate to Blueyard" 
+                            target="_blank" 
+                            href="https://www.blueyard.com/" 
+                            class="flex bg-newneutral-100 justify-center items-center w-20 h-20 lg:w-36 lg:h-36">
+                            Figment
+                        </a>
+                        <a 
+                            aria-label="Navigate to Blueyard" 
+                            target="_blank" 
+                            href="https://www.blueyard.com/" 
+                            class="flex bg-newneutral-100 justify-center items-center w-20 h-20 lg:w-36 lg:h-36">
+                            Fenbushi Capital
+                        </a>
+                        <a 
+                            aria-label="Navigate to Blueyard" 
+                            target="_blank" 
+                            href="https://www.blueyard.com/" 
+                            class="flex bg-newneutral-100 justify-center items-center w-20 h-20 lg:w-36 lg:h-36">
+                            Samsung Next
+                        </a>
+                        <span class="flex bg-newneutral-100 justify-center items-center text-center w-20 h-20 lg:w-36 lg:h-36">
+                            Lanebury Growth Capital
+                        </span>
+                        <span class="flex bg-newneutral-100 justify-center items-center text-center w-20 h-20 lg:w-36 lg:h-36">
+                            Avocado Capital
+                        </span>
                     </div>
-                    <a aria-label="View Fission's discord" href="https://fission.codes/discord" target="_blank" class="btn btn-primary items-center gap-2 w-full md:max-w-fit bg-purple-500 text-newneutral-50 text-base rounded border-newneutral-50 border">
-                        {{ DiscordSmallFill() }} Join our Discord
-                    </a>
+                    <div class="pt-4">
+                        ...and more supporters on <a class="link" aria-label="Navigate to Open Collective" target="_blank" href="https://opencollective.com/fission">
+                            Open Collective
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </section>
         </section>
-
-        <!-- Current Projects -->
-        <section aria-label="current-products" class="max-w-5xl w-full flex flex-col md:gap-8 items-center justify-between mb-[50px] md:mb-20">
-            <h4 class="text-xs md:text-base rounded-2xl py-2 px-[22px] sm:px-[34px] mb-8 md:mb-0 uppercase text-pink-50 bg-gradient-to-r from-pink-300 to-purple-500">Current projects</h4>
-
-            <div aria-label="ucans" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-newneutral-100 dark:bg-newneutral-700 text-newneutral-800 dark:text-newneutral-100 rounded-sm border-b border-newneutral-300 md:border-none">
-                <img src="{{ "/images/ucan.png" | relativePath(page) }}" class="w-auto inline-block" alt="UCAN logo" loading="lazy" decoding="async" width="160" height="144" />
-                <div>
-                    <h4 class="text-lg md:text-xl mb-2">UCANs: decentralized authorization</h4>
-                    <p><a aria-label="View the UCAN documentation site" href="https://ucan.xyz/" target="_blank" class="underline text-purple-500 dark:text-purple-200">UCANs</a> extend JWTs to enable distributed identity (<a href="https://www.w3.org/TR/did-core/" target="_blank" class="underline text-purple-500 dark:text-purple-200">DIDs</a>) and authorization in local-first apps & distributed systems. Simple, passwordless authentication without browser plugins—like OAuth, but small, light and decentralized. They have been adopted by <a href="https://web3.storage" target="_blank" class="underline text-purple-500 dark:text-purple-200">web3.storage</a> & <a href="https://blueskyweb.org/" target="_blank" class="underline text-purple-500 dark:text-purple-200">Bluesky</a>.</p>
-                </div>
-            </div>
-
-            <div aria-label="webnative" class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 gap-8 md:gap-10 bg-newneutral-100 dark:bg-newneutral-700 text-newneutral-800 dark:text-newneutral-100 rounded-sm">
-                <img src="{{ "/images/webnative-dark.svg" | relativePath(page) }}" class="hidden dark:inline-block w-auto inline-block" alt="Webnative icon" loading="lazy" decoding="async" width="144" height="144" />
-                <img src="{{ "/images/webnative-light.svg" | relativePath(page) }}" class="inline-block dark:hidden w-auto inline-block" alt="Webnative icon" loading="lazy" decoding="async" width="144" height="144" />
-                <div>
-                    <h4 class="text-lg md:text-xl mb-2">Webnative SDK: a true local-first edge computing stack</h4>
-                    <p>The <a aria-label="View the Webnative SDK guide" href="https://guide.fission.codes/developers/webnative" target="_blank" class="underline text-purple-500 dark:text-purple-200">Webnative SDK</a> empowers developers to build fully distributed web applications without needing a complex back-end. <a aria-label="View the webnative examples github org" href="https://github.com/webnative-examples/" target="_blank" class="underline text-purple-500 dark:text-purple-200">Webnative applications</a> work offline and store data encrypted for the user by leveraging UCANs, IPFS and the power of the web platform.</p>
-                </div>
-            </div>
-
-            <div aria-label="protocol-labs" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-newneutral-100 dark:bg-newneutral-700 text-newneutral-800 dark:text-newneutral-100 rounded-sm border-b border-newneutral-300 md:border-none">
-                <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Protocol Labs logo" loading="lazy" decoding="async" width="160" height="144" />
-                <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Protocol Labs logo" loading="lazy" decoding="async" width="160" height="144" />
-                <div>
-                    <h4 class="text-lg md:text-xl mb-2">Protocol Labs: making decentralized storage resilient</h4>
-                    <p><a aria-label="View the protocol labs website" href="https://protocol.ai/" target="_blank" class="underline text-purple-500 dark:text-purple-200">Protocol Labs</a> pioneered decentralized storage with the introduction of IPFS. Our WebNative File System brings encrypted-at-rest storage and multi-player capabilities to the protocol. We collaborate with Protocol Labs and other key partners to enhance the <a aria-label="View the protocol labs website" href="https://protocol.ai/" target="_blank" class="underline text-purple-500 dark:text-purple-200">IPFS</a> and <a aria-label="View the IPFS website" href="https://ipfs.io/" target="_blank" class="underline text-purple-500 dark:text-purple-200">Filecoin</a> ecosystem.</p>
-                </div>
-            </div>
-        </section>
-
+       
     </div>
 </div>
 {% endblock %}
