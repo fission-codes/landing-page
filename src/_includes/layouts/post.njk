@@ -40,20 +40,20 @@
 {% block content %}
     <div class="inner overflow-x-hidden px-8">
 
-        <article class="post-full post max-w-3xl mb-24 mx-auto">
+        <article class="post-full prose my-14 mx-auto">
 
-            <div class="mb-8 mt-5">
-              <a href="../" class="flex gap-2 items-center link link-hover text-purple-500 dark:text-purple-200 text-body-base md:text-body-lg">{{ ArrowLeft() }} View more blog posts</a>
+            <div class="flex justify-center">
+              <a href="../" class="flex gap-2 items-center text-purple-500 dark:text-purple-200 text-body-base md:text-body-lg">{{ ArrowLeft() }} View all posts</a>
             </div>
 
-            <header class="post-full-header">
+            <header class="post-full-header my-14">
                 {# TODO: tag and date meta
                 <section class="post-full-meta">
                     <time class="post-full-meta-date" datetime="2021-06-07">7 June 2021</time>
                         <span class="date-divider">/</span> <a href="/tag/presentation/">Presentations</a>
                 </section>
                 #}
-                <h1 class="post-full-title">{{ title }}</h1>
+                <h1 class="text-center text-heading-3xl text-purple-500 post-full-title">{{ title }}</h1>
             </header>
 
             <figure class="post-full-image lg:-mx-20">
