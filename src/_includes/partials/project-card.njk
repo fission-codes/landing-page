@@ -1,6 +1,6 @@
 {% from "macros/icons/ExternalLink.njk" import ExternalLink %}
 
-{% macro projectCard(project, featured) %}
+{% macro projectCard(project, featured, columns=3) %}
     {% if (featured) %}
     <div class="max-h-[calc(100vh_-_6rem)] drop-shadow-[0px_0px_10px_rgba(100, 70, 250, 0.1)] justify-around bg-newneutral-0 border border-purple-200 rounded-sm w-full p-6 flex flex-col items-center gap-2 transition duration-500 ease-out transform scale-100 hover:scale-102"
         data-projectCard
@@ -38,15 +38,13 @@
         </a>
     </div>
     {% else %}
-    <div class="col-span-4 bg-newneutral-0 p-6 rounded-sm flex flex-col items-center gap-4 border-4"
+    <a class="col-span-{{columns}} bg-newneutral-0 p-6 rounded-sm flex flex-col items-center text-center gap-4 border-4"
+        aria-label="View {{ project.name }}" 
+        href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
         data-projectCard
         data-time-horizon="{{ project.timeHorizon }}"
         data-topic="{{ project.topics.join(',') }}">
-        not
-        <a  
-            aria-label="View {{ project.name }}" 
-            href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
-            class="relative block w-full h-64 mb-6 overflow-hidden rounded-sm">
+        <div class="relative block w-full h-32 mb-6 overflow-hidden rounded-sm">
             <img 
                 class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" 
                 src="{{ project.thumbnailImage.url }}" 
@@ -57,16 +55,16 @@
                 loading="lazy" 
                 decoding="async" 
             />
-        </a>
-        <a 
+        </div>
+        <h3 
             aria-label="View {{ project.name }}" 
             href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
             class="block text-lg font-display text-purple-500 leading-tight mb-2">
             {{ project.name }}
-        </a>
+        </h3>
         <div>
             <p>{{ project.summary }}</p>
         </div>
-    </div>
+    </a>
     {% endif %}
 {% endmacro %}
