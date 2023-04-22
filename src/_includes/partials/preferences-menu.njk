@@ -1,7 +1,7 @@
 {% from "macros/icons/X.njk" import X %}
 
 <div class="preferences-menu top-0 fixed z-max w-0 h-0 bg-newneutral-100 opacity-0 overflow-auto">
-    <div class="max-w-screens-xl mx-auto flex flex-col lg:gap-8 lg:flex-row w-full mb-12">
+    <div class="max-w-screen-xl mx-auto flex flex-col lg:gap-12 lg:flex-row w-full mb-12">
 
         <div class="absolute top-4 right-4">
             <button 
@@ -12,14 +12,14 @@
             </button>
         </div>
 
-        <div class="mx-auto basis-1/2 max-w-screen-lg flex flex-col justify-between gap-8 p-5 md:p-10 lg:p-16 lg:pr-0">
-            <div class="flex flex-col gap-2">
-                <h2 class="text-heading-lg font-semibold text-pink-400">Help us narrow it down</h2>
-                <p class="text-body-lg">We know that Fission has a lot there’s a lot to take in. Answer a couple of quick questions to help us direct you to the right places.</p>
+        <div class="mx-auto basis-1/2 max-w-screen-lg flex flex-col justify-between gap-5 p-5 md:p-10 lg:p-16 lg:pr-0">
+            <div class="flex flex-col gap-2 lg:py-8">
+                <h2 class="text-heading-base lg:text-heading-xl font-semibold text-purple-500">Help us narrow it down</h2>
+                <p class="text-body-lg">We've got a lot going on. Answer these two quick questions to help us direct you to the right places.</p>
             </div>
 
             <form class="flex flex-col gap-4 items-stretch">
-                <h2 class="text-body-base lg:text-body-2xl uppercase font-sans font-semibold">
+                <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
                     Which timeline are you on?
                 </h2>
                 <div class="flex flex-col gap-2 items-stretch">
@@ -50,7 +50,7 @@
 
         <div class="mx-auto basis-1/2 max-w-screen-lg flex flex-col gap-8 p-5 md:p-10 lg:p-16 lg:pl-0">    
             <form class="flex flex-col gap-4 items-stretch">
-                <h2 class="text-body-base lg:text-body-2xl uppercase font-sans font-semibold text-center">
+                <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
                     Which of these concepts interests you the most?
                 </h2>
                 <div class="flex flex-col gap-2">
@@ -93,8 +93,8 @@
             </form>
         </div>
 
-        <div class="fixed bottom-8 w-full text-center">
-            <button aria-label="Apply Ecosystem Filter" 
+        <div class="fixed bottom-8 w-full max-w-screen-xl text-center px-7">
+            <button aria-label="Apply Ecosystem Preferences" 
                 class="mx-auto close-preferences-menu max-w-[320px] btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg">
                 Continue
             </button>
@@ -119,7 +119,7 @@
             preferencesMenu.classList.add('w-0', 'h-0', 'opacity-0');
         }
 
-        document.querySelector('.open-preferences-menu').addEventListener('click', openPreferencesMenu)
-        document.querySelector('.close-preferences-menu').addEventListener('click', closePreferencesMenu)
+        document.querySelectorAll('.open-preferences-menu').forEach(el => el.addEventListener('click', openPreferencesMenu));
+        document.querySelectorAll('.close-preferences-menu').forEach(el => el.addEventListener('click', closePreferencesMenu));
     });
 </script>

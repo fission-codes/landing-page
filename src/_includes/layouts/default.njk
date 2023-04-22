@@ -254,12 +254,13 @@
         {{ site.codeinjection_head | safe if site.codeinjection_head }}
         {{ codeinjection_head | safe if codeinjection_head }}
     </head>
-    <body class="bg-newneutral-100 text-newneutral-600 text-sm lg:text-base">
+    <body class="bg-newneutral-100 text-newneutral-600 text-xs lg:text-base">
         {% include "partials/icons.njk" %}
         {% include "partials/overlay-menu.njk" %}        
         <div class="viewport">
 
             <div class="viewport-top pt-[70px]">
+                <div class="bg-blend-lighten bg-purple-fade h-16 absolute top-[70px] lg:h-28 w-full pointer-events-none"></div>
                 {% block header %}
                 {% endblock header %}
 

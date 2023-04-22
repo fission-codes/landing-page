@@ -69,17 +69,17 @@ module.exports = {
         "heading-xl": ["2.441rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
         "heading-lg": ["1.953rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
         "heading-base": ["1.563rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
-        "heading-sm": ["1.266rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-sm": ["1.5rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
         "heading-xs": ["1rem", { lineHeight: "120%", letterSpacing: "-0.01em" }],
         "body-3xl": ["1.602rem", { lineHeight: "130%" }],
         "body-2xl": ["1.424rem", { lineHeight: "130%" }],
-        "body-xl": ["1.266rem", { lineHeight: "130%" }],
+        "body-xl": ["1.25rem", { lineHeight: "130%" }],
         "body-lg": ["1.1rem", { lineHeight: "130%" }],
         "body-base": ["1rem", { lineHeight: "130%" }],
         "body-sm": [".889rem", { lineHeight: "130%" }],
         "body-xs": ["0.79rem", { lineHeight: "130%" }],
         "body-2xs": ["0.702rem", { lineHeight: "130%" }],
-        "button-xl": ["1.266rem", { lineHeight: "100%" }],
+        "button-xl": ["1.25rem", { lineHeight: "100%" }],
         "button-lg": ["1.1rem", { lineHeight: "100%" }],
         "button-base": ["1rem", { lineHeight: "100%" }],
         "button-sm": [".889rem", { lineHeight: "100%" }],
@@ -98,7 +98,14 @@ module.exports = {
       },
       screens: {
         'xl': '1352px',
-      }
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.newneutral.600'),
+          },
+        },
+      }),
     },
   },
   plugins: [

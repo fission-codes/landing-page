@@ -3,6 +3,7 @@
 {% from "macros/header.njk" import header with context %}
 {% from "partials/project-card.njk" import projectCard with context %}
 {% from "macros/icons/ArrowLeft.njk" import ArrowLeft %}
+{% from "macros/icons/ExternalLink.njk" import ExternalLink %}
 {% set title = post.title %}
 {% set codeinjection_head = post.codeinjection_head %}
 {% set codeinjection_foot = post.codeinjection_foot %}
@@ -12,58 +13,87 @@
 {% endblock %}
 
 {% block content %}
-    <div class="inner overflow-x-hidden px-8">
+    <div class="my-14">
 
-        <article class="project-full project max-w-3xl mb-24 mx-auto">
+        <div class="flex justify-center">
+              <a href="../" class="flex gap-2 items-center text-purple-500 dark:text-purple-200 text-body-base md:text-body-lg">
+              {{ ArrowLeft() }} Whole ecosystem
+              </a>
+        </div>
 
-            <div class="mb-8 mt-5">
-                <a href="../" class="flex gap-2 items-center link link-hover text-purple-500 dark:text-purple-200 text-body-base md:text-body-lg">
-                    {{ ArrowLeft() }} Whole ecosystem
-                </a>
-            </div>
+        <section class="max-w-screen-xl flex flex-col md:flex-row my-20 mx-auto gap-8">
 
-            <header class="project-full-header">
-                <h1 class="project-full-title">{{ project.name }}</h1>
-            </header>
-
-            <figure class="project-full-image lg:-mx-20">
+            <figure class="flex basis-1/2 justify-center">
                 <img 
                     src="{{ project.featureImage.url }}" 
                     width="{{ project.featureImage.width / 2}}"
                     height="{{ project.featureImage.height / 2}}"
-                    class="rounded-md w-full"
+                    class="rounded-lg max-h-[50vh] max-w-[80%] w-full"
                     data-page-url="{{ page.url }}"
                     loading="lazy" decoding="async"
                 />
             </figure>
 
-            <section class="project-full-content load-external-scripts content-body">
-                <div class="project-content sm:text-lg">
-                    <ul>
-                        <li>{{ project.type}}</li>
-                        <li>{{ project.relationship}}</li>
-                        <li>{{ project.timeHorizon}}</li>
-                        <li>{{ project.topics}}</li>
-                    </ul>
+            <section class="flex flex-col px-7 xl:px-0 gap-5 basis-1/2">
+                <h1 class="text-center md:text-left text-purple-500 text-heading-base sm:text-heading-lg md:text-heading-xl">
+                    {{ project.name }}
+                </h1>
+                <h2>{{ project.timeHorizon}} • {{ project.type}} • {{ project.relationship}}</h2>
+                <div>
                     {{ project.fullDescription | safe}}
                 </div>
-                <div>
+                <div class="">
                     <a 
                         aria-label="{{ project.primaryCTA.label }}" 
                         href="{{ project.primaryCTA.url }}" 
                         target="_blank" 
-                        class="btn btn-primary h-[69px] font-normal items-center gap-2 w-full sm:max-w-fit bg-purple-500 text-newneutral-0 text-base rounded">
-                        {{ project.primaryCTA.label }}
+                        class="md:text-body-xl open-preferences-menu semibold open-preferences-menu btn btn-outline font-normal items-center gap-2 text-newneutral-0 rounded-lg border-newneutral-0 border bg-purple-500">
+                        {{ project.primaryCTA.label }} {{ ExternalLink() }}
                     </a>
                     {{ project.secondaryCTAs | safe}}
                 </div>
-                <div class="project-related-projects">
-                    {% for relatedProject in project.relatedProjects %}
-                        {{ projectCard(relatedProject) }}
-                    {% endfor %}
+                <div class="flex gap-4 justify-start">
+                {% for topic in project.topics %}
+                    <span class="border border-newneutral-400 py-2 px-4 rounded-lg">
+                        {% if topic == "Computing" %}
+                            Edge Computing
+                        {% elseif topic == "Data" %}
+                            User-Owned Data
+                        {% elseif topic == "Identity" %}
+                            Decentralized Identity
+                        {% elseif topic == "Commons" %}
+                            Commons Networks
+                        {% else %}
+                            {{ topic }}
+                        {% endif %}
+                    </span>
+                {% endfor %}
                 </div>
             </section>
-        </article>
+        </section>
+
+        <section class="flex flex-col p-2 sm:p-16 bg-purple-500">     
+            <div class="text-newneutral-0 mt-8 mb-7 md:mb-10 md:mt-12 flex flex-col gap-2 text-center"> 
+                <h2 class="text-heading-base text-heading-base lg:text-heading-lg">Connections</h2>
+                {% if (project.relatedProjects.length == 0) %}
+                <p class="text-body-base lg:text-body-lg">
+                    We're still mapping out the ecosystem. Hold tight!
+                </p>
+                <p class="text-body-base lg:text-body-lg">
+                    We'll have the connections for this project mapped here soon.
+                </p>
+                {% else %}
+                <p class="text-body-base lg:text-body-lg">
+                    Here are all the other parts of the Fission ecosystem connects to it.
+                </p>
+                {% endif %}
+            </div>
+            <div class="mx-auto max-w-screen-xl grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-2 md:gap-5 auto-rows-max">   
+            {% for relatedProject in project.relatedProjects %}
+                {{ projectCard(relatedProject, false, 4) }}
+            {% endfor %}
+            </div>
+        </section>
 
     </div>
 {% endblock %}

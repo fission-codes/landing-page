@@ -44,9 +44,9 @@
         data-projectCard
         data-time-horizon="{{ project.timeHorizon }}"
         data-topic="{{ project.topics.join(',') }}">
-        <div class="relative block w-full h-32 mb-6 overflow-hidden rounded-sm">
+        <div class="relative block w-full h-32 mb-6 rounded-sm">
             <img 
-                class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" 
+                class="object-contain object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" 
                 src="{{ project.thumbnailImage.url }}" 
                 width="{{ project.thumbnailImage.width / 2}}"
                 height="{{ project.thumbnailImage.height / 2}}"
