@@ -26,7 +26,9 @@
             <figure class="flex basis-1/2 justify-center">
                 <img 
                     src="{{ project.featureImage.url }}" 
-                    class="rounded-lg max-h-[50vh] max-w-[80%] w-full"
+                    class="object-contain rounded-lg max-h-[50vh] max-w-60 w-full"
+                    width="{{ project.featureImage.width }}"
+                    height="{{ project.featureImage.height }}"
                     data-page-url="{{ page.url }}"
                     loading="lazy" decoding="async"
                 />
@@ -36,8 +38,8 @@
                 <h1 class="text-center md:text-left text-purple-500 text-heading-base sm:text-heading-lg md:text-heading-xl">
                     {{ project.name }}
                 </h1>
-                <h2>{{ project.timeHorizon}} • {{ project.type}} • {{ project.relationship}}</h2>
-                <div>
+                <h2>{{ project.relationship}}</h2>
+                <div class="prose">
                     {{ project.fullDescription | safe}}
                 </div>
                 <div class="">

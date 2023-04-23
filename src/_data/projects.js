@@ -24,11 +24,7 @@ module.exports = async function() {
                     var tempRecord = {
                         id: record._rawJson.id,
                         name: record._rawJson.fields.Name,
-                        sourceImageURLs: {
-                            feature: record._rawJson.fields["Feature Image"] ? record._rawJson.fields["Feature Image"][0].url : null,
-                            thumbnail: record._rawJson.fields["Thumbnail Image"] ? record._rawJson.fields["Thumbnail Image"][0].url : null,
-                            full: record._rawJson.fields["Full Image"] ? record._rawJson.fields["Full Image"][0].url : null,
-                        },
+                        sourceImageURL: record._rawJson.fields.Image ? record._rawJson.fields.Image[0].url : null,
 
                         relationship: record._rawJson.fields["Fission Relationship"],
                         timeHorizon: record._rawJson.fields["Time Horizon"],
@@ -59,19 +55,17 @@ module.exports = async function() {
         // cache images
         // TODO: make it so it wasn't written by a designer
         const imageSettings = {
-            widths: ["auto"],
-            formats: ["webp"],
+            widths: ["400", null],
+            formats: ["webp","svg"],
+            svgShortCircuit: true,
             outputDir: "./dist/resized-images/",
             urlPath: "/resized-images/",
         };
 
-        let resizedImages = {
-            feature: await Image(project.sourceImageURLs.feature, imageSettings),
-            thumbnail: await Image(project.sourceImageURLs.thumbnail, imageSettings),
-        }
+        let resizedImages = await Image(project.sourceImageURL, imageSettings);
 
-        project.featureImage = resizedImages.feature.webp[0];
-        project.thumbnailImage = resizedImages.feature.webp[0];
+        project.featureImage = resizedImages.svg.length > 0 ? resizedImages.svg[0] : resizedImages.webp[1];
+        project.thumbnailImage = resizedImages.svg.length > 0 ? resizedImages.svg[0] : resizedImages.webp[0];
 
         // attach related projects info
         project.relatedProjects = [];
