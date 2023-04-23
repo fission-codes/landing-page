@@ -60,6 +60,9 @@ module.exports = async function() {
             svgShortCircuit: true,
             outputDir: "./dist/resized-images/",
             urlPath: "/resized-images/",
+            sharpOptions: {
+                animated: true
+            }
         };
 
         let resizedImages = await Image(project.sourceImageURL, imageSettings);

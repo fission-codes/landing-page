@@ -59,6 +59,9 @@ module.exports = async function() {
             formats: ["webp"],
             outputDir: "./dist/resized-images/",
             urlPath: "/resized-images/",
+            sharpOptions: {
+                animated: true
+            }
         });
 
         teamMember.avatar = resizedAvatar.webp[0];
