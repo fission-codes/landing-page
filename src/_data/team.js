@@ -61,7 +61,6 @@ module.exports = async function() {
             urlPath: "/resized-images/",
         });
 
-        console.log(resizedAvatar);
         teamMember.avatar = resizedAvatar.webp[0];
 
     }
