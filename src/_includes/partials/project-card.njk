@@ -3,7 +3,7 @@
 {% macro projectCard(project, featured, columns=3) %}
     {% if (featured) %}
     <div class="max-h-[calc(100vh_-_6rem)] drop-shadow-[0px_0px_10px_rgba(100, 70, 250, 0.1)] justify-around bg-newneutral-0 border border-purple-200 rounded-sm w-full p-6 flex flex-col items-center gap-2 transition duration-500 ease-out transform scale-100 hover:scale-102"
-        data-projectCard
+        data-project-id="{{project.id}}"
         data-time-horizon="{{ project.timeHorizon }}"
         data-topic="{{ project.topics.join(',') }}">
         <a  
@@ -41,7 +41,7 @@
     <a class="col-span-{{columns}} bg-newneutral-0 p-6 rounded-sm flex flex-col items-center text-center gap-4 border-4"
         aria-label="View {{ project.name }}" 
         href="{{ ["/ecosystem/", project.name | slugify] | join | relativePath(page) }}" 
-        data-projectCard
+        data-project-id="{{project.id}}"
         data-time-horizon="{{ project.timeHorizon }}"
         data-topic="{{ project.topics.join(',') }}">
         <div class="relative block w-full h-32 mb-6 rounded-sm">

@@ -16,6 +16,7 @@
 
 {% block header %}
   {{ header(false) }}
+  {% include "partials/preferences-logic.njk" %}
 {% endblock %}
 
 {% block content %}
@@ -160,7 +161,9 @@
                     </label>
                     <a aria-label="View Fission's Ecosystem" 
                         href="{{ "/ecosystem" | relativePath(page) }}" 
-                        class="btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg">
+                        class="btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg"
+                        data-highlighted-projects-label="_COUNT_ Projects To Explore"
+                        data-no-highlighted-projects-label="Explore our full ecosystem">
                         Explore our full ecosystem
                     </a>
                 </div>

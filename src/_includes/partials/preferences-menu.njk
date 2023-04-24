@@ -1,9 +1,9 @@
 {% from "macros/icons/X.njk" import X %}
 
 <div class="preferences-menu top-0 fixed z-max w-0 h-0 bg-newneutral-100 opacity-0 overflow-auto">
-    <div class="max-w-screen-xl mx-auto flex flex-col lg:gap-12 lg:flex-row w-full mb-12">
+    <div class="max-w-screen-xl mx-auto flex flex-col w-full gap-12 p-5 py-10 md:p-10 lg:p-16">
 
-        <div class="absolute top-4 right-4">
+        <div class="absolute top-3 right-7">
             <button 
                 aria-label="close-preferences-menu" 
                 name="close-preferences-menu" 
@@ -12,88 +12,94 @@
             </button>
         </div>
 
-        <div class="mx-auto basis-1/2 max-w-screen-lg flex flex-col justify-between gap-5 p-5 md:p-10 lg:p-16 lg:pr-0">
-            <div class="flex flex-col gap-2 lg:py-8">
-                <h2 class="text-heading-base lg:text-heading-xl font-semibold text-purple-500">Help us narrow it down</h2>
-                <p class="text-body-lg">We've got a lot going on. Answer these two quick questions to help us direct you to the right places.</p>
+        <div class="mx-auto flex flex-col gap-5 lg:gap-12 lg:flex-row w-full">
+            <div class="mx-auto basis-1/2 max-w-screen-lg flex flex-col justify-between gap-5">
+                <div class="flex flex-col gap-2 py-8">
+                    <h2 class="text-heading-base lg:text-heading-xl font-semibold text-purple-500">Help us narrow it down</h2>
+                    <p class="text-body-lg">We've got a lot going on. Answer these two quick questions to help us direct you to the right places.</p>
+                </div>
+
+                <form class="flex flex-col gap-4 items-stretch">
+                    <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
+                        Which timeline are you on?
+                    </h2>
+                    <div class="flex flex-col gap-2 items-stretch">
+                        <label for="timeHorizon-now" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border border-pink-300">
+                            <input id="timeHorizon-now" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Now">
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">Tools for today</span>
+                                <span class="text-body-sm">Proven & production-ready</span>
+                            </span>
+                        </label>
+                        <label for="timeHorizon-tomorrow" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border border-pink-300">
+                            <input id="timeHorizon-tomorrow" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Tomorrow">
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">Tech for tomorrow</span>
+                                <span class="text-body-sm">Speculative & experimental</span>
+                            </span>
+                        </label>
+                        <label for="timeHorizon-flatCircle" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border border-pink-300">
+                            <input id="timeHorizon-flatCircle" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Flat">
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">Time is a flat circle</span>
+                                <span class="text-body-sm">Physics cannot contain me</span>
+                            </span>
+                        </label>
+                    </div>
+                </form>
             </div>
 
-            <form class="flex flex-col gap-4 items-stretch">
-                <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
-                    Which timeline are you on?
-                </h2>
-                <div class="flex flex-col gap-2 items-stretch">
-                    <label for="timeHorizon-now" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border border-pink-300">
-                        <input id="timeHorizon-now" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Now">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Tools for today</span>
-                            <span class="text-body-sm">Proven & production-ready</span>
-                        </span>
-                    </label>
-                    <label for="timeHorizon-tomorrow" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border border-pink-300">
-                        <input id="timeHorizon-tomorrow" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Tomorrow">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Tech for tomorrow</span>
-                            <span class="text-body-sm">Speculative & experimental</span>
-                        </span>
-                    </label>
-                    <label for="timeHorizon-flatCircle" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-5 lg:py-6 gap-4 rounded-lg border border-pink-300">
-                        <input id="timeHorizon-flatCircle" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Flat">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Time is a flat circle</span>
-                            <span class="text-body-sm">Physics cannot contain me</span>
-                        </span>
-                    </label>
-                </div>
-            </form>
+            <div class="mx-auto basis-1/2 max-w-screen-lg flex flex-col gap-8">    
+                <form class="flex flex-col gap-4 items-stretch">
+                    <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
+                        Which of these concepts interests you the most?
+                    </h2>
+                    <div class="flex flex-col gap-2">
+                        <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                            <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Identity">
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">Decentralized Identity</span>
+                                <span class="text-body-sm">Establishing who you are and what you can do requires more precision & care.</span>
+                            </span>
+                        </label>
+                        <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                            <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Data"> 
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">User-owned data</span>
+                                <span class="text-body-sm">People and the communities they belong to deserve more agency over their data.</span>
+                            </span>
+                        </label>
+                        <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                            <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Compute">
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">Edge computing</span>
+                                <span class="text-body-sm">From pocket to desktop to data center, our computers can work together to compute data where it lives.</span>
+                            </span>
+                        </label>
+                        <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                            <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Commons">
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">Commons networks</span>
+                                <span class="text-body-sm">Working with open source, DWeb, and networked orgs to build, fund, and collaborate.</span>
+                            </span>
+                        </label>
+                        <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                            <input class="checkbox" type="checkbox" name="all-topics" value="All">
+                            <span class="flex flex-col gap-1">
+                                <span class="lg:text-body-lg font-semibold">All of the above</span>
+                                <span class="text-body-sm">Hook it to my veins!</span>
+                            </span>
+                        </label>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <div class="mx-auto basis-1/2 max-w-screen-lg flex flex-col gap-8 p-5 md:p-10 lg:p-16 lg:pl-0">    
-            <form class="flex flex-col gap-4 items-stretch">
-                <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
-                    Which of these concepts interests you the most?
-                </h2>
-                <div class="flex flex-col gap-2">
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Identity">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Decentralized Identity</span>
-                            <span class="text-body-sm">Establishing who you are and what you can do requires more precision & care.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Data"> 
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">User-owned data</span>
-                            <span class="text-body-sm">People and the communities they belong to deserve more agency over their data.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Compute">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Edge computing</span>
-                            <span class="text-body-sm">From pocket to desktop to data center, our computers can work together to compute data where it lives.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Commons">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Commons networks</span>
-                            <span class="text-body-sm">Working with open source, DWeb, and networked orgs to build, fund, and collaborate.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox" type="checkbox" name="all-topics" value="All">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">All of the above</span>
-                            <span class="text-body-sm">Hook it to my veins!</span>
-                        </span>
-                    </label>
-                </div>
-            </form>
-        </div>
-
-        <div class="fixed bottom-8 w-full max-w-screen-xl text-center px-7">
+        <div class="sticky bottom-8 flex flex-col items-center gap-4 w-full max-w-screen-xl text-center">
+            <div class="empty:hidden bg-pink-400 text-newneutral-0 rounded-lg p-2 px-4" 
+                 data-highlighted-projects-label="_COUNT_ projects match your interests 🤝"
+                 data-no-highlighted-projects-label="">
+            </div>
             <button aria-label="Apply Ecosystem Preferences" 
                 class="mx-auto close-preferences-menu max-w-[320px] btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg">
                 Continue

@@ -1,0 +1,181 @@
+<script>
+    const projects = [];
+  {% for project in projects %}
+        {% raw %}projects.push({
+            id: "{% endraw %}{{ project.id }}{% raw %}",
+            timeHorizon: "{% endraw %}{{ project.timeHorizon }}{% raw %}",
+            topics: "{% endraw %}{{ project.topics | join(', ') }}{% raw %}"
+        });{% endraw %}
+  {% endfor %}
+
+    // Open the IndexedDB
+    const openDB = () => {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open('visitor-personalization-v0', 1);
+
+            request.onerror = (event) => reject(event.target.error);
+            request.onsuccess = (event) => resolve(event.target.result);
+
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                db.createObjectStore('preferences', { keyPath: 'id' });
+            };
+        });
+    };
+
+    // Save the radio button selection to IndexedDB
+    const saveTimeSelection = async (selectedValue) => {
+        const db = await openDB();
+        const tx = db.transaction('preferences', 'readwrite');
+        const store = tx.objectStore('preferences');
+        const data = { id: 'timeSelection', value: selectedValue };
+
+        store.put(data);
+
+        return tx.complete;
+    };
+
+    // Retrieve the radio button selection from IndexedDB
+    const getTimeSelection = async () => {
+        const db = await openDB();
+        const tx = db.transaction('preferences', 'readonly');
+        const store = tx.objectStore('preferences');
+
+        return new Promise((resolve, reject) => {
+            const request = store.get('timeSelection');
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => resolve(request.result);
+        });
+    };
+
+    // Save the topic selections to IndexedDB
+    const saveTopicSelections = async (selectedValues) => {
+        const db = await openDB();
+        const tx = db.transaction('preferences', 'readwrite');
+        const store = tx.objectStore('preferences');
+        const data = { id: 'topicSelections', value: selectedValues };
+
+        store.put(data);
+
+        return tx.complete;
+    };
+
+    // Retrieve the topic selections from IndexedDB
+    const getTopicSelections = async () => {
+        const db = await openDB();
+        const tx = db.transaction('preferences', 'readonly');
+        const store = tx.objectStore('preferences');
+
+        return new Promise((resolve, reject) => {
+            const request = store.get('topicSelections');
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => resolve(request.result);
+        });
+    };
+
+    const updateHighlighting = async () => {
+        const searchTimeHorizon = await getTimeSelection();
+        const searchTopics = await getTopicSelections() || [];
+
+        // we need a time horizon specified at minimum in order to highlight
+        if (!searchTimeHorizon) return;
+
+        const highlightClass = 'relevant-item';
+
+        // Clear existing highlighting
+        document.querySelectorAll(`[data-project-id]`).forEach(el => {
+            el.classList.remove(highlightClass);
+        });
+        
+        // Filter projects map
+        const relevantProjects = projects.filter(
+        (project) =>
+            // "Flat" matches all projects
+            (searchTimeHorizon.value == 'Flat' || project.timeHorizon === searchTimeHorizon.value) &&
+            (!searchTopics.value ||
+            searchTopics.value.length === 0 ||
+            searchTopics.value.some((searchTopic) => project.topics.indexOf(searchTopic) > 0))
+        );
+        const relevantProjectIDs = relevantProjects.map((project) => project.id);
+
+        // Apply new highlighting
+        relevantProjectIDs.forEach(id => {
+            document.querySelectorAll(`[data-project-id=${id}]`).forEach(el => el.classList.add(highlightClass));
+        });
+
+        // Update any conditional text
+        if (relevantProjectIDs.length > 0) {
+            document.querySelectorAll(`[data-highlighted-projects-label]`).forEach(el => {
+                el.innerHTML = el.dataset.highlightedProjectsLabel.replace('_COUNT_', relevantProjectIDs.length);
+            });
+        } else {
+            document.querySelectorAll(`[data-no-highlighted-projects-label]`).forEach(el => {
+                el.innerHTML = el.dataset.noHighlightedProjectsLabel;
+            });
+        }
+
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+
+        // Radio button change event listener
+        document.querySelectorAll('input[name="timeHorizon"]').forEach(timeHorizonRadio => {
+            timeHorizonRadio.addEventListener('change', async (event) => {
+                if (event.target.checked) {
+                    await saveTimeSelection(event.target.value);
+                    await updateHighlighting();
+                }
+            });
+        });
+
+        // Checkbox change event listener
+        document.querySelectorAll('input[name="topic"]').forEach(topicCheckbox => {
+            topicCheckbox.addEventListener('change', async () => {
+                const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="topic"]:checked'));
+                const selectedValues = selectedCheckboxes.map(checkbox => checkbox.value);
+
+                if (!topicCheckbox.checked) document.querySelector('input[name="all-topics"]').checked = false;
+
+                await saveTopicSelections(selectedValues);
+                await updateHighlighting();
+            });
+        });
+
+        // "All Topics" change event listener
+        var allTopicCheckbox = document.querySelector('input[name="all-topics"]');
+        if (allTopicCheckbox) {
+            allTopicCheckbox.addEventListener('change', async () => {
+                if (!allTopicCheckbox.checked) return; 
+                document.querySelectorAll('input[name="topic"]').forEach(topicCheckbox => {
+                    topicCheckbox.checked = true;
+                    topicCheckbox.dispatchEvent( new Event('change') );
+                });
+            });
+        }
+
+        const storedTimeData = await getTimeSelection();
+        const storedTopicData = await getTopicSelections();
+
+        if (storedTimeData) {
+            const selectedOption = document.querySelector(`input[name="timeHorizon"][value="${storedTimeData.value}"]`);
+            if (selectedOption) {
+                selectedOption.checked = true;
+            } else {
+                console.error('The stored radio button value does not exist in the DOM.');
+            }
+        }
+
+        if (storedTopicData) {
+            storedTopicData.value.forEach(topic => {
+                const selectedCheckbox = document.querySelector(`input[name="topic"][value="${topic}"]`);
+                if (selectedCheckbox) {
+                    selectedCheckbox.checked = true;
+                } else {
+                    console.error('A stored checkbox value does not exist in the DOM.');
+                }
+            });
+        }
+
+        await updateHighlighting();
+    });
+</script>
