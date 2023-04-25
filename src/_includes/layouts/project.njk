@@ -42,7 +42,8 @@
                 <div class="prose">
                     {{ project.fullDescription | safe}}
                 </div>
-                <div class="">
+                {% if project.primaryCTA.url %}
+                <div>
                     <a 
                         aria-label="{{ project.primaryCTA.label }}" 
                         href="{{ project.primaryCTA.url }}" 
@@ -50,8 +51,9 @@
                         class="md:text-body-xl open-preferences-menu semibold open-preferences-menu btn btn-outline font-normal items-center gap-2 text-newneutral-0 rounded-lg border-newneutral-0 border bg-purple-500">
                         {{ project.primaryCTA.label }} {{ ExternalLink() }}
                     </a>
-                    {{ project.secondaryCTAs | safe}}
+                    {# {{ project.secondaryCTAs | safe}} #}
                 </div>
+                {% endif %}
                 <div class="flex gap-4 justify-start">
                 {% for topic in project.topics %}
                     <span class="border border-newneutral-400 py-2 px-4 rounded-lg">
