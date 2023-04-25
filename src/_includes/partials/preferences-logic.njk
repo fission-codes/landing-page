@@ -88,15 +88,19 @@
         });
         
         // Filter projects map
-        const relevantProjects = projects.filter(
-        (project) =>
-            // "Flat" matches all projects
-            (searchTimeHorizon.value == 'Flat' || project.timeHorizon === searchTimeHorizon.value) &&
-            (!searchTopics.value ||
-            searchTopics.value.length === 0 ||
-            searchTopics.value.some((searchTopic) => project.topics.indexOf(searchTopic) > 0))
+        const filteredByTime = projects.filter(project => 
+            // flat means any
+            searchTimeHorizon.value == 'Flat' 
+            || project.timeHorizon === searchTimeHorizon.value
+        ); 
+        const filteredByTopic = filteredByTime.filter(project =>
+            // no topic means all topics
+            (!searchTopics.value || searchTopics.value.length === 0)
+            || searchTopics.value.some(
+                (searchTopic) => project.topics.indexOf(searchTopic) > -1
+            )
         );
-        const relevantProjectIDs = relevantProjects.map((project) => project.id);
+        const relevantProjectIDs = filteredByTopic.map((project) => project.id);
 
         // Apply new highlighting
         relevantProjectIDs.forEach(id => {
