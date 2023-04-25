@@ -98,11 +98,11 @@
             <h2 class="mx-auto max-w-screen-xl font-sans font-semibold lg:font-normal px-7 mt-10 mb-7 text-body-sm lg:text-body-3xl lg:mt-12 lg:mb-12 sm:text-center">
                 Here are the 3 projects we’re most excited about right now:
             </h2>
-            <div class="carousel carousel-center gap-2 sm:gap-4 max-w-screen-xl xl:mx-auto">
+            <div data-featured-projects class="carousel carousel-center px-7 xl:px-0 gap-2 sm:gap-4 max-w-screen-xl xl:mx-auto">
                 {% for id in todayProjectIDs %}
                     {% for project in projects %}
                         {% if project.id === id %}
-                        <div class="carousel-item first:ml-7 last:mr-7 xl:first:ml-0 xl:last:mr-0 w-[calc(100%_-_3.5rem)] sm:w-[40%] lg:max-w-[437.333333px]">{{ projectCard(project, true) }}</div>
+                        <div class="carousel-item w-[calc(100%_-_1.75rem)] sm:w-[50%] lg:max-w-[437.333333px]">{{ projectCard(project, true) }}</div>
                         {% endif %}
                     {% endfor %}    
                 {% endfor %}

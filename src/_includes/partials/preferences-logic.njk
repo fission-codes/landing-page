@@ -76,9 +76,16 @@
     const updateHighlighting = async () => {
         const searchTimeHorizon = await getTimeSelection();
         const searchTopics = await getTopicSelections() || [];
+        const featuredEl = document.querySelector('[data-featured-projects]');
 
         // we need a time horizon specified at minimum in order to highlight
-        if (!searchTimeHorizon) return;
+        if (!searchTimeHorizon) {
+            return 
+        } else if (searchTimeHorizon.value === 'Tomorrow' && featuredEl) {
+            featuredEl.classList.add('flex-row-reverse');
+        } else if (featuredEl) {
+            featuredEl.classList.remove('flex-row-reverse');
+        }
 
         const highlightClass = 'relevant-item';
 
