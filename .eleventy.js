@@ -45,9 +45,9 @@ const imageShortcode = async (src, alt, widths) => {
 
   return {
     feature: {
-      url: metadata.webp[1].url,
-      width: metadata.webp[1].width,
-      height: metadata.webp[1].height,
+      url: metadata.webp[1] ? metadata.webp[1].url : metadata.webp[0].url,
+      width: metadata.webp[1] ? metadata.webp[1].width : metadata.webp[0].width,
+      height: metadata.webp[1] ? metadata.webp[1].height : metadata.webp[0].height,
     },
     thumbnail: {
       url: metadata.webp[0].url,
