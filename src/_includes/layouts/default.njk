@@ -66,7 +66,7 @@
                                 headers: { 'Content-Type': 'application/json' }
                             }
                         )
-                        document.querySelector('.newsletter-form-wrapper').innerHTML = '<p class="input input-bordered font-normal pl-[25px] pr-[70px] relative z-10 h-[66px] leading-[66px] text-[20px] rounded-sm bg-newneutral-0 text-newneutral-500 border-newneutral-700 ">Please check your email!</p>'
+                        document.querySelector('.newsletter-form').innerHTML = '<p class="input input-bordered font-normal pl-[25px] pr-[70px] relative z-10 h-[66px] leading-[66px] text-[20px] rounded-sm bg-newneutral-0 text-newneutral-500 border-newneutral-700 ">Please check your email!</p>'
                     } catch (error) {
                         console.error(error)
                         document.querySelector('.newsletter-form input[type="email"]').classList.add('input-error')
@@ -107,7 +107,7 @@
     </head>
     <body class="bg-newneutral-100 text-newneutral-600 text-xs lg:text-base">
         {% include "partials/icons.njk" %}
-        {% include "partials/overlay-menu.njk" %}        
+        {% include "partials/overlay-menu.njk" %}
         <div class="viewport">
 
             <div class="viewport-top pt-[70px]">
