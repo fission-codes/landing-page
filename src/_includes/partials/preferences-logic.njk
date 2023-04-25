@@ -153,7 +153,7 @@
         });
 
         // "All Topics" change event listener
-        var allTopicCheckbox = document.querySelector('input[name="all-topics"]');
+        const allTopicCheckbox = document.querySelector('input[name="all-topics"]');
         if (allTopicCheckbox) {
             allTopicCheckbox.addEventListener('change', async () => {
                 if (!allTopicCheckbox.checked) return; 

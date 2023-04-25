@@ -1,14 +1,14 @@
 require("dotenv").config();
 const Image = require("@11ty/eleventy-img");
 
-var Airtable = require("airtable");
-var base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+const Airtable = require("airtable");
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
     process.env.AIRTABLE_BASE
 );
 // const { AssetCache } = require("@11ty/eleventy-cache-assets");
 // const assetCacheId = "airtableCMS";
 
-var md = require('markdown-it')();
+const md = require('markdown-it')();
 
 module.exports = async function() {
 
@@ -29,7 +29,7 @@ module.exports = async function() {
         .eachPage(
             function page(records, fetchNextPage) {
                 records.forEach(record => {
-                    var tempRecord = {
+                    const tempRecord = {
                         id: record._rawJson.id,
                         name: record._rawJson.fields.Name,
                         sourceAvatarURL: record._rawJson.fields.Avatar ? record._rawJson.fields.Avatar[0].url : '',
@@ -53,8 +53,8 @@ module.exports = async function() {
         
         // cache images
         // TODO: make it so it wasn't written by a designer
-        let teamMember = allTeamMembers[i];
-        let resizedAvatar = await Image(teamMember.sourceAvatarURL, {
+        const teamMember = allTeamMembers[i];
+        const resizedAvatar = await Image(teamMember.sourceAvatarURL, {
             widths: ["auto"],
             formats: ["webp"],
             outputDir: "./dist/resized-images/",
