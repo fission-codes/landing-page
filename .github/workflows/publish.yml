@@ -22,6 +22,8 @@ jobs:
         env:
           GHOST_API_URL: ${{ secrets.GHOST_API_URL }}
           GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE: ${{ secrets.AIRTABLE_BASE }}
       - name: 🚀 Publish to Fission!
         uses: fission-suite/publish-action@v1
         with:
