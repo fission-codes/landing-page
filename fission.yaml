@@ -1,3 +1,3 @@
 ignore: []
-url: fission-2023-redesign-staging.fission.app
+url: fissioncodes.fission.app
 build: ./dist
