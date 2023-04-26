@@ -19,8 +19,8 @@ module.exports = async function() {
       console.error(err);
     });
 
-  siteData.subtitle = "Connecting people, devices, and apps to global data at the edge";
-  siteData.description = "Build the future of web apps at the edge: auth, data, and publishing for front end devs"
+  siteData.subtitle = "We construct identity, data, and compute solutions for the future of the Internet";
+  siteData.description = "Fission makes local-first methods a reality, starting at the protocols. We ship tools you can use today, and invent tech that will power tomorrow. Join us in creating a more compassionate and connected world of software."
 
   if (process.env.SITE_URL) siteData.url = process.env.SITE_URL;
 

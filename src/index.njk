@@ -5,112 +5,201 @@
 
 {% from "partials/card.njk" import card with context %}
 {% from "macros/header.njk" import header with context %}
+{% from "macros/fission-logo.njk" import fissionLogo with context %}
 {% from "macros/icons/DiscordSmallFill.njk" import DiscordSmallFill %}
+{% from "macros/icons/EcosystemIllustration.njk" import EcosystemIllustration %}
+{% from "macros/icons/ExternalLink.njk" import ExternalLink %}
+{% from "partials/project-card.njk" import projectCard with context %}
 
 {% set postslist = collections.posts | limit(3) %}
-{% set title = "Build the future of web apps at the edge" %}
+{% set title = "The future of identity, data, and compute" %}
 
 {% block header %}
   {{ header(false) }}
+  {% include "partials/preferences-logic.njk" %}
 {% endblock %}
 
 {% block content %}
-<div aria-label="homepage" class="-mt-[110px]">
+<div aria-label="homepage">
 
-    <!-- Hero Build the Future -->
-    <section aria-label="hero" class="relative w-full pt-[226px] md:pt-[228px] mb-[170px] md:mb-[120px] flex flex-col bg-blend-lighten bg-hero-light dark:bg-hero-dark">
-        <h1 class="sr-only">Fission: We build identity, data, and compute protocols for the future of the Internet.</h1>
-
-        <div class="flex flex-col items-center justify-center grow px-10">
-            <a aria-label="Navigate to the Fission homepage" href="/" class="flex flex-col items-center justify-between w-auto text-2xl select-none mb-[50px] md:mb-[64px] homepage-link">
-                <img src="{{ "/images/hero-logo-light.webp" | relativePath(page) }}" srcset="{{ "/images/hero-logo-light.webp" | relativePath(page) }} 1x, {{ "/images/hero-logo-light-2x.webp" | relativePath(page) }} 2x" class="w-[80%] md:w-full max-w-[614px] block dark:hidden" alt="Fission" width="645" height="136" />
-                <img src="{{ "/images/hero-logo-dark.webp" | relativePath(page) }}" srcset="{{ "/images/hero-logo-dark.webp" | relativePath(page) }} 1x, {{ "/images/hero-logo-dark-2x.webp" | relativePath(page) }} 2x" class="w-[80%] md:w-full max-w-[614px] hidden dark:block" alt="Fission" width="645" height="136" />
-            </a>
-            <h2 class="w-[80%] md:w-full max-w-[825px] text-center text-neutral-600 dark:text-neutral-300 text-xl md:text-2xl font-display">We build <span class="text-newpink-300 dark:text-newpink-100">identity</span>, <span class="text-newpink-300 dark:text-newpink-100">data</span>, and <span class="text-newpink-300 dark:text-newpink-100">compute</span> protocols for the future of the Internet.</h2>
+    <section 
+        aria-label="hero" 
+        class="
+            mx-auto flex flex-col lg:grid grid-cols-12 items-center max-w-screen-xl auto-rows-max 
+            gap-4 px-5 lg:px-0 mx-5 mt-24 mb-8 lg:mt-20 lg:mb-20
+        ">
+        <div class="col-span-6 flex items-center justify-center mb-12 lg:mb-0">
+            <figure alt="Fission Symbol" class="max-w-[33vw] lg:max-w-[206px] select-none homepage-link">
+                {{ fissionLogo(true) }}
+            </figure>
         </div>
+        <h2 class="text-center lg:text-left col-start-7 col-span-6 text-purple-500 text-heading-sm sm:text-heading-lg xl:text-heading-xl font-display sm:p-6">
+            We construct <span class="text-pink-500">identity</span>, <span class="text-pink-500">data</span>, and <span class="text-pink-500">compute</span> solutions for the future of the Internet.
+        </h2>
+        <h1 class="sr-only">Fission: We build identity, data, and compute protocols for the future of the Internet.</h1>
     </section>
 
-    <section aria-label="body" class="w-full max-w-5xl m-auto flex flex-col items-center">
-        <a aria-label="causal islands" href="https://causalislands.com/" target="_blank" class="w-full block mb-24 transition-opacity hover:opacity-90">
-            <img src="{{ "/images/ci-banner.webp" | relativePath(page) }}" srcset="{{ "/images/ci-banner.webp" | relativePath(page) }} 1x, {{ "/images/ci-banner-2x.webp" | relativePath(page) }} 2x" class="hidden md:block w-full h-auto rounded-sm" alt="Causal Islands Banner" width="936" height="312" />
-            <img src="{{ "/images/ci-banner-mobile.webp" | relativePath(page) }}" srcset="{{ "/images/ci-banner-mobile.webp" | relativePath(page) }} 1x, {{ "/images/ci-banner-mobile-2x.webp" | relativePath(page) }} 2x" class="block md:hidden w-full h-auto rounded-sm" alt="Causal Islands Banner Mobile" width="412" height="231" />
-        </a>
-
-        <!-- Pitch -->
-        <section aria-label="pitch" class="relative z-10 mx-4 w-full flex items-center justify-center mb-[60px] md:mb-20 rounded-sm">
-            <div class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse gap-8 md:gap-10 p-10 md:p-12 bg-newpurple-700 dark:bg-newpurple-800">
-                <img src="{{ "/images/stack-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Fission stack" loading="lazy" decoding="async" width="160" height="160" />
-                <img src="{{ "/images/stack-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Fission stack" loading="lazy" decoding="async" width="160" height="160" />
-                <div class="flex flex-col gap-4 md:gap-6 text-neutral-50">
-                    <h3 class="text-lg md:text-xl">The world deserves more humane software</h3>
-                    <div class="flex flex-col gap-4 mb-4 md:mb-0 md:text-body-lg">
-                        <p>You need better methods of building it.</p>
-                        <p>Fission is a world-class applied research lab building those better methods, from the protocol up. Our team does the heavy lifting so you can focus on bringing your ideas to life.</p>
-                        <p>We ship tech that is ready to be used today, and invent tech that will be ready tomorrow.</p>
-                    </div>
-                    <a aria-label="View Fission's discord" href="https://fission.codes/discord" target="_blank" class="btn btn-primary items-center gap-2 w-full md:max-w-fit bg-newpurple-500 text-neutral-50 text-base rounded border-neutral-50 border">
-                        {{ DiscordSmallFill() }} Join our Discord
-                    </a>
-                </div>
+    <section 
+        aria-label="pitch" 
+        class="
+            flex flex-col max-w-screen-xl auto-rows-max 
+            gap-4 mx-2 mb-7 p-5 bg-newneutral-0 rounded-lg
+            md:grid grid-cols-12 md:gap-0 md:mb-14 md:bg-transparent md:mx-auto 
+            xl:p-0
+        ">
+            <div class="col-span-6 flex gap-4 items-center md:bg-newneutral-0 rounded-lg md:py-12 md:px-8">
+                <figure alt="Tools" class="text-body-3xl lg:text-heading-xl">
+                    🛠️
+                </figure>
+                <p class="text-body-sm lg:text-body-3xl font-semibold">
+                    Our world deserves more humane software. You need better methods of building it.
+                </p>
             </div>
+            <div class="text-body-xs lg:text-body-xl col-span-6 md:bg-purple-500 md:text-newneutral-0 prose rounded-lg md:p-8">
+                <p>Fission makes local-first methods a reality, starting at the protocols. We ship tools you can use today, and invent tech that will power tomorrow.</p>
+                <p>Join us in creating a more compassionate and connected world of software.</p>
+            </div>
+    </section>
+
+    <section aria-label="body" class="w-full flex flex-col justify-center">
+
+        <section aria-label="topics" class="w-full max-w-full bg-pink-400 p-7 lg:p-12 sticky">
+            <form class="flex flex-col gap-5 items-center">
+                <h2 class="text-body-base lg:text-body-2xl uppercase font-sans font-bold text-newneutral-0">
+                    Which timeline are you on?
+                </h2>
+                <div class="flex flex-col gap-2 lg:gap-5 lg:flex-row">
+                    <label for="timeHorizon-now" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-6 gap-5 rounded-lg border-pink-300">
+                        <input id="timeHorizon-now" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Now">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Tools for today</span>
+                            <span class="text-body-sm">Proven & production-ready</span>
+                        </span>
+                    </label>
+                    <label for="timeHorizon-tomorrow" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-6 gap-5 rounded-lg border-pink-300">
+                        <input id="timeHorizon-tomorrow" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Tomorrow">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Tech for tomorrow</span>
+                            <span class="text-body-sm">Speculative & experimental</span>
+                        </span>
+                    </label>
+                    <label for="timeHorizon-flatCircle" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-6 gap-5 rounded-lg border-pink-300">
+                        <input id="timeHorizon-flatCircle" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Flat">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Time is a flat circle</span>
+                            <span class="text-body-sm">Physics cannot contain me</span>
+                        </span>
+                    </label>
+                </div>
+            </form>
         </section>
 
-        <!-- Current Projects -->
-        <section aria-label="current-products" class="max-w-5xl w-full flex flex-col md:gap-8 items-center justify-between mb-[50px] md:mb-20">
-            <h4 class="text-xs md:text-base rounded-2xl py-2 px-[22px] sm:px-[34px] mb-8 md:mb-0 uppercase text-newpink-50 bg-gradient-to-r from-newpink-300 to-newpurple-500">Current projects</h4>
-
-            <div aria-label="ucans" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
-                <img src="{{ "/images/ucan.png" | relativePath(page) }}" class="w-auto inline-block" alt="UCAN logo" loading="lazy" decoding="async" width="160" height="144" />
-                <div>
-                    <h4 class="text-lg md:text-xl mb-2">UCANs: decentralized authorization</h4>
-                    <p><a aria-label="View the UCAN documentation site" href="https://ucan.xyz/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">UCANs</a> extend JWTs to enable distributed identity (<a href="https://www.w3.org/TR/did-core/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">DIDs</a>) and authorization in local-first apps & distributed systems. Simple, passwordless authentication without browser plugins—like OAuth, but small, light and decentralized. They have been adopted by <a href="https://web3.storage" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">web3.storage</a> & <a href="https://blueskyweb.org/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Bluesky</a>.</p>
-                </div>
-            </div>
-
-            <div aria-label="webnative" class="flex flex-col justify-between items-center md:flex-row md:flex-row-reverse p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm">
-                <img src="{{ "/images/webnative-dark.svg" | relativePath(page) }}" class="hidden dark:inline-block w-auto inline-block" alt="Webnative icon" loading="lazy" decoding="async" width="144" height="144" />
-                <img src="{{ "/images/webnative-light.svg" | relativePath(page) }}" class="inline-block dark:hidden w-auto inline-block" alt="Webnative icon" loading="lazy" decoding="async" width="144" height="144" />
-                <div>
-                    <h4 class="text-lg md:text-xl mb-2">Webnative SDK: a true local-first edge computing stack</h4>
-                    <p>The <a aria-label="View the Webnative SDK guide" href="https://guide.fission.codes/developers/webnative" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative SDK</a> empowers developers to build fully distributed web applications without needing a complex back-end. <a aria-label="View the webnative examples github org" href="https://github.com/webnative-examples/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Webnative applications</a> work offline and store data encrypted for the user by leveraging UCANs, IPFS and the power of the web platform.</p>
-                </div>
-            </div>
-
-            <div aria-label="protocol-labs" class="flex flex-col justify-between items-center md:flex-row p-10 md:p-12 gap-8 md:gap-10 bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-100 rounded-sm border-b border-neutral-300 md:border-none">
-                <img src="{{ "/images/pl-dark.svg" | relativePath(page) }}" class="w-auto hidden dark:inline-block" alt="Protocol Labs logo" loading="lazy" decoding="async" width="160" height="144" />
-                <img src="{{ "/images/pl-light.svg" | relativePath(page) }}" class="w-auto inline-block dark:hidden" alt="Protocol Labs logo" loading="lazy" decoding="async" width="160" height="144" />
-                <div>
-                    <h4 class="text-lg md:text-xl mb-2">Protocol Labs: making decentralized storage resilient</h4>
-                    <p><a aria-label="View the protocol labs website" href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Protocol Labs</a> pioneered decentralized storage with the introduction of IPFS. Our WebNative File System brings encrypted-at-rest storage and multi-player capabilities to the protocol. We collaborate with Protocol Labs and other key partners to enhance the <a aria-label="View the protocol labs website" href="https://protocol.ai/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">IPFS</a> and <a aria-label="View the IPFS website" href="https://ipfs.io/" target="_blank" class="underline text-newpurple-500 dark:text-newpurple-200">Filecoin</a> ecosystem.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog -->
-        <section aria-label="blog" class="w-full flex flex-col items-center justify-between mb-20">
-            <div class="w-full text-center">
-                <a aria-label="View the Fission blog" href="{{ "/blog" | relativePath(page) }}">
-                    <h3 class="mb-6 md:mb-8 w-fit mx-auto text-xs md:text-base uppercase rounded-2xl py-2 px-[22px] sm:px-[34px] text-newpink-50 bg-gradient-to-r from-newpink-300 to-newpurple-500">From the blog</h3>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-3 gap-6 px-8 lg:px-0">
-                {% for post in postslist %}
-                    <div class="col-span-3 md:col-span-1">
-                        <div class="h-full relative">
-                            <a aria-label="View {{ post.title }} blog post" href="{{ ["/blog", post.url] | join | relativePath(page) }}" class="relative block w-full h-64 mb-6 overflow-hidden rounded-sm">
-                                {# <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.thumbnail_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}" loading="lazy" decoding="async" width="{{ post.thumbnail_image_width }}" height="{{ post.thumbnail_image_height }}" /> #}
-                                <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="{{ post.thumbnail_image }}" alt="{{ post.title }}" data-page-url="{{ page.url }}" loading="lazy" decoding="async" width="348" height="256" />
-                            </a>
-                            <a aria-label="View {{ post.title }} blog post" href="{{ ["/blog", post.url] | join | relativePath(page) }}" class="block text-lg font-display text-newpurple-500 dark:text-newpurple-200 leading-tight mb-2">{{ post.title }}</a>
-                            <div class="post-card-excerpt text-neutral-800 dark:text-neutral-100">
-                                <p>{{ post.excerpt }}</p>
-                            </div>
-                        </div>
-                    </div>
+        <section aria-label="featured projects">
+            <h2 class="mx-auto max-w-screen-xl font-sans font-semibold lg:font-normal px-7 mt-10 mb-7 text-body-sm lg:text-body-3xl lg:mt-12 lg:mb-12 sm:text-center">
+                Here are the 3 projects we’re most excited about right now:
+            </h2>
+            <div data-featured-projects class="carousel carousel-center px-7 xl:px-0 gap-2 sm:gap-4 max-w-screen-xl xl:mx-auto">
+                {% for id in todayProjectIDs %}
+                    {% for project in projects %}
+                        {% if project.id === id %}
+                        <div class="carousel-item w-[calc(100%_-_1.75rem)] sm:w-[50%] lg:max-w-[437.333333px]">{{ projectCard(project, true) }}</div>
+                        {% endif %}
+                    {% endfor %}    
                 {% endfor %}
             </div>
         </section>
+
+        <section aria-label="topics" class="mx-auto px-7 xl:px-0 max-w-screen-xl flex flex-col my-7 md:my-24 md:grid grid-cols-12 gap-7 xl:gap-4">
+            <div class="xl:col-start-2 col-span-6 xl:col-span-5 flex flex-col gap-7 md:gap-12">
+                <div>
+                    <h2 class="text-heading-sm sm:text-heading-base lg:text-heading-lg text-pink-500 mb-2 xl:mb-4">We’re ambitious folks — there’s&nbsp;even more</h2>
+                    <p class="text-body-lg max-w-[30ch]">Fission is part of a dense ecosystem of like-minded projects and collaborations.</p>
+                </div>
+                <div class="flex grow align-center justify-center lg:align-end">
+                    {{ EcosystemIllustration() }}
+                </div>
+            </div>
+            <form class="col-span-6 xl:col-start-8 xl:col-span-5 flex flex-col gap-5 items-center">
+                <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
+                    Which of these concepts interests you the most?
+                </h2>
+                <div class="flex flex-col gap-2">
+                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Identity">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Decentralized Identity</span>
+                            <span class="text-body-sm">Establishing who you are and what you can do requires more precision & care.</span>
+                        </span>
+                    </label>
+                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Data"> 
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">User-owned data</span>
+                            <span class="text-body-sm">People and the communities they belong to deserve more agency over their data.</span>
+                        </span>
+                    </label>
+                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Compute">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Edge computing</span>
+                            <span class="text-body-sm">From pocket to desktop to data center, our computers can work together to compute data where it lives.</span>
+                        </span>
+                    </label>
+                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Commons">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">Commons networks</span>
+                            <span class="text-body-sm">Working with open source, DWeb, and networked orgs to build, fund, and collaborate.</span>
+                        </span>
+                    </label>
+                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
+                        <input class="checkbox" type="checkbox" name="all-topics" value="All">
+                        <span class="flex flex-col gap-1">
+                            <span class="lg:text-body-lg font-semibold">All of the above</span>
+                            <span class="text-body-sm">Hook it to my veins!</span>
+                        </span>
+                    </label>
+                    <a aria-label="View Fission's Ecosystem" 
+                        href="{{ "/ecosystem" | relativePath(page) }}" 
+                        class="btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg"
+                        data-highlighted-projects-label="_COUNT_ Projects To Explore"
+                        data-no-highlighted-projects-label="Explore our full ecosystem">
+                        Explore our full ecosystem
+                    </a>
+                </div>
+            </form>
+        </section>
+
+        <section aria-label="values" class="mx-auto max-w-screen-xl grid grid-cols-12 px-7 xl:px-0">
+            <div class="col-span-12 xl:col-start-2 xl:col-span-10 flex flex-col md:flex-row gap-7 mb-24 text-body-base">
+                <div class="flex flex-col gap-7 basis-1/2">
+                    <div class="flex flex-col gap-3">
+                        <h2 class="text-purple-500 text-heading-xs md:text-heading-base uppercase">We simplify the complex</h2>
+                        <p>Fission handles the technical details so you can bring your ideas to life.</p>
+                        <p>Encryption, authorization, data management, orchestration..backend infrastructure can be messy and complicated. We won't let that hold you back from building impactful software that positively impacts your community.</p>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h2 class="text-purple-500 text-heading-xs md:text-heading-base uppercase">We’re ecosystem obsessed</h2>
+                        <p>Fission supports the development of humane, local-first software through research, development, collaboration, and funding.</p>
+                        <p>Improving underlying protocols and methods is necessary to ensure their scalability and ease of use in the future.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-7 basis-1/2">
+                    <div class="flex flex-col gap-3">
+                        <h2 class="text-purple-500 text-heading-xs md:text-heading-base uppercase">We deeply value open source</h2>
+                        <p>Fission’s tools are all open source. We love seeing our inventions power some of the most exciting applications out there. Capyloon, Noosphere, Functionland, Koii, and many others have integrated UCAN and/or WNFS into their infrastructures.</p>
+                        <p>We also support open source projects as both a financial contributor and a fiscal host on Open Collective.</p>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h2 class="text-purple-500 text-heading-xs md:text-heading-base uppercase">We learn and build in public</h2>
+                        <p>Fission hosts virtual community calls, sponsors DWeb Hacker Bases and events at conferences all over the world, and assembles great minds together at our own Future of Computing conference, Causal Islands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% include "partials/supporters.njk" %}
+       
     </div>
 </div>
 {% endblock %}

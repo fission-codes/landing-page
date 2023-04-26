@@ -1,0 +1,129 @@
+{% extends 'layouts/default.njk' %}
+
+{% from "macros/header.njk" import header with context %}
+{% from "partials/project-card.njk" import projectCard with context %}
+{% from "macros/icons/ArrowLeft.njk" import ArrowLeft %}
+{% from "macros/icons/ExternalLink.njk" import ExternalLink %}
+{% set title = post.title %}
+{% set codeinjection_head = post.codeinjection_head %}
+{% set codeinjection_foot = post.codeinjection_foot %}
+
+{% block header %}
+  {{ header() }}
+{% endblock %}
+
+{% block content %}
+    <div class="my-14">
+
+        <div class="flex justify-center">
+              <a href="../" class="flex gap-2 items-center text-purple-500 text-body-base md:text-body-lg">
+              {{ ArrowLeft() }} Whole ecosystem
+              </a>
+        </div>
+
+        <section class="max-w-screen-xl flex flex-col md:flex-row my-20 mx-auto gap-8">
+
+            <figure class="flex basis-1/2 justify-center">
+                <img 
+                    src="{{ project.featureImage.url }}" 
+                    class="object-contain rounded-lg max-h-[50vh] max-w-60 w-full"
+                    width="{{ project.featureImage.width }}"
+                    height="{{ project.featureImage.height }}"
+                    data-page-url="{{ page.url }}"
+                    loading="lazy" decoding="async"
+                />
+            </figure>
+
+            <section class="flex flex-col px-7 xl:px-0 gap-5 basis-1/2">
+                <h1 class="text-center md:text-left text-purple-500 text-heading-base sm:text-heading-lg md:text-heading-xl">
+                    {{ project.name }}
+                </h1>
+                <h2>{{ project.relationship}}</h2>
+                <div class="prose">
+                    {{ project.fullDescription | safe}}
+                </div>
+                {% if project.primaryCTA.url %}
+                <div>
+                    <a 
+                        aria-label="{{ project.primaryCTA.label }}" 
+                        href="{{ project.primaryCTA.url }}" 
+                        target="_blank" 
+                        class="md:text-body-xl open-preferences-menu semibold open-preferences-menu btn btn-outline font-normal items-center gap-2 text-newneutral-0 rounded-lg border-newneutral-0 border bg-purple-500">
+                        {{ project.primaryCTA.label }} {{ ExternalLink() }}
+                    </a>
+                    {# {{ project.secondaryCTAs | safe}} #}
+                </div>
+                {% endif %}
+                <div class="flex gap-4 justify-start">
+                {% for topic in project.topics %}
+                    <span class="border border-newneutral-400 py-2 px-4 rounded-lg">
+                        {% if topic == "Computing" %}
+                            Edge Computing
+                        {% elseif topic == "Data" %}
+                            User-Owned Data
+                        {% elseif topic == "Identity" %}
+                            Decentralized Identity
+                        {% elseif topic == "Commons" %}
+                            Commons Networks
+                        {% else %}
+                            {{ topic }}
+                        {% endif %}
+                    </span>
+                {% endfor %}
+                </div>
+            </section>
+        </section>
+
+        <section class="flex flex-col p-2 sm:p-16 bg-purple-500">     
+            <div class="text-newneutral-0 mt-8 mb-7 md:mb-10 md:mt-12 flex flex-col gap-2 text-center"> 
+                <h2 class="text-heading-base text-heading-base lg:text-heading-lg">Connections</h2>
+                {% if (project.relatedProjects.length == 0) %}
+                <p class="text-body-base lg:text-body-lg">
+                    We're still mapping out the ecosystem. Hold tight!
+                </p>
+                <p class="text-body-base lg:text-body-lg">
+                    We'll have the connections for this project mapped here soon.
+                </p>
+                {% else %}
+                <p class="text-body-base lg:text-body-lg">
+                    Here are all the other parts of the Fission ecosystem connects to it.
+                </p>
+                {% endif %}
+            </div>
+            <div class="mx-auto max-w-screen-xl grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-2 md:gap-5 auto-rows-max">   
+            {% for relatedProject in project.relatedProjects %}
+                {{ projectCard(relatedProject, false, 4) }}
+            {% endfor %}
+            </div>
+        </section>
+
+    </div>
+{% endblock %}
+
+{# {%- block seo -%}
+    <!--Twitter Card-->
+    <meta name="twitter:site" content="{{ site.twitter }}">
+    <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ site.url + page.url }}">
+    <meta name="twitter:title" content="{{ title }} – {{ site.title }}">
+    <meta name="twitter:description" content="{{ post.excerpt }}">
+    <meta name="twitter:image" content="{{ post.feature_image }}">
+
+    <!--Schema-->
+    <link rel="author" href="{{ post.primary_author.website }}">
+    <link rel="publisher" href="{{ site.url }}">
+    <meta itemprop="name" content="{{ title }} – {{ site.title }}">
+    <meta itemprop="description" content="{{ post.excerpt }}">
+    <meta itemprop="image" content="{{ post.feature_image }}">
+
+    <!-- Facebook OpenGraph -->
+    <meta property="og:url" content="{{ site.url + page.url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title }} – {{ site.title }}">
+    <meta property="og:image" content="{{ post.feature_image }}">
+    <meta property="og:description" content="{{ post.excerpt }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="{{ site.lang }}">
+    <meta property="article:author" content="{{ site.url }}">
+{%- endblock -%} #}

@@ -1,28 +1,52 @@
 {% from "macros/icons/ExternalLink.njk" import ExternalLink %}
 {% from "macros/icons/Hamburger.njk" import Hamburger %}
-{% from "macros/icons/FissionLogoLight.njk" import FissionLogoLight %}
-{% from "macros/icons/FissionLogoDark.njk" import FissionLogoDark %}
+{% from "macros/fission-logo.njk" import fissionLogo %}
 
-{% macro header(showLogo=true) %}
-    <div class="navbar p-8 relative z-10 items-center md:items-start bg-transparent">
-        {%- if showLogo %}
-            <a aria-label="Navigate to home page" href="/" class="block homepage-link">
-                <div class="block dark:hidden">
-                    <img src="{{ "/images/fission-header-light.webp" | relativePath(page) }}" srcset="{{ "/images/fission-header-light.webp" | relativePath(page) }} 1x, {{ "/images/fission-header-light-2x.webp" | relativePath(page) }} 2x" alt="Fission" class="max-w-[155px] h-auto" width="312" height="66" />
-                </div>
-                <div class="hidden dark:block">
-                    <img src="{{ "/images/fission-header-dark.webp" | relativePath(page) }}" srcset="{{ "/images/fission-header-dark.webp" | relativePath(page) }} 1x, {{ "/images/fission-header-dark-2x.webp" | relativePath(page) }} 2x" alt="Fission" class="max-w-[155px] h-auto" width="312" height="66" />
-                </div>
+{% macro header() %}
+    <div class="w-full flex items-center px-7 py-3 lg:py-4 fixed top-0 z-10 bg-newneutral-100">
+        <div class="m-auto w-full max-w-screen-xl flex justify-between items-center">
+            <a aria-label="Navigate to home page" href="/" class="block w-[101px] lg:w-[131px] homepage-link">
+                {{ fissionLogo() }}
             </a>
-        {%- endif -%}
 
-        <div class="ml-auto">
-            <ul class="hidden md:flex menu menu-horizontal gap-8 px-1 text-body-lg text-newpurple-500 dark:text-newpurple-200">
-                <li class="!bg-none !rounded-none pt-0.5"><a href="{{ "/blog" | relativePath(page) }}" class="!bg-transparent !rounded-none h-fit transition-colors hover:text-newpink-300 dark:hover:text-newpink-100 !px-0 !pb-4 !pt-0 border-b border-b-transparent hover:border-b-newpink-300 dark:hover:border-b-newpink-100 {% if '/blog' in page.url %}text-newpink-300 dark:text-newpink-100 border-b-newpink-300 dark:border-b-newpink-100{% endif %}">Read Our Blog</a></li>
-                <li class="!bg-none !rounded-none pt-0.5"><a href="https://shop.fission.codes" target="_blank" class="!bg-transparent !rounded-none h-fit transition-colors hover:text-newpink-300 dark:hover:text-newpink-100 !px-0 !pb-4 !pt-0 border-b border-b-transparent hover:border-b-newpink-300 dark:hover:border-b-newpink-100">Shop Fission Swag {{ ExternalLink() }}</a></li>
+            <ul class="hidden font-semibold lg:flex gap-5">
+                <li>
+                    <a 
+                        href="{{ "/ecosystem" | relativePath(page) }}" 
+                        class="{% if '/ecosystem' in page.url %}text-pink-300{% endif %}">
+                        ● Ecosystem
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="{{ "/team" | relativePath(page) }}" 
+                        class="{% if '/team' in page.url %}text-pink-300{% endif %}">
+                        ● Our Team
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="{{ "/blog" | relativePath(page) }}" 
+                        class="{% if '/blog' in page.url %}text-pink-300{% endif %}">
+                        ● Blog
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="https://shop.fission.codes" 
+                        target="_blank" 
+                        class="flex items-center gap-1">
+                        ● Shop Fission Swag {{ ExternalLink() }}
+                    </a>
+                </li>
             </ul>
 
-            <button aria-label="open-menu" name="open-menu" class="open-menu z-20 inline-block md:hidden text-neutral-900 dark:text-neutral-100">{{ Hamburger() }}</button>
+            <button 
+                aria-label="open-menu" 
+                name="open-menu" 
+                class="open-menu z-20 inline-block lg:hidden text-purple-500">
+                {{ Hamburger() }}
+            </button>
         </div>
     </div>
 {% endmacro %}

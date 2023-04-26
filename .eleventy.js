@@ -38,6 +38,9 @@ const imageShortcode = async (src, alt, widths) => {
     formats: ["webp"],
     outputDir: "./dist/resized-images/",
     urlPath: "/resized-images/",
+    sharpOptions: {
+      animated: true
+    }
   });
 
   return {

@@ -10,104 +10,102 @@ module.exports = {
 
     extend: {
       backgroundImage: {
-        "hero-dark":
-          "linear-gradient(358.98deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%);",
-        "hero-light":
-          "linear-gradient(358.98deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%)",
-        "text-bg-dark": "linear-gradient(92.57deg, #FF5274 0%, #6446FA 99.99%)",
-        "newsletter-dark":
-          "linear-gradient(134.46deg, rgba(255, 82, 116, 0.4) 0%, rgba(100, 70, 250, 0.4) 100%)",
-        "newsletter-light":
-          "linear-gradient(92.57deg, #FF5274 0%, #6446FA 99.99%)",
-        "overlay-menu":
-          "linear-gradient(358.98deg, rgba(255, 82, 116, 0) 10.03%, rgba(100, 70, 250, 0.2) 99.18%)",
+        "purple-fade":
+          "linear-gradient(360deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.04) 32.78%, rgba(100, 70, 250, 0.08) 51.82%, rgba(100, 70, 250, 0.12) 70.86%, rgba(100, 70, 250, 0.16) 84.79%, rgba(100, 70, 250, 0.2) 99.18%);",
       },
       colors: {
-        ...kit.dasherizeObjectKeys(kit.colors),
-        neutral: {
-          0: "#FBFBFC",
-          50: "#F5F5F9",
-          100: "#EEEEF5",
-          200: "#E3E3EF",
-          300: "#CBCCDE",
-          400: "#A3A3BE",
-          500: "#696A8B",
-          600: "#3F4161",
-          700: "#1F223D",
-          800: "#0E1225",
-          900: "#070B16",
+        newneutral: {
+          "0": "#fcfcfd",
+          "100": "#eeeef5",
+          "200": "#c8c8d4",
+          "300": "#a3a3b3",
+          "400": "#808094",
+          "500": "#5e5f76",
+          "600": "#3e3f59",
+          "700": "#1f223d",
+          "800": "#17172b"
+        },
+        pink: {
+          "100": "#ffdbe2",
+          "200": "#ffadb8",
+          "300": "#ff8697",
+          "400": "#fd5375",
+          "500": "#fa2e55",
+          "600": "#ec1345"
+        },
+        purple: {
+          "100": "#e0deff",
+          "200": "#c0baff",
+          "300": "#a195ff",
+          "400": "#836fff",
+          "500": "#6446fa",
+          "600": "#523ee5"
         },
         yellow: {
-          50: "#FEFCE8",
-          100: "#FFE8A4",
-          200: "#FFC967",
-          300: "#FFB238",
-          400: "#EB971B",
-          500: "#CC7B0B",
-          600: "#A96103",
-          700: "#7B4401",
-          800: "#5E3403",
-          900: "#4A2A07",
+          "100": "#fff0ad",
+          "200": "#f9dd90",
+          "300": "#f2ca74",
+          "400": "#eab757"
         },
-        /*
-          Named `newpurple` and `newpink` to avoid breaking Fission Kit imports
-          TODO: these color definitions should be updated in Fission Kit,
-          and then updated throughout templates that depend on them.
-
-          For color migration guide, see the Fission Kit figma:
-          https://www.figma.com/file/Np45Vc6bM943XFdXIeEGFJ/Fission-Kit?node-id=500%3A1624
-        */
-        newpurple: {
-          50: "#E0DEFF",
-          100: "#B1ABFF",
-          200: "#9287FF",
-          300: "#7967FF",
-          400: "#6144F3",
-          500: "#6446FA",
-          600: "#5133D3",
-          700: "#3C2399",
-          800: "#26155E",
-          900: "#160A38",
+        red: {
+          "100": "#ffbdc8",
+          "200": "#ff9c9f",
+          "300": "#fd7977",
+          "400": "#f65555"
         },
-        newpink: {
-          50: "#FFDAE1",
-          100: "#FFA4B5",
-          200: "#FF7390",
-          300: "#FF5274",
-          400: "#E9254F",
-          500: "#CC1139",
-          600: "#A20827",
-          700: "#74051C",
-          800: "#4C0514",
-          900: "#340612",
-        },
+        green: {
+          "100": "#a1e2c1",
+          "200": "#82d1a6",
+          "300": "#61c18c",
+          "400": "#3bb073"
+        }, 
       },
       fontFamily: {
         display: ["PPFragment"],
         sans: ["UncutSans"],
       },
       fontSize: {
-        "body-xs": ["12px", { lineHeight: "17px" }],
-        "body-sm": ["15px", { lineHeight: "20px" }],
-        "body-base": ["18px", { lineHeight: "23px" }],
-        "body-lg": ["22px", { lineHeight: "29px" }],
-        "body-xl": ["26px", { lineHeight: "34px" }],
-        "body-2xl": ["31px", { lineHeight: "40px" }],
-        xs: ["13px", { lineHeight: "15px" }],
-        sm: ["16px", { lineHeight: "24px" }],
-        base: ["18px", { lineHeight: "21px" }],
-        lg: ["24px", { lineHeight: "30px" }],
-        xl: ["32px", { lineHeight: "38px" }],
-        "2xl": ["43px", { lineHeight: "52px" }],
-        "3xl": ["57px", { lineHeight: "69px" }],
-      },
-      maxWidth: {
-        "3xl": "775px",
-        "5xl": "936px",
+        "heading-2xl": ["3.052rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-xl": ["2.441rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-lg": ["1.953rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-base": ["1.563rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-sm": ["1.5rem", { lineHeight: "120%", letterSpacing: "-0.01em"  }],
+        "heading-xs": ["1rem", { lineHeight: "120%", letterSpacing: "-0.01em" }],
+        "body-3xl": ["1.602rem", { lineHeight: "130%" }],
+        "body-2xl": ["1.424rem", { lineHeight: "130%" }],
+        "body-xl": ["1.25rem", { lineHeight: "130%" }],
+        "body-lg": ["1.1rem", { lineHeight: "130%" }],
+        "body-base": ["1rem", { lineHeight: "130%" }],
+        "body-sm": [".889rem", { lineHeight: "130%" }],
+        "body-xs": ["0.79rem", { lineHeight: "130%" }],
+        "body-2xs": ["0.702rem", { lineHeight: "130%" }],
+        "button-xl": ["1.25rem", { lineHeight: "100%" }],
+        "button-lg": ["1.1rem", { lineHeight: "100%" }],
+        "button-base": ["1rem", { lineHeight: "100%" }],
+        "button-sm": [".889rem", { lineHeight: "100%" }],
+        "button-xs": ["0.79rem", { lineHeight: "100%" }]
       },
       zIndex: {
         max: "1000",
       },
+      borderWidth: {
+        DEFAULT: '1.4px',
+      },
+      "borderRadius": {
+        "none": "0",
+        "xs": "0.5rem",
+        "sm": "0.7rem"
+      },
+      screens: {
+        'xl': '1352px',
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.newneutral.600'),
+          },
+        },
+      }),
     },
   },
   plugins: [
@@ -119,5 +117,6 @@ module.exports = {
         addBase({ "@font-face": fontFace });
       });
     }),
+    require('@tailwindcss/typography'),
   ],
 };

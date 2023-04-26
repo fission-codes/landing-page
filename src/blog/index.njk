@@ -1,7 +1,7 @@
 ---
 pagination:
   data: collections.posts
-  size: 6
+  size: 12
   alias: posts
 ---
 
@@ -21,10 +21,15 @@ pagination:
 {% block content %}
 <section>
 
-    {# TODO: Some blog intro content, maybe latest event #}
-
-    <div class="px-8 mx-auto max-w-7xl">
-        <h1 class="text-2xl mb-20 pt-8 text-neutral-600 dark:text-neutral-100">Our Blog</h1>
+    <div class="px-8 mx-auto max-w-screen-xl">
+        
+        <section 
+            aria-label="hero" 
+            class="my-24">
+            <h1 class="text-center text-purple-500 text-heading-sm sm:text-heading-lg md:text-heading-xl">
+                Our Blog
+            </h1>
+        </section>
 
         <div class="grid grid-cols-12 gap-6">
 
@@ -33,42 +38,6 @@ pagination:
             {% endfor %}
 
         </div>
-{#
-<!-- Could be events? -->
-        <div class="flex items-center justify-between w-full pb-5 mt-16 mb-8 border-b border-gray-200">
-            <h2 class="text-3xl font-bold text-gray-800">Events</h2>
-            <a href="https://talk.fission.codes/t/fission-tech-talks/1902" class="flex items-center text-base font-semibold text-blue-400 hover:text-blue-500 group">
-                <span>View More Posts</span>
-                <svg class="w-4 h-4 mt-0.5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </a>
-        </div>
-
-        <div class="grid grid-cols-12 gap-6">
-            <div class="relative col-span-12 mb-10 space-y-4 md:col-span-6 lg:col-span-4">
-                <a href="#_" class="relative block w-full h-64 overflow-hidden rounded">
-                    <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="https://cdn.devdojo.com/images/may2021/blog-image-04.jpg">
-                </a>
-                <p class="text-xs font-bold text-gray-400 uppercase">Inspiration</p>
-                <a href="#_" class="block text-2xl font-medium leading-tight text-gray-700 hover:text-gray-900">Learn How the Creator of Techstreet Crushed the Competition</a>
-            </div>
-
-            <div class="relative col-span-12 mb-10 space-y-4 md:col-span-6 lg:col-span-4">
-                <a href="#_" class="relative block w-full h-64 overflow-hidden rounded">
-                    <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="https://cdn.devdojo.com/images/may2021/blog-image-05.jpg">
-                </a>
-                <p class="text-xs font-bold text-gray-400 uppercase">Resources</p>
-                <a href="#_" class="block text-2xl font-medium leading-tight text-gray-700 hover:text-gray-900">Learn how Reading Can Accellerate your Earning Potential</a>
-            </div>
-
-            <div class="relative col-span-12 mb-10 space-y-4 md:col-span-6 lg:col-span-4">
-                <a href="#_" class="relative block w-full h-64 overflow-hidden rounded">
-                    <img class="object-cover object-center w-full h-full transition duration-500 ease-out transform scale-100 hover:scale-105" src="https://cdn.devdojo.com/images/may2021/blog-image-06.jpg">
-                </a>
-                <p class="text-xs font-bold text-gray-400 uppercase">REsources</p>
-                <a href="#_" class="block text-2xl font-medium leading-tight text-gray-700 hover:text-gray-900">Best Entrepreneurs you should be Following this Year</a>
-            </div>
-        </div>
-#}
     </div>
 </section>
 

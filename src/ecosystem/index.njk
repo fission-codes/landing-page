@@ -1,0 +1,164 @@
+{% extends 'layouts/default.njk' %}
+{% from "partials/project-card.njk" import projectCard with context %}
+{% from "macros/icons/EcosystemIllustration.njk" import EcosystemIllustration %}
+{% from "macros/icons/Sliders.njk" import Sliders %}
+{% from "macros/header.njk" import header with context %}
+{% set title = "Ecosystem" %}
+
+{% block header %}
+
+  {{ header() }}
+{% endblock %}
+
+{% block content %}
+
+{% include "partials/preferences-logic.njk" %}
+{% include "partials/preferences-menu.njk" %}
+
+<section>
+
+    <section 
+        aria-label="hero" 
+        class="
+            mx-auto flex flex-col max-w-screen-sm md:flex-row-reverse md:gap-16 md:max-w-screen-xl auto-rows-max 
+            align-center gap-12 md:gap-4 px-5 md:px-8 mx-5 mt-16 mb-8 md:mb-20
+        ">
+        <div class="col-span-6 basis-1/2 flex flex-col justify-center">
+            <h1 class="text-center md:text-left md:px-8 text-purple-500 text-heading-sm sm:text-heading-lg md:text-heading-xl">
+                We won't get to the&nbsp;<span class="text-pink-500">future</span>&nbsp;alone
+            </h1>
+        </div>
+        <div class="basis-1/2 flex flex-col gap-2 max-h-40 md:max-h-80">
+            {{ EcosystemIllustration() }}
+        </div>
+    </section>
+
+    <section 
+        aria-label="pitch" 
+        class="
+            flex flex-col mx-auto max-w-screen-sm md:max-w-screen-xl auto-rows-max 
+            gap-0 mx-2 mb-7 p-2 sm:p-5 xl:p-0
+            md:grid grid-cols-12 md:mb-14 md:bg-transparent md:mx-auto 
+        ">
+            <div class="col-span-6 flex flex-col bg-newneutral-0 rounded-lg overflow-hidden">
+                <header class="py-2 px-5 md:p-4 md:px-8 bg-newneutral-700 text-newneutral-0">
+                    <h2 class="font-sans font-semibold md:text-body-2xl">
+                        Fission sees a world where:
+                    </h2>
+                </header>
+                <div class="flex flex-col gap-3 p-5 md:p-8 md:text-body-xl">
+                    <div>
+                        👤&nbsp;&nbsp;<b>People</b> control their digital lives.
+                    </div>
+                    <div>
+                        🖥&nbsp;&nbsp;<b>Edge computing</b> is part of critical infrastructure.
+                    </div>
+                    <div>
+                        🎉&nbsp;&nbsp;<b>Open source</b> is celebrated and well-funded.
+                    </div>
+                    <div>
+                        🛠&nbsp;&nbsp;<b>Protocols</b> replace platforms as the foundation of software development.
+                    </div>
+                    <div>
+                        🏠&nbsp;&nbsp;<b>Local-first</b> software is the norm.
+                    </div>
+                    <div>
+                        🔁&nbsp;&nbsp;<b>Exit</b> from one application to another is seamless.
+                    </div>
+                </div>
+            </div>
+            <div class="gap-4 md:text-body-xl flex flex-col justify-between col-span-6 bg-pink-400 text-newneutral-0 rounded-lg p-5 md:p-8">
+                <div class="flex flex-col gap-4">
+                    <p>We aim to make this vision a reality. But the technology that enables it is a complex ecosystem, requiring care and cultivation to thrive.</p>
+                    <p>Our work exists in that ecosystem. In some places, we lead; in others, we support.</p>
+                    <p>Here's your map to the Fission ecosystem:</p>
+                </div>
+                <button 
+                    aria-label="open-preferences-menu" 
+                    name="open-preferences-menu" 
+                    class="md:text-body-xl open-preferences-menu semibold open-preferences-menu btn btn-outline font-normal items-center gap-2 w-full text-newneutral-0 rounded-lg border-newneutral-0 border bg-purple-500">
+                    <span 
+                        data-highlighted-projects-label="_COUNT_ Projects For You"
+                        data-no-highlighted-projects-label="Narrow It Down">
+                        Narrow It Down
+                    </span> {{ Sliders() }}
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <div class="flex flex-col p-2 sm:p-16 bg-purple-500">     
+        <div class="text-newneutral-0 mt-8 mb-7 md:mb-10 md:mt-12 flex flex-col gap-2 text-center"> 
+            <h2 class="text-heading-base text-heading-base lg:text-heading-lg">Our Core Projects</h2>
+            <p class="text-body-base lg:text-body-lg">These are the projects under our sole stewardship.</p>
+        </div>
+        <div class="mx-auto max-w-screen-xl grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-2 md:gap-5 auto-rows-max">   
+        {% for project in projects %}
+            {% if project.relationship == "Core" %}
+                {{ projectCard(project, false, 4) }}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="flex flex-col p-2 sm:p-16">
+        <div class="mt-8 mb-7 md:mb-10 md:mt-12 flex flex-col gap-2 text-center"> 
+            <h2 class="text-heading-base text-heading-base lg:text-heading-lg">Fission-Led Efforts</h2>
+            <p class="text-body-base lg:text-body-lg">These are projects we’ve initiated and continue to lead, but that involve many external partners.</p>
+        </div>
+        
+        <div class="mx-auto max-w-screen-xl grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-5 auto-rows-max">
+        {% for project in projects %}
+            {% if project.relationship == "Fission-led" %}
+                {{ projectCard(project, false, 4) }}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="flex flex-col p-2 sm:p-16">
+        <div class="mt-8 mb-7 md:mb-10 md:mt-12 flex flex-col gap-2 text-center"> 
+            <h2 class="text-heading-base text-heading-base lg:text-heading-lg">Places We Contribute</h2>
+            <p class="text-body-base lg:text-body-lg">We’re also deeply engaged in other standards groups, networks & events.</p>
+        </div>
+        <div class="mx-auto max-w-screen-xl grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-5 auto-rows-max">
+        {% for project in projects %}
+            {% if project.relationship == "Contributor" %}
+                {{ projectCard(project, false, 4) }}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="flex flex-col p-2 sm:p-16">
+        <div class="mt-8 mb-7 md:mb-10 md:mt-12 flex flex-col gap-2 text-center"> 
+            <h2 class="text-heading-base text-heading-base lg:text-heading-lg">Collaborators & Adopters</h2>
+            <p class="text-body-base lg:text-body-lg">Some of the brightest like minds we’ve encountered along the way</p>
+        </div>
+        <div class="mx-auto max-w-screen-xl grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-5 auto-rows-max">
+        {% for project in projects %}
+            {% if project.relationship == "Collaborators & Adopters" %}
+                {{ projectCard(project, false, 4) }}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+
+    {% include "partials/supporters.njk" %}
+
+    <div class="mx-auto flex flex-col items-center justify-center gap-8 max-w-screen-md bg-purple-500 text-newneutral-0 rounded-lg my-8 md:my-24 p-5 md:p-16">
+        <div class="max-w-[35ch] text-center flex flex-col gap-3">
+            <h2 class="text-heading-base text-heading-base lg:text-heading-lg">Projects We Fund</h2>
+            <p class="text-body-base lg:text-body-lg">We support projects that help make our vision a reality</p>
+        </div>
+        <a aria-label="Navigate to Open Collective" 
+            href="https://opencollective.com/fission" 
+            target="_blank" 
+            class="btn btn-primary max-w-[35ch] font-semibold items-center gap-2 w-full bg-newneutral-700 text-newneutral-0 rounded-lg">
+            View on Open Collective
+        </a>
+    </div>
+
+</section>
+
+{% endblock%}
