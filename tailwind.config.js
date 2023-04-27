@@ -98,6 +98,7 @@ module.exports = {
       },
       screens: {
         'xl': '1352px',
+        'xlpadded': '1422px',
       },
       typography: (theme) => ({
         DEFAULT: {

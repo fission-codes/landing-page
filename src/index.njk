@@ -26,7 +26,7 @@
         aria-label="hero" 
         class="
             mx-auto flex flex-col lg:grid grid-cols-12 items-center max-w-screen-xl auto-rows-max 
-            gap-4 px-5 lg:px-0 mx-5 mt-24 mb-8 lg:mt-20 lg:mb-20
+            gap-4 px-5 lg:px-0 mt-24 mb-8 lg:mt-20 lg:mb-20
         ">
         <div class="col-span-6 flex items-center justify-center mb-12 lg:mb-0">
             <figure alt="Fission Symbol" class="max-w-[33vw] lg:max-w-[206px] select-none homepage-link">
@@ -45,7 +45,7 @@
             flex flex-col max-w-screen-xl auto-rows-max 
             gap-4 mx-2 mb-7 p-5 bg-newneutral-0 rounded-lg
             md:grid grid-cols-12 md:gap-0 md:mb-14 md:bg-transparent md:mx-auto 
-            xl:p-0
+            xlpadded:p-0
         ">
             <div class="col-span-6 flex gap-4 items-center md:bg-newneutral-0 rounded-lg md:py-12 md:px-8">
                 <figure alt="Tools" class="text-body-3xl lg:text-heading-xl">
@@ -98,7 +98,7 @@
             <h2 class="mx-auto max-w-screen-xl font-sans font-semibold lg:font-normal px-7 mt-10 mb-7 text-body-sm lg:text-body-3xl lg:mt-12 lg:mb-12 sm:text-center">
                 Here are the 3 projects we’re most excited about right now:
             </h2>
-            <div data-featured-projects class="carousel carousel-center px-7 xl:px-0 gap-2 sm:gap-4 max-w-screen-xl xl:mx-auto">
+            <div data-featured-projects class="carousel carousel-center px-7 xlpadded:px-0 gap-2 sm:gap-4 max-w-screen-xl xl:mx-auto">
                 {% for id in todayProjectIDs %}
                     {% for project in projects %}
                         {% if project.id === id %}
@@ -109,7 +109,7 @@
             </div>
         </section>
 
-        <section aria-label="topics" class="mx-auto px-7 xl:px-0 max-w-screen-xl flex flex-col my-7 md:my-24 md:grid grid-cols-12 gap-7 xl:gap-4">
+        <section aria-label="topics" class="mx-auto px-7 xlpadded:px-0 max-w-screen-xl flex flex-col my-7 md:my-24 md:grid grid-cols-12 gap-7 xl:gap-4">
             <div class="xl:col-start-2 col-span-6 xl:col-span-5 flex flex-col gap-7 md:gap-12">
                 <div>
                     <h2 class="text-heading-sm sm:text-heading-base lg:text-heading-lg text-pink-500 mb-2 xl:mb-4">We’re ambitious folks — there’s&nbsp;even more</h2>
@@ -170,7 +170,7 @@
             </form>
         </section>
 
-        <section aria-label="values" class="mx-auto max-w-screen-xl grid grid-cols-12 px-7 xl:px-0">
+        <section aria-label="values" class="mx-auto max-w-screen-xl grid grid-cols-12 px-7 xlpadded:px-0">
             <div class="col-span-12 xl:col-start-2 xl:col-span-10 flex flex-col md:flex-row gap-7 mb-24 text-body-base">
                 <div class="flex flex-col gap-7 basis-1/2">
                     <div class="flex flex-col gap-3">
