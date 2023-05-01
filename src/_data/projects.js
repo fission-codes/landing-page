@@ -24,6 +24,7 @@ module.exports = async function() {
                     const tempRecord = {
                         id: record._rawJson.id,
                         name: record._rawJson.fields.Name,
+                        expandedName: record._rawJson.fields["Expanded Name"],
                         sourceImageURL: record._rawJson.fields.Image ? record._rawJson.fields.Image[0].url : null,
 
                         relationship: record._rawJson.fields["Fission Relationship"],

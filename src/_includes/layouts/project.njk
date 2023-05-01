@@ -36,7 +36,7 @@
 
             <section class="flex flex-col px-7 xlpadded:px-0 gap-5 basis-1/2">
                 <h1 class="text-center md:text-left text-purple-500 text-heading-base sm:text-heading-lg md:text-heading-xl">
-                    {{ project.name }}
+                    {{ project.name }}{% if project.expandedName %}: {{project.expandedName}} {% endif %}
                 </h1>
                 <h2>{{ project.relationship}}</h2>
                 <div class="prose">
@@ -57,7 +57,7 @@
                 <div class="flex gap-4 justify-start">
                 {% for topic in project.topics %}
                     <span class="border border-newneutral-400 py-2 px-4 rounded-lg">
-                        {% if topic == "Computing" %}
+                        {% if topic == "Compute" %}
                             Edge Computing
                         {% elseif topic == "Data" %}
                             User-Owned Data
