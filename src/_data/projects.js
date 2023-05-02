@@ -15,7 +15,7 @@ module.exports = async function() {
     const allProjects = [];
 
     await base("tblGc9MFKGecJMvjW")
-        .select({ 
+        .select({
             view: "viwKEVkeHMc6J2ym4",
         })
         .eachPage(
@@ -52,7 +52,7 @@ module.exports = async function() {
 
     for (let i = 0; i < allProjects.length; i++) {
         const project = allProjects[i];
-        
+
         // cache images
         // TODO: make it so it wasn't written by a designer
         const imageSettings = {
@@ -66,7 +66,7 @@ module.exports = async function() {
             }
         };
 
-        let resizedImages = await Image(project.sourceImageURL, imageSettings);
+        const resizedImages = await Image(project.sourceImageURL, imageSettings);
 
         project.featureImage = resizedImages.svg.length > 0 ? resizedImages.svg[0] : resizedImages.webp[1];
         project.thumbnailImage = resizedImages.svg.length > 0 ? resizedImages.svg[0] : resizedImages.webp[0];
@@ -81,7 +81,7 @@ module.exports = async function() {
             project.relatedProjects.push(relatedProject);
         }
     }
-    
+
     return allProjects;
 
 };
