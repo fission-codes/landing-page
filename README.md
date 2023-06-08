@@ -1,6 +1,11 @@
+# Making Changes To The Website Content
+
+You can find a guide here on how to make or request changes to various content on the site:
+https://talk.fission.codes/t/making-content-updates-to-fission-codes/4845
+
 # Fission Eleventy Headless Ghost
 
-The [Publish action](https://github.com/fission-suite/landing-page/actions/workflows/publish.yml) will build and publish the site to https://fission.codes for every main branch commit
+The [Publish action](https://github.com/fission-suite/landing-page/actions/workflows/publish.yml) will build and publish the site to https://fission.codes for every main branch commit.
 
 ## Eleventy
 
