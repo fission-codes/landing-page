@@ -237,7 +237,11 @@ module.exports = function(config) {
           const urlParts = audioSrc.split('/')
           const fileName = urlParts[urlParts.length - 1]
           downloadFile(fileName, audioSrc, "dist/relativeLocalAudio", callback);
+
+          post.html = post.html.replace(audioSrc, `../../relativeLocalAudio/${fileName}`);
         })
+
+
       }
 
       // Convert publish date into a Date object
