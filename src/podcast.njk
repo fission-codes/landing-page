@@ -3,56 +3,55 @@ permalink: /causalislands/podcast.xml
 eleventyExcludeFromCollections: true
 date: Last Modified
 ---
+
 {# Syntax sourced from Ghost details here https://ghost.org/tutorials/custom-rss-feed/ #}
 {# TODO: Some of this material we should be able to source from the Ghost interface for the tag -- name, description, image https://ghost.fission.codes/ghost/#/tags/causal-islands-podcast #}
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"
-xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-xmlns:dc="http://purl.org/dc/elements/1.1/"
-xmlns:atom="http://www.w3.org/2005/Atom"
-xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
-xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/"
-xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
+
+<rss
+    version="2.0"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+    xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+    xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/"
+    xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0"
+>
     <channel>
-        <title>Causal Islands Podcast</title>
-        <link>https://fission.codes/causalislands-podcast/</link>
-        <description>Welcome to the Causal Islands Future of Computing podcast!
-
-Each month we’ll dive deep into distributed systems, local-first software, AI, tools for thought, and their sociotechnical implications.
-
-Join our hosts as they engage in thought-provoking interviews with leading experts, exploring the intricate connections between technology and society, uncovering the transformative power of these emerging paradigms, and discussing their potential to shape our future in profound ways.</description>
+        <title>{{ collections.causalIslandsTag.name }}</title>
+        <link>https://fission.codes/causalislands/podcast.xml</link>
+        <description>{{ collections.causalIslandsTag.description }}</description>
         <language>en</language>
-        <copyright>Causal Islands (Fission Software) Copyright {{date format="YYYY"}}</copyright>
+        <copyright>Causal Islands (Fission Software) Copyright {{ fullYear() }}</copyright>
         <atom:link href="https://fission.codes/causalislands/podcast.xml" rel="self" type="application/rss+xml" />
-        <lastBuildDate>{{date format="ddd, DD MMM YYYY HH:mm:ss ZZ"}}</lastBuildDate>
+        <lastBuildDate>{{ lastBuildDate() }}</lastBuildDate>
         <itunes:author>Causal Islands</itunes:author>
         <itunes:summary>Welcome to the Causal Islands Future of Computing podcast!
-
-Each month we’ll dive deep into distributed systems, local-first software, AI, tools for thought, and their sociotechnical implications.
-
-Join our hosts as they engage in thought-provoking interviews with leading experts, exploring the intricate connections between technology and society, uncovering the transformative power of these emerging paradigms, and discussing their potential to shape our future in profound ways.</itunes:summary>
+Each month we&#180;ll dive deep into distributed systems, local-first software, AI, tools for thought, and their sociotechnical implications.
+Join our hosts as they engage in thought-provoking interviews with leading experts, exploring the intricate connections between technology and society, uncovering the transformative power of these emerging paradigms, and discussing their potential to shape our future in profound ways.
+        </itunes:summary>
         <itunes:owner>
             <itunes:name>Causal Islands</itunes:name>
             <itunes:email>connect@causalislands.com</itunes:email>
         </itunes:owner>
         <itunes:explicit>clean</itunes:explicit>
-        <itunes:image href="https://fission.codes/images/podcast/ci-cover.jpg"/>
+        <itunes:image href="{{ collections.causalIslandsTag.feature_image }}"/>
         <itunes:category text="Technology"></itunes:category>
-        {%- for post in collections.posts %}{# TODO: this is where we get just the "Causal Islands Podcast" tag #}
+        {% for podcast in collections.podcasts %}
             <item>
-                <title>{{ post.title }}</title>
-                <link>{{ site.url + post.url }}</link>
-                <pubDate>{{ post.updated_at }}</pubDate>
-                <guid isPermaLink="false">{{ site.url + post.url }}</guid>
+                <title>{{ podcast.title }}</title>
+                <link>{{ site.url + podcast.url }}</link>
+                <pubDate>{{ podcast.updated_at }}</pubDate>
+                <guid isPermaLink="false">{{ site.url + podcast.url }}</guid>
                 <category><![CDATA[ {{primary_tag.name}} ]]></category>
                 <description>{{custom_excerpt}}</description>
                 <content:encoded><![CDATA[ {{content}} ]]></content:encoded>
                 <enclosure url="{{og_description}}" length="0" type="audio/mpeg"/>
                 {# COMMENTING OUT: <itunes:subtitle>{{custom_excerpt}}</itunes:subtitle> #}
-                <itunes:summary><![CDATA[ {{ post.html | htmlToAbsoluteUrls(site.url + page.url) }} ]]></itunes:summary>
+                <itunes:summary><![CDATA[ {{ podcast.html | htmlToAbsoluteUrls(site.url + page.url) }} ]]></itunes:summary>
             </item>
-        {%- endfor %}
+        {% endfor %}
     </channel>
 </rss>

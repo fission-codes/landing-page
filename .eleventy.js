@@ -142,7 +142,23 @@ module.exports = function(config) {
   });
 
   // Function to return the full year to use in the copyright
-  config.addNunjucksGlobal("copyrightDate", () => new Date().getFullYear());
+  config.addNunjucksGlobal("fullYear", () => new Date().getFullYear());
+
+  // Function to return the last build date
+  const date = new Date();
+  const dateStr =
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "/" +
+    ("00" + date.getDate()).slice(-2) +
+    "/" +
+    date.getFullYear() +
+    " " +
+    ("00" + date.getHours()).slice(-2) +
+    ":" +
+    ("00" + date.getMinutes()).slice(-2) +
+    ":" +
+    ("00" + date.getSeconds()).slice(-2);
+  config.addNunjucksGlobal("lastBuildDate", () => dateStr);
 
   // Don't ignore the same files ignored in the git repo
   config.setUseGitIgnore(false);
@@ -204,6 +220,78 @@ module.exports = function(config) {
       .browse({
         include: "tags,authors",
         limit: "all",
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    collection.forEach(async (post, index) => {
+      post.url = stripDomain(post.url);
+      post.primary_author.url = stripDomain(post.primary_author.url);
+      post.tags.map((tag) => (tag.url = stripDomain(tag.url)));
+
+      // Resize feature_image for detail views and generate smaller thumbnail_image for archive views
+      const { feature, thumbnail } = await imageShortcode(post.feature_image, post.title, ['auto', 800]);
+      post.feature_image = feature.url;
+      post.feature_image_width = feature.width;
+      post.feature_image_height = feature.width;
+      post.thumbnail_image = thumbnail.url;
+      post.thumbnail_image_width = thumbnail.width;
+      post.thumbnail_image_height = thumbnail.height;
+
+      // Parse audio player src and save it relatively
+      if (post.html.includes("<audio src=")) {
+        let src;
+        const audioSrcs = [];
+        const rex = /<audio[^>]+src="?([^"\s]+)"?\s* /g;
+        while ((src = rex.exec(post.html))) {
+          audioSrcs.push(src[1]);
+        }
+
+        const callback = () => console.log('audio file downloaded')
+        audioSrcs.forEach(audioSrc => {
+          const urlParts = audioSrc.split('/')
+          const fileName = urlParts[urlParts.length - 1]
+          downloadFile(fileName, audioSrc, "dist/relativeLocalAudio", callback);
+
+          post.html = post.html.replace(audioSrc, `../../relativeLocalAudio/${fileName}`);
+        })
+
+
+      }
+
+      // Convert publish date into a Date object
+      post.published_at = new Date(post.published_at);
+
+      // Append discourse comments to `.html` of post
+      post.html = `${post.html}<div id='discourse-comments' class='discourse-comments'></div>
+        <script type="text/javascript">
+          DiscourseEmbed = { discourseUrl: 'https://talk.fission.codes/',
+                            discourseEmbedUrl: 'https://fission.codes/blog/${post.slug}/' };
+
+          (function() {
+            var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+            d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+          })();
+        </script>`;
+    });
+
+    // Bring featured post to the top of the list
+    collection.sort((post, nextPost) => nextPost.featured - post.featured);
+
+    return collection;
+  });
+
+  // Podcasts
+  // =====
+
+  config.addCollection("podcasts", async function (collection) {
+    collection = await api.posts
+      .browse({
+        include: "tags,authors",
+        limit: "all",
+        filter: "tag:causal-islands-podcast",
       })
       .catch((err) => {
         console.error(err);
@@ -338,6 +426,18 @@ module.exports = function(config) {
     });
 
     return collection;
+  });
+
+  config.addCollection("causalIslandsTag", async function () {
+    const tag = await api.tags
+      .read({ slug: "causal-islands-podcast" })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    tag.url = stripDomain(tag.url);
+
+    return tag;
   });
 
   /////////////////////////////////////////////

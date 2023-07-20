@@ -98,6 +98,130 @@
                         link.setAttribute('href', `${window.location.origin}/ipns/fissioncodes.fission.app/`);
                     })
                 }
+
+                // Audio player
+                !function() {
+                    const e = function(e) {
+                        const t = e.querySelector(".kg-audio-player-container")
+                        , a = e.querySelector(".kg-audio-play-icon")
+                        , o = e.querySelector(".kg-audio-pause-icon")
+                        , i = e.querySelector(".kg-audio-seek-slider")
+                        , r = e.querySelector(".kg-audio-playback-rate")
+                        , d = e.querySelector(".kg-audio-mute-icon")
+                        , l = e.querySelector(".kg-audio-unmute-icon")
+                        , s = e.querySelector(".kg-audio-volume-slider")
+                        , n = e.querySelector("audio")
+                        , c = e.querySelector(".kg-audio-duration")
+                        , u = e.querySelector(".kg-audio-current-time");
+                        let g = [{
+                            rate: .75,
+                            label: "0.7×"
+                        }, {
+                            rate: 1,
+                            label: "1×"
+                        }, {
+                            rate: 1.25,
+                            label: "1.2×"
+                        }, {
+                            rate: 1.75,
+                            label: "1.7×"
+                        }, {
+                            rate: 2,
+                            label: "2×"
+                        }]
+                        , v = null
+                        , m = 1;
+                        const k = ()=>{
+                            i.value = Math.floor(n.currentTime),
+                            u.textContent = h(i.value),
+                            t.style.setProperty("--seek-before-width", i.value / i.max * 100 + "%"),
+                            v = requestAnimationFrame(k)
+                        }
+                        , y = e=>{
+                            e === i ? t.style.setProperty("--seek-before-width", e.value / e.max * 100 + "%") : t.style.setProperty("--volume-before-width", e.value / e.max * 100 + "%")
+                        }
+                        , h = e=>{
+                            const t = Math.floor(e / 60)
+                            , a = Math.floor(e % 60);
+                            return `${t}:${a < 10 ? `0 ${a}` : `${a}`}`
+                        }
+                        , p = ()=>{
+                            c.textContent = h(n.duration)
+                        }
+                        , f = ()=>{
+                            i.max = Math.floor(n.duration)
+                        }
+                        , L = ()=>{
+                            if (n.buffered.length > 0) {
+                                const e = Math.floor(n.buffered.end(n.buffered.length - 1));
+                                t.style.setProperty("--buffered-width", e / i.max * 100 + "%")
+                            }
+                        }
+                        ;
+                        n.readyState > 0 ? (p(),
+                        f(),
+                        L()) : n.addEventListener("loadedmetadata", (()=>{
+                            p(),
+                            f(),
+                            L()
+                        }
+                        )),
+                        a.addEventListener("click", (()=>{
+                            a.classList.add("kg-audio-hide"),
+                            o.classList.remove("kg-audio-hide"),
+                            n.play(),
+                            requestAnimationFrame(k)
+                        }
+                        )),
+                        o.addEventListener("click", (()=>{
+                            o.classList.add("kg-audio-hide"),
+                            a.classList.remove("kg-audio-hide"),
+                            n.pause(),
+                            cancelAnimationFrame(v)
+                        }
+                        )),
+                        d.addEventListener("click", (()=>{
+                            d.classList.add("kg-audio-hide"),
+                            l.classList.remove("kg-audio-hide"),
+                            n.muted = !1
+                        }
+                        )),
+                        l.addEventListener("click", (()=>{
+                            l.classList.add("kg-audio-hide"),
+                            d.classList.remove("kg-audio-hide"),
+                            n.muted = !0
+                        }
+                        )),
+                        r.addEventListener("click", (()=>{
+                            let e = g[(m + 1) % 5];
+                            m += 1,
+                            n.playbackRate = e.rate,
+                            r.textContent = e.label
+                        }
+                        )),
+                        n.addEventListener("progress", L),
+                        i.addEventListener("input", (e=>{
+                            y(e.target),
+                            u.textContent = h(i.value),
+                            n.paused || cancelAnimationFrame(v)
+                        }
+                        )),
+                        i.addEventListener("change", (()=>{
+                            n.currentTime = i.value,
+                            n.paused || requestAnimationFrame(k)
+                        }
+                        )),
+                        s.addEventListener("input", (e=>{
+                            const t = e.target.value;
+                            y(e.target),
+                            n.volume = t / 100
+                        }
+                        ))
+                    }
+                    , t = document.querySelectorAll(".kg-audio-card");
+                    for (let a = 0; a < t.length; a++)
+                        e(t[a])
+                }();
             });
         </script>
         <script>document.documentElement.classList.remove('no-js');</script>

@@ -10,7 +10,7 @@
 <div class="overlay-menu fixed z-max w-0 h-0 bg-newneutral-100 opacity-0 overflow-auto">
     <div class="flex flex-col h-full px-7 py-3 w-full">
 
-        <div class="fixed left-0 bottom-0 rotate-180 w-full h-32 pointer-events-none overflow-hidden">        
+        <div class="fixed left-0 bottom-0 rotate-180 w-full h-32 pointer-events-none overflow-hidden">
             <div class="bg-blend-lighten bg-purple-fade -mt-32 h-64 w-full"></div>
         </div>
 
@@ -18,9 +18,9 @@
             <a aria-label="Navigate to home page" href="/" class="block w-[101px] lg:w-[131px] homepage-link">
                 {{ fissionLogo() }}
             </a>
-            <button 
-                aria-label="close-menu" 
-                name="close-menu" 
+            <button
+                aria-label="close-menu"
+                name="close-menu"
                 class="close-menu text-purple-400 transition-opacity hover:opacity-80 translate-x-1">
                 {{ X() }}
             </button>
@@ -54,7 +54,7 @@
                 <a aria-label="View Fission on LinkedIn" href="https://ca.linkedin.com/company/fissioncodes" rel="me" target="_blank" class="transition-opacity hover:opacity-80">{{ LinkedinOutline() }}</a>
             </div>
 
-            <p class="text-body-xs text-newneutral-400 text-center">© {{ copyrightDate() }} Fission</p>
+            <p class="text-body-xs text-newneutral-400 text-center">© {{ fullYear() }} Fission</p>
         </div>
     </div>
 </div>
