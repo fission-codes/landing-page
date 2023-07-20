@@ -327,9 +327,8 @@ module.exports = function(config) {
           downloadFile(fileName, audioSrc, "dist/relativeLocalAudio", callback);
 
           post.html = post.html.replace(audioSrc, `../../relativeLocalAudio/${fileName}`);
+          post.audioFile = `/relativeLocalAudio/${fileName}`;
         })
-
-
       }
 
       // Convert publish date into a Date object
@@ -436,6 +435,16 @@ module.exports = function(config) {
       });
 
     tag.url = stripDomain(tag.url);
+
+    // Resize feature_image and save it locally
+    const { feature } = await imageShortcode(
+      tag.feature_image,
+      tag.name,
+      ["auto", 800]
+    );
+    tag.feature_image = feature.url;
+    tag.feature_image_width = feature.width;
+    tag.feature_image_height = feature.width;
 
     return tag;
   });
