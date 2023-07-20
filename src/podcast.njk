@@ -17,7 +17,7 @@ date: Last Modified
 >
     <channel>
         <title>{{ collections.causalIslandsTag.name }}</title>
-        <link>https://causalislands.com</link>{# COMMENT: This should go to a causalislands podcast page #}
+        <link>https://causalislands.com/podcast</link>
         <description>{{ collections.causalIslandsTag.description }}</description>
         <language>en</language>
         <copyright>Causal Islands (Fission Software) Copyright {{ fullYear() }}</copyright>
@@ -41,7 +41,7 @@ date: Last Modified
                 <guid isPermaLink="false">https://fission.codes{{ podcast.url }}</guid>
                 <category><![CDATA[ {{ podcast.primary_tag.name }} ]]></category>
                 <description>{{ podcast.custom_excerpt }}</description>
-                <content:encoded>{{ podcast.html | htmlToAbsoluteUrls(site.url + podcast.url) }}</content:encoded>
+                <content:encoded>{{ podcast.html | htmlToAbsoluteUrls(site.url + podcast.url) }}</content:encoded>{# TODO this is still showing ghost.fission.codes for imagess #}
                 <enclosure url="https://fission.codes{{ podcast.audioFile }}" length="0" type="audio/mpeg"/>
                 <itunes:subtitle>{{ podcast.custom_excerpt }}</itunes:subtitle>
                 <itunes:summary>https://fission.codes/blog{{ podcast.url }}</itunes:summary>
