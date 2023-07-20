@@ -17,7 +17,7 @@ date: Last Modified
 >
     <channel>
         <title>{{ collections.causalIslandsTag.name }}</title>
-        <link>https://fission.codes/causalislands/podcast.xml</link>
+        <link>https://causalislands.com</link>{# COMMENT: This should go to a causalislands podcast page #}
         <description>{{ collections.causalIslandsTag.description }}</description>
         <language>en</language>
         <copyright>Causal Islands (Fission Software) Copyright {{ fullYear() }}</copyright>
@@ -36,15 +36,17 @@ date: Last Modified
         {% for podcast in collections.podcasts %}
             <item>
                 <title>{{ podcast.title }}</title>
-                <link>{{ site.url + podcast.url }}</link>
+                <link>https://fission.codes/{{ podcast.url }}</link>
                 <pubDate>{{ podcast.updated_at }}</pubDate>
-                <guid isPermaLink="false">{{ site.url + podcast.url }}</guid>
+                <guid isPermaLink="false">https://fission.codes/{{ podcast.url }}</guid>
                 <category><![CDATA[ {{ podcast.primary_tag.name }} ]]></category>
                 <description>{{ podcast.custom_excerpt }}</description>
-                <content:encoded><![CDATA[ {{ podcast.html | htmlToAbsoluteUrls(site.url + page.url) }}} ]]></content:encoded>
+                <content:encoded><![CDATA[ {{ podcast.html | htmlToAbsoluteUrls(site.url + podcast.url) }} ]]></content:encoded>
                 <enclosure url="{{ podcast.og_description }}" length="0" type="audio/mpeg"/>
-                {# COMMENTING OUT: <itunes:subtitle>{{ podcast.custom_excerpt }}</itunes:subtitle> #}
-                <itunes:summary><![CDATA[ {{ podcast.html | htmlToAbsoluteUrls(site.url + page.url) }} ]]></itunes:summary>
+                <itunes:subtitle>{{ podcast.custom_excerpt }}</itunes:subtitle>
+                <itunes:summary><![CDATA[ {{ podcast.html | htmlToAbsoluteUrls(site.url + page.url) }} ]]></itunes:summary>{# COMMENT: need to get the proper fission published url in here #}
+                <itunes:author>Causal Islands</itunes:author>
+                {# COMMENTED OUT: I think we can grab the feature image for the podcast and put it here. Needs to be 1400x1400 minimum <itunes:image></itunes:image> #}
             </item>
         {% endfor %}
     </channel>
