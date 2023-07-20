@@ -3,8 +3,6 @@ permalink: /causalislands/podcast.xml
 eleventyExcludeFromCollections: true
 date: Last Modified
 ---
-
-{# Syntax sourced from Ghost details here https://ghost.org/tutorials/custom-rss-feed/ #}
 <rss
     version="2.0"
     xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -26,9 +24,7 @@ date: Last Modified
         <atom:link href="https://fission.codes/causalislands/podcast.xml" rel="self" type="application/rss+xml" />
         <lastBuildDate>{{ lastBuildDate() }}</lastBuildDate>
         <itunes:author>Causal Islands</itunes:author>
-        <itunes:summary>Welcome to the Causal Islands Future of Computing podcast!
-Each month we&#180;ll dive deep into distributed systems, local-first software, AI, tools for thought, and their sociotechnical implications.
-Join our hosts as they engage in thought-provoking interviews with leading experts, exploring the intricate connections between technology and society, uncovering the transformative power of these emerging paradigms, and discussing their potential to shape our future in profound ways.
+        <itunes:summary>{{ collections.causalIslandsTag.description }}
         </itunes:summary>
         <itunes:owner>
             <itunes:name>Causal Islands</itunes:name>
@@ -43,13 +39,14 @@ Join our hosts as they engage in thought-provoking interviews with leading exper
                 <link>{{ site.url + podcast.url }}</link>
                 <pubDate>{{ podcast.updated_at }}</pubDate>
                 <guid isPermaLink="false">{{ site.url + podcast.url }}</guid>
-                <category><![CDATA[ {{primary_tag.name}} ]]></category>
-                <description>{{custom_excerpt}}</description>
-                <content:encoded><![CDATA[ {{content}} ]]></content:encoded>
-                <enclosure url="{{og_description}}" length="0" type="audio/mpeg"/>
-                {# COMMENTING OUT: <itunes:subtitle>{{custom_excerpt}}</itunes:subtitle> #}
+                <category><![CDATA[ {{ podcast.primary_tag.name }} ]]></category>
+                <description>{{ podcast.custom_excerpt }}</description>
+                <content:encoded><![CDATA[ {{ podcast.html | htmlToAbsoluteUrls(site.url + page.url) }}} ]]></content:encoded>
+                <enclosure url="{{ podcast.og_description }}" length="0" type="audio/mpeg"/>
+                {# COMMENTING OUT: <itunes:subtitle>{{ podcast.custom_excerpt }}</itunes:subtitle> #}
                 <itunes:summary><![CDATA[ {{ podcast.html | htmlToAbsoluteUrls(site.url + page.url) }} ]]></itunes:summary>
             </item>
         {% endfor %}
     </channel>
 </rss>
+{# Syntax sourced from Ghost details here https://ghost.org/tutorials/custom-rss-feed/ #}
