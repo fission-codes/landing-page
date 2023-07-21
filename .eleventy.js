@@ -58,7 +58,7 @@ const imageShortcode = async (src, alt, widths) => {
   };
 }
 
-// Download audio files and save them locally
+// Download media files and save them locally
 const downloadFile = async (fileName, url, dest, cb) => {
   fs.mkdir(dest, { recursive: true }, (err) => {
     if (err) throw err;
@@ -239,25 +239,50 @@ module.exports = function(config) {
       post.thumbnail_image_width = thumbnail.width;
       post.thumbnail_image_height = thumbnail.height;
 
-      // Parse audio player src and save it relatively
+      // Parse audio player src and save it locally
       if (post.html.includes("<audio src=")) {
         let src;
         const audioSrcs = [];
-        const rex = /<audio[^>]+src="?([^"\s]+)"?\s* /g;
+        let rex = /<audio[^>]+src="?([^"\s]+)"?\s* /g;
         while ((src = rex.exec(post.html))) {
           audioSrcs.push(src[1]);
         }
 
-        const callback = () => console.log('audio file downloaded')
-        audioSrcs.forEach(audioSrc => {
-          const urlParts = audioSrc.split('/')
-          const fileName = urlParts[urlParts.length - 1]
-          downloadFile(fileName, audioSrc, "dist/relativeLocalAudio", callback);
+        let callback = () => console.log("audio file downloaded");
+        audioSrcs.forEach((audioSrc) => {
+          const urlParts = audioSrc.split("/");
+          const audioFileName = urlParts[urlParts.length - 1];
+          downloadFile(audioFileName, audioSrc, "dist/relativeLocalAudio", callback);
 
-          post.html = post.html.replace(audioSrc, `../../relativeLocalAudio/${fileName}`);
-        })
+          post.html = post.html.replace(
+            audioSrc,
+            `../../relativeLocalAudio/${audioFileName}`
+          );
+        });
 
+        // Parse inline image src and save it locally
+        if (post.html.includes("<img src=")) {
+          let imageSrc;
+          rex = /<img[^>]+src="?([^"\s]+)"?\s*/g;
+          while ((src = rex.exec(post.html))) {
+            // Trim the file name to remove any extraneous query params
+            imageSrc = src[1].split("?")[0];
+          }
+          callback = () => console.log("image file downloaded");
+          const urlParts = imageSrc.split("/");
+          const imageFileName = urlParts[urlParts.length - 1];
+          downloadFile(
+            imageFileName,
+            imageSrc,
+            "dist/resized-images",
+            callback
+          );
 
+          post.html = post.html.replace(
+            imageSrc,
+            `../../resized-images/${imageFileName}`
+          );
+        }
       }
 
       // Convert publish date into a Date object
@@ -311,11 +336,11 @@ module.exports = function(config) {
       post.thumbnail_image_width = thumbnail.width;
       post.thumbnail_image_height = thumbnail.height;
 
-      // Parse audio player src and save it relatively
+      // Parse audio player src and save it locally
       if (post.html.includes("<audio src=")) {
         let src;
         const audioSrcs = [];
-        const rex = /<audio[^>]+src="?([^"\s]+)"?\s* /g;
+        const rex = /<audio[^>]+src="?([^"\s]+)"?\s*/g;
         while ((src = rex.exec(post.html))) {
           audioSrcs.push(src[1]);
         }
