@@ -19,9 +19,9 @@ date: Last Modified
   {%- for post in collections.posts %}
   <entry>
     <title>{{ post.title }}</title>
-    <link href="https://fission.codes{{ post.url }}"/>
+    <link href="https://fission.codes/blog{{ post.url }}"/>
     <updated>{{ post.updated_at }}</updated>
-    <id>https://fission.codes{{ post.url }}</id>
+    <id>https://fission.codes/blog{{ post.url }}</id>
     <content type="html">{{ post.html | htmlToAbsoluteUrls(site.url + page.url) }}</content>
   </entry>
   {%- endfor %}

@@ -28,7 +28,7 @@ const stripDomain = url => {
 };
 
 // Resize image
-const imageShortcode = async (src, alt, widths) => {
+const imageShortcode = async (src, alt, widths, formats = ['webp']) => {
   if (alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
     throw new Error(`Missing \`alt\` on myImage from: ${src}`);
@@ -36,7 +36,7 @@ const imageShortcode = async (src, alt, widths) => {
 
   let metadata = await Image(src, {
     widths: widths,
-    formats: ["webp"],
+    formats: formats,
     outputDir: "./dist/resized-images/",
     urlPath: "/resized-images/",
     sharpOptions: {
@@ -46,14 +46,14 @@ const imageShortcode = async (src, alt, widths) => {
 
   return {
     feature: {
-      url: metadata.webp[1] ? metadata.webp[1].url : metadata.webp[0].url,
-      width: metadata.webp[1] ? metadata.webp[1].width : metadata.webp[0].width,
-      height: metadata.webp[1] ? metadata.webp[1].height : metadata.webp[0].height,
+      url: metadata[formats[0]][1] ? metadata[formats[0]][1].url : metadata[formats[0]][0].url,
+      width: metadata[formats[0]][1] ? metadata[formats[0]][1].width : metadata[formats[0]][0].width,
+      height: metadata[formats[0]][1] ? metadata[formats[0]][1].height : metadata[formats[0]][0].height,
     },
     thumbnail: {
-      url: metadata.webp[0].url,
-      width: metadata.webp[0].width,
-      height: metadata.webp[0].height,
+      url: metadata[formats[0]][0].url,
+      width: metadata[formats[0]][0].width,
+      height: metadata[formats[0]][0].height,
     },
   };
 }
@@ -328,7 +328,7 @@ module.exports = function(config) {
       post.tags.map((tag) => (tag.url = stripDomain(tag.url)));
 
       // Resize feature_image for detail views and generate smaller thumbnail_image for archive views
-      const { feature, thumbnail } = await imageShortcode(post.feature_image, post.title, ['auto', 800]);
+      const { feature, thumbnail } = await imageShortcode(post.feature_image, post.title, ['auto', 800], ['png']);
       post.feature_image = feature.url;
       post.feature_image_width = feature.width;
       post.feature_image_height = feature.width;
