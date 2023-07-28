@@ -3,6 +3,7 @@
 {% from "macros/icons/MastodonOutline.njk" import MastodonOutline %}
 {% from "macros/icons/DiscordOutline.njk" import DiscordOutline %}
 {% from "macros/icons/LinkedinOutline.njk" import LinkedinOutline %}
+{% from "macros/icons/YoutubeOutline.njk" import YoutubeOutline %}
 {% from "macros/icons/ExternalLink.njk" import ExternalLink %}
 {% from "macros/fission-logo.njk" import fissionLogo %}
 {% from "macros/icons/ArrowRightCircle.njk" import ArrowRightCircle %}
@@ -117,6 +118,12 @@
                         {{ LinkedinOutline() }}
                     </span> <span class="hidden underline underline-offset-2 lg:inline-block">LinkedIn</span>
                 </a>
+                <a aria-label="Watch Fission's YouTube Channel" href="https://www.youtube.com/@fissioncodes" rel="me" target="_blank" class="flex gap-2 transition-opacity hover:opacity-80">
+                    <span class="w-10 lg:-ml-12 text-center text-purple-500">
+                        {{ YoutubeOutline() }}
+                    </span> <span class="hidden underline underline-offset-2 lg:inline-block">YouTube</span>
+                </a>
+                
             </div>
         </div>
     </div>
