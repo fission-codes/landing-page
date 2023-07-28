@@ -465,9 +465,10 @@ module.exports = function(config) {
     const { feature } = await imageShortcode(
       tag.feature_image,
       tag.name,
-      ["auto", 800],
+      ["auto", 3000],
       ['png']
     );
+
     tag.feature_image = feature.url;
     tag.feature_image_width = feature.width;
     tag.feature_image_height = feature.width;
