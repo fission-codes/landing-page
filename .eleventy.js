@@ -200,12 +200,21 @@ module.exports = function(config) {
         console.error(err);
       });
 
-    collection.map((doc) => {
+    collection.forEach(async (doc) => {
       doc.url = stripDomain(doc.url);
       doc.primary_author.url = stripDomain(doc.primary_author.url);
 
       // Convert publish date into a Date object
       doc.published_at = new Date(doc.published_at);
+
+      // Resize image and save locally
+      if (doc.feature_image) {
+        const { feature } = await imageShortcode(doc.feature_image, doc.title, ['auto', 800]);
+        doc.feature_image = feature.url;
+        doc.feature_image_width = feature.width;
+        doc.feature_image_height = feature.width;
+      }
+
       return doc;
     });
 
@@ -225,7 +234,7 @@ module.exports = function(config) {
         console.error(err);
       });
 
-    collection.forEach(async (post, index) => {
+    collection.forEach(async (post) => {
       post.url = stripDomain(post.url);
       post.primary_author.url = stripDomain(post.primary_author.url);
       post.tags.map((tag) => (tag.url = stripDomain(tag.url)));
@@ -322,7 +331,7 @@ module.exports = function(config) {
         console.error(err);
       });
 
-    collection.forEach(async (post, index) => {
+    collection.forEach(async (post) => {
       post.url = stripDomain(post.url);
       post.primary_author.url = stripDomain(post.primary_author.url);
       post.tags.map((tag) => (tag.url = stripDomain(tag.url)));

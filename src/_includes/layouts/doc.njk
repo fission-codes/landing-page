@@ -23,6 +23,20 @@
           </a>
         </div> #}
 
+        {% if doc.feature_image %}
+          <figure class="post-full-image lg:-mx-20 pt-10">
+            <img
+              src="{{ doc.feature_image }}"
+              alt="{{ doc.title }}"
+              width="{{ doc.feature_image_width }}"
+              height="{{ doc.feature_image_height }}"
+              class="rounded-md w-full"
+              data-page-url="{{ page.url }}"
+              loading="lazy" decoding="async"
+            />
+          </figure>
+        {% endif %}
+
         <div class="mb-8 mt-5">
           <div class="w-3 h-0 border-t border-base-300 dark:border-base-600"></div>
         </div>
