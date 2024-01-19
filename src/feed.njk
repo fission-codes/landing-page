@@ -17,6 +17,7 @@ date: Last Modified
     <name>{{ collections.authors[0].name }}</name>
   </author>
   {%- for post in collections.posts %}
+  {% if loop.index0 < 30 %} 
   <entry>
     <title>{{ post.title }}</title>
     <link href="https://fission.codes/blog{{ post.url }}"/>
@@ -24,5 +25,6 @@ date: Last Modified
     <id>https://fission.codes/blog{{ post.url }}</id>
     <content type="html">{{ post.html | htmlToAbsoluteUrls(site.url + page.url) }}</content>
   </entry>
+  {% endif %}
   {%- endfor %}
 </feed>
