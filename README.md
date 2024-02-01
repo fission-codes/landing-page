@@ -12,7 +12,7 @@ The [Publish action](https://github.com/fission-suite/landing-page/actions/workf
 Install dependencies
 
 ```bash
-yarn
+npm i
 ```
 
 # Create .env
@@ -30,7 +30,7 @@ SITE_URL=http://localhost:8080
 Start the development server
 
 ```bash
-yarn start
+npm run start
 ```
 
 This will grab all posts and images and the site will be running at `https://localhost:8080`
@@ -42,5 +42,5 @@ You can disable the default Ghost Handlebars Theme front-end by enabling the `Ma
 
 ```bash
 # Build the site locally
-yarn build
+npm run build
 ```
