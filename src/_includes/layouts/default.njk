@@ -46,6 +46,75 @@
         <link rel="stylesheet" href="{{ "/stylesheet-new.css" | relativePath(page) }}" />
         <script defer data-domain="fission.codes" src="https://plausible.io/js/script.js"></script>
 
+
+        <!-- Everywhere Computer related styles -->
+        <style>
+            .ec-logo {
+              position: relative;
+              max-width: 64vmin;
+              max-height: 64vmin;
+            }
+            @media screen and (min-width: 560px) {
+              .ec-logo {
+                max-width: 48vmin;
+                max-height: 48vmin;
+              } 
+            }
+            .ec-logo-bg {
+              width: 80%;
+              animation: rotateAnimation 30s linear infinite;
+            }
+            .ec-logo-mg {
+              width: 61.12%;
+              height: 61.12%;
+              background-image: url('../images/logo-mg.gif');
+              background-size: cover;
+              background-position: center;
+              position: absolute;
+              top: 11.8%;
+              left: 11.8%;
+            }
+            .ec-logo-fg {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 80%;
+            }
+
+/*            ul {
+              padding-left: 0rem;
+              margin-left: -0.25rem;
+            }
+
+            li + li {
+              margin-top: 0.75rem;
+            }
+
+            li {
+              padding-left: 0.25rem;
+            }*/
+
+            li::marker {
+              content: '✵';
+              display: inline-block; /* Necessary for the transform to work on pseudo-elements */
+              animation: rotateAnimation 8s linear infinite;
+            }
+
+            .rotate {
+              display: inline-block;
+              animation: rotateAnimation 8s linear infinite;
+            }
+
+            @keyframes rotateAnimation {
+              0% {
+                transform: rotate(0deg);
+              }
+              100% {
+                transform: rotate(360deg);
+              }
+            }
+        </style>
+
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

@@ -14,14 +14,14 @@
                     <a 
                         href="{{ "/team" | relativePath(page) }}" 
                         class="{% if '/team' in page.url %}text-pink-300{% endif %}">
-                        ● Our Team
+                        Our Team
                     </a>
                 </li>
                 <li>
                     <a 
                         href="{{ "/blog" | relativePath(page) }}" 
                         class="{% if '/blog' in page.url %}text-pink-300{% endif %}">
-                        ● Blog
+                        Blog
                     </a>
                 </li>
                 <li>
@@ -29,7 +29,15 @@
                         href="https://shop.fission.codes" 
                         target="_blank" 
                         class="flex items-center gap-1">
-                        ● Shop Fission Swag {{ ExternalLink() }}
+                        Swag {{ ExternalLink() }}
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="https://everywhere.computer" 
+                        target="_blank" 
+                        class="flex items-center gap-1">
+                        Everywhere Computer {{ ExternalLink() }}
                     </a>
                 </li>
             </ul>
