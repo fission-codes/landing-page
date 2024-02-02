@@ -39,7 +39,7 @@
         <h1 class="sr-only">Fission: We build identity, data, and compute protocols for the future of the Internet.</h1>
     </section>
 
-    <section class="w-full px-2">
+    <section class="w-full px-2 mb-16">
         <section class="mx-auto overflow-hidden max-w-screen-xl rounded-sm bg-newneutral-0 items-center" style="background-color: #e1e2ea;">
             <header class="p-2 md:p-4 bg-newneutral-700 text-newneutral-0 text-center">
                 <h2 class="text-heading-xs md:text-heading-base">
@@ -49,9 +49,9 @@
             <div class="mx-auto flex flex-col gap-12 items-center max-w-3xl p-8 lg:p-16">
                 <a href="https://everywhere.computer/">
                     <div class="ec-logo">
-                        <img class="ec-logo-bg" src="/images/ec-logo-bg.svg" />
+                        <img class="ec-logo-bg" src="{{ "/images/ec-logo-bg.svg" | relativePath(page) }}" />
                         <div class="ec-logo-mg"></div>
-                        <img class="ec-logo-fg" src="/images/ec-logo-fg.svg" />
+                        <img class="ec-logo-fg" src="{{ "/images/ec-logo-fg.svg" | relativePath(page) }}" />
                     </div>
                 </a>
             </div>

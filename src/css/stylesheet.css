@@ -543,3 +543,76 @@ code[class*=language-],pre[class*=language-]{color:#ccc;background:0 0;font-fami
 .kg-audio-player-container input[type=range]:active::-ms-thumb {
     transform: scale(1.2)
 }
+
+
+/* Everywhere Computer related styles */
+
+.ec-logo {
+  position: relative;
+  max-width: 64vmin;
+  max-height: 64vmin;
+  @apply flex items-center justify-center;
+}
+@media screen and (min-width: 560px) {
+  .ec-logo {
+    max-width: 48vmin;
+    max-height: 48vmin;
+  } 
+}
+.ec-logo-bg {
+  width: 80%;
+  animation: rotateAnimation 30s linear infinite;
+  z-index: 1;
+}
+.ec-logo-mg {
+  width: 65%;
+  height: 69%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.ec-logo-fg {
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/*            ul {
+  padding-left: 0rem;
+  margin-left: -0.25rem;
+}
+
+li + li {
+  margin-top: 0.75rem;
+}
+
+li {
+  padding-left: 0.25rem;
+}*/
+
+li::marker {
+  content: '✵';
+  display: inline-block; /* Necessary for the transform to work on pseudo-elements */
+  animation: rotateAnimation 8s linear infinite;
+}
+
+.rotate {
+  display: inline-block;
+  animation: rotateAnimation 8s linear infinite;
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

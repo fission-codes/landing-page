@@ -49,69 +49,8 @@
 
         <!-- Everywhere Computer related styles -->
         <style>
-            .ec-logo {
-              position: relative;
-              max-width: 64vmin;
-              max-height: 64vmin;
-            }
-            @media screen and (min-width: 560px) {
-              .ec-logo {
-                max-width: 48vmin;
-                max-height: 48vmin;
-              } 
-            }
-            .ec-logo-bg {
-              width: 80%;
-              animation: rotateAnimation 30s linear infinite;
-            }
             .ec-logo-mg {
-              width: 61.12%;
-              height: 61.12%;
-              background-image: url('../images/logo-mg.gif');
-              background-size: cover;
-              background-position: center;
-              position: absolute;
-              top: 11.8%;
-              left: 11.8%;
-            }
-            .ec-logo-fg {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 80%;
-            }
-
-/*            ul {
-              padding-left: 0rem;
-              margin-left: -0.25rem;
-            }
-
-            li + li {
-              margin-top: 0.75rem;
-            }
-
-            li {
-              padding-left: 0.25rem;
-            }*/
-
-            li::marker {
-              content: '✵';
-              display: inline-block; /* Necessary for the transform to work on pseudo-elements */
-              animation: rotateAnimation 8s linear infinite;
-            }
-
-            .rotate {
-              display: inline-block;
-              animation: rotateAnimation 8s linear infinite;
-            }
-
-            @keyframes rotateAnimation {
-              0% {
-                transform: rotate(0deg);
-              }
-              100% {
-                transform: rotate(360deg);
-              }
+              background-image: url('{{ "/images/ec-logo-mg.gif" | relativePath(page) }}');
             }
         </style>
 
