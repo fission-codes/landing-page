@@ -48,10 +48,10 @@
             </header>
             <div class="mx-auto flex flex-col gap-12 items-center max-w-3xl p-8 lg:p-16">
                 <a href="https://everywhere.computer/">
-                    <div class="ec-logo">
-                        <img class="ec-logo-bg" src="{{ "/images/ec-logo-bg.svg" | relativePath(page) }}" />
-                        <div class="ec-logo-mg"></div>
-                        <img class="ec-logo-fg" src="{{ "/images/ec-logo-fg.svg" | relativePath(page) }}" />
+                    <div class="relative flex items-center justify-center max-w-[64vim] max-h-[64vim] sm:max-w-[48vim] sm:max-h-[48vim]">
+                        <img class="animate-rotateAnimation w-4/5 z-[1]" src="{{ "/images/ec-logo-bg.svg" | relativePath(page) }}" />
+                        <div class="ec-logo-mg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] w-[65%] h-[69%] bg-cover bg-center"></div>
+                        <img class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[3] w-4/5" src="{{ "/images/ec-logo-fg.svg" | relativePath(page) }}" />
                     </div>
                 </a>
             </div>
