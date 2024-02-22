@@ -545,6 +545,10 @@ code[class*=language-],pre[class*=language-]{color:#ccc;background:0 0;font-fami
 }
 
 li::marker {
-  content: '✵';
-  @apply inline-block animate-rotateAnimation;
+  content: '●';
+}
+
+li {
+  padding-left: 0.25rem;
+  margin-left: 0.33rem;
 }
