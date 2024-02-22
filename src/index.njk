@@ -39,139 +39,30 @@
         <h1 class="sr-only">Fission: We build identity, data, and compute protocols for the future of the Internet.</h1>
     </section>
 
-    <section 
-        aria-label="pitch" 
-        class="
-            flex flex-col max-w-screen-xl auto-rows-max 
-            gap-4 mx-2 mb-7 p-5 bg-newneutral-0 rounded-lg
-            md:grid grid-cols-12 md:gap-0 md:mb-14 md:bg-transparent md:mx-auto 
-            xlpadded:p-0
-        ">
-            <div class="col-span-6 flex gap-4 items-center md:bg-newneutral-0 rounded-lg md:py-12 md:px-8">
-                <figure alt="Tools" class="text-body-3xl lg:text-heading-xl">
-                    🛠️
-                </figure>
-                <p class="text-body-sm lg:text-body-3xl font-semibold">
-                    Fission builds open source protocols and managed solutions that empower developers to construct scalable and secure software applications.
-                </p>
+    <section class="w-full px-2 mb-16">
+        <section class="mx-auto overflow-hidden max-w-screen-xl rounded-sm bg-newneutral-0 items-center" style="background-color: #e1e2ea;">
+            <header class="p-2 md:p-4 bg-newneutral-700 text-newneutral-0 text-center">
+                <h2 class="text-heading-xs md:text-heading-base">
+                    Currently Working On
+                </h2>
+            </header>
+            <div class="mx-auto flex flex-col gap-12 items-center max-w-3xl p-8 lg:p-16">
+                <a href="https://everywhere.computer/">
+                    <div class="relative flex items-center justify-center max-w-[64vim] max-h-[64vim] sm:max-w-[48vim] sm:max-h-[48vim]">
+                        <img class="animate-rotateAnimation w-4/5 z-[1]" src="{{ "/images/ec-logo-bg.svg" | relativePath(page) }}" />
+                        <div class="ec-logo-mg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] w-[65%] h-[69%] bg-cover bg-center"></div>
+                        <img class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[3] w-4/5" src="{{ "/images/ec-logo-fg.svg" | relativePath(page) }}" />
+                    </div>
+                    <h2 class="text-heading-base md:text-heading-lg mt-8 text-center">
+                        Edge Compute That Runs Everywhere
+                    </h2>
+                </a>
             </div>
-            <div class="text-body-xs lg:text-body-xl col-span-6 md:bg-purple-500 md:text-newneutral-0 prose rounded-lg md:p-8">
-                <p>Users want data ownership and privacy without compromising on a seamless experience.</p>
-                <p>You want to build a resilient application that is fast, cost-effective, and efficient.</p>
-                <p>We build local-first and edge computing tools that make all of this possible.</p>
-            </div>
+        </section>
     </section>
 
     <section aria-label="body" class="w-full flex flex-col justify-center">
-
-        <section aria-label="topics" class="w-full max-w-full bg-pink-400 p-7 lg:p-12 sticky">
-            <form class="flex flex-col gap-5 items-center">
-                <h2 class="text-body-base lg:text-body-2xl uppercase font-sans font-bold text-newneutral-0">
-                    Which timeline are you on?
-                </h2>
-                <div class="flex flex-col gap-2 lg:gap-5 lg:flex-row">
-                    <label for="timeHorizon-now" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-6 gap-5 rounded-lg border-pink-300">
-                        <input id="timeHorizon-now" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Now">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Tools for today</span>
-                            <span class="text-body-sm">Proven & production-ready</span>
-                        </span>
-                    </label>
-                    <label for="timeHorizon-tomorrow" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-6 gap-5 rounded-lg border-pink-300">
-                        <input id="timeHorizon-tomorrow" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Tomorrow">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Tech for tomorrow</span>
-                            <span class="text-body-sm">Speculative & experimental</span>
-                        </span>
-                    </label>
-                    <label for="timeHorizon-flatCircle" class="cursor-pointer bg-newneutral-0 flex items-center p-4 lg:px-6 gap-5 rounded-lg border-pink-300">
-                        <input id="timeHorizon-flatCircle" class="radio save-preferences-input" type="radio" name="timeHorizon" value="Flat">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Time is a flat circle</span>
-                            <span class="text-body-sm">Physics cannot contain me</span>
-                        </span>
-                    </label>
-                </div>
-            </form>
-        </section>
-
-        <section aria-label="featured projects">
-            <h2 class="mx-auto max-w-screen-xl font-sans font-semibold lg:font-normal px-7 mt-10 mb-7 text-body-sm lg:text-body-3xl lg:mt-12 lg:mb-12 sm:text-center">
-                Here are the 3 projects we’re most excited about right now:
-            </h2>
-            <div data-featured-projects class="carousel carousel-center px-7 xlpadded:px-0 gap-2 sm:gap-4 max-w-screen-xl xl:mx-auto">
-                {% for id in todayProjectIDs %}
-                    {% for project in projects %}
-                        {% if project.id === id %}
-                        <div class="carousel-item w-[calc(100%_-_1.75rem)] sm:w-[50%] lg:max-w-[437.333333px]">{{ projectCard(project, true) }}</div>
-                        {% endif %}
-                    {% endfor %}    
-                {% endfor %}
-            </div>
-        </section>
-
-        <section aria-label="topics" class="mx-auto px-7 xlpadded:px-0 max-w-screen-xl flex flex-col my-7 md:my-24 md:grid grid-cols-12 gap-7 xl:gap-4">
-            <div class="xl:col-start-2 col-span-6 xl:col-span-5 flex flex-col gap-7 md:gap-12">
-                <div>
-                    <h2 class="text-heading-sm sm:text-heading-base lg:text-heading-lg text-pink-500 mb-2 xl:mb-4">We’re ambitious folks — there’s&nbsp;even more</h2>
-                    <p class="text-body-lg max-w-[30ch]">Fission is part of a dense ecosystem of like-minded projects and collaborations.</p>
-                </div>
-                <div class="flex grow align-center justify-center lg:align-end">
-                    {{ EcosystemIllustration() }}
-                </div>
-            </div>
-            <form class="col-span-6 xl:col-start-8 xl:col-span-5 flex flex-col gap-5 items-center">
-                <h2 class="text-body-base lg:text-body-xl uppercase font-sans font-bold text-center">
-                    Which of these concepts interests you the most?
-                </h2>
-                <div class="flex flex-col gap-2">
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Identity">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Decentralized identity</span>
-                            <span class="text-body-sm">Establishing who you are and what you can do requires more precision & care.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Data"> 
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">User-owned data</span>
-                            <span class="text-body-sm">People and the communities they belong to deserve more agency over their data.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Compute">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Edge computing</span>
-                            <span class="text-body-sm">From pocket to desktop to data center, our computers can work together to compute data where it lives.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox save-preferences-input" type="checkbox" name="topic" value="Commons">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">Commons networks</span>
-                            <span class="text-body-sm">Working with open source, DWeb, and networked orgs to build, fund, and collaborate.</span>
-                        </span>
-                    </label>
-                    <label class="cursor-pointer bg-newneutral-0 flex items-center px-4 py-3 lg:px-5 lg:py-4 gap-4 rounded-lg border border-purple-300">
-                        <input class="checkbox" type="checkbox" name="all-topics" value="All">
-                        <span class="flex flex-col gap-1">
-                            <span class="lg:text-body-lg font-semibold">All of the above</span>
-                            <span class="text-body-sm">Hook it to my veins!</span>
-                        </span>
-                    </label>
-                    <a aria-label="View Fission's Ecosystem" 
-                        href="{{ "/ecosystem" | relativePath(page) }}" 
-                        class="btn btn-primary font-semibold items-center gap-2 w-full bg-purple-500 text-newneutral-0 rounded-lg"
-                        data-highlighted-projects-label="_COUNT_ Projects To Explore"
-                        data-no-highlighted-projects-label="Explore our full ecosystem">
-                        Explore our full ecosystem
-                    </a>
-                </div>
-            </form>
-        </section>
-
-        <section aria-label="values" class="mx-auto max-w-screen-xl grid grid-cols-12 px-7 xlpadded:px-0">
+        <section aria-label="values" class="mx-auto max-w-screen-xl grid grid-cols-12 px-7 xlpadded:px-10">
             <div class="col-span-12 xl:col-start-2 xl:col-span-10 flex flex-col md:flex-row gap-7 mb-24 text-body-base">
                 <div class="flex flex-col gap-7 basis-1/2">
                     <div class="flex flex-col gap-3">

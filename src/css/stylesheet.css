@@ -543,3 +543,12 @@ code[class*=language-],pre[class*=language-]{color:#ccc;background:0 0;font-fami
 .kg-audio-player-container input[type=range]:active::-ms-thumb {
     transform: scale(1.2)
 }
+
+li::marker {
+  content: '●';
+}
+
+li {
+  padding-left: 0.25rem;
+  margin-left: 0.33rem;
+}

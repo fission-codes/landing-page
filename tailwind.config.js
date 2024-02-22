@@ -9,6 +9,9 @@ module.exports = {
     fontFamily: kit.fonts,
 
     extend: {
+      animation: {
+        rotateAnimation: 'rotateAnimation 30s linear infinite',
+      },      
       backgroundImage: {
         "purple-fade":
           "linear-gradient(360deg, rgba(100, 70, 250, 0) 10.03%, rgba(100, 70, 250, 0.04) 32.78%, rgba(100, 70, 250, 0.08) 51.82%, rgba(100, 70, 250, 0.12) 70.86%, rgba(100, 70, 250, 0.16) 84.79%, rgba(100, 70, 250, 0.2) 99.18%);",
@@ -85,6 +88,12 @@ module.exports = {
         "button-sm": [".889rem", { lineHeight: "100%" }],
         "button-xs": ["0.79rem", { lineHeight: "100%" }]
       },
+      keyframes: {
+        rotateAnimation: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        },
+      },      
       zIndex: {
         max: "1000",
       },
