@@ -1,128 +1,123 @@
-{% extends 'layouts/default.njk' %}
-
-{% from "macros/header.njk" import header with context %}
-{% from "macros/icons/ArrowLeft.njk" import ArrowLeft %}
-{% set title = post.title %}
-{% set codeinjection_head = post.codeinjection_head %}
-{% set codeinjection_foot = post.codeinjection_foot %}
-
-
-
-{% block header %}
-  {{ header() }}
-{% endblock %}
-
-
-
-{#
-{% block content %}
+{% extends 'layouts/default.njk' %} {% from "macros/header.njk" import header
+with context %} {% from "macros/icons/ArrowLeft.njk" import ArrowLeft %} {% set
+title = post.title %} {% set codeinjection_head = post.codeinjection_head %} {%
+set codeinjection_foot = post.codeinjection_foot %} {% block header %}
+{{ header() }}
+{% endblock %} {# {% block content %}
 <section class="w-full py-8 sm:py-12 md:py-16">
-    <article class="content">
-        {% if post.feature_image %}
-            <figure class="post-feature-image">
-                <img src="{{ post.feature_image }}" alt="{{ title }}">
-            </figure>
-        {% endif %}
-        <section class="post-full-content">
-            <h1 class="content-title">{{ title }}</h1>
-            <section class="content-body load-external-scripts">
-                {{ content | safe }}
-            </section>
-        </section>
-    </article>
+  <article class="content">
+    {% if post.feature_image %}
+    <figure class="post-feature-image">
+      <img src="{{ post.feature_image }}" alt="{{ title }}" />
+    </figure>
+    {% endif %}
+    <section class="post-full-content">
+      <h1 class="content-title">{{ title }}</h1>
+      <section class="content-body load-external-scripts">
+        {{ content | safe }}
+      </section>
+    </section>
+  </article>
 </section>
 
-{% endblock %}
-#}
-
-
-
-{% block content %}
-    <div class="inner overflow-x-hidden px-8">
-
-        <article class="post-full my-14 mx-auto max-w-screen-md">
-
-            <div class="flex justify-center">
-              <a href="../" class="flex gap-2 items-center text-purple-500 text-body-base md:text-body-lg">{{ ArrowLeft() }} View all posts</a>
-            </div>
-
-            <header class="post-full-header my-14">
-                {# TODO: tag and date meta
-                <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="2021-06-07">7 June 2021</time>
-                        <span class="date-divider">/</span> <a href="/tag/presentation/">Presentations</a>
-                </section>
-                #}
-                <h1 class="text-center text-purple-500 text-heading-sm sm:text-heading-lg md:text-heading-xl">
-                    {{ title }}
-                </h1>
-            </header>
-
-            <figure class="post-full-image lg:-mx-20">
-                <img
-                    src="{{ post.feature_image }}"
-                    alt="{{ title }}"
-                    width="{{ post.feature_image_width }}"
-                    height="{{ post.feature_image_height }}"
-                    class="rounded-md w-full"
-                    data-page-url="{{ page.url }}"
-                    loading="lazy" decoding="async"
-                />
-            </figure>
-
-            <section class="mx-auto post-full-content load-external-scripts content-body">
-                <div class="post-content sm:text-lg">
-                    {{ content | safe }}
-                </div>
-            </section>
-
-{# TODO: check this Discourse embed
-<section class="post-full-comments">
-    <div id='discourse-comments'></div>
-
-<script type="text/javascript">
-  DiscourseEmbed = { discourseUrl: 'https://talk.fission.codes/',
-                     discourseEmbedUrl: 'https://fission.codes/blog/{{ post.url }}' };
-
-  (function() {
-    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
-    d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
-  })();
-</script>
-</section>
-#}
-        </article>
-
+{% endblock %} #} {% block content %}
+<div class="inner overflow-x-hidden px-8">
+  <article class="post-full my-14 mx-auto max-w-screen-lg">
+    <div class="flex justify-center">
+      <a
+        href="../"
+        class="flex gap-2 items-center text-purple-500 text-body-base md:text-body-lg"
+        >{{ ArrowLeft() }} View all posts</a
+      >
     </div>
-{% endblock %}
 
+    <header class="post-full-header my-14">
+      {# TODO: tag and date meta
+      <section class="post-full-meta">
+        <time class="post-full-meta-date" datetime="2021-06-07"
+          >7 June 2021</time
+        >
+        <span class="date-divider">/</span>
+        <a href="/tag/presentation/">Presentations</a>
+      </section>
+      #}
+      <h1
+        class="text-center text-purple-500 text-heading-sm sm:text-heading-lg md:text-heading-xl"
+      >
+        {{ title }}
+      </h1>
+    </header>
 
+    <figure class="post-full-image lg:-mx-20">
+      <img
+        src="{{ post.feature_image }}"
+        alt="{{ title }}"
+        width="{{ post.feature_image_width }}"
+        height="{{ post.feature_image_height }}"
+        class="rounded-md w-full"
+        data-page-url="{{ page.url }}"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
 
-{%- block seo -%}
-    <!--Twitter Card-->
-    <meta name="twitter:site" content="{{ site.twitter }}">
-    <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ site.url + page.url }}">
-    <meta name="twitter:title" content="{{ title }} – {{ site.title }}">
-    <meta name="twitter:description" content="{{ post.excerpt }}">
-    <meta name="twitter:image" content="{{ post.feature_image }}">
+    <section
+      class="mx-auto post-full-content load-external-scripts content-body"
+    >
+      <div class="post-content sm:text-lg">
+        {{ content | safe }}
+      </div>
+    </section>
 
-    <!--Schema-->
-    <link rel="author" href="{{ post.primary_author.website }}">
-    <link rel="publisher" href="{{ site.url }}">
-    <meta itemprop="name" content="{{ title }} – {{ site.title }}">
-    <meta itemprop="description" content="{{ post.excerpt }}">
-    <meta itemprop="image" content="{{ post.feature_image }}">
+    {# TODO: check this Discourse embed
+    <section class="post-full-comments">
+      <div id="discourse-comments"></div>
 
-    <!-- Facebook OpenGraph -->
-    <meta property="og:url" content="{{ site.url + page.url }}">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ title }} – {{ site.title }}">
-    <meta property="og:image" content="{{ post.feature_image }}">
-    <meta property="og:description" content="{{ post.excerpt }}">
-    <meta property="og:site_name" content="{{ site.title }}">
-    <meta property="og:locale" content="{{ site.lang }}">
-    <meta property="article:author" content="{{ site.url }}">
+      <script type="text/javascript">
+        DiscourseEmbed = {
+          discourseUrl: "https://talk.fission.codes/",
+          discourseEmbedUrl: "https://fission.codes/blog/{{ post.url }}",
+        };
+
+        (function () {
+          var d = document.createElement("script");
+          d.type = "text/javascript";
+          d.async = true;
+          d.src = DiscourseEmbed.discourseUrl + "javascripts/embed.js";
+          (
+            document.getElementsByTagName("head")[0] ||
+            document.getElementsByTagName("body")[0]
+          ).appendChild(d);
+        })();
+      </script>
+    </section>
+    #}
+  </article>
+</div>
+{% endblock %} {%- block seo -%}
+<!--Twitter Card-->
+<meta name="twitter:site" content="{{ site.twitter }}" />
+<meta name="twitter:creator" content="{{ post.primary_author.twitter }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="{{ site.url + page.url }}" />
+<meta name="twitter:title" content="{{ title }} – {{ site.title }}" />
+<meta name="twitter:description" content="{{ post.excerpt }}" />
+<meta name="twitter:image" content="{{ post.feature_image }}" />
+
+<!--Schema-->
+<link rel="author" href="{{ post.primary_author.website }}" />
+<link rel="publisher" href="{{ site.url }}" />
+<meta itemprop="name" content="{{ title }} – {{ site.title }}" />
+<meta itemprop="description" content="{{ post.excerpt }}" />
+<meta itemprop="image" content="{{ post.feature_image }}" />
+
+<!-- Facebook OpenGraph -->
+<meta property="og:url" content="{{ site.url + page.url }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ title }} – {{ site.title }}" />
+<meta property="og:image" content="{{ post.feature_image }}" />
+<meta property="og:description" content="{{ post.excerpt }}" />
+<meta property="og:site_name" content="{{ site.title }}" />
+<meta property="og:locale" content="{{ site.lang }}" />
+<meta property="article:author" content="{{ site.url }}" />
 {%- endblock -%}
