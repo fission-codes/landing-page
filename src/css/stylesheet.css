@@ -240,7 +240,7 @@ pre[class*="language-"] {
   color: #ccc;
   background: 0 0;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  @apply text-xs sm:text-body-xs !important;
+  @apply text-body-2xs sm:text-body-xs !important;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -334,7 +334,7 @@ pre[class*="language-"] {
 
 .kg-code-card,
 .language-sh {
-  @apply text-xs sm:text-body-xs !important;
+  @apply text-body-2xs sm:text-body-xs !important;
 }
 
 /**
