@@ -100,6 +100,7 @@ module.exports = {
         "body-sm": [".889rem", { lineHeight: "130%" }],
         "body-xs": ["0.79rem", { lineHeight: "130%" }],
         "body-2xs": ["0.702rem", { lineHeight: "130%" }],
+        "body-3xs": ["0.602rem", { lineHeight: "130%" }],
         "button-xl": ["1.25rem", { lineHeight: "100%" }],
         "button-lg": ["1.1rem", { lineHeight: "100%" }],
         "button-base": ["1rem", { lineHeight: "100%" }],
