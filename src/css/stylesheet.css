@@ -332,7 +332,8 @@ pre[class*="language-"] {
   color: green;
 }
 
-.kg-code-card {
+.kg-code-card,
+.language-sh {
   @apply sm:text-body-xs;
 }
 
