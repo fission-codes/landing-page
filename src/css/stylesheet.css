@@ -240,7 +240,7 @@ pre[class*="language-"] {
   color: #ccc;
   background: 0 0;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  @apply sm:text-body-xs;
+  @apply sm:text-body-xs !important;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
